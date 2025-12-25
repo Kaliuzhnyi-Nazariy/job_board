@@ -3,6 +3,9 @@ import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link } from "react-router";
 import z from "zod";
+import { useAppDispatch } from "../../../features/hooks/dispatchHook";
+import { signin } from "../../../features/auth/authRequest";
+import type { IResponse } from "../../../features/auth/interface";
 
 type SignIn = {
   email: string;
@@ -32,8 +35,14 @@ const Signin = () => {
     resolver: zodResolver(zodValidation),
   });
 
-  const onSubmit: SubmitHandler<SignIn> = (data) => {
-    console.log(data);
+  const dispatch = useAppDispatch();
+
+  const onSubmit: SubmitHandler<SignIn> = async (data) => {
+    // console.log(data);
+    const res = await dispatch(signin(data));
+    if ((res.payload as IResponse).ok) {
+      console.log("redirect to /home");
+    }
   };
 
   const [showPassword, setShowPassword] = useState(false);

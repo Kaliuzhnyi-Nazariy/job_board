@@ -3,9 +3,11 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link } from "react-router";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAppDispatch } from "../../../features/hooks/dispatchHook";
+import { signup } from "../../../features/auth/authRequest";
 
 type AuthUser = {
-  role: "candidate" | "employer" | "";
+  role: "candidate" | "employer";
   fullName: string;
   username: string;
   email: string;
@@ -14,7 +16,7 @@ type AuthUser = {
 };
 
 const initialAuth: AuthUser = {
-  role: "",
+  role: "employer",
   fullName: "",
   username: "",
   email: "",
@@ -23,7 +25,7 @@ const initialAuth: AuthUser = {
 };
 
 const zodValidation = z.object({
-  role: z.enum(["candidate", "employer", ""]),
+  role: z.enum(["candidate", "employer"]),
   fullName: z.string(),
   username: z
     .string()
@@ -52,8 +54,11 @@ const Signup = () => {
     resolver: zodResolver(zodValidation),
   });
 
-  const onSubmit: SubmitHandler<AuthUser> = (data) => {
+  const dispatch = useAppDispatch();
+
+  const onSubmit: SubmitHandler<AuthUser> = async (data) => {
     if (!isCheckTerms) return;
+    await dispatch(signup(data));
     console.log(data);
   };
 
