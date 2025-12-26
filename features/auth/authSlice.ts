@@ -1,5 +1,11 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { signin, signup } from "./authRequest";
+import {
+  forgetPassword,
+  logout,
+  resetPassword,
+  signin,
+  signup,
+} from "./authRequest";
 
 export interface AuthReducerState {
   isLoading: boolean;
@@ -40,7 +46,19 @@ const authSlice = createSlice({
 
       .addCase(signin.pending, handlePending)
       .addCase(signin.fulfilled, handleFulfilled)
-      .addCase(signin.rejected, handleRejection);
+      .addCase(signin.rejected, handleRejection)
+
+      .addCase(logout.pending, handlePending)
+      .addCase(logout.fulfilled, handleFulfilled)
+      .addCase(logout.rejected, handleRejection)
+
+      .addCase(forgetPassword.pending, handlePending)
+      .addCase(forgetPassword.fulfilled, handleFulfilled)
+      .addCase(forgetPassword.rejected, handleRejection)
+
+      .addCase(resetPassword.pending, handlePending)
+      .addCase(resetPassword.fulfilled, handleFulfilled)
+      .addCase(resetPassword.rejected, handleRejection);
   },
 });
 

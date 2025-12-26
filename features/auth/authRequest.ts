@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../api/api";
-import type { ISignIn, ISignUp } from "./interface";
+import type { IResponse, ISignIn, ISignUp, ResetPassword } from "./interface";
 import axios from "axios";
 
 export const signup = createAsyncThunk<
-  { ok: boolean },
+  IResponse,
   ISignUp,
   { rejectValue: { message: string } }
 >("/auth/signup", async (data, { rejectWithValue }) => {
@@ -14,14 +14,14 @@ export const signup = createAsyncThunk<
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return rejectWithValue({
-        message: error.response?.data?.message || "Signin failed",
+        message: error.response?.data?.message || "Signup failed",
       });
     }
   }
 });
 
 export const signin = createAsyncThunk<
-  { ok: boolean },
+  IResponse,
   ISignIn,
   { rejectValue: { message: string } }
 >("/user/auth/sigin", async (data, { rejectWithValue }) => {
@@ -32,6 +32,57 @@ export const signin = createAsyncThunk<
     if (axios.isAxiosError(error)) {
       return rejectWithValue({
         message: error.response?.data?.message || "Signin failed",
+      });
+    }
+  }
+});
+
+export const logout = createAsyncThunk<
+  IResponse,
+  void,
+  { rejectValue: { message: string } }
+>("/user/auth/logout", async (_, { rejectWithValue }) => {
+  try {
+    const res = await api.post("/user/auth/signout");
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue({
+        message: error.response?.data?.message || "Signout failed",
+      });
+    }
+  }
+});
+
+export const forgetPassword = createAsyncThunk<
+  IResponse,
+  { email: string },
+  { rejectValue: { message: string } }
+>("/user/auth/forget-password", async (data, { rejectWithValue }) => {
+  try {
+    const res = await api.post("/user/auth/email-for-reset", data);
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue({
+        message: error.response?.data?.message || "Email sending failed",
+      });
+    }
+  }
+});
+
+export const resetPassword = createAsyncThunk<
+  IResponse,
+  ResetPassword,
+  { rejectValue: { message: string } }
+>("/user/auth/reset-pasword", async (data, { rejectWithValue }) => {
+  try {
+    const res = await api.post("/user/auth/reset-password", data);
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return rejectWithValue({
+        message: error.response?.data?.message || "Reset password failed",
       });
     }
   }
