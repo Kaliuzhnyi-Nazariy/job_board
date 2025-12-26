@@ -15,3 +15,9 @@ export interface IResponse {
   code?: number;
   message?: string;
 }
+
+export interface ResetPassword {
+  password: string;
+  confirmPassword: string;
+  token: string;
+}
