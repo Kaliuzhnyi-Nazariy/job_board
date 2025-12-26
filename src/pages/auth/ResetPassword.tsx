@@ -1,7 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { useParams } from "react-router";
 import z from "zod";
+import { useAppDispatch } from "../../../features/hooks/dispatchHook";
+import { resetPassword } from "../../../features/auth/authRequest";
+import type { IResponse } from "../../../features/auth/interface";
 
 type ResetPassword = {
   password: string;
@@ -36,11 +40,30 @@ const ResetPassword = () => {
     resolver: zodResolver(zodValidation),
   });
 
-  const onSubmit: SubmitHandler<ResetPassword> = (data) => {
+  const path = useParams();
+
+  const dispatch = useAppDispatch();
+
+  const onSubmit: SubmitHandler<ResetPassword> = async (data) => {
     if (data.password !== data.confirmPassword) {
       return;
     }
-    console.log(data);
+    const token = path["*"];
+
+    const res = await dispatch(
+      resetPassword({
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+        token: token as string,
+      })
+    );
+
+    if ((res.payload as IResponse).ok) {
+      console.log("password changed successfully!");
+    }
+
+    // console.log(token);
+    // console.log(data);
   };
 
   const [showPassword, setShowPassword] = useState(false);
