@@ -17,6 +17,9 @@ const Navbar = () => {
     }
   };
 
+  const dashboardLink =
+    role == "employer" ? "/employer/dashboard" : "/candidate/dashboard";
+
   return (
     <header>
       <nav>
@@ -26,7 +29,7 @@ const Navbar = () => {
           </li>
           <li>{findLink()}</li>
           <li>
-            <Link to="#">Dashboard</Link>
+            <Link to={dashboardLink}>Dashboard</Link>
           </li>
         </ul>
       </nav>
