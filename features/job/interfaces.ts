@@ -2,9 +2,9 @@ export interface IJobForm {
   title: string;
   position: string;
   description: string;
-  minSalary: string;
-  maxSalary: string;
-  salaryType: "month" | "week" | "year" | "contract";
+  minSalary: number;
+  maxSalary: number;
+  salaryType: "month" | "week" | "hour" | "year" | "contract";
   workTime: "full_time" | "part_time" | "internship" | "contract";
   location: string;
 
