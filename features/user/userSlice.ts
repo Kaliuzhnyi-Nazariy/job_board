@@ -10,7 +10,7 @@ const initialState: UserInitialState = {
 };
 
 const handlePending = (state: UserInitialState) => {
-  console.log("start fetching user data");
+  // console.log("start fetching user data");
   state.isError = null;
   state.isLoading = false;
 };
@@ -20,7 +20,7 @@ const handleRejected = (
   action: PayloadAction<RejectValue | undefined>
 ) => {
   state.isLoading = false;
-  initialState.initialized = true;
+  state.initialized = true;
   state.isError = action.payload?.message || "Server error!";
 };
 
