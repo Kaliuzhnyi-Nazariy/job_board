@@ -2,10 +2,10 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import type { IJobList } from "./JobComponent";
 
 const JobCard = ({ job }: { job: IJobList }) => {
-  const { title, location, position, workTime, salary } = job;
+  const { title, location, position, work_time, salary } = job;
 
   const workTimeView = () => {
-    switch (workTime) {
+    switch (work_time) {
       case "full_time":
         return "Full-Time";
       case "part_time":

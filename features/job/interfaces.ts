@@ -20,7 +20,7 @@ export interface IJob {
   minSalary: string;
   maxSalary: string;
   salaryType: "month" | "week" | "year" | "contract";
-  workTime: "full_time" | "part_time" | "internship" | "contract";
+  work_time: "full_time" | "part_time" | "internship" | "contract";
   location: string;
 }
 

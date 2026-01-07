@@ -7,8 +7,8 @@ export interface IJobList {
   location: string;
   position: string;
   salary: string;
-  workTime: "full_time" | "part_time" | "internship" | "contract";
-  createdAt: number;
+  work_time: "full_time" | "part_time" | "internship" | "contract";
+  created_at: number;
 }
 
 const JobComponent = () => {
