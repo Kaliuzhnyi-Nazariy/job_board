@@ -9,3 +9,9 @@ export const postJob = async (data: IJobForm) => {
 
   return res.data;
 };
+
+export const getJobs = async () => {
+  const res = await api.get("/job/jobs");
+
+  return res.data;
+};
