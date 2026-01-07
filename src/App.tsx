@@ -13,6 +13,7 @@ const EmployerRouteComponent = lazy(() => import("./layouts/EmployerRoute"));
 
 const HomeCandidate = lazy(() => import("./pages/candidate/home"));
 const FindJob = lazy(() => import("./pages/candidate/FindJob"));
+const CandidateDashboard = lazy(() => import("./pages/candidate/Dashboard"));
 
 const EmployerDashboard = lazy(() => import("./pages/employer/Dashboard"));
 const HomeEmployer = lazy(() => import("./pages/employer/home"));
@@ -30,9 +31,12 @@ function App() {
       <Route path="/forget-password" element={<ForgetPage />} />
       <Route path="/reset-password/*" element={<ResetPasswordPage />} />
       <Route path="/" element={<UserLayoutComponent />}>
-        <Route element={<CandidateRouteComponent />}>
-          <Route path="/candidate/home" element={<HomeCandidate />} />
-          <Route path="/candidate/find-job" element={<FindJob />} />
+        <Route path="/candidate" element={<CandidateRouteComponent />}>
+          <Route path="home" element={<HomeCandidate />} />
+          <Route path="find-job" element={<FindJob />} />
+          <Route path="dashboard" element={<CandidateDashboard />}>
+            {/* <Route></Route> */}
+          </Route>
         </Route>
         <Route path="/employer" element={<EmployerRouteComponent />}>
           <Route path="home" element={<HomeEmployer />} />
