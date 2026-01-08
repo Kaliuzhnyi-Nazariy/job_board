@@ -33,3 +33,9 @@ export interface InitialJobState {
   isLoading: boolean;
   isError: null | string;
 }
+
+export interface IGetJob {
+  page: number;
+  limit: 12 | 16;
+  order: "newest" | "oldest";
+}

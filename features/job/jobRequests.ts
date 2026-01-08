@@ -1,4 +1,4 @@
-import type { IJobForm } from "./interfaces";
+import type { IGetJob, IJobForm } from "./interfaces";
 import api from "../api/api";
 
 export const postJob = async (data: IJobForm) => {
@@ -10,8 +10,10 @@ export const postJob = async (data: IJobForm) => {
   return res.data;
 };
 
-export const getJobs = async () => {
-  const res = await api.get("/job/jobs");
+export const getJobs = async (params: IGetJob) => {
+  const res = await api.get("/job/jobs", {
+    params,
+  });
 
   return res.data;
 };
