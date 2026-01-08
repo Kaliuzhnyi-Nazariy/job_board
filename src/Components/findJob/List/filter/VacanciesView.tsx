@@ -1,30 +1,30 @@
+import { useSearchParams } from "react-router";
+
 const VacanciesView = ({
   setView,
-  setJobNumberOnPage,
-  setSortingType,
-}: {
+}: // setJobNumberOnPage,
+// setSortingType,
+{
   setJobNumberOnPage: (number: 12 | 16) => void;
   setView: (view: "grid" | "list") => void;
   setSortingType: (type: "oldest" | "newest") => void;
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   return (
     <div className="flex gap-4">
       <select
-        name=""
-        id=""
+        defaultValue={searchParams.get("order") || "oldest"}
         onChange={(select) =>
-          setSortingType(select.target.value as "oldest" | "newest")
+          setSearchParams({ order: select.target.value as "oldest" | "newest" })
         }
       >
         <option value="oldest">Latest</option>
         <option value="newest">Earlier</option>
       </select>
       <select
-        name=""
-        id=""
-        onChange={(val) =>
-          setJobNumberOnPage(Number(val.target.value) as 12 | 16)
-        }
+        defaultValue={searchParams.get("limit") || 12}
+        onChange={(val) => setSearchParams({ limit: val.target.value })}
       >
         <option value="12">12 per page</option>
         <option value="16">16 per page</option>
