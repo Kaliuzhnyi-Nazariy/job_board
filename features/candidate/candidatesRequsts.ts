@@ -5,3 +5,9 @@ export const getCandidates = async () => {
 
   return res.data;
 };
+
+export const getCandidate = async (id: string) => {
+  const res = await api.get("/candidate/" + id);
+
+  return res.data.data;
+};
