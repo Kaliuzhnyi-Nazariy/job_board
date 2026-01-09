@@ -6,14 +6,14 @@ import {
   userRole,
 } from "../../features/user/userSelector";
 
-const CandidateRoute = () => {
+const EmployerRoute = () => {
   const role = useSelector(userRole);
 
   const loading = useSelector(userLoading);
   const initialized = useSelector(userInitialized);
 
   if (!initialized || loading) {
-    return <div className="">Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   if (role !== "employer") {
@@ -23,4 +23,4 @@ const CandidateRoute = () => {
   return <Outlet />;
 };
 
-export default CandidateRoute;
+export default EmployerRoute;
