@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const findLink = () => {
     if (role == "employer") {
-      return <Link to="#">Find Employers</Link>;
+      return <Link to="/employer/candidates">Find Employers</Link>;
     } else {
       return <Link to="/candidate/find-job">Find Job</Link>;
     }
