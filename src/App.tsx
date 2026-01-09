@@ -14,11 +14,18 @@ const EmployerRouteComponent = lazy(() => import("./layouts/EmployerRoute"));
 const HomeCandidate = lazy(() => import("./pages/candidate/home"));
 const FindJob = lazy(() => import("./pages/candidate/FindJob"));
 const CandidateDashboard = lazy(() => import("./pages/candidate/Dashboard"));
+const OverviewCandidate = lazy(() => import("./pages/candidate/Overview"));
 
 const EmployerDashboard = lazy(() => import("./pages/employer/Dashboard"));
 const HomeEmployer = lazy(() => import("./pages/employer/home"));
 const EmployerOverviewPage = lazy(() => import("./pages/employer/Overview"));
 const PostJobPage = lazy(() => import("./pages/employer/PostAJob"));
+const FindACandidatePage = lazy(
+  () => import("./pages/employer/Candidates/FindACandidate")
+);
+const CandidatePage = lazy(
+  () => import("./pages/employer/Candidates/Candidate")
+);
 
 const Forbidden = lazy(() => import("./pages/error/Forbidden"));
 
@@ -35,7 +42,7 @@ function App() {
           <Route path="home" element={<HomeCandidate />} />
           <Route path="find-job" element={<FindJob />} />
           <Route path="dashboard" element={<CandidateDashboard />}>
-            {/* <Route></Route> */}
+            <Route path="" element={<OverviewCandidate />} />
           </Route>
         </Route>
         <Route path="/employer" element={<EmployerRouteComponent />}>
@@ -44,6 +51,10 @@ function App() {
             <Route path="" element={<EmployerOverviewPage />} />
             <Route path="post-a-job" element={<PostJobPage />} />
           </Route>
+          <Route path="candidates" element={<FindACandidatePage />} />
+          {/* <Route path="candidate" element={<CandidatePage />} /> */}
+
+          <Route path="candidates/:candidateId" element={<CandidatePage />} />
         </Route>
       </Route>
       <Route path="/forbidden" element={<Forbidden />} />
