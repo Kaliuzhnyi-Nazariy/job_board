@@ -11,9 +11,13 @@ export type ISignIn = Pick<ISignUp, "email" | "password">;
 
 export interface IResponse {
   ok: boolean;
-  payload?: { token: string };
+  payload?: { token: string } | { data: string | ("employer" | "candidate") };
   code?: number;
   message?: string;
+}
+
+export interface ISignInResponse extends IResponse {
+  data: "employer" | "candidate";
 }
 
 export interface ResetPassword {

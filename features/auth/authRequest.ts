@@ -1,6 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../api/api";
-import type { IResponse, ISignIn, ISignUp, ResetPassword } from "./interface";
+import type {
+  IResponse,
+  ISignIn,
+  ISignInResponse,
+  ISignUp,
+  ResetPassword,
+} from "./interface";
 import axios from "axios";
 
 export const signup = createAsyncThunk<
@@ -21,7 +27,8 @@ export const signup = createAsyncThunk<
 });
 
 export const signin = createAsyncThunk<
-  IResponse,
+  // IResponse,
+  ISignInResponse,
   ISignIn,
   { rejectValue: { message: string } }
 >("/user/auth/sigin", async (data, { rejectWithValue }) => {
