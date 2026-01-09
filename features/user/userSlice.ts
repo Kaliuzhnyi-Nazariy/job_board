@@ -33,9 +33,9 @@ const userSlice = createSlice({
     builder.addCase(
       getMe.fulfilled,
       (state: UserInitialState, action: PayloadAction<{ user: IUser }>) => {
+        state.user = action.payload.user;
         state.isLoading = false;
         state.initialized = true;
-        state.user = action.payload.user;
       }
     );
     builder.addCase(getMe.rejected, handleRejected);
