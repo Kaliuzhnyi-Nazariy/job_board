@@ -28,7 +28,7 @@ const FindACandidate = () => {
               return (
                 <li key={c.id}>
                   <Link to={`/employer/candidates/${c.id}`}>
-                    <h3>{c.fullname}</h3>
+                    <h3>{c.full_name}</h3>
                     <h4>{c.role}</h4>
                   </Link>
                 </li>
