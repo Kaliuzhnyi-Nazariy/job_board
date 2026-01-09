@@ -1,11 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import z from "zod";
 import { useAppDispatch } from "../../../features/hooks/dispatchHook";
 import { signin } from "../../../features/auth/authRequest";
-import type { IResponse } from "../../../features/auth/interface";
+// import type { ISignInResponse } from "../../../features/auth/interface";
+// import type { IResponse } from "../../../features/auth/interface";
 
 type SignIn = {
   email: string;
@@ -36,12 +37,32 @@ const Signin = () => {
   });
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<SignIn> = async (data) => {
-    // console.log(data);
-    const res = await dispatch(signin(data));
-    if ((res.payload as IResponse).ok) {
-      console.log("redirect to /home");
+    // // console.log(data);
+    // const res = await dispatch(signin(data));
+    // if ((res.payload as IResponse).ok) {
+    //   console.log("redirect to /home");
+    //   console.log(res.payload?.data);
+    //   if (res.payload?.data === "employer") {
+    //     navigate("/employer/home");
+    //   } else {
+    //     navigate("/candidate/home");
+    //   }
+    // }
+    try {
+      const payload = await dispatch(signin(data)).unwrap();
+
+      // payload is now SUCCESS ONLY
+      if (payload.data === "employer") {
+        await navigate("/employer/home");
+      } else {
+        await navigate("/candidate/home");
+      }
+    } catch (err) {
+      // rejected case (errorHandler / rejectedWithValue)
+      console.error(err);
     }
   };
 
