@@ -17,3 +17,10 @@ export const getJobs = async (params: IGetJob) => {
 
   return res.data;
 };
+
+export const getMyJobs = async () => {
+  const res = await api.get("/job/my-jobs");
+  console.log({ res });
+
+  return res.data;
+};
