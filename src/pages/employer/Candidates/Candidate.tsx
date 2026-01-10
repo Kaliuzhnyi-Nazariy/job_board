@@ -46,7 +46,7 @@ const Candidate = () => {
           <div className="grid grid-cols-2 gap-18">
             <div className="">
               <h4>Biography</h4>
-              <article>{data.biography}</article>
+              <article>{data.biography || "no bio"}</article>
             </div>
             <div className="">
               <div className="grid grid-cols-2">
