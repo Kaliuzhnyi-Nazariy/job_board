@@ -17,7 +17,7 @@ const Dashboard = () => {
             <Link to={`${baseURL}/post-a-job`}>Post a Job</Link>
           </li>
           <li>
-            <Link to="#">My Jobs</Link>
+            <Link to={`${baseURL}/my-jobs`}>My Jobs</Link>
           </li>
           <li>
             <Link to="#">Saved Candidates</Link>

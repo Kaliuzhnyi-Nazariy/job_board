@@ -26,6 +26,7 @@ const FindACandidatePage = lazy(
 const CandidatePage = lazy(
   () => import("./pages/employer/Candidates/Candidate")
 );
+const MyJobsPage = lazy(() => import("./pages/employer/Jobs/MyJobs"));
 
 const Forbidden = lazy(() => import("./pages/error/Forbidden"));
 
@@ -50,6 +51,7 @@ function App() {
           <Route path="dashboard" element={<EmployerDashboard />}>
             <Route path="" element={<EmployerOverviewPage />} />
             <Route path="post-a-job" element={<PostJobPage />} />
+            <Route path="my-jobs" element={<MyJobsPage />} />
           </Route>
           <Route path="candidates" element={<FindACandidatePage />} />
           {/* <Route path="candidate" element={<CandidatePage />} /> */}
