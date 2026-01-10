@@ -14,14 +14,18 @@ export interface IJobForm {
 }
 
 export interface IJob {
+  id: string;
   title: string;
   position: string;
-  description: string;
+  description?: string;
   minSalary: string;
   maxSalary: string;
   salaryType: "month" | "week" | "year" | "contract";
-  work_time: "full_time" | "part_time" | "internship" | "contract";
-  location: string;
+  work_time?: "full_time" | "part_time" | "internship" | "contract";
+  location?: string;
+  education?: string;
+  responsobilities?: string;
+  experience?: string;
 }
 
 export type Job = Omit<IJob, "minSalary" | "maxSalary" | "salaryType"> & {
