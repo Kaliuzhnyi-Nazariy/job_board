@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMyJob } from "../../../../features/job/jobRequests";
 import { useParams } from "react-router";
-import type { Job } from "../../../../features/job/interfaces";
-import { useState } from "react";
+import type { IJobFormUpdate, Job } from "../../../../features/job/interfaces";
+import { useEffect, useState } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { JobValidation } from "./jobValidation";
 
 // TO-DO:
 // make form and default values take from data from backend
@@ -18,18 +21,37 @@ const Job = () => {
 
   const [updateMode, setUpdateMode] = useState(false);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  const jobState: IJobFormUpdate = {
+    title: "",
+    position: "",
+    description: "",
+    // minSalary: job.minSalary || 0,
+    // maxSalary: job.maxSalary || 0,
+    // salaryType: job. || "month",
+    minSalary: 0,
+    maxSalary: 0,
+    salaryType: "month",
+    workTime: "Full-Time",
+    location: "",
+    education: "",
+    responsobilities: "",
+    experience: "",
+  };
 
-  if (isError || !data?.job) return <p>No data</p>;
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IJobFormUpdate>({
+    defaultValues: jobState,
+    resolver: zodResolver(JobValidation),
+  });
 
-  // const job: Job = !isLoading && !isError ? data.job : {};
-  const job: Job = data.job;
-  console.log(job);
-
-  const workTimeView = () => {
-    switch (job.work_time) {
+  const workTimeView = (
+    workTime: "full_time" | "part_time" | "internship" | "contract"
+  ) => {
+    switch (workTime) {
       case "full_time":
         return "Full-Time";
       case "part_time":
@@ -39,154 +61,179 @@ const Job = () => {
       case "internship":
         return "Internship";
       default:
-        return "No data";
+        return "Full-Time";
     }
+  };
+
+  const salaryValue = (salary: string) => {
+    // temprorary decision, in the future is planing to change .split on regex expression
+
+    const splitSalary = salary.split("-");
+    const minSalary = splitSalary[0].split("$")[1];
+    const maxSalary = splitSalary[1].split("$")[1].split("/")[0];
+
+    const salaryType = splitSalary[1].split("/")[1];
+
+    return {
+      minSalary: Number(minSalary) as number,
+      maxSalary: Number(maxSalary) as number,
+      salaryType: salaryType as "month" | "week" | "hour" | "year" | "contract",
+    };
+  };
+
+  useEffect(() => {
+    if (data && data.job) {
+      const job: Job = data.job;
+
+      reset({
+        title: job.title ?? "",
+        position: job.position ?? "",
+        description: job.description ?? "",
+        location: job.location ?? "",
+        education: job.education ?? "",
+        experience: job.experience ?? "",
+        responsobilities: job.responsobilities ?? "",
+        workTime: workTimeView(job.work_time!),
+        minSalary: salaryValue(job.salary).minSalary,
+        maxSalary: salaryValue(job.salary).maxSalary,
+        salaryType: salaryValue(job.salary).salaryType,
+      });
+    }
+  }, [data, reset]);
+
+  if (isLoading) return <p>Loading...</p>;
+
+  if (isError || !data?.job) return <p>No data</p>;
+
+  const job: Job = data.job;
+
+  const onSubmit: SubmitHandler<IJobFormUpdate> = async (data) => {
+    console.log(data);
   };
 
   return (
     <div>
-      {job ? (
-        <div className="w-full">
-          <span>
-            <h1>Title: </h1>
+      <div>
+        {job ? (
+          <form
+            className="w-full flex flex-col"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <label>Title: </label>
             {updateMode ? (
-              <input
-                type="text"
-                value={job.title}
-                className="w-full"
-                disabled={!updateMode}
-              />
+              <input type="text" {...register("title")} />
             ) : (
-              job.title
+              <p>{job.title}</p>
             )}
-          </span>
-          <span className="w-full">
-            <p>Position:</p>
-            <input
-              type="text"
-              value={job.position}
-              className="w-full"
-              disabled={!updateMode}
-            />
-          </span>
+            <p>{errors.title?.message}</p>
 
-          <span>
-            <p>Location:</p>
-            <input
-              type="text"
-              value={job.location}
-              className="w-full"
-              disabled={!updateMode}
-            />
-          </span>
-          <span>
-            <p>Salary:</p>
+            <label>Position: </label>
+            {updateMode ? (
+              <input type="text" {...register("position")} />
+            ) : (
+              <p>{job.position}</p>
+            )}
+            <p>{errors.position?.message}</p>
+
+            <label>Location: </label>
+            {updateMode ? (
+              <input type="text" {...register("location")} />
+            ) : (
+              <p>{job.location}</p>
+            )}
+            <p>{errors.location?.message}</p>
+
+            <label>Salary: </label>
             {updateMode ? (
               <>
-                {/* make logic splitting salary string into numbers from '$' to '-' and from '-' to '/' and salary type after '/' */}
-                <p>Min salary: </p>
+                <label>Minimal salary: </label>
                 <input
                   type="number"
-                  value={job.salary}
-                  className="w-full"
-                  disabled={!updateMode}
+                  {...register("minSalary", { valueAsNumber: true })}
                 />
+                <p>{errors.minSalary?.message}</p>
 
-                <p>Max salary: </p>
+                <label>Maximum salary: </label>
                 <input
                   type="number"
-                  value={job.salary}
-                  className="w-full"
-                  disabled={!updateMode}
+                  {...register("maxSalary", { valueAsNumber: true })}
                 />
+                <p>{errors.maxSalary?.message}</p>
 
-                <p>Salary type: </p>
-                <input
-                  type="text"
-                  value={job.salary}
-                  className="w-full"
-                  disabled={!updateMode}
-                />
+                <label>Salery Type: </label>
+                <select {...register("salaryType")}>
+                  <option value="month">month</option>
+                  <option value="week">week</option>
+                  <option value="hour">hour</option>
+                  <option value="year">year</option>
+                  <option value="contract">contract</option>
+                </select>
+                <p>{errors.salaryType?.message}</p>
               </>
             ) : (
               <p>{job.salary}</p>
             )}
-          </span>
-          <span>
-            <p>Job type:</p>
-            <input
-              type="text"
-              // value={job.work_time}
-              value={workTimeView()}
-              className="w-full"
-              disabled={!updateMode}
-            />
-          </span>
-          <span>
-            <p>Education:</p>{" "}
-            {updateMode ? (
-              <input
-                type="text"
-                value={job.education || ""}
-                className="w-full"
-                disabled={!updateMode}
-              />
-            ) : (
-              job.education ?? "No education"
-            )}
-          </span>
-          <span>
-            <p>Experience:</p>{" "}
-            {updateMode ? (
-              <input
-                type="text"
-                value={job.experience || ""}
-                className="w-full"
-                disabled={!updateMode}
-              />
-            ) : (
-              job.experience ?? "No experience"
-            )}
-          </span>
 
-          {/* <hr /> */}
-
-          <div className="">
-            <h3>Description: </h3>
+            <label>Job Type</label>
             {updateMode ? (
-              <textarea
-                value={job.description || ""}
-                className="w-full"
-                disabled={!updateMode}
-              />
+              <>
+                <select {...register("workTime")}>
+                  <option value="Full-Time">Full-Time</option>
+                  <option value="Part-Time">Part-Time</option>
+                  <option value="Internship">Internship</option>
+                  <option value="Contract">Contract</option>
+                </select>
+
+                <p>{errors.workTime?.message}</p>
+              </>
+            ) : (
+              <p>{workTimeView(job.work_time!)}</p>
+            )}
+
+            <label>Education</label>
+            {updateMode ? (
+              <input type="text" {...register("education")} />
+            ) : (
+              <p>{job.experience || "No experience"}</p>
+            )}
+            <p>{errors.education?.message}</p>
+
+            <label>Experience:</label>
+            {updateMode ? (
+              <input type="text" {...register("experience")} />
+            ) : (
+              <p>{job.experience ?? "No experience"}</p>
+            )}
+            <p>{errors.experience?.message}</p>
+
+            <label>Description: </label>
+            {updateMode ? (
+              <textarea {...register("description")} />
             ) : (
               <article>{job.description ?? "No descripton"}</article>
             )}
-          </div>
-          <div className="">
-            <h3>Responsobilities: </h3>
+            <p>{errors.description?.message}</p>
+
+            <label>Responsobilities: </label>
             {updateMode ? (
-              <textarea
-                value={job.responsobilities || ""}
-                className="w-full"
-                disabled={!updateMode}
-              />
+              <textarea {...register("responsobilities")} />
             ) : (
               <article>{job.responsobilities ?? "No responsobilities"}</article>
             )}
-          </div>
+            <p>{errors.responsobilities?.message}</p>
 
-          <button
-            type="button"
-            className="cursor-pointer"
-            onClick={() => setUpdateMode(!updateMode)}
-          >
-            {updateMode ? "Done" : "Update"}
-          </button>
-        </div>
-      ) : (
-        <p>No data</p>
-      )}
+            <button
+              type={!updateMode ? "submit" : "button"}
+              className="cursor-pointer"
+              onClick={() => setUpdateMode(!updateMode)}
+            >
+              {updateMode ? "Save" : "Update"}
+            </button>
+          </form>
+        ) : (
+          <p>No data</p>
+        )}
+      </div>
     </div>
   );
 };

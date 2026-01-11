@@ -13,6 +13,21 @@ export interface IJobForm {
   experience?: string;
 }
 
+export interface IJobFormUpdate {
+  title: string;
+  position: string;
+  description: string;
+  minSalary: number;
+  maxSalary: number;
+  salaryType: "month" | "week" | "hour" | "year" | "contract";
+  workTime: "Full-Time" | "Part-Time" | "Internship" | "Contract";
+  location: string;
+
+  education?: string;
+  responsobilities?: string;
+  experience?: string;
+}
+
 export interface IJob {
   id: string;
   title: string;
