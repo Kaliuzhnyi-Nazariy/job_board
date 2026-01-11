@@ -20,7 +20,12 @@ export const getJobs = async (params: IGetJob) => {
 
 export const getMyJobs = async () => {
   const res = await api.get("/job/my-jobs");
-  console.log({ res });
+
+  return res.data;
+};
+
+export const getMyJob = async (jobId: string) => {
+  const res = await api.get("/job/my-jobs/" + jobId);
 
   return res.data;
 };
