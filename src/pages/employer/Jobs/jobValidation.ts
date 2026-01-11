@@ -15,7 +15,7 @@ export const JobValidation = z
       'That field can be filled only with that values: "month", "week", "year", "contract"'
     ),
     workTime: z.enum(
-      ["Full-Time", "Part-Time", "Internship", "Contract"],
+      ["full_time", "part_time", "internship", "contract"],
       "That field can be filled only with that values: 'full_time', 'part_time', 'internship', 'contract' "
     ),
     location: z.string(),

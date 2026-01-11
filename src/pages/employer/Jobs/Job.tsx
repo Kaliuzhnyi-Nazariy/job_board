@@ -1,7 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { getMyJob } from "../../../../features/job/jobRequests";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getMyJob, updateMyJob } from "../../../../features/job/jobRequests";
 import { useParams } from "react-router";
-import type { IJobFormUpdate, Job } from "../../../../features/job/interfaces";
+import type {
+  IJobForm,
+  // IJobFormUpdate,
+  Job,
+} from "../../../../features/job/interfaces";
 import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,23 +19,21 @@ const Job = () => {
   const { jobId } = useParams();
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["myJob"],
+    queryKey: ["myJob", jobId],
     queryFn: () => getMyJob(jobId!),
+    enabled: !!jobId,
   });
 
   const [updateMode, setUpdateMode] = useState(false);
 
-  const jobState: IJobFormUpdate = {
+  const jobState: IJobForm = {
     title: "",
     position: "",
     description: "",
-    // minSalary: job.minSalary || 0,
-    // maxSalary: job.maxSalary || 0,
-    // salaryType: job. || "month",
     minSalary: 0,
     maxSalary: 0,
     salaryType: "month",
-    workTime: "Full-Time",
+    workTime: "full_time",
     location: "",
     education: "",
     responsobilities: "",
@@ -43,7 +45,7 @@ const Job = () => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<IJobFormUpdate>({
+  } = useForm<IJobForm>({
     defaultValues: jobState,
     resolver: zodResolver(JobValidation),
   });
@@ -66,7 +68,7 @@ const Job = () => {
   };
 
   const salaryValue = (salary: string) => {
-    // temprorary decision, in the future is planing to change .split on regex expression
+    // temprorary solution, in the future is planing to change .split on regex expression
 
     const splitSalary = salary.split("-");
     const minSalary = splitSalary[0].split("$")[1];
@@ -93,7 +95,7 @@ const Job = () => {
         education: job.education ?? "",
         experience: job.experience ?? "",
         responsobilities: job.responsobilities ?? "",
-        workTime: workTimeView(job.work_time!),
+        workTime: job.work_time!,
         minSalary: salaryValue(job.salary).minSalary,
         maxSalary: salaryValue(job.salary).maxSalary,
         salaryType: salaryValue(job.salary).salaryType,
@@ -101,14 +103,37 @@ const Job = () => {
     }
   }, [data, reset]);
 
+  const queryClient = useQueryClient();
+
+  const {
+    mutate,
+    isSuccess,
+    isError: jobUpdError,
+  } = useMutation({
+    mutationKey: ["updateJob"],
+    mutationFn: (data: IJobForm) => updateMyJob({ data, jobId: jobId! }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ["myJob", jobId],
+      }),
+  });
+
   if (isLoading) return <p>Loading...</p>;
 
   if (isError || !data?.job) return <p>No data</p>;
 
   const job: Job = data.job;
 
-  const onSubmit: SubmitHandler<IJobFormUpdate> = async (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IJobForm> = async (data) => {
+    // console.log(data);
+    mutate(data);
+    if (isSuccess) {
+      // console.log("huraaaaaaa");
+    }
+
+    if (jobUpdError) {
+      // console.log(jobUpdError);
+    }
   };
 
   return (
@@ -178,10 +203,10 @@ const Job = () => {
             {updateMode ? (
               <>
                 <select {...register("workTime")}>
-                  <option value="Full-Time">Full-Time</option>
-                  <option value="Part-Time">Part-Time</option>
-                  <option value="Internship">Internship</option>
-                  <option value="Contract">Contract</option>
+                  <option value="full_time">Full-Time</option>
+                  <option value="part_time">Part-Time</option>
+                  <option value="internship">Internship</option>
+                  <option value="contract">Contract</option>
                 </select>
 
                 <p>{errors.workTime?.message}</p>
