@@ -59,8 +59,8 @@ const JobList = ({
       }),
   });
 
-  console.log(data);
-  console.log({ page, limit, order });
+  // console.log(data);
+  // console.log({ page, limit, order });
 
   const orderedJobs = data
     ? [...data.jobs].sort((a, b) => {
@@ -90,9 +90,12 @@ const JobList = ({
           <ul className={`${listView === "grid" ? gridStyles : listStyles}`}>
             {orderedJobs.map((job) => {
               return (
-                <li key={job.id}>
+                <Link to={`/candidate/find-job/${job.id}`} key={job.id}>
                   <JobCard job={job}></JobCard>
-                </li>
+                </Link>
+                // <li key={job.id}>
+                //   <JobCard job={job}></JobCard>
+                // </li>
               );
             })}
           </ul>
