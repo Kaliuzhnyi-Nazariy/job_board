@@ -21,7 +21,7 @@ const Dashboard = () => {
             <Link to={`${baseURL}/`}>Job alert</Link>
           </li>
           <li>
-            <Link to={`${baseURL}/`}>Settings</Link>
+            <Link to={`${baseURL}/setting`}>Settings</Link>
           </li>
         </ul>
       </div>

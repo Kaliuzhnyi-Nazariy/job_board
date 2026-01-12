@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Greeting from "./pages";
 import { lazy } from "react";
 
@@ -11,11 +11,24 @@ const UserLayoutComponent = lazy(() => import("./layouts/UserLayout"));
 const CandidateRouteComponent = lazy(() => import("./layouts/CandidateRoute"));
 const EmployerRouteComponent = lazy(() => import("./layouts/EmployerRoute"));
 
+// candidate
 const HomeCandidate = lazy(() => import("./pages/candidate/home"));
 const FindJob = lazy(() => import("./pages/candidate/FindJob"));
 const CandidateDashboard = lazy(() => import("./pages/candidate/Dashboard"));
 const OverviewCandidate = lazy(() => import("./pages/candidate/Overview"));
+const JobPage = lazy(() => import("./pages/candidate/Job"));
 
+// candidate settings
+const SettingsLayout = lazy(
+  () => import("./Components/candidateSettings/SettingsLayout")
+);
+
+const PersonalPage = lazy(() => import("./pages/candidate/Setting/Personal"));
+const ProfilePage = lazy(() => import("./pages/candidate/Setting/Profile"));
+const SocialPage = lazy(() => import("./pages/candidate/Setting/Social"));
+const AccountPage = lazy(() => import("./pages/candidate/Setting/Account"));
+
+// employer
 const EmployerDashboard = lazy(() => import("./pages/employer/Dashboard"));
 const HomeEmployer = lazy(() => import("./pages/employer/home"));
 const EmployerOverviewPage = lazy(() => import("./pages/employer/Overview"));
@@ -41,15 +54,25 @@ function App() {
       <Route path="/reset-password/*" element={<ResetPasswordPage />} />
       <Route path="/" element={<UserLayoutComponent />}>
         <Route path="/candidate" element={<CandidateRouteComponent />}>
+          <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<HomeCandidate />} />
           <Route path="find-job" element={<FindJob />} />
+          <Route path="find-job/:jobId" element={<JobPage />} />
           <Route path="dashboard" element={<CandidateDashboard />}>
             <Route path="" element={<OverviewCandidate />} />
+            <Route path="setting" element={<SettingsLayout />}>
+              <Route index element={<Navigate to="personal" replace />} />
+              <Route path="personal" element={<PersonalPage />} />
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="social" element={<SocialPage />} />
+              <Route path="account" element={<AccountPage />} />
+            </Route>
           </Route>
         </Route>
         <Route path="/employer" element={<EmployerRouteComponent />}>
           <Route path="home" element={<HomeEmployer />} />
           <Route path="dashboard" element={<EmployerDashboard />}>
+            <Route index element={<Navigate to="" replace />} />
             <Route path="" element={<EmployerOverviewPage />} />
             <Route path="post-a-job" element={<PostJobPage />} />
             <Route path="my-jobs" element={<MyJobsPage />} />
