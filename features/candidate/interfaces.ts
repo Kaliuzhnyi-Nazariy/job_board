@@ -14,3 +14,18 @@ export interface FullDataCandidate {
   phone?: string;
   [key: string]: unknown;
 }
+
+export interface IUpdForm {
+  full_name: string;
+  speciality: string;
+  experience: string;
+  education: string;
+  website: string;
+}
+
+export type UpdateProfile = Pick<
+  FullDataCandidate,
+  "biogrpahy" | "date_of_birth" | "gender" | "experience" | "education"
+> & {
+  id: string;
+};
