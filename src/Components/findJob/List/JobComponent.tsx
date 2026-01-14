@@ -40,11 +40,7 @@ const JobComponent = () => {
         setJobNumberOnPage={setJobNumberOnPage}
         setSortingType={setSortingType}
       />
-      <JobList
-        listView={listView}
-        jobNumber={jobNumber}
-        jobSortingType={jobSorting}
-      />
+      <JobList listView={listView} jobSortingType={jobSorting} />
     </div>
   );
 };
