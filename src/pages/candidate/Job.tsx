@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import { getJob } from "../../../features/job/jobRequests";
+import ApplyModal from "../../Components/modals/ApplyModal";
+import React from "react";
 
 const Job = () => {
   const { jobId } = useParams();
@@ -11,6 +13,10 @@ const Job = () => {
   });
 
   console.log(data);
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -40,7 +46,9 @@ const Job = () => {
             {work_time}
           </span>
         </div>
-        <button>Apply now</button>
+        <button type="button" onClick={handleOpen}>
+          Apply now
+        </button>
       </div>
       <div className="flex gap-12.5">
         <div className="w-full">
@@ -94,6 +102,12 @@ const Job = () => {
           </ul>
         </div>
       </div>
+      <ApplyModal
+        open={open}
+        handleClose={handleClose}
+        jobTitle={title}
+        jobId={jobId!}
+      />
     </div>
   );
 };
