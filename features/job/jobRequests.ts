@@ -49,3 +49,9 @@ export const updateMyJob = async ({
 
   return res.data;
 };
+
+export const getJob = async (jobId: string) => {
+  const res = await api.get("/job/jobs/" + jobId);
+
+  return res.data;
+};
