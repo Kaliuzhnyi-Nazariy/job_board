@@ -20,14 +20,34 @@ const Applied = () => {
   }
 
   return (
-    <div>
-      <h2>Applied</h2>
+    <div className="w-full">
+      <h2>
+        Applied Jobs
+        <span className="opacity-50"> ({data ? data.length : 0})</span>
+      </h2>
       {data && data.length > 0 ? (
-        <ul>
+        <ul className="w-full">
           {data.map((aj) => {
             return (
-              <li key={aj.id}>
-                <h2>{aj.title}</h2>
+              <li
+                key={aj.id}
+                className="flex justify-between items-center w-full p-5"
+              >
+                <div className="">
+                  <div className="flex gap-2">
+                    <h2>{aj.title}</h2>
+                    <span>{aj.work_time}</span>
+                  </div>
+                  <div className="flex">
+                    <p>{aj.location}</p>
+                    <p>{aj.salary}</p>
+                  </div>
+                </div>
+
+                <p>{JSON.stringify(aj.applied_at)}</p>
+                <p>{aj.status}</p>
+
+                <button>View Details</button>
               </li>
             );
           })}
