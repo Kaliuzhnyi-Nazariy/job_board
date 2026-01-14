@@ -16,7 +16,11 @@ const VacanciesView = ({
       <select
         defaultValue={searchParams.get("order") || "oldest"}
         onChange={(select) =>
-          setSearchParams({ order: select.target.value as "oldest" | "newest" })
+          setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+            params.set("order", select.target.value);
+            return params;
+          })
         }
       >
         <option value="oldest">Latest</option>
@@ -24,7 +28,13 @@ const VacanciesView = ({
       </select>
       <select
         defaultValue={searchParams.get("limit") || 12}
-        onChange={(val) => setSearchParams({ limit: val.target.value })}
+        onChange={(val) =>
+          setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+            params.set("limit", val.target.value);
+            return params;
+          })
+        }
       >
         <option value="12">12 per page</option>
         <option value="16">16 per page</option>
