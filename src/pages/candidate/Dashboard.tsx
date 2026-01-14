@@ -12,7 +12,7 @@ const Dashboard = () => {
             <Link to={`${baseURL}`}>Overview</Link>
           </li>
           <li>
-            <Link to={`${baseURL}/`}>Applied Jobs</Link>
+            <Link to={`${baseURL}/applied-jobs`}>Applied Jobs</Link>
           </li>
           <li>
             <Link to={`${baseURL}/`}>Favorite Jobs</Link>

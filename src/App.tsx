@@ -28,6 +28,8 @@ const ProfilePage = lazy(() => import("./pages/candidate/Setting/Profile"));
 const SocialPage = lazy(() => import("./pages/candidate/Setting/Social"));
 const AccountPage = lazy(() => import("./pages/candidate/Setting/Account"));
 
+const AppliedPage = lazy(() => import("./pages/candidate/Applied"));
+
 // employer
 const EmployerDashboard = lazy(() => import("./pages/employer/Dashboard"));
 const HomeEmployer = lazy(() => import("./pages/employer/home"));
@@ -67,6 +69,7 @@ function App() {
               <Route path="social" element={<SocialPage />} />
               <Route path="account" element={<AccountPage />} />
             </Route>
+            <Route path="applied-jobs" element={<AppliedPage />} />
           </Route>
         </Route>
         <Route path="/employer" element={<EmployerRouteComponent />}>
