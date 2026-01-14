@@ -5,15 +5,17 @@ import { getJobs } from "../../../../features/job/jobRequests";
 import { Link, useSearchParams } from "react-router";
 
 const JobList = ({
-  jobNumber,
+  // jobNumber,
   listView,
   jobSortingType,
 }: {
-  jobNumber: 12 | 16;
+  // jobNumber: 12 | 16;
   listView: "grid" | "list";
   jobSortingType: "oldest" | "newest";
 }) => {
-  const gridStyles = `grid ${jobNumber === 12 ? "grid-cols-3" : "grid-cols-4"}`;
+  // console.log({ jobNumber });
+  // const [searchParams] = useSearchParams();
+  // console.log({ jobNumber });
   const listStyles = "flex flex-col";
 
   const [searchParams] = useSearchParams();
@@ -21,6 +23,8 @@ const JobList = ({
   const page = Number(searchParams.get("page")) || 1;
   const limit = Number(searchParams.get("limit")) || (12 as 12 | 16);
   const order = searchParams.get("order") || "newest";
+
+  const gridStyles = `grid ${limit === 12 ? "grid-cols-3" : "grid-cols-4"}`;
 
   // const jobList: IJobList[] = [
   //   {
@@ -102,9 +106,7 @@ const JobList = ({
           <ul>
             <li>
               <Link
-                to={`?page=${
-                  page - 1
-                }&limit=${jobNumber}&order=${jobSortingType}`}
+                to={`?page=${page - 1}&limit=${limit}&order=${jobSortingType}`}
               >
                 back
               </Link>
@@ -112,9 +114,7 @@ const JobList = ({
             <li>{page}</li>
             <li>
               <Link
-                to={`?page=${
-                  page + 1
-                }&limit=${jobNumber}&order=${jobSortingType}`}
+                to={`?page=${page + 1}&limit=${limit}&order=${jobSortingType}`}
               >
                 forward
               </Link>
