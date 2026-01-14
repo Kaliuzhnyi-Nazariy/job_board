@@ -1,4 +1,5 @@
 import api from "../api/api";
+import type { CandidateApplication } from "./interfaces";
 
 export const apply = async ({
   jobId,
@@ -12,7 +13,9 @@ export const apply = async ({
   return res.data;
 };
 
-export const getCandidateApplications = async () => {
+export const getCandidateApplications = async (): Promise<
+  CandidateApplication[]
+> => {
   const res = await api.get("/application/candidate-applications");
 
   return res.data;
