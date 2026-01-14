@@ -11,3 +11,9 @@ export const apply = async ({
 
   return res.data;
 };
+
+export const getCandidateApplications = async () => {
+  const res = await api.get("/application/candidate-applications");
+
+  return res.data;
+};
