@@ -25,7 +25,5 @@ export interface IUpdForm {
 
 export type UpdateProfile = Pick<
   FullDataCandidate,
-  "biogrpahy" | "date_of_birth" | "gender" | "experience" | "education"
-> & {
-  id: string;
-};
+  "biography" | "date_of_birth" | "gender" | "experience" | "education"
+>;
