@@ -1,13 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { userId } from "../../../../features/user/userSelector";
-import { getCandidate } from "../../../../features/candidate/candidatesRequsts";
+import {
+  getCandidate,
+  updateCandidateProfile,
+} from "../../../../features/candidate/candidatesRequsts";
+import type { UpdateProfile } from "../../../../features/candidate/interfaces";
 
 export type IGender = "Mr" | "Ms" | "Mx";
 export interface IUpdProfile {
   dateOfBirth: string;
+  gender: IGender;
+  experience: string;
+  education: string;
+  biography: string;
+}
+
+export interface IUpdProfileSend {
+  dateOfBirth: Date;
   gender: IGender;
   experience: string;
   education: string;
@@ -32,8 +44,13 @@ const Profile = () => {
     defaultValues: updForm,
   });
 
+  const { mutate } = useMutation({
+    mutationKey: ["updateProfile"],
+    mutationFn: (data: UpdateProfile) => updateCandidateProfile(data),
+  });
+
   const handleSubmitUpdate: SubmitHandler<IUpdProfile> = async (data) => {
-    console.log(data);
+    mutate({ ...data, date_of_birth: new Date(data.dateOfBirth) });
   };
 
   const userIdValue = useSelector(userId);
@@ -45,7 +62,9 @@ const Profile = () => {
 
   useEffect(() => {
     if (data) {
-      const date = data.date_of_birth.split("T")[0];
+      const date =
+        (data.date_of_birth && data.date_of_birth.split("T")[0]) ||
+        "08-20-1995";
 
       reset({
         dateOfBirth: date || "",
