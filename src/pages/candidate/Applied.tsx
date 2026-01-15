@@ -2,8 +2,22 @@ import { useSelector } from "react-redux";
 import { userId } from "../../../features/user/userSelector";
 import { useQuery } from "@tanstack/react-query";
 import { getCandidateApplications } from "../../../features/application/applicationRequest";
+import { useState } from "react";
+import ApplicationDetails from "../../Components/modals/ApplicationDetails";
 
 const Applied = () => {
+  const [openModal, setModalOpen] = useState(false);
+  const [applicationId, setApplicationId] = useState<string | null>(null);
+
+  const handleOpen = (jobId: string) => {
+    setModalOpen(true);
+    setApplicationId(jobId);
+  };
+  const handleClose = () => {
+    setModalOpen(false);
+    setApplicationId(null);
+  };
+
   const userIdValue = useSelector(userId);
 
   const { data, isLoading, isError } = useQuery({
@@ -18,6 +32,8 @@ const Applied = () => {
   if (isError) {
     return <p>Error ocurred!</p>;
   }
+
+  // make a model which is going to be opened after clicking view details button, the request to get data is already exist
 
   return (
     <div className="w-full">
@@ -47,7 +63,7 @@ const Applied = () => {
                 <p>{JSON.stringify(aj.applied_at)}</p>
                 <p>{aj.status}</p>
 
-                <button>View Details</button>
+                <button onClick={() => handleOpen(aj.id)}>View Details</button>
               </li>
             );
           })}
@@ -55,6 +71,11 @@ const Applied = () => {
       ) : (
         "You haven't applied yet!"
       )}
+      <ApplicationDetails
+        open={openModal}
+        handleClose={handleClose}
+        applicationId={applicationId!}
+      />
     </div>
   );
 };
