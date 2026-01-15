@@ -20,3 +20,13 @@ export const getCandidateApplications = async (): Promise<
 
   return res.data;
 };
+
+export const getCandidateApplicationDetails = async (
+  jobApplicationId: string
+) => {
+  const res = await api.get(
+    "/application/candidate-applications/" + jobApplicationId
+  );
+
+  return res.data;
+};
