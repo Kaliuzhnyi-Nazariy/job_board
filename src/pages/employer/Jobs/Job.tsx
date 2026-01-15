@@ -36,7 +36,7 @@ const Job = () => {
     workTime: "full_time",
     location: "",
     education: "",
-    responsobilities: "",
+    responsibilities: "",
     experience: "",
   };
 
@@ -94,7 +94,7 @@ const Job = () => {
         location: job.location ?? "",
         education: job.education ?? "",
         experience: job.experience ?? "",
-        responsobilities: job.responsobilities ?? "",
+        responsibilities: job.responsibilities ?? "",
         workTime: job.work_time!,
         minSalary: salaryValue(job.salary).minSalary,
         maxSalary: salaryValue(job.salary).maxSalary,
@@ -239,13 +239,13 @@ const Job = () => {
             )}
             <p>{errors.description?.message}</p>
 
-            <label>Responsobilities: </label>
+            <label>responsibilities: </label>
             {updateMode ? (
-              <textarea {...register("responsobilities")} />
+              <textarea {...register("responsibilities")} />
             ) : (
-              <article>{job.responsobilities ?? "No responsobilities"}</article>
+              <article>{job.responsibilities ?? "No responsibilities"}</article>
             )}
-            <p>{errors.responsobilities?.message}</p>
+            <p>{errors.responsibilities?.message}</p>
 
             <button
               type={!updateMode ? "submit" : "button"}

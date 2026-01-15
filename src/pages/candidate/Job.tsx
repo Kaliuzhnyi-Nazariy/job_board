@@ -30,7 +30,7 @@ const Job = () => {
     title,
     work_time,
     description,
-    responsobilities,
+    responsibilities,
     education,
     experience,
     location,
@@ -58,7 +58,7 @@ const Job = () => {
           </>
           <>
             <h4>Responsibilities</h4>
-            <article>{responsobilities || "No responsibilities"}</article>
+            <article>{responsibilities || "No responsibilities"}</article>
           </>
         </div>
         <div className="w-full">

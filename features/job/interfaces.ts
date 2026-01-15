@@ -9,7 +9,7 @@ export interface IJobForm {
   location: string;
 
   education?: string;
-  responsobilities?: string;
+  responsibilities?: string;
   experience?: string;
 }
 
@@ -24,7 +24,7 @@ export interface IJobFormUpdate {
   location: string;
 
   education?: string;
-  responsobilities?: string;
+  responsibilities?: string;
   experience?: string;
 }
 
@@ -39,7 +39,7 @@ export interface IJob {
   work_time?: "full_time" | "part_time" | "internship" | "contract";
   location?: string;
   education?: string;
-  responsobilities?: string;
+  responsibilities?: string;
   experience?: string;
 }
 

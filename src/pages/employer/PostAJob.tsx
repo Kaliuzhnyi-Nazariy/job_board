@@ -19,7 +19,7 @@ const PostAJob = () => {
     workTime: "full_time",
     location: "",
     education: "",
-    responsobilities: "",
+    responsibilities: "",
     experience: "",
   };
 
@@ -43,9 +43,9 @@ const PostAJob = () => {
       ),
       location: z.string(),
       education: z.string().optional(),
-      responsobilities: z
+      responsibilities: z
         .string()
-        .max(1028, "Responsobilities shouldn't be longer than 1028 characters!")
+        .max(1028, "responsibilities shouldn't be longer than 1028 characters!")
         .optional(),
       experience: z.string().optional(),
     })
@@ -151,8 +151,8 @@ const PostAJob = () => {
         </div>
 
         <div className={inputBlock}>
-          <label>Responsobilities</label>
-          <textarea {...register("responsobilities")} />
+          <label>responsibilities</label>
+          <textarea {...register("responsibilities")} />
         </div>
 
         <button disabled={mutation.isPending} className="disabled:opacity-50">

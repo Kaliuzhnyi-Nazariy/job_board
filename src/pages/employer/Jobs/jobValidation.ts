@@ -20,9 +20,9 @@ export const JobValidation = z
     ),
     location: z.string(),
     education: z.string().optional(),
-    responsobilities: z
+    responsibilities: z
       .string()
-      .max(1028, "Responsobilities shouldn't be longer than 1028 characters!")
+      .max(1028, "responsibilities shouldn't be longer than 1028 characters!")
       .optional(),
     experience: z.string().optional(),
   })
