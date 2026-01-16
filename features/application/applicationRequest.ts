@@ -22,11 +22,17 @@ export const getCandidateApplications = async (): Promise<
 };
 
 export const getCandidateApplicationDetails = async (
-  jobApplicationId: string
+  jobApplicationId: string,
 ) => {
   const res = await api.get(
-    "/application/candidate-applications/" + jobApplicationId
+    "/application/candidate-applications/" + jobApplicationId,
   );
+
+  return res.data;
+};
+
+export const getApplications = async (jobId: string) => {
+  const res = await api.get("/application/get-applications/" + jobId);
 
   return res.data;
 };
