@@ -55,3 +55,11 @@ export const getJob = async (jobId: string) => {
 
   return res.data;
 };
+
+export const getRecentJobs = async () => {
+  const res = await api.get("/job/my-jobs/recent");
+
+  return res.data;
+};
+
+
