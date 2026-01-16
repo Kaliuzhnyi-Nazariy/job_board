@@ -1,3 +1,5 @@
+type workTime = "full_time" | "part_time" | "internship" | "contract";
+
 export interface IJobForm {
   title: string;
   position: string;
@@ -5,7 +7,7 @@ export interface IJobForm {
   minSalary: number;
   maxSalary: number;
   salaryType: "month" | "week" | "hour" | "year" | "contract";
-  workTime: "full_time" | "part_time" | "internship" | "contract";
+  workTime: workTime;
   location: string;
 
   education?: string;
@@ -36,7 +38,7 @@ export interface IJob {
   minSalary: string;
   maxSalary: string;
   salaryType: "month" | "week" | "year" | "contract";
-  work_time?: "full_time" | "part_time" | "internship" | "contract";
+  work_time?: workTime;
   location?: string;
   education?: string;
   responsibilities?: string;
@@ -57,4 +59,16 @@ export interface IGetJob {
   page: number;
   limit: 12 | 16;
   order: "newest" | "oldest";
+}
+
+type statuses = "applied" | "rejected" | "accepted";
+
+export interface EmployerRecentJobs {
+  id: string;
+  title: string;
+  work_time: workTime;
+  position: string;
+  created_at: Date;
+  applications_count: number;
+  status: statuses;
 }
