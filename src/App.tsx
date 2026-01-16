@@ -20,7 +20,7 @@ const JobPage = lazy(() => import("./pages/candidate/Job"));
 
 // candidate settings
 const SettingsLayout = lazy(
-  () => import("./Components/candidateSettings/SettingsLayout")
+  () => import("./Components/candidateSettings/SettingsLayout"),
 );
 
 const PersonalPage = lazy(() => import("./pages/candidate/Setting/Personal"));
@@ -36,13 +36,15 @@ const HomeEmployer = lazy(() => import("./pages/employer/home"));
 const EmployerOverviewPage = lazy(() => import("./pages/employer/Overview"));
 const PostJobPage = lazy(() => import("./pages/employer/PostAJob"));
 const FindACandidatePage = lazy(
-  () => import("./pages/employer/Candidates/FindACandidate")
+  () => import("./pages/employer/Candidates/FindACandidate"),
 );
 const CandidatePage = lazy(
-  () => import("./pages/employer/Candidates/Candidate")
+  () => import("./pages/employer/Candidates/Candidate"),
 );
 const MyJobsPage = lazy(() => import("./pages/employer/Jobs/MyJobs"));
 const MyJobPage = lazy(() => import("./pages/employer/Jobs/Job"));
+
+const ApplicationPage = lazy(() => import("./pages/employer/Applications"));
 
 const Forbidden = lazy(() => import("./pages/error/Forbidden"));
 
@@ -75,15 +77,14 @@ function App() {
         <Route path="/employer" element={<EmployerRouteComponent />}>
           <Route path="home" element={<HomeEmployer />} />
           <Route path="dashboard" element={<EmployerDashboard />}>
-            <Route index element={<Navigate to="" replace />} />
+            {/* <Route index element={<Navigate to="" replace />} /> */}
             <Route path="" element={<EmployerOverviewPage />} />
             <Route path="post-a-job" element={<PostJobPage />} />
             <Route path="my-jobs" element={<MyJobsPage />} />
             <Route path="my-jobs/:jobId" element={<MyJobPage />} />
           </Route>
+          <Route path="view-application/:jobId" element={<ApplicationPage />} />
           <Route path="candidates" element={<FindACandidatePage />} />
-          {/* <Route path="candidate" element={<CandidatePage />} /> */}
-
           <Route path="candidates/:candidateId" element={<CandidatePage />} />
         </Route>
       </Route>
