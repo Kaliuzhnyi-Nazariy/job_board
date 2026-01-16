@@ -35,11 +35,11 @@ const PostAJob = () => {
       maxSalary: z.number().gt(-1, "The value cannot be negative!"),
       salaryType: z.enum(
         ["month", "week", "hour", "year", "contract"],
-        'That field can be filled only with that values: "month", "week", "year", "contract"'
+        'That field can be filled only with that values: "month", "week", "year", "contract"',
       ),
       workTime: z.enum(
         ["full_time", "part_time", "internship", "contract"],
-        "That field can be filled only with that values: 'full_time', 'part_time', 'internship', 'contract' "
+        "That field can be filled only with that values: 'full_time', 'part_time', 'internship', 'contract' ",
       ),
       location: z.string(),
       education: z.string().optional(),
@@ -57,6 +57,7 @@ const PostAJob = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: JobForm,
@@ -65,6 +66,20 @@ const PostAJob = () => {
 
   const mutation = useMutation({
     mutationFn: (data: IJobForm) => postJob(data),
+    onSuccess: () =>
+      reset({
+        title: "",
+        position: "",
+        description: "",
+        minSalary: 0,
+        maxSalary: 0,
+        salaryType: "month",
+        workTime: "full_time",
+        location: "",
+        education: "",
+        responsibilities: "",
+        experience: "",
+      }),
   });
 
   const submitHandler: SubmitHandler<IJobForm> = async (data) => {
