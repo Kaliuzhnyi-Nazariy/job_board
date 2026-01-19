@@ -36,3 +36,14 @@ export const getApplications = async (jobId: string) => {
 
   return res.data;
 };
+
+export const getApplicantDetails = async (
+  jobId: string,
+  applicationId: string,
+) => {
+  const res = await api.get(
+    `/application/${jobId}/candidate-details/${applicationId}`,
+  );
+
+  return res.data;
+};
