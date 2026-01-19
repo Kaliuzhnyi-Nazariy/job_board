@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getMyJob, updateMyJob } from "../../../../features/job/jobRequests";
-import { useParams } from "react-router";
+import {
+  deleteJob,
+  getMyJob,
+  updateMyJob,
+} from "../../../../features/job/jobRequests";
+import { useNavigate, useParams } from "react-router";
 import type {
   IJobForm,
   // IJobFormUpdate,
@@ -51,7 +55,7 @@ const Job = () => {
   });
 
   const workTimeView = (
-    workTime: "full_time" | "part_time" | "internship" | "contract"
+    workTime: "full_time" | "part_time" | "internship" | "contract",
   ) => {
     switch (workTime) {
       case "full_time":
@@ -116,6 +120,16 @@ const Job = () => {
       queryClient.invalidateQueries({
         queryKey: ["myJob", jobId],
       }),
+  });
+
+  const navigate = useNavigate();
+
+  const { mutate: deleteJobMutation } = useMutation({
+    mutationKey: ["deleteJob"],
+    mutationFn: () => deleteJob(jobId!),
+    onSuccess: () => {
+      navigate("/employer/dashboard/my-jobs");
+    },
   });
 
   if (isLoading) return <p>Loading...</p>;
@@ -247,13 +261,26 @@ const Job = () => {
             )}
             <p>{errors.responsibilities?.message}</p>
 
-            <button
-              type={!updateMode ? "submit" : "button"}
-              className="cursor-pointer"
-              onClick={() => setUpdateMode(!updateMode)}
-            >
-              {updateMode ? "Save" : "Update"}
-            </button>
+            <ul className="flex w-full justify-around">
+              <li>
+                <button
+                  type={!updateMode ? "submit" : "button"}
+                  className="cursor-pointer"
+                  onClick={() => setUpdateMode(!updateMode)}
+                >
+                  {updateMode ? "Save" : "Update"}
+                </button>
+              </li>
+              <li>
+                <button
+                  className="cursor-pointer"
+                  onClick={() => deleteJobMutation()}
+                  type="button"
+                >
+                  Delete
+                </button>
+              </li>
+            </ul>
           </form>
         ) : (
           <p>No data</p>
