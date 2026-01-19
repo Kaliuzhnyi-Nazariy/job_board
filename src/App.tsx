@@ -44,7 +44,9 @@ const CandidatePage = lazy(
 const MyJobsPage = lazy(() => import("./pages/employer/Jobs/MyJobs"));
 const MyJobPage = lazy(() => import("./pages/employer/Jobs/Job"));
 
-const ApplicationPage = lazy(() => import("./pages/employer/Applications"));
+const ApplicationPage = lazy(
+  () => import("./pages/employer/Applications/Applications"),
+);
 
 const Forbidden = lazy(() => import("./pages/error/Forbidden"));
 
