@@ -94,9 +94,11 @@ const JobList = ({
           <ul className={`${listView === "grid" ? gridStyles : listStyles}`}>
             {orderedJobs.map((job) => {
               return (
-                <Link to={`/candidate/find-job/${job.id}`} key={job.id}>
-                  <JobCard job={job}></JobCard>
-                </Link>
+                <li>
+                  <Link to={`/candidate/find-job/${job.id}`} key={job.id}>
+                    <JobCard job={job}></JobCard>
+                  </Link>
+                </li>
                 // <li key={job.id}>
                 //   <JobCard job={job}></JobCard>
                 // </li>
