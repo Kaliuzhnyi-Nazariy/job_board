@@ -1,6 +1,9 @@
 import { Box, Modal } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import { getApplicantDetails } from "../../../features/application/applicationRequest";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  getApplicantDetails,
+  updateStatusOfApplication,
+} from "../../../features/application/applicationRequest";
 import { Link } from "react-router";
 
 const ApplicationCandidateDetails = ({
@@ -18,6 +21,16 @@ const ApplicationCandidateDetails = ({
     queryKey: ["getCandidateDetails", applicationId],
     queryFn: () => getApplicantDetails(jobId, applicationId),
     enabled: open && !!applicationId && !!jobId,
+  });
+
+  const { mutate: rejectApplication } = useMutation({
+    mutationKey: ["rejectApplicationStatus"],
+    mutationFn: () => updateStatusOfApplication(applicationId, "rejected"),
+  });
+
+  const { mutate: hireApplication } = useMutation({
+    mutationKey: ["rejectApplicationStatus"],
+    mutationFn: () => updateStatusOfApplication(applicationId, "accepted"),
   });
 
   if (!open) return null;
@@ -55,9 +68,13 @@ const ApplicationCandidateDetails = ({
                 <li>
                   <Link to={`mailto:` + data.email}>Send Mail</Link>
                 </li>
-                <li>
-                  <button>Hire Candidate</button>
-                </li>
+                {data.status === "applied" && (
+                  <li>
+                    <button onClick={() => hireApplication()}>
+                      Hire Candidate
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
             <div className="grid grid-cols-2 g-18">
@@ -151,10 +168,22 @@ const ApplicationCandidateDetails = ({
                 </div>
               </div>
             </div>
-            <div className="w-full flex justify-around items-center">
-              <button className="cursor-pointer">Reject</button>
-              <button className="cursor-pointer">Hire</button>
-            </div>
+            {data.status === "applied" && (
+              <div className="w-full flex justify-around items-center">
+                <button
+                  className="cursor-pointer"
+                  onClick={() => rejectApplication()}
+                >
+                  Reject
+                </button>
+                <button
+                  className="cursor-pointer"
+                  onClick={() => hireApplication()}
+                >
+                  Hire
+                </button>
+              </div>
+            )}
           </>
         )}
       </Box>
