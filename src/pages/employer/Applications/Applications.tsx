@@ -11,7 +11,7 @@ const Applications = () => {
   const handleClose = () => setOpen(false);
   const { jobId } = useParams();
 
-  const [applicationId, setApplicationId] = useState<number | null>(null);
+  const [applicationId, setApplicationId] = useState<string | null>(null);
 
   const { data, isLoading } = useQuery({
     queryKey: ["getApplications", jobId],
@@ -30,7 +30,7 @@ const Applications = () => {
         <h1>Applications</h1>
         <ul className="grid grid-cols-3">
           <li>
-            <h2>All applications</h2>
+            <h2>All application ({data.length})</h2>
             <ul>
               {data.map((ap) => {
                 return (

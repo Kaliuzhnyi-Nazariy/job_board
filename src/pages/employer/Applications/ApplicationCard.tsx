@@ -7,7 +7,7 @@ const ApplicationCard = ({
 }: {
   ap: any;
   handleOpen: () => void;
-  setApplicationId: React.Dispatch<React.SetStateAction<number | null>>;
+  setApplicationId: React.Dispatch<React.SetStateAction<string | null>>;
 }) => {
   return (
     <li
