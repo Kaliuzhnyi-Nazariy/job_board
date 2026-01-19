@@ -47,3 +47,15 @@ export const getApplicantDetails = async (
 
   return res.data;
 };
+
+export const updateStatusOfApplication = async (
+  jobApplicationId: string,
+  status: "rejected" | "accepted",
+) => {
+  const res = await api.patch(
+    "/application/update-candidate-status/" + jobApplicationId,
+    { status },
+  );
+
+  return res.data;
+};
