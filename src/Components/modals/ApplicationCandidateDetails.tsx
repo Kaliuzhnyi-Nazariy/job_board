@@ -14,23 +14,23 @@ const ApplicationCandidateDetails = ({
 }: {
   open: boolean;
   handleClose: () => void;
-  applicationId: string;
+  applicationId: string | null;
   jobId: string;
 }) => {
   const { data, isLoading } = useQuery({
     queryKey: ["getCandidateDetails", applicationId],
-    queryFn: () => getApplicantDetails(jobId, applicationId),
+    queryFn: () => getApplicantDetails(jobId, applicationId!),
     enabled: open && !!applicationId && !!jobId,
   });
 
   const { mutate: rejectApplication } = useMutation({
     mutationKey: ["rejectApplicationStatus"],
-    mutationFn: () => updateStatusOfApplication(applicationId, "rejected"),
+    mutationFn: () => updateStatusOfApplication(applicationId!, "rejected"),
   });
 
   const { mutate: hireApplication } = useMutation({
     mutationKey: ["rejectApplicationStatus"],
-    mutationFn: () => updateStatusOfApplication(applicationId, "accepted"),
+    mutationFn: () => updateStatusOfApplication(applicationId!, "accepted"),
   });
 
   if (!open) return null;
