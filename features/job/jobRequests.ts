@@ -62,4 +62,8 @@ export const getRecentJobs = async () => {
   return res.data;
 };
 
+export const deleteJob = async (jobId: string) => {
+  const res = await api.delete("/job/delete/" + jobId);
 
+  return res.data;
+};
