@@ -59,6 +59,8 @@ export interface IGetJob {
   page: number;
   limit: 12 | 16;
   order: "newest" | "oldest";
+  title: string | null;
+  location: string | null;
 }
 
 type statuses = "applied" | "rejected" | "accepted";

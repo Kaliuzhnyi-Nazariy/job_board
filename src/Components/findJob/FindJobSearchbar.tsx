@@ -3,8 +3,42 @@ import SearchIcon from "@mui/icons-material/Search";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LayersIcon from "@mui/icons-material/Layers";
 import { jobCategories } from "../../extras/jobCategories";
+import { useSearchParams } from "react-router";
+
+import { useForm, type SubmitHandler } from "react-hook-form";
 
 const FindJobSearchbar = () => {
+  const [, setSearchParams] = useSearchParams();
+
+  const { register, handleSubmit } = useForm<{
+    title?: string;
+    location?: string;
+  }>({
+    defaultValues: {
+      title: "",
+      location: "",
+    },
+  });
+
+  const onHandleSubmit: SubmitHandler<{
+    title?: string;
+    location?: string;
+  }> = (data) => {
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
+
+      if (data.title) params.set("title", data.title);
+      else params.delete("title");
+
+      if (data.location) params.set("location", data.location);
+      else params.delete("location");
+
+      params.set("page", "1");
+
+      return params;
+    });
+  };
+
   return (
     <Box
       sx={{
@@ -27,6 +61,7 @@ const FindJobSearchbar = () => {
           disableUnderline: true,
           startAdornment: <SearchIcon color="primary" sx={{ mr: 1 }} />,
         }}
+        {...register("title")}
       />
 
       <Divider orientation="vertical" flexItem />
@@ -39,6 +74,7 @@ const FindJobSearchbar = () => {
           disableUnderline: true,
           startAdornment: <LocationOnIcon color="primary" sx={{ mr: 1 }} />,
         }}
+        {...register("location")}
       />
 
       <Divider orientation="vertical" flexItem />
@@ -75,7 +111,11 @@ const FindJobSearchbar = () => {
       </Box>
 
       {/* Find Job */}
-      <Button variant="contained" size="large">
+      <Button
+        variant="contained"
+        size="large"
+        onClick={handleSubmit(onHandleSubmit)}
+      >
         Find Job
       </Button>
     </Box>

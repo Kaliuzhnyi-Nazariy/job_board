@@ -5,17 +5,12 @@ import { getJobs } from "../../../../features/job/jobRequests";
 import { Link, useSearchParams } from "react-router";
 
 const JobList = ({
-  // jobNumber,
   listView,
   jobSortingType,
 }: {
-  // jobNumber: 12 | 16;
   listView: "grid" | "list";
   jobSortingType: "oldest" | "newest";
 }) => {
-  // console.log({ jobNumber });
-  // const [searchParams] = useSearchParams();
-  // console.log({ jobNumber });
   const listStyles = "flex flex-col";
 
   const [searchParams] = useSearchParams();
@@ -23,48 +18,22 @@ const JobList = ({
   const page = Number(searchParams.get("page")) || 1;
   const limit = Number(searchParams.get("limit")) || (12 as 12 | 16);
   const order = searchParams.get("order") || "newest";
+  const title = searchParams.get("title") || null;
+  const location = searchParams.get("location") || null;
 
   const gridStyles = `grid ${limit === 12 ? "grid-cols-3" : "grid-cols-4"}`;
 
-  // const jobList: IJobList[] = [
-  //   {
-  //     title: "Dribble",
-  //     location: "California",
-  //     position: "Sunior UX Designer.",
-  //     salary: "$50k-80k/month",
-  //     workTime: "full_time",
-  //     createdAt: 1519129853500,
-  //   },
-  //   {
-  //     title: "Reddit",
-  //     location: "United Kingdom of Great Britain",
-  //     position: "Marketing Officer",
-  //     salary: "$30K-$35K",
-  //     workTime: "full_time",
-  //     createdAt: 1519129858900,
-  //   },
-  //   {
-  //     title: "Freepik",
-  //     location: "China",
-  //     position: "Visual Designer",
-  //     salary: "$10K-$15K",
-  //     workTime: "part_time",
-  //     createdAt: 1519129864400,
-  //   },
-  // ];
-
   const { data, isLoading, error } = useQuery({
-    queryKey: ["jobs", page, limit, order],
+    queryKey: ["jobs", page, limit, order, title, location],
     queryFn: () =>
       getJobs({
         page: page,
         limit: limit as 12 | 16,
         order: order as "newest" | "oldest",
+        title,
+        location,
       }),
   });
-
-  // console.log(data);
-  // console.log({ page, limit, order });
 
   const orderedJobs = data
     ? [...data.jobs].sort((a, b) => {
