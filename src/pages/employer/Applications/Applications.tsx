@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import { getApplications } from "../../../../features/application/applicationRequest";
-import ApplicationCandidateDetails from "../../../Components/modals/ApplicationCandidateDetails";
+import ApplicationCandidateDetails from "../../../Components/modals/Applications/ApplicationCandidateDetails";
 import React, { useState } from "react";
 import ApplicationCard from "./ApplicationCard";
+import type { JobApplicatinon } from "../../../../features/application/interfaces";
 
 const Applications = () => {
   const [open, setOpen] = React.useState(false);
@@ -13,7 +14,7 @@ const Applications = () => {
 
   const [applicationId, setApplicationId] = useState<string | null>(null);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery<JobApplicatinon[]>({
     queryKey: ["getApplications", jobId],
     queryFn: () => getApplications(jobId!),
   });
@@ -22,7 +23,12 @@ const Applications = () => {
     return <p>Loading...</p>;
   }
 
-  const candidateList = data.filter((aj) => aj.status !== "rejected");
+  if (isError || !data) return <p>Error occured!</p>;
+
+  const candidateList = data.filter(
+    (aj) => aj.status !== "rejected" && aj.status !== "accepted",
+  );
+  const submittedCandidates = data.filter((aj) => aj.status === "accepted");
 
   return (
     <>
@@ -31,68 +37,62 @@ const Applications = () => {
         <ul className="grid grid-cols-3">
           <li>
             <h2>All application ({data.length})</h2>
-            <ul>
-              {data.map((ap) => {
-                return (
-                  <ApplicationCard
-                    ap={ap}
-                    handleOpen={handleOpen}
-                    key={ap.id}
-                    setApplicationId={setApplicationId}
-                  />
-                );
-              })}
-            </ul>
+            {data.length > 0 ? (
+              <ul>
+                {data.map((ap) => {
+                  return (
+                    <ApplicationCard
+                      ap={ap}
+                      handleOpen={handleOpen}
+                      key={ap.id}
+                      setApplicationId={setApplicationId}
+                    />
+                  );
+                })}
+              </ul>
+            ) : (
+              <p>No applications yet!</p>
+            )}
           </li>
           <li>
             <ul>
-              <h2>Applied</h2>
-              {candidateList.map((ap) => {
-                return (
-                  <li key={ap.id} className="w-60 ">
-                    <Link to={`/employer/candidates/` + ap.user_id}>
-                      <div className="w-full flex justify-between">
-                        <h2 className="font-bold">{ap.full_name}</h2>
-                        <span className="opacity-50">{ap.speciality}</span>
-                      </div>
-
-                      <hr />
-
-                      <ul className="list-[inside]">
-                        <li>{ap.experience}</li>
-                        <li>Education: {ap.education}</li>
-                        <li>Applied: {ap.applied_at}</li>
-                      </ul>
-                    </Link>
-                  </li>
-                );
-              })}
+              <h2>Applied ({candidateList.length})</h2>
+              {candidateList.length > 0 ? (
+                <ul>
+                  {candidateList.map((ap) => {
+                    return (
+                      <ApplicationCard
+                        ap={ap}
+                        handleOpen={handleOpen}
+                        key={ap.id}
+                        setApplicationId={setApplicationId}
+                      />
+                    );
+                  })}
+                </ul>
+              ) : (
+                <p>No shorten list candidates!</p>
+              )}
             </ul>
           </li>
           <li>
-            <h2>Submitted</h2>
-            {/* <ul>
-            {candidateList.map((ap) => {
-              return (
-                <li key={ap.id} className="w-60 ">
-                  <Link to={`/employer/candidates/` + ap.user_id}>
-                    <div className="w-full flex justify-between">
-                      <h2 className="font-bold">{ap.full_name}</h2>
-                      <span className="opacity-50">{ap.speciality}</span>
-                    </div>
-
-                    <hr />
-
-                    <ul className="list-[inside]">
-                      <li>{ap.experience}</li>
-                      <li>Education: {ap.education}</li>
-                      <li>Applied: {ap.applied_at}</li>
-                    </ul>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul> */}
+            <h2>Submitted ({submittedCandidates.length})</h2>
+            {submittedCandidates.length > 0 ? (
+              <ul>
+                {submittedCandidates.map((ap) => {
+                  return (
+                    <ApplicationCard
+                      ap={ap}
+                      handleOpen={handleOpen}
+                      key={ap.id}
+                      setApplicationId={setApplicationId}
+                    />
+                  );
+                })}
+              </ul>
+            ) : (
+              <p>No hired candidate yet!</p>
+            )}
           </li>
         </ul>
       </div>

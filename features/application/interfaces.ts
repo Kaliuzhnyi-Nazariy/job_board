@@ -11,3 +11,16 @@ export interface CandidateApplication {
   status: statuses;
   applied_at: Date;
 }
+
+export interface JobApplicatinon {
+  id: string;
+  status: statuses;
+  applied_at: Date;
+  full_name: string;
+  user_id: string;
+  experience?: string;
+  education?: string;
+  speciality?: string;
+  // covering_letter: string;
+  // email: string;
+}

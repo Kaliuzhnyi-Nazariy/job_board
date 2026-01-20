@@ -1,11 +1,12 @@
 import type React from "react";
+import type { JobApplicatinon } from "../../../../features/application/interfaces";
 
 const ApplicationCard = ({
   ap,
   handleOpen,
   setApplicationId,
 }: {
-  ap: any;
+  ap: JobApplicatinon;
   handleOpen: () => void;
   setApplicationId: React.Dispatch<React.SetStateAction<string | null>>;
 }) => {
@@ -25,10 +26,10 @@ const ApplicationCard = ({
 
       <hr />
 
-      <ul className="list-[inside]">
+      <ul className="list-disc list-inside">
         <li>{ap.experience}</li>
         <li>Education: {ap.education}</li>
-        <li>Applied: {ap.applied_at}</li>
+        <li>Applied: {JSON.stringify(ap.applied_at)}</li>
       </ul>
     </li>
   );
