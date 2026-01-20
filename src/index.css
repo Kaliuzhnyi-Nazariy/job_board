@@ -1,4 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
+
+:root {
+  --primary5: #0a65cc;
+  --gray6: #5e6670;
+}
 
 body,
 h1,
@@ -10,4 +16,63 @@ h6,
 h7 {
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  width: 100vw;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 500;
+  line-height: 64px;
+}
+
+h2 {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 56px;
+}
+
+h3 {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 48px;
+}
+
+h4 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+h5 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.caption {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.button {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.body_medium {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.body_medium_500 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
 }
