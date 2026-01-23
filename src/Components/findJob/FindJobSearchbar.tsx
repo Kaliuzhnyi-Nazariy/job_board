@@ -10,7 +10,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 const FindJobSearchbar = () => {
   const [, setSearchParams] = useSearchParams();
 
-  const { register, handleSubmit } = useForm<{
+  const { register, handleSubmit, reset } = useForm<{
     title?: string;
     location?: string;
   }>({
@@ -34,6 +34,11 @@ const FindJobSearchbar = () => {
       else params.delete("location");
 
       params.set("page", "1");
+
+      reset({
+        title: "",
+        location: "",
+      });
 
       return params;
     });
