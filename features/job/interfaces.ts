@@ -1,4 +1,4 @@
-type workTime = "full_time" | "part_time" | "internship" | "contract";
+export type workTime = "full_time" | "part_time" | "internship" | "contract";
 
 export interface IJobForm {
   title: string;
