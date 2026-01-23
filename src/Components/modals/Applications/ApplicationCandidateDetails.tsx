@@ -3,8 +3,9 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   getApplicantDetails,
   updateStatusOfApplication,
-} from "../../../features/application/applicationRequest";
+} from "../../../../features/application/applicationRequest";
 import { Link } from "react-router";
+import CandidateContactInformation from "./CandidateContactInformation";
 
 const ApplicationCandidateDetails = ({
   open,
@@ -117,7 +118,8 @@ const ApplicationCandidateDetails = ({
                   </div>
                 </div>
 
-                <div className="">
+                <CandidateContactInformation data={data} />
+                {/* <div className="">
                   <h3>Contact Information</h3>
                   <ul>
                     {data.website && (
@@ -137,7 +139,7 @@ const ApplicationCandidateDetails = ({
                           <div className="size-8 rounded-full bg-blue-500"></div>
                           <div>
                             <h5>location</h5>
-                            <Link to={data.location}>{data.location}</Link>
+                            <p>{data.location}</p>
                           </div>
                         </div>
                       </li>
@@ -148,7 +150,7 @@ const ApplicationCandidateDetails = ({
                           <div className="size-8 rounded-full bg-blue-500"></div>
                           <div>
                             <h5>phone</h5>
-                            <Link to={data.phone}>{data.phone}</Link>
+                            <p>{data.phone}</p>
                           </div>
                         </div>
                       </li>
@@ -165,7 +167,7 @@ const ApplicationCandidateDetails = ({
                       </div>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
             {data.status === "applied" && (

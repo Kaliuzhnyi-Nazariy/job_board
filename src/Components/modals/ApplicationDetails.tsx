@@ -3,6 +3,8 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { getCandidateApplicationDetails } from "../../../features/application/applicationRequest";
+import { workTimeFormat } from "../../helpers/jobTimeFormat";
+import { dateFormat } from "../../helpers";
 
 const ApplicationDetails = ({
   open,
@@ -18,6 +20,10 @@ const ApplicationDetails = ({
     queryFn: () => getCandidateApplicationDetails(applicationId),
     retry: 1,
   });
+
+  // if (!isLoading && !isError) {
+  //   dateFormat(data.applied_at || undefined);
+  // }
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -48,7 +54,9 @@ const ApplicationDetails = ({
               <Typography variant="h6" component="h2">
                 Title: {data.title}
               </Typography>
-              <Typography component="p">{data.work_time}</Typography>
+              <Typography component="p">
+                {workTimeFormat(data.work_time)}
+              </Typography>
             </div>
             <Typography component="p">Position: {data.position}</Typography>
             <Typography component="p">Location: {data.location}</Typography>
@@ -73,7 +81,9 @@ const ApplicationDetails = ({
               <Typography component="p">Status: {data.status}</Typography>
             </>
             <>
-              <Typography component="p">Applied: {data.applied_at}</Typography>
+              <Typography component="p">
+                Applied: {dateFormat(data.applied_at)}
+              </Typography>
             </>
             <button onClick={handleClose}>Close</button>
           </>
