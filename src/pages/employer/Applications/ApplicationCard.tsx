@@ -1,5 +1,6 @@
 import type React from "react";
 import type { JobApplicatinon } from "../../../../features/application/interfaces";
+import { dateFormat } from "../../../helpers";
 
 const ApplicationCard = ({
   ap,
@@ -29,7 +30,7 @@ const ApplicationCard = ({
       <ul className="list-disc list-inside">
         <li>{ap.experience}</li>
         <li>Education: {ap.education}</li>
-        <li>Applied: {JSON.stringify(ap.applied_at)}</li>
+        <li>Applied: {dateFormat(ap.applied_at)}</li>
       </ul>
     </li>
   );
