@@ -2,6 +2,7 @@
 @import "tailwindcss";
 
 :root {
+  --primary50: #e7f0fa;
   --primary5: #0a65cc;
   --gray6: #5e6670;
 }
@@ -63,6 +64,11 @@ h5 {
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
+}
+
+.body_small {
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .body_medium {
