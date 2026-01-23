@@ -56,6 +56,9 @@ const JobList = ({
     return <p>failed to get jobs</p>;
   }
 
+  const isNextPageAvailable =
+    data.meta.total > data.meta.limit * data.meta.page;
+
   return (
     <>
       {data?.jobs?.length > 0 && (
@@ -74,10 +77,12 @@ const JobList = ({
               );
             })}
           </ul>
+
           <ul>
             <li>
               <Link
                 to={`?page=${page - 1}&limit=${limit}&order=${jobSortingType}`}
+                className={`${page == 1 && "pointer-events-none"}`}
               >
                 back
               </Link>
@@ -86,6 +91,7 @@ const JobList = ({
             <li>
               <Link
                 to={`?page=${page + 1}&limit=${limit}&order=${jobSortingType}`}
+                className={`${!isNextPageAvailable && "pointer-events-none"}`}
               >
                 forward
               </Link>
