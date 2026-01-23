@@ -38,14 +38,53 @@ import MenuItem from "@mui/material/MenuItem";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import { countries } from "../../extras/countries";
+import { useLocation, useNavigate, useSearchParams } from "react-router";
 
 const Searchbar = () => {
+  const { pathname } = useLocation();
+  const [, setSearchParams] = useSearchParams();
+
+  const navigate = useNavigate();
+
+  const handleCountryChange = (country: string) => {
+    if (pathname !== "/candidate/find-job") {
+      navigate({
+        pathname: "/candidate/find-job",
+        search: `?location=${country}`,
+      });
+      return;
+    }
+
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
+      params.set("location", country);
+      return params;
+    });
+  };
+
+  const handleJobChange = (job: string) => {
+    if (pathname !== "/candidate/find-job") {
+      navigate({
+        pathname: "/candidate/find-job",
+        search: `?title=${job}`,
+      });
+      return;
+    }
+
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
+      params.set("title", job);
+      return params;
+    });
+  };
+
   return (
     <Box sx={{ width: "100%", maxWidth: 700 }}>
       <TextField
         fullWidth
         placeholder="Job title, keyword, company"
         variant="outlined"
+        onChange={(e) => handleJobChange(e.target.value)}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -59,6 +98,7 @@ const Searchbar = () => {
                   minWidth: 100,
                   mr: 1,
                 }}
+                onChange={(e) => handleCountryChange(e.target.value)}
               >
                 {countries.map((country) => (
                   <MenuItem key={country} value={country}>
