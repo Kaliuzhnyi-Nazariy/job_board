@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getCandidateApplications } from "../../../features/application/applicationRequest";
 import { useState } from "react";
 import ApplicationDetails from "../../Components/modals/ApplicationDetails";
+import { workTimeFormat } from "../../helpers/jobTimeFormat";
+import { dateFormat } from "../../helpers";
 
 const Applied = () => {
   const [openModal, setModalOpen] = useState(false);
@@ -52,7 +54,7 @@ const Applied = () => {
                 <div className="">
                   <div className="flex gap-2">
                     <h2>{aj.title}</h2>
-                    <span>{aj.work_time}</span>
+                    <span>{workTimeFormat(aj.work_time)}</span>
                   </div>
                   <div className="flex">
                     <p>{aj.location}</p>
@@ -60,7 +62,7 @@ const Applied = () => {
                   </div>
                 </div>
 
-                <p>{JSON.stringify(aj.applied_at)}</p>
+                <p>{dateFormat(aj.applied_at)}</p>
                 <p>{aj.status}</p>
 
                 <button onClick={() => handleOpen(aj.id)}>View Details</button>
