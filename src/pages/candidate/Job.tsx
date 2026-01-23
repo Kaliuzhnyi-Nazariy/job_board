@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { getJob } from "../../../features/job/jobRequests";
 import ApplyModal from "../../Components/modals/ApplyModal";
 import React from "react";
+import { workTimeFormat } from "../../helpers/jobTimeFormat";
 
 const Job = () => {
   const { jobId } = useParams();
@@ -43,7 +44,7 @@ const Job = () => {
         <div className="flex items-center">
           <h3>{title}</h3>
           <span className="px-3 py-0.75 bg-blue-400/20 text-blue-500">
-            {work_time}
+            {workTimeFormat(work_time)}
           </span>
         </div>
         <button type="button" onClick={handleOpen}>
@@ -89,7 +90,7 @@ const Job = () => {
               <div>
                 <div className="size-8"></div>
                 <span>JOB TYPE</span>
-                <p>{work_time}</p>
+                <p>{workTimeFormat(work_time)}</p>
               </div>
             </li>
             <li>

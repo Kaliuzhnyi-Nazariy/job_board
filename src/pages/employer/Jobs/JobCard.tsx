@@ -1,5 +1,6 @@
 import type { IJob } from "../../../../features/job/interfaces";
 import { Link } from "react-router";
+import { workTimeFormat } from "../../../helpers/jobTimeFormat";
 
 const JobCard = ({ data }: { data: IJob }) => {
   return (
@@ -7,7 +8,7 @@ const JobCard = ({ data }: { data: IJob }) => {
       <Link to={`/employer/dashboard/my-jobs/${data.id}`}>
         <div className="">
           <h2>{data.title}</h2>
-          <p className="opacity-50">{data.work_time}</p>
+          <p className="opacity-50">{workTimeFormat(data.work_time)}</p>
         </div>
 
         <div className="">.</div>

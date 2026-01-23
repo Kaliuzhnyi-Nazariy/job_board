@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getMyJobs, getRecentJobs } from "../../../features/job/jobRequests";
 import { Link } from "react-router";
 import type { EmployerRecentJobs } from "../../../features/job/interfaces";
+import { workTimeFormat } from "../../helpers/jobTimeFormat";
 
 const Overview = () => {
   const usernameValue = useSelector(username);
@@ -55,7 +56,7 @@ const Overview = () => {
                   >
                     <div className="">
                       <h1>{rj.title}</h1>
-                      <p>{rj.work_time}</p>
+                      <p>{workTimeFormat(rj.work_time)}</p>
                     </div>
 
                     <p>{rj.status}</p>

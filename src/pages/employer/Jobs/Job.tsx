@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { JobValidation } from "./jobValidation";
+import { workTimeFormat } from "../../../helpers/jobTimeFormat";
 
 // TO-DO:
 // make form and default values take from data from backend
@@ -53,23 +54,6 @@ const Job = () => {
     defaultValues: jobState,
     resolver: zodResolver(JobValidation),
   });
-
-  const workTimeView = (
-    workTime: "full_time" | "part_time" | "internship" | "contract",
-  ) => {
-    switch (workTime) {
-      case "full_time":
-        return "Full-Time";
-      case "part_time":
-        return "Part-Time";
-      case "contract":
-        return "Contract";
-      case "internship":
-        return "Internship";
-      default:
-        return "Full-Time";
-    }
-  };
 
   const salaryValue = (salary: string) => {
     // temprorary solution, in the future is planing to change .split on regex expression
@@ -226,7 +210,7 @@ const Job = () => {
                 <p>{errors.workTime?.message}</p>
               </>
             ) : (
-              <p>{workTimeView(job.work_time!)}</p>
+              <p>{workTimeFormat(job.work_time!)}</p>
             )}
 
             <label>Education</label>
