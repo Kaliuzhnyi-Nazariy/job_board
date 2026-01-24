@@ -1,37 +1,3 @@
-// import { countries } from "../../extras/countries";
-// import TextField from "@mui/material/TextField";
-// import InputAdornment from "@mui/material/InputAdornment";
-// import SearchIcon from "@mui/icons-material/Search";
-
-// const Searchbar = () => {
-//   console.log(countries.map);
-//   return (
-//     <div className="">
-//       <select>
-//         {countries.map((country) => {
-//           return <option value={country}>{country}</option>;
-//         })}
-//       </select>
-//       {/* <input type="text" /> */}
-//       <TextField
-//         id="outlined-basic"
-//         InputProps={{
-//           startAdornment: (
-//             <InputAdornment position="start">
-//               <SearchIcon />
-//             </InputAdornment>
-//           ),
-//         }}
-//         variant="outlined"
-//       ></TextField>
-//       <div className="size-6 bg-purple-500"></div>
-//       <div className="size-12 bg-purple-500"></div>
-//     </div>
-//   );
-// };
-
-// export default Searchbar;
-
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import MenuItem from "@mui/material/MenuItem";
@@ -39,50 +5,103 @@ import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import { countries } from "../../extras/countries";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
+import { useSelector } from "react-redux";
+import { userRole } from "../../../features/user/userSelector";
 
 const Searchbar = () => {
+  const userrole = useSelector(userRole);
+
   const { pathname } = useLocation();
   const [, setSearchParams] = useSearchParams();
 
   const navigate = useNavigate();
 
   const handleCountryChange = (country: string) => {
-    if (pathname !== "/candidate/find-job") {
-      navigate({
-        pathname: "/candidate/find-job",
-        search: `?location=${country}`,
-      });
-      return;
-    }
+    if (userrole === "candidate") {
+      if (pathname !== "/candidate/find-job") {
+        navigate({
+          pathname: "/candidate/find-job",
+          search: `?location=${country}`,
+        });
+        return;
+      }
 
-    setSearchParams((prev) => {
-      const params = new URLSearchParams(prev);
-      params.set("location", country);
-      return params;
-    });
+      setSearchParams((prev) => {
+        const params = new URLSearchParams(prev);
+        params.set("location", country);
+        return params;
+      });
+    } else {
+      if (pathname !== "/employer/candidates") {
+        navigate({
+          pathname: "/employer/candidates",
+          // search: `?location=${country}`,
+        });
+        return;
+      }
+
+      setSearchParams((prev) => {
+        const params = new URLSearchParams(prev);
+        // params.set("location", country);
+        return params;
+      });
+    }
   };
 
   const handleJobChange = (job: string) => {
-    if (pathname !== "/candidate/find-job") {
-      navigate({
-        pathname: "/candidate/find-job",
-        search: `?title=${job}`,
-      });
-      return;
-    }
+    // if (pathname !== "/candidate/find-job") {
+    // navigate({
+    //   pathname: "/candidate/find-job",
+    //   search: `?title=${job}`,
+    // });
+    //   return;
+    // }
 
-    setSearchParams((prev) => {
-      const params = new URLSearchParams(prev);
-      params.set("title", job);
-      return params;
-    });
+    // setSearchParams((prev) => {
+    //   const params = new URLSearchParams(prev);
+    //   params.set("title", job);
+    //   return params;
+    // });
+    if (userrole === "candidate") {
+      if (pathname !== "/candidate/find-job") {
+        navigate({
+          pathname: "/candidate/find-job",
+          // search: `?title=${job}`,
+        });
+        return;
+      }
+
+      setSearchParams((prev) => {
+        const params = new URLSearchParams(prev);
+        // params.set("location", country);
+        return params;
+      });
+    } else {
+      if (pathname !== "/employer/candidates") {
+        navigate({
+          pathname: "/employer/candidates",
+          // search: `?search=${job}`,
+        });
+        return;
+      }
+
+      setSearchParams((prev) => {
+        const params = new URLSearchParams(prev);
+        params.set("search", job);
+        return params;
+      });
+    }
   };
 
   return (
     <Box sx={{ width: "100%", maxWidth: 700 }}>
       <TextField
         fullWidth
-        placeholder="Job title, keyword, company"
+        placeholder={
+          userrole == "candidate"
+            ? "Job title, keyword, company"
+            : "Candidate name, position..."
+        }
         variant="outlined"
         onChange={(e) => handleJobChange(e.target.value)}
         InputProps={{
