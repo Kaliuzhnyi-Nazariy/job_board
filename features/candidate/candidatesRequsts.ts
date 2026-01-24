@@ -1,8 +1,13 @@
 import api from "../api/api";
 import type { IUpdForm, UpdateProfile } from "./interfaces";
 
-export const getCandidates = async () => {
-  const res = await api.get("/candidate");
+export const getCandidates = async (search?: string) => {
+  console.log({ search });
+  // const res = await api.get("/candidate", { params: search || null });
+
+  const res = await api.get("/candidate", {
+    params: search ? { search } : {},
+  });
 
   return res.data;
 };
@@ -14,7 +19,7 @@ export const getCandidate = async (id: string) => {
 };
 
 export const updateCandidatePersonal = async (
-  data: IUpdForm & { id: string }
+  data: IUpdForm & { id: string },
 ) => {
   const res = await api.patch("candidate/update-personal", data);
 

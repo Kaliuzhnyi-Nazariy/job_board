@@ -2,14 +2,27 @@ import { useQuery } from "@tanstack/react-query";
 import { getCandidates } from "../../../../features/candidate/candidatesRequsts";
 import {
   Link,
+  useSearchParams,
   // useSearchParams
 } from "react-router";
 
 const FindACandidate = () => {
+  const [searchParams] = useSearchParams();
+  console.log(searchParams.get("search"));
+
+  const search = searchParams.get("search")?.trim() || "";
+
+  // const { data, isLoading, isError } = useQuery({
+  //   queryKey: ["candidates", searchParams.get("search")],
+  //   queryFn: () => getCandidates(searchParams.get("search") as string),
+  // });
+
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["candidates"],
-    queryFn: getCandidates,
+    queryKey: ["candidates", search],
+    queryFn: () => getCandidates(search),
   });
+
+  console.log({ data });
 
   // const [searchParams, setSearchParams] = useSearchParams();
 
