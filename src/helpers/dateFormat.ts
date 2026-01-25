@@ -1,6 +1,9 @@
 import { monthsShort } from "../extras/month";
 
-export const dateFormat = (date: Date | string | undefined) => {
+export const dateFormat = (
+  date: Date | string | undefined,
+  format?: "dateOfBirth",
+) => {
   // console.log(date);
 
   if (!date) {
@@ -20,6 +23,13 @@ export const dateFormat = (date: Date | string | undefined) => {
 
   const applyHour = parsedDate.getHours() - 1;
   const applyMinutes = parsedDate.getMinutes();
+
+  if (format == "dateOfBirth") {
+    const date_of_birth =
+      monthsShort[applyMonth] + " " + applyDate + ", " + applyYear;
+
+    return date_of_birth;
+  }
 
   const applyingDate =
     monthsShort[applyMonth] +
