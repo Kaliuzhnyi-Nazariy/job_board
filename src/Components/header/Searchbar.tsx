@@ -21,7 +21,7 @@ const Searchbar = () => {
       if (pathname !== "/candidate/find-job") {
         navigate({
           pathname: "/candidate/find-job",
-          search: `?location=${country}`,
+          // search: `?location=${country}`,
         });
         return;
       }
@@ -35,33 +35,20 @@ const Searchbar = () => {
       if (pathname !== "/employer/candidates") {
         navigate({
           pathname: "/employer/candidates",
-          // search: `?location=${country}`,
+          search: `?location=${country}`,
         });
         return;
       }
 
       setSearchParams((prev) => {
         const params = new URLSearchParams(prev);
-        // params.set("location", country);
+        params.set("location", country);
         return params;
       });
     }
   };
 
   const handleJobChange = (job: string) => {
-    // if (pathname !== "/candidate/find-job") {
-    // navigate({
-    //   pathname: "/candidate/find-job",
-    //   search: `?title=${job}`,
-    // });
-    //   return;
-    // }
-
-    // setSearchParams((prev) => {
-    //   const params = new URLSearchParams(prev);
-    //   params.set("title", job);
-    //   return params;
-    // });
     if (userrole === "candidate") {
       if (pathname !== "/candidate/find-job") {
         navigate({
@@ -73,7 +60,7 @@ const Searchbar = () => {
 
       setSearchParams((prev) => {
         const params = new URLSearchParams(prev);
-        // params.set("location", country);
+        params.set("title", job);
         return params;
       });
     } else {
