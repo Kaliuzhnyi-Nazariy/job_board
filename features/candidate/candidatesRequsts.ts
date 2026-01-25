@@ -1,12 +1,9 @@
 import api from "../api/api";
 import type { IUpdForm, UpdateProfile } from "./interfaces";
 
-export const getCandidates = async (search?: string) => {
-  console.log({ search });
-  // const res = await api.get("/candidate", { params: search || null });
-
+export const getCandidates = async (search?: string, location?: string) => {
   const res = await api.get("/candidate", {
-    params: search ? { search } : {},
+    params: { search, location },
   });
 
   return res.data;

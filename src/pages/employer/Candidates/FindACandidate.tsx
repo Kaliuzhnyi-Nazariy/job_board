@@ -8,23 +8,14 @@ import {
 
 const FindACandidate = () => {
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get("search"));
 
   const search = searchParams.get("search")?.trim() || "";
-
-  // const { data, isLoading, isError } = useQuery({
-  //   queryKey: ["candidates", searchParams.get("search")],
-  //   queryFn: () => getCandidates(searchParams.get("search") as string),
-  // });
+  const location = searchParams.get("location")?.trim() || "";
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["candidates", search],
-    queryFn: () => getCandidates(search),
+    queryKey: ["candidates", search, location],
+    queryFn: () => getCandidates(search, location),
   });
-
-  console.log({ data });
-
-  // const [searchParams, setSearchParams] = useSearchParams();
 
   if (isLoading) return <p>Searching for candidates</p>;
 
