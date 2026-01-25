@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router";
 import { getCandidate } from "../../../../features/candidate/candidatesRequsts";
 import type { FullDataCandidate } from "../../../../features/candidate/interfaces";
+import { dateFormat } from "../../../helpers";
 
 const Candidate = () => {
   const { candidateId } = useParams();
@@ -52,7 +53,9 @@ const Candidate = () => {
               <div className="grid grid-cols-2">
                 <div className="">
                   <p>DATE OF BIRTH</p>
-                  <p>{JSON.stringify(data.date_of_birth) || "no data"}</p>
+                  <p>
+                    {dateFormat(data.date_of_birth, "dateOfBirth") || "no data"}
+                  </p>
                 </div>
                 <div className="">
                   <p>GENDER</p>
@@ -72,7 +75,13 @@ const Candidate = () => {
               <h4>Contact Information</h4>
               <div className="">
                 <p>Website</p>
-                <p>{data.website || "no data"}</p>
+                {data.website ? (
+                  <Link to={data.website} target="_blank">
+                    {data.website}
+                  </Link>
+                ) : (
+                  <p>no data</p>
+                )}
               </div>
               <div className="">
                 <p>Loaction</p>
@@ -80,11 +89,15 @@ const Candidate = () => {
               </div>
               <div className="">
                 <p>Phone</p>
-                <p>{data.phone || "no data"}</p>
+                {data.phone ? (
+                  <Link to={`tel:` + data.phone}>{data.phone}</Link>
+                ) : (
+                  <p>no data</p>
+                )}
               </div>
               <div className="">
                 <p>Email address</p>
-                <p>{data.email}</p>
+                <Link to={`mailto:` + data.email}>{data.email}</Link>
               </div>
             </div>
           </div>
