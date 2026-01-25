@@ -59,3 +59,9 @@ export const updateStatusOfApplication = async (
 
   return res.data;
 };
+
+export const getCandidateRecentApplications = async () => {
+  const res = await api.get("/application/candidate-recent");
+
+  return res.data;
+};
