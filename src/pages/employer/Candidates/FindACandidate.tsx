@@ -5,9 +5,18 @@ import {
   useSearchParams,
   // useSearchParams
 } from "react-router";
+import { useEffect } from "react";
 
 const FindACandidate = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    return setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
+      params.set("location", "Poland");
+      return params;
+    });
+  }, []);
 
   const search = searchParams.get("search")?.trim() || "";
   const location = searchParams.get("location")?.trim() || "";
@@ -26,7 +35,7 @@ const FindACandidate = () => {
       <h1>Find A Candidate</h1>
 
       <>
-        {data && data.length > 0 && (
+        {data && data.length > 0 ? (
           <ul>
             {data.map((c) => {
               return (
@@ -39,6 +48,8 @@ const FindACandidate = () => {
               );
             })}
           </ul>
+        ) : (
+          <p>No candidate found!</p>
         )}
       </>
     </div>
