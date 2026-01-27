@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "../../../features/hooks/dispatchHook";
 import { signup } from "../../../features/auth/authRequest";
 import { MenuItem, Select, TextField } from "@mui/material";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 type AuthUser = {
   role: "candidate" | "employer";
@@ -50,17 +51,30 @@ const Signup = () => {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: initialAuth,
     resolver: zodResolver(zodValidation),
+    mode: "onChange",
   });
 
   const dispatch = useAppDispatch();
 
+  const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<AuthUser> = async (data) => {
     if (!isCheckTerms) return;
-    await dispatch(signup(data));
+    const res = await dispatch(signup(data));
+
+    console.log(res.meta.requestStatus == "rejected");
+
+    if (res.payload?.ok) {
+      if (data.role == "candidate") {
+        navigate("/candidate/dashboard");
+      } else {
+        navigate("/employer/dashboard");
+      }
+    }
     console.log(data);
   };
 
@@ -69,6 +83,10 @@ const Signup = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [isCheckTerms, setCheckTerms] = useState(false);
+
+  const errorMessage = "text-(--danger5) px-3 pt-1";
+
+  const isButtonEnabled = isValid && isCheckTerms;
 
   return (
     <div className="grid grid-cols-2 w-full h-screen justify-between">
@@ -114,7 +132,7 @@ const Signup = () => {
             </select> */}
         </div>
         <p>{errors.role?.message}</p>
-        <div className="mt-8">
+        <div className="mt-8 flex flex-col gap-5">
           <div className="flex gap-5">
             <>
               <TextField
@@ -122,19 +140,15 @@ const Signup = () => {
                 variant="outlined"
                 {...register("fullName")}
                 placeholder="Full Name"
-                sx={{ height: "48px" }}
+                sx={{ height: "48px", width: "258px", padding: 0 }}
                 InputProps={{
                   sx: {
                     height: "48px",
-                    padding: "0 18px",
+                    padding: 0,
+                    // padding: "0 18px",
                   },
                 }}
               />
-              {/* <input
-            type="text"
-            {...register("fullName")}
-            placeholder="Full Name"
-          /> */}
               <p>{errors.fullName?.message}</p>
             </>
             <div>
@@ -143,78 +157,144 @@ const Signup = () => {
                 variant="outlined"
                 {...register("username")}
                 placeholder="Username"
-                sx={{ height: "48px" }}
+                sx={{ height: "48px", width: "258px", padding: 0 }}
                 InputProps={{
                   sx: {
                     height: "48px",
-                    padding: "0 18px",
+                    padding: 0,
+                    // padding: "0 18px",
                   },
                 }}
               />
-              {/* <input
-                type="text"
-                {...register("username")}
-                placeholder="Username"
-              /> */}
               <p className="text-[10px]">{errors.username?.message}</p>
             </div>
           </div>
-          <input
-            type="text"
-            {...register("email")}
-            placeholder="Emaill address"
-          />
-          <p>{errors.email?.message}</p>
-
-          <div className="relative">
-            <input
-              type={showPassword ? "text" : "password"}
-              {...register("password")}
-              placeholder="Password"
+          <div className="">
+            <TextField
+              variant="outlined"
+              {...register("email")}
+              placeholder="Email address"
+              sx={{ width: "100%", height: "48px", padding: 0 }}
+              InputProps={{
+                sx: {
+                  height: "48px",
+                  // padding: "0 18px",
+                },
+              }}
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              eye
-            </button>
+            <p className={errorMessage}>{errors.email?.message}</p>
           </div>
-          <p>{errors.password?.message}</p>
 
-          <div className="relative">
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              {...register("confirmPassword")}
-              placeholder="Confirm Password"
-            />
-            <button
-              type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
-              eye
-            </button>
+          <div className="">
+            <div className="relative">
+              <TextField
+                variant="outlined"
+                {...register("password")}
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                sx={{ width: "100%", height: "48px", padding: 0 }}
+                InputProps={{
+                  sx: {
+                    height: "48px",
+                    // padding: "0 18px",
+                  },
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-0 top-1/2 -translate-1/2"
+              >
+                eye
+              </button>
+            </div>
+            <p className={errorMessage}>{errors.password?.message}</p>
           </div>
-          <p>{errors.confirmPassword?.message}</p>
+
+          <div className="">
+            <div className="relative">
+              <TextField
+                variant="outlined"
+                {...register("confirmPassword")}
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                sx={{ width: "100%", height: "48px", padding: 0 }}
+                InputProps={{
+                  sx: {
+                    height: "48px",
+                    // padding: "0 18px",
+                  },
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-0 top-1/2 -translate-1/2"
+              >
+                eye
+              </button>
+            </div>
+            <p className={errorMessage}>{errors.confirmPassword?.message}</p>
+          </div>
 
           <label>
             {" "}
             <input
               type="checkbox"
               onChange={() => setCheckTerms(!isCheckTerms)}
+              className="body_small"
             />
-            I've read and agree with your Terms of Services
+            I've read and agree with your{" "}
+            <Link to="/terms" className="text-(--primary5) font-medium">
+              Terms of Services
+            </Link>
           </label>
 
-          <button type="submit">Create account (right arrow)</button>
+          <button
+            type="submit"
+            className="py-4 bg-(--primary5) rounded-sm text-white button flex gap-3 items-center justify-center cursor-pointer hover:bg-(--primary6) disabled:bg-(--primary1) disabled:cursor-not-allowed transition-colors duration-150"
+            disabled={!isButtonEnabled}
+          >
+            <span>Create account</span> <ArrowRightAltIcon />
+          </button>
         </div>
       </form>
-      <div className="relative h-full ">
-        <div className="absolute w-full h-full bg-linear-[0deg,#041A3C_1%,#041a3c7c_100%,transparent]"></div>
+      <div className="relative h-full  ">
+        <div className="absolute w-full h-full bg-linear-[0deg,#041A3C_1%,#041a3c7c_100%,transparent] select-none"></div>
         <img
           src="/public/checkered_flag.jpg"
           alt="checkered flag"
-          className="h-full w-full object-none object-center"
+          className="h-full w-full object-none object-center select-none"
         />
+        <div className="absolute inset-y-0 -left-11.75 w-20 bg-white -skew-x-5 select-none"></div>
+
+        <div className="absolute bottom-28.5 left-34.5 text-white flex flex-col gap-12.5">
+          <p>Over 1,75,324 candidates waiting for good employees.</p>
+
+          <ul className="flex gap-2.5">
+            <li className="flex flex-col gap-6 w-45 h-36">
+              <div className="size-16 bg-gray-500"></div>
+              <span>
+                <p>1,75,324</p>
+                <p>Live Job</p>
+              </span>
+            </li>
+            <li className="flex flex-col gap-6 w-45 h-36">
+              <div className="size-16 bg-gray-500"></div>
+              <span>
+                <p>1,75,324</p>
+                <p>Employers</p>
+              </span>
+            </li>
+            <li className="flex flex-col gap-6 w-45 h-36">
+              <div className="size-16 bg-gray-500"></div>
+              <span>
+                <p>1,75,324</p>
+                <p>New Jobs</p>
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
