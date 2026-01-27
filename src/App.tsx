@@ -7,6 +7,8 @@ const SignupPage = lazy(() => import("./pages/auth/Signup"));
 const ForgetPage = lazy(() => import("./pages/auth/ForgetPassword"));
 const ResetPasswordPage = lazy(() => import("./pages/auth/ResetPassword"));
 
+const TermsPage = lazy(() => import("./pages/terms"));
+
 const UserLayoutComponent = lazy(() => import("./layouts/UserLayout"));
 const CandidateRouteComponent = lazy(() => import("./layouts/CandidateRoute"));
 const EmployerRouteComponent = lazy(() => import("./layouts/EmployerRoute"));
@@ -91,6 +93,7 @@ function App() {
         </Route>
       </Route>
       <Route path="/forbidden" element={<Forbidden />} />
+      <Route path="/terms" element={<TermsPage />} />
     </Routes>
   );
 }
