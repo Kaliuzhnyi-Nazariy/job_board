@@ -5,8 +5,11 @@ import { Link, useNavigate } from "react-router";
 import z from "zod";
 import { useAppDispatch } from "../../../features/hooks/dispatchHook";
 import { signin } from "../../../features/auth/authRequest";
-// import type { ISignInResponse } from "../../../features/auth/interface";
-// import type { IResponse } from "../../../features/auth/interface";
+import ButtonAuth from "../../Components/Auth/ButtonAuth";
+import { TextField } from "@mui/material";
+
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 type SignIn = {
   email: string;
@@ -30,71 +33,105 @@ const Signin = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: signinState,
     resolver: zodResolver(zodValidation),
+    mode: "onChange",
   });
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<SignIn> = async (data) => {
-    // // console.log(data);
-    // const res = await dispatch(signin(data));
-    // if ((res.payload as IResponse).ok) {
-    //   console.log("redirect to /home");
-    //   console.log(res.payload?.data);
-    //   if (res.payload?.data === "employer") {
-    //     navigate("/employer/home");
-    //   } else {
-    //     navigate("/candidate/home");
-    //   }
-    // }
     try {
       const payload = await dispatch(signin(data)).unwrap();
 
-      // payload is now SUCCESS ONLY
       if (payload.data === "employer") {
         await navigate("/employer/home");
       } else {
         await navigate("/candidate/home");
       }
     } catch (err) {
-      // rejected case (errorHandler / rejectedWithValue)
       console.error(err);
     }
   };
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const errorMessage = "text-(--danger5) px-3 pt-1";
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="justify-self-center self-center w-134 ml-[10%]"
+    >
       <div className="">
         <div className="">
-          <h1>Sign in</h1>
-          <p>
-            Don't have account <Link to="/auth/signup">Create account</Link>
+          <h4>Sign in</h4>
+          <p className="mt-4 body_medium text-(--gray6)">
+            Don't have account{" "}
+            <Link
+              to="/auth/signup"
+              className="text-(--primary5) body_medium_500"
+            >
+              Create account
+            </Link>
           </p>
         </div>
       </div>
-      <input type="text" {...register("email")} placeholder="Emaill address" />
-      <p>{errors.email?.message}</p>
+      <div className="my-8 flex flex-col gap-5">
+        <div className="">
+          <TextField
+            variant="outlined"
+            {...register("email")}
+            placeholder="Email address"
+            sx={{ width: "100%", height: "48px", padding: 0 }}
+            InputProps={{
+              sx: {
+                height: "48px",
+                // padding: "0 18px",
+              },
+            }}
+          />
+          <p>{errors.email?.message}</p>
+        </div>
+        <div className="">
+          <div className="relative">
+            <TextField
+              variant="outlined"
+              {...register("password")}
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              sx={{ width: "100%", height: "48px", padding: 0 }}
+              InputProps={{
+                sx: {
+                  height: "48px",
+                  // padding: "0 18px",
+                },
+              }}
+            />
 
-      <div className="relative">
-        <input
-          type={showPassword ? "text" : "password"}
-          {...register("password")}
-          placeholder="Password"
-        />
-        <button type="button" onClick={() => setShowPassword(!showPassword)}>
-          eye
-        </button>
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-0 top-1/2 -translate-1/2"
+            >
+              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </button>
+          </div>
+          <p className={errorMessage}>{errors.password?.message}</p>
+        </div>
+
+        <Link
+          to="/forget-password"
+          className="body_medium_500 text-(--primary5)"
+        >
+          Forget password
+        </Link>
       </div>
-      <p>{errors.password?.message}</p>
-      <Link to="/forget-password">Forget password</Link>
 
-      <button type="submit">Create account (right arrow)</button>
+      <ButtonAuth isButtonEnabled={isValid} text="Sign In" />
     </form>
   );
 };
