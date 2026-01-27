@@ -12,7 +12,9 @@ const Searchbar = () => {
   const userrole = useSelector(userRole);
 
   const { pathname } = useLocation();
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchValue = searchParams.get("search");
 
   const navigate = useNavigate();
 
@@ -90,6 +92,7 @@ const Searchbar = () => {
             : "Candidate name, position..."
         }
         variant="outlined"
+        value={searchValue}
         onChange={(e) => handleJobChange(e.target.value)}
         InputProps={{
           startAdornment: (
