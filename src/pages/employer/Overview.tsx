@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { username } from "../../../features/user/userSelector";
+import { userLoading, username } from "../../../features/user/userSelector";
 import { useQuery } from "@tanstack/react-query";
 import { getMyJobs, getRecentJobs } from "../../../features/job/jobRequests";
 import { Link } from "react-router";
@@ -8,6 +8,7 @@ import { workTimeFormat } from "../../helpers/jobTimeFormat";
 
 const Overview = () => {
   const usernameValue = useSelector(username);
+  const isUserLoading = useSelector(userLoading);
   const { data, isLoading, isError } = useQuery({
     queryKey: ["myjobs"],
     queryFn: getMyJobs,
@@ -24,7 +25,10 @@ const Overview = () => {
 
   return (
     <div className="w-full">
-      <h1>Hello, {usernameValue}</h1>
+      <h1>
+        Hello,{" "}
+        {isUserLoading ? "Loading..." : usernameValue ? usernameValue : "user"}
+      </h1>
       <span>
         <p>
           {isError
@@ -34,9 +38,9 @@ const Overview = () => {
             : `${data.job.length} jobs`}
         </p>
       </span>
-      <span>
+      {/* <span>
         <p>2, 517 saved candidates</p>
-      </span>
+      </span> */}
 
       <div className="w-full">
         <div className="flex w-full justify-between">
@@ -45,6 +49,8 @@ const Overview = () => {
         </div>
         {loadingRecentJobs ? (
           <p>Loading...</p>
+        ) : isRecentJobsError ? (
+          <p>Error occured!</p>
         ) : recentJobs.length > 0 ? (
           <ul>
             {recentJobs.map((rj: EmployerRecentJobs) => {
@@ -69,9 +75,9 @@ const Overview = () => {
                         : "No applications"}
                     </p>
 
-                    <Link to={"/employer/view-application/" + rj.id}>
+                    {/* <Link to={"/employer/view-application/" + rj.id}>
                       View Applications
-                    </Link>
+                    </Link> */}
                   </Link>
                 </li>
               );
