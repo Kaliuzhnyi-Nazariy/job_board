@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router";
 import Greeting from "./pages";
 import { lazy } from "react";
 
+const AuthPage = lazy(() => import("./pages/auth/Auth"));
 const SigninPage = lazy(() => import("./pages/auth/Signin"));
 const SignupPage = lazy(() => import("./pages/auth/Signup"));
 const ForgetPage = lazy(() => import("./pages/auth/ForgetPassword"));
@@ -56,8 +57,11 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Greeting />} />
-      <Route path="/auth/signin" element={<SigninPage />} />
-      <Route path="/auth/signup" element={<SignupPage />} />
+      <Route path="/auth" element={<AuthPage />}>
+        <Route index element={<Navigate to="signin" replace />} />
+        <Route path="signin" element={<SigninPage />} />
+        <Route path="signup" element={<SignupPage />} />
+      </Route>
       <Route path="/forget-password" element={<ForgetPage />} />
       <Route path="/reset-password/*" element={<ResetPasswordPage />} />
       <Route path="/" element={<UserLayoutComponent />}>
