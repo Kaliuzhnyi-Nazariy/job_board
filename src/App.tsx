@@ -61,8 +61,8 @@ function App() {
         <Route index element={<Navigate to="signin" replace />} />
         <Route path="signin" element={<SigninPage />} />
         <Route path="signup" element={<SignupPage />} />
+        <Route path="forget-password" element={<ForgetPage />} />
       </Route>
-      <Route path="/forget-password" element={<ForgetPage />} />
       <Route path="/reset-password/*" element={<ResetPasswordPage />} />
       <Route path="/" element={<UserLayoutComponent />}>
         <Route path="/candidate" element={<CandidateRouteComponent />}>
