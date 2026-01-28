@@ -69,7 +69,7 @@ const Signin = () => {
       <div className="">
         <div className="">
           <h4>Sign in</h4>
-          <p className="mt-4 body_medium text-(--gray6)">
+          <p className="mt-4 body_medium text-(--grey6)">
             Don't have account{" "}
             <Link
               to="/auth/signup"
@@ -124,7 +124,7 @@ const Signin = () => {
         </div>
 
         <Link
-          to="/forget-password"
+          to="/auth/forget-password"
           className="body_medium_500 text-(--primary5)"
         >
           Forget password

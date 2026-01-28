@@ -112,7 +112,7 @@ const Signup = () => {
         <div className="w-78 flex flex-col gap-4">
           <h3>Create account.</h3>
           <p>
-            <span className="body_medium text-(--gray6)">
+            <span className="body_medium text-(--grey6)">
               Already have account?
             </span>{" "}
             <Link
