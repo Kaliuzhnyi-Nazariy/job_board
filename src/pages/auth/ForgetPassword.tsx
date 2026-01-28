@@ -6,6 +6,8 @@ import { useAppDispatch } from "../../../features/hooks/dispatchHook";
 import { forgetPassword } from "../../../features/auth/authRequest";
 import type { IResponse } from "../../../features/auth/interface";
 import { useState } from "react";
+import { TextField } from "@mui/material";
+import ButtonAuth from "../../Components/Auth/ButtonAuth";
 
 type ForgetPassword = {
   email: string;
@@ -23,10 +25,11 @@ const ForgetPassword = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: forgetPasswordForm,
     resolver: zodResolver(zodValidator),
+    mode: "onChange",
   });
 
   const dispatch = useAppDispatch();
@@ -44,24 +47,53 @@ const ForgetPassword = () => {
   };
 
   return (
-    <>
-      <h1>Forget Password</h1>
-      <p>
-        Go back to <Link to="/auth/signin">Sign In</Link>
+    <div className="justify-self-center self-center w-134">
+      <h4>Forget Password</h4>
+      <p className="body_medium text-(--grey6) mt-8 ">
+        Go back to{" "}
+        <Link to="/auth/signin" className="body_medium_500 text-(--primary5)">
+          Sign In
+        </Link>
       </p>
-      <p>
-        Don't have account <Link to="/auth/signup">Create Account</Link>
+      <p className="body_medium text-(--grey6) mt-2">
+        Don't have account{" "}
+        <Link to="/auth/signup" className="body_medium_500 text-(--primary5)">
+          Create Account
+        </Link>
       </p>
       {isEmailSent ? (
-        "Email is already sent!"
+        <p className="mt-8">Email is already sent!</p>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input type="email" {...register("email")} />
-          <p>{errors.email?.message}</p>
-          <button type="submit">Reset Password (right arrow)</button>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mt-8 w-full flex flex-col gap-8"
+        >
+          {/* <input type="email" {...register("email")} /> */}
+          <div className="">
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              {...register("email")}
+              placeholder="Email address"
+              sx={{ height: "48px", width: "100%", padding: 0 }}
+              InputProps={{
+                sx: {
+                  height: "48px",
+                  padding: 0,
+                  // padding: "0 18px",
+                },
+              }}
+            />
+            {errors.email && (
+              <p className="text-(--danger5) px-3 pt-1">
+                {errors.email?.message}
+              </p>
+            )}
+          </div>
+          <ButtonAuth isButtonEnabled={isValid} text="Reset Password" />
         </form>
       )}
-    </>
+    </div>
   );
 };
 

@@ -6,6 +6,11 @@ import z from "zod";
 import { useAppDispatch } from "../../../features/hooks/dispatchHook";
 import { resetPassword } from "../../../features/auth/authRequest";
 import type { IResponse } from "../../../features/auth/interface";
+import { TextField } from "@mui/material";
+
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import ButtonAuth from "../../Components/Auth/ButtonAuth";
 
 type ResetPassword = {
   password: string;
@@ -34,10 +39,11 @@ const ResetPassword = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: resetPasswordState,
     resolver: zodResolver(zodValidation),
+    mode: "onChange",
   });
 
   const path = useParams();
@@ -55,7 +61,7 @@ const ResetPassword = () => {
         password: data.password,
         confirmPassword: data.confirmPassword,
         token: token as string,
-      })
+      }),
     );
 
     if ((res.payload as IResponse).ok) {
@@ -71,42 +77,75 @@ const ResetPassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
-    <>
-      <h1>Reset Password</h1>
-      <article>
+    <div className="absolute -translate-1/2 top-1/2 left-1/2 w-134 flex flex-col items-center text-center">
+      <h4>Reset Password</h4>
+      <article className="mt-6 body_medium text-(--grey6)">
         Duis luctus interdum metus, ut consectetur ante consectetur sed.
         Suspendisse euismod viverra massa sit amet mollis.
       </article>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <input
-            type={showPassword ? "text" : "password"}
-            {...register("password")}
-            placeholder="New Password"
-          />
-          <button type="button" onClick={() => setShowPassword(!showPassword)}>
-            eye
-          </button>
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-9 w-full">
+        <div className="">
+          <div className="relative">
+            <TextField
+              variant="outlined"
+              {...register("password")}
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              sx={{ width: "100%", height: "48px", padding: 0 }}
+              InputProps={{
+                sx: {
+                  height: "48px",
+                  // padding: "0 18px",
+                },
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-0 top-1/2 -translate-1/2"
+            >
+              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </button>
+          </div>
+          {errors.password && (
+            <p className="text-(--danger5) px-3 pt-1">
+              {errors.password?.message}
+            </p>
+          )}
         </div>
-        <p>{errors.password?.message}</p>
-        <div>
-          <input
-            type={showConfirmPassword ? "text" : "password"}
-            {...register("confirmPassword")}
-            placeholder="Confirm Password"
-          />
-          <button
-            type="button"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          >
-            eye
-          </button>
+        <div className="mt-4 mb-9">
+          <div className="relative">
+            <TextField
+              variant="outlined"
+              {...register("confirmPassword")}
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              sx={{ width: "100%", height: "48px", padding: 0 }}
+              InputProps={{
+                sx: {
+                  height: "48px",
+                  // padding: "0 18px",
+                },
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-0 top-1/2 -translate-1/2"
+            >
+              {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </button>
+          </div>
+          {errors.confirmPassword && (
+            <p className="text-(--danger5) px-3 pt-1">
+              {errors.confirmPassword?.message}
+            </p>
+          )}
         </div>
-        <p>{errors.confirmPassword?.message}</p>
-        <button type="submit">Reset Password</button>
+        <ButtonAuth isButtonEnabled={isValid} text="Reset Password" />
       </form>
-    </>
+    </div>
   );
 };
 
