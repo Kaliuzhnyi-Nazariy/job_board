@@ -7,9 +7,9 @@
   --primary4: #3b84d6;
   --primary5: #0a65cc;
   --primary6: #0851a3;
-  --grey50: #f1f2f4;
-  --grey1: #e4e5e8;
-  --grey6: #5e6670;
+  --gray50: #f1f2f4;
+  --gray1: #e4e5e8;
+  --gray6: #5e6670;
   --danger5: #e05151;
 }
 
@@ -80,7 +80,7 @@ h5 {
 
 .body_small {
   font-size: 14px;
-  line-height: 20px;
+  line-height: 0.7;
 }
 
 .body_small_500 {
@@ -98,5 +98,16 @@ h5 {
 .body_medium_500 {
   font-weight: 500;
   font-size: 16px;
+  line-height: 24px;
+}
+
+.body_large {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.body_large_500 {
+  font-weight: 500;
+  font-size: 18px;
   line-height: 24px;
 }
