@@ -83,7 +83,16 @@ const Searchbar = () => {
   };
 
   return (
-    <Box sx={{ width: "100%", maxWidth: 700 }}>
+    <Box
+      sx={{
+        // width: "100%",
+        width: 668,
+        height: 50,
+        padding: 0,
+        borderColor: "#e4e5e8",
+        borderRadius: 5,
+      }}
+    >
       <TextField
         fullWidth
         placeholder={
@@ -91,6 +100,14 @@ const Searchbar = () => {
             ? "Job title, keyword, company"
             : "Candidate name, position..."
         }
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            height: 50,
+          },
+          "& .MuiOutlinedInput-input": {
+            padding: "12px 8px",
+          },
+        }}
         variant="outlined"
         value={searchValue}
         onChange={(e) => handleJobChange(e.target.value)}
@@ -105,7 +122,6 @@ const Searchbar = () => {
                 InputProps={{ disableUnderline: true }}
                 sx={{
                   minWidth: 100,
-                  mr: 1,
                 }}
                 onChange={(e) => handleCountryChange(e.target.value)}
               >
