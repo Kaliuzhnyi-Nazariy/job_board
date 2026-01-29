@@ -4,8 +4,11 @@
 :root {
   --primary50: #e7f0fa;
   --primary1: #cee0f5;
+  --primary4: #3b84d6;
   --primary5: #0a65cc;
   --primary6: #0851a3;
+  --grey50: #f1f2f4;
+  --grey1: #e4e5e8;
   --grey6: #5e6670;
   --danger5: #e05151;
 }
@@ -26,6 +29,12 @@ body {
   font-family: "Inter", sans-serif;
   width: 100vw;
   height: 100vh;
+}
+
+.logo {
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 600;
 }
 
 h1 {
@@ -72,6 +81,12 @@ h5 {
 .body_small {
   font-size: 14px;
   line-height: 20px;
+}
+
+.body_small_500 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
 }
 
 .body_medium {
