@@ -28,7 +28,7 @@ const JobFilter = () => {
   return (
     <div className="flex gap-2">
       {jobTitle && (
-        <span className="flex gap-1 py-1 px-2 rounded-full bg-gray-400">
+        <span className="flex items-center gap-3 pl-4 py-1.5 pr-1.5 rounded-full bg-(--gray50) body_smal h-8">
           <p>{jobTitle}</p>
           <button
             onClick={async () => {
@@ -41,13 +41,14 @@ const JobFilter = () => {
               refetch();
               queryClient.invalidateQueries({ queryKey: ["jobs"] });
             }}
+            className="size-5 rounded-full bg-white text-(--gray5) text-center flex justify-center items-center"
           >
             x
           </button>
         </span>
       )}
       {jobLocation && (
-        <span className="flex gap-1 py-1 px-2 rounded-full bg-gray-400">
+        <span className="flex items-center gap-3 pl-4 py-1.5 pr-1.5 rounded-full bg-(--gray50) body_smal h-8">
           <p>{jobLocation}</p>
           <button
             onClick={async () => {
@@ -59,6 +60,7 @@ const JobFilter = () => {
               refetch();
               queryClient.invalidateQueries({ queryKey: ["jobs"] });
             }}
+            className="size-5 rounded-full bg-white text-(--gray5) text-center flex justify-center items-center"
           >
             x
           </button>
