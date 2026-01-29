@@ -6,6 +6,7 @@ import { jobCategories } from "../../extras/jobCategories";
 import { useSearchParams } from "react-router";
 
 import { useForm, type SubmitHandler } from "react-hook-form";
+import Section from "../Section";
 
 const FindJobSearchbar = () => {
   const [, setSearchParams] = useSearchParams();
@@ -45,85 +46,127 @@ const FindJobSearchbar = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        bgcolor: "background.paper",
-        borderRadius: 1,
-        // boxShadow: 1,
-        px: 2,
-        py: 1,
-        gap: 1,
-        border: "1px solid #767E94",
-      }}
-    >
-      {/* Job title */}
-      <TextField
-        placeholder="Job title, Keyword..."
-        variant="standard"
-        InputProps={{
-          disableUnderline: true,
-          startAdornment: <SearchIcon color="primary" sx={{ mr: 1 }} />,
-        }}
-        {...register("title")}
-      />
-
-      <Divider orientation="vertical" flexItem />
-
-      {/* Location */}
-      <TextField
-        placeholder="Location"
-        variant="standard"
-        InputProps={{
-          disableUnderline: true,
-          startAdornment: <LocationOnIcon color="primary" sx={{ mr: 1 }} />,
-        }}
-        {...register("location")}
-      />
-
-      <Divider orientation="vertical" flexItem />
-
-      {/* Category */}
-      <TextField
-        select
-        placeholder="Select Category"
-        variant="standard"
-        InputProps={{
-          disableUnderline: true,
-          startAdornment: <LayersIcon color="primary" sx={{ mr: 1 }} />,
-        }}
-        sx={{ minWidth: 180 }}
-      >
-        {jobCategories.map((cat) => (
-          <MenuItem key={cat} value={cat}>
-            {cat}
-          </MenuItem>
-        ))}
-      </TextField>
-
-      <Divider orientation="vertical" flexItem />
-
-      {/* Advance Filter */}
+    <Section extraStyles="bg-(--gray50) pt-6 pb-8">
+      <h4 className="body_large_500" style={{ marginBottom: "24px" }}>
+        Find Job
+      </h4>
       <Box
         sx={{
-          color: "text.secondary",
-          cursor: "pointer",
-          fontSize: 14,
+          display: "flex",
+          alignItems: "center",
+          bgcolor: "background.paper",
+          borderRadius: 1,
+          // boxShadow: 1,
+          padding: "12px",
+          border: "1px solid #767E94",
+          width: "1320px",
+          height: "80px",
         }}
       >
-        Advance Filter
-      </Box>
+        {/* Job title */}
+        <TextField
+          placeholder="Job title, Keyword..."
+          variant="standard"
+          sx={{
+            width: "375px",
+            "& .MuiOutlinedInput-root": {
+              height: 56,
+            },
+            "& .MuiOutlinedInput-input": {
+              padding: "18px 16px",
+            },
+          }}
+          InputProps={{
+            disableUnderline: true,
+            startAdornment: <SearchIcon color="primary" sx={{ mr: 1 }} />,
+          }}
+          {...register("title")}
+        />
 
-      {/* Find Job */}
-      <Button
-        variant="contained"
-        size="large"
-        onClick={handleSubmit(onHandleSubmit)}
-      >
-        Find Job
-      </Button>
-    </Box>
+        <Divider orientation="vertical" flexItem />
+
+        {/* Location */}
+        <TextField
+          placeholder="Location"
+          variant="standard"
+          sx={{
+            width: "300px",
+            "& .MuiOutlinedInput-root": {
+              height: 56,
+            },
+            "& .MuiOutlinedInput-input": {
+              padding: "18px 16px",
+            },
+          }}
+          InputProps={{
+            disableUnderline: true,
+            startAdornment: <LocationOnIcon color="primary" sx={{ mr: 1 }} />,
+          }}
+          {...register("location")}
+        />
+
+        <Divider orientation="vertical" flexItem />
+
+        {/* Category */}
+        <TextField
+          select
+          placeholder="Select Category"
+          variant="standard"
+          sx={{
+            width: "300px",
+            "& .MuiOutlinedInput-root": {
+              height: 56,
+            },
+            "& .MuiOutlinedInput-input": {
+              padding: "18px 16px",
+            },
+          }}
+          InputProps={{
+            disableUnderline: true,
+            startAdornment: <LayersIcon color="primary" sx={{ mr: 1 }} />,
+          }}
+        >
+          {jobCategories.map((cat) => (
+            <MenuItem key={cat} value={cat}>
+              {cat}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <Divider orientation="vertical" flexItem />
+
+        {/* Advance Filter */}
+        <Box
+          // sx={{
+          // color: "text.secondary",
+          // cursor: "pointer",
+          //   fontSize: 14,
+          //   width: "178px",
+          //   height: "56px",
+          // }}
+          sx={{
+            width: "178px",
+            "& .MuiOutlinedInput-root": {
+              height: 56,
+            },
+            color: "text.secondary",
+            cursor: "pointer",
+          }}
+        >
+          Advance Filter
+        </Box>
+
+        {/* Find Job */}
+        <Button
+          variant="contained"
+          size="large"
+          onClick={handleSubmit(onHandleSubmit)}
+          sx={{ ml: "12px", width: "131px", height: 56 }}
+        >
+          Find Job
+        </Button>
+      </Box>
+    </Section>
   );
 };
 
