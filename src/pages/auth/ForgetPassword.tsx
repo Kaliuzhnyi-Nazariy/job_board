@@ -49,13 +49,13 @@ const ForgetPassword = () => {
   return (
     <div className="justify-self-center self-center w-134">
       <h4>Forget Password</h4>
-      <p className="body_medium text-(--grey6) mt-8 ">
+      <p className="body_medium text-(--gray6) mt-8 ">
         Go back to{" "}
         <Link to="/auth/signin" className="body_medium_500 text-(--primary5)">
           Sign In
         </Link>
       </p>
-      <p className="body_medium text-(--grey6) mt-2">
+      <p className="body_medium text-(--gray6) mt-2">
         Don't have account{" "}
         <Link to="/auth/signup" className="body_medium_500 text-(--primary5)">
           Create Account

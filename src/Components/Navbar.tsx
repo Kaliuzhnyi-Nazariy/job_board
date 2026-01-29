@@ -33,7 +33,7 @@ const Navbar = () => {
     role == "employer" ? "/employer/dashboard" : "/candidate/dashboard";
 
   return (
-    <header className="bg-(--grey50) px-75 h-12 flex justify-between">
+    <header className="bg-(--gray50) px-75 h-12 flex justify-between">
       <nav>
         <ul className="flex gap-6 h-full">
           {/* <li
