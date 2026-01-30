@@ -10,6 +10,7 @@
   --gray50: #f1f2f4;
   --gray1: #e4e5e8;
   --gray4: #9199a3;
+  --gray5: #767f8c;
   --gray6: #5e6670;
   --danger5: #e05151;
 }
@@ -77,6 +78,17 @@ h5 {
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
+}
+
+.body_xs {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.body_xs_500 {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
 }
 
 .body_small {
