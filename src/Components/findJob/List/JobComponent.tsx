@@ -36,6 +36,7 @@ const JobComponent = () => {
   return (
     <div>
       <JobHeader
+        listView={listView}
         setView={setView}
         setJobNumberOnPage={setJobNumberOnPage}
         setSortingType={setSortingType}

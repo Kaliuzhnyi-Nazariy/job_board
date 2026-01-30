@@ -3,26 +3,21 @@ import JobFilter from "./JobFilter";
 import Section from "../../../Section";
 
 const JobHeader = ({
+  listView,
   setView,
   setJobNumberOnPage,
   setSortingType,
 }: {
+  listView: "grid" | "list";
   setView: (view: "grid" | "list") => void;
   setJobNumberOnPage: (number: 12 | 16) => void;
   setSortingType: (type: "oldest" | "newest") => void;
 }) => {
   return (
-    // <div className="flex justify-between">
-    //   <JobFilter />
-    //   <VacanciesView
-    //     setView={setView}
-    //     setJobNumberOnPage={setJobNumberOnPage}
-    //     setSortingType={setSortingType}
-    //   />
-    // </div>
-    <Section extraStyles="flex justify-between py-4.5">
+    <Section extraStyles="flex justify-between py-4.5 items-center">
       <JobFilter />
       <VacanciesView
+        listView={listView}
         setView={setView}
         setJobNumberOnPage={setJobNumberOnPage}
         setSortingType={setSortingType}
