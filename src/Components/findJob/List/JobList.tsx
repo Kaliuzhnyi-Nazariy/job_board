@@ -100,10 +100,12 @@ const JobList = ({
                 color: "#99C2FF",
                 bgcolor: "transparent",
               },
-              "& .Mui-selected": {
-                backgroundColor: "#0a65cc",
-                color: "white",
-              },
+              "& .css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected":
+                {
+                  bgcolor: "#0a65cc",
+                  backgroundColor: "#0a65cc",
+                  color: "white",
+                },
               "& .MuiPaginationItem-previousNext": {
                 bgcolor: "#e7f0fa",
                 color: "#0a65cc",
