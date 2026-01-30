@@ -27,3 +27,11 @@ export type UpdateProfile = Pick<
   FullDataCandidate,
   "biography" | "date_of_birth" | "gender" | "experience" | "education"
 >;
+
+export interface ICandidate {
+  id: string;
+  role: "employer" | "candidate";
+  username: string;
+  full_name: string;
+  email: string;
+}

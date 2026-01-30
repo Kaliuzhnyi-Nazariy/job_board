@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMyJobs } from "../../../../features/job/jobRequests";
 import JobCard from "./JobCard";
+import type { IJob } from "../../../../features/job/interfaces";
 
 const MyJobs = () => {
   const { data, isLoading, isError } = useQuery({
@@ -12,10 +13,6 @@ const MyJobs = () => {
   if (isLoading && !isError) {
     return <p>Loading...</p>;
   }
-
-  // const jobs = data.job;
-
-  // console.log({ jobs });
 
   // in the future I will add ststuse and filter on that page
 
@@ -31,7 +28,7 @@ const MyJobs = () => {
 
       {data && data.job && data.job.length > 0 ? (
         <ul>
-          {data.job.map((j) => {
+          {data.job.map((j: IJob) => {
             return (
               <li key={j.id}>
                 <JobCard data={j} />

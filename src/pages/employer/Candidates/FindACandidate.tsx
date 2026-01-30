@@ -1,11 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCandidates } from "../../../../features/candidate/candidatesRequsts";
-import {
-  Link,
-  useSearchParams,
-  // useSearchParams
-} from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { useEffect } from "react";
+import type { ICandidate } from "../../../../features/candidate/interfaces";
 
 const FindACandidate = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -37,7 +34,7 @@ const FindACandidate = () => {
       <>
         {data && data.length > 0 ? (
           <ul>
-            {data.map((c) => {
+            {data.map((c: ICandidate) => {
               return (
                 <li key={c.id}>
                   <Link to={`/employer/candidates/${c.id}`}>
