@@ -4,12 +4,9 @@ export const dateFormat = (
   date: Date | string | undefined,
   format?: "dateOfBirth",
 ) => {
-  // console.log(date);
-
   if (!date) {
     return "No date";
   }
-  // console.log(date.getMonth());
 
   const parsedDate = new Date(date);
 
@@ -41,8 +38,6 @@ export const dateFormat = (
     applyHour +
     ":" +
     applyMinutes;
-
-  console.log(applyingDate);
 
   return applyingDate;
   // const timeValue = date.split("T")[1];
