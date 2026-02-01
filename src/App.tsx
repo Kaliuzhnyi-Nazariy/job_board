@@ -29,7 +29,9 @@ const SettingsLayout = lazy(
 const PersonalPage = lazy(() => import("./pages/candidate/Setting/Personal"));
 const ProfilePage = lazy(() => import("./pages/candidate/Setting/Profile"));
 const SocialPage = lazy(() => import("./pages/candidate/Setting/Social"));
-const AccountPage = lazy(() => import("./pages/candidate/Setting/Account"));
+const AccountPage = lazy(
+  () => import("./pages/candidate/Setting/Account/Account"),
+);
 
 const AppliedPage = lazy(() => import("./pages/candidate/Applied"));
 
