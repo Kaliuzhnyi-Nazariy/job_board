@@ -8,6 +8,7 @@ import {
   updateCandidateProfile,
 } from "../../../../features/candidate/candidatesRequsts";
 import type { UpdateProfile } from "../../../../features/candidate/interfaces";
+import { MenuItem, Select, TextField } from "@mui/material";
 
 export type IGender = "Mr" | "Ms" | "Mx";
 export interface IUpdProfile {
@@ -76,45 +77,109 @@ const Profile = () => {
     }
   }, [data, reset]);
 
-  return (
-    <div>
-      <form
-        className="w-full grid grid-cols-2"
-        onSubmit={handleSubmit(handleSubmitUpdate)}
-      >
-        <div className="flex flex-col">
-          <label>Date of birth</label>
-          <input type="date" {...register("dateOfBirth")} />
-        </div>
-        <div className="flex flex-col">
-          <label>Gender</label>
-          <select {...register("gender")} defaultValue={updForm.biography}>
-            <option value="Mr">Mr</option>
-            <option value="Ms">Ms</option>
-            <option value="Mx">Mx</option>
-          </select>
-        </div>
-        <div className="flex flex-col">
-          <label>Experience</label>
-          <input type="text" {...register("experience")} />
-          <p>{errors.experience?.message}</p>
-        </div>
-        <div className="flex flex-col">
-          <label>Education</label>
-          <input type="text" {...register("education")} />
-          <p>{errors.education?.message}</p>
-        </div>
-        <div className="flex flex-col col-start-1 col-end-3">
-          <label>Biography</label>
-          <textarea
-            placeholder="Write down your biography here. Let the employers know who you are..."
-            {...register("biography")}
-          ></textarea>
-        </div>
+  const labelStyles = "body_small mb-2";
 
-        <button>Save Changes</button>
-      </form>
-    </div>
+  return (
+    <form
+      className="w-full grid grid-cols-2 gap-4.5"
+      onSubmit={handleSubmit(handleSubmitUpdate)}
+    >
+      <div className="flex flex-col">
+        <label className={labelStyles}>Date of birth</label>
+        <TextField
+          id="outlined"
+          type="date"
+          {...register("dateOfBirth")}
+          sx={{
+            "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input": {
+              padding: "12px 18px",
+            },
+            "& .css-18p5xg2-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline":
+              {
+                borderColor: "#e4e5e8",
+              },
+          }}
+        />
+      </div>
+      <div className="flex flex-col">
+        <label className={labelStyles}>Gender</label>
+        <Select
+          {...register("gender")}
+          defaultValue={updForm.gender}
+          sx={{
+            "& .css-18jp67o-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
+              {
+                padding: "12px 18px",
+              },
+            "& .css-18p5xg2-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline":
+              {
+                borderColor: "#e4e5e8",
+              },
+          }}
+        >
+          <MenuItem value="Mr">Mr</MenuItem>
+          <MenuItem value="Ms">Ms</MenuItem>
+          <MenuItem value="Mx">Mx</MenuItem>
+        </Select>
+      </div>
+      <div className="flex flex-col">
+        <label className={labelStyles}>Experience</label>
+        <TextField
+          id="outlined"
+          {...register("experience")}
+          sx={{
+            "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input": {
+              padding: "12px 18px",
+            },
+            "& .css-18p5xg2-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline":
+              {
+                borderColor: "#e4e5e8",
+              },
+          }}
+        />
+        {errors.experience && <p>{errors.experience?.message}</p>}
+      </div>
+      <div className="flex flex-col">
+        <label className={labelStyles}>Education</label>
+        <TextField
+          id="outlined"
+          {...register("education")}
+          sx={{
+            "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input": {
+              padding: "12px 18px",
+            },
+            "& .css-18p5xg2-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline":
+              {
+                borderColor: "#e4e5e8",
+              },
+          }}
+        />
+        {errors.education && <p>{errors.education?.message}</p>}
+      </div>
+      <div className="flex flex-col col-start-1 col-end-3">
+        <label className={labelStyles}>Biography</label>
+        <TextField
+          id="standard-multiline-static"
+          multiline
+          rows={10}
+          placeholder="Write down your biography here. Let the employers know who you are..."
+          variant="outlined"
+          sx={{
+            "& .css-xrmkj5-MuiInputBase-root-MuiOutlinedInput-root": {
+              padding: "12px 18px",
+            },
+            "& .css-18p5xg2-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline":
+              {
+                borderColor: "#e4e5e8",
+              },
+          }}
+        />
+      </div>
+
+      <button className="px-8 py-4 bg-(--primary5) justify-self-start text-white rounded-sm button ">
+        Save Changes
+      </button>
+    </form>
   );
 };
 
