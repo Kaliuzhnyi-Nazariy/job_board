@@ -16,3 +16,9 @@ export interface UserInitialState {
 export interface RejectValue {
   message: string;
 }
+
+export interface ChangePasswordState {
+  oldPassword?: string;
+  newPassword?: string;
+  confirmPassword?: string;
+}

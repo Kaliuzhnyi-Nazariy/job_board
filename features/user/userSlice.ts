@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { IUser, RejectValue, UserInitialState } from "./interfaces";
-import { getMe } from "./userRequest";
+import { changePassword, deleteAccount, getMe } from "./userRequest";
 
 const initialState: UserInitialState = {
   user: null,
@@ -17,7 +17,7 @@ const handlePending = (state: UserInitialState) => {
 
 const handleRejected = (
   state: UserInitialState,
-  action: PayloadAction<RejectValue | undefined>
+  action: PayloadAction<RejectValue | undefined>,
 ) => {
   state.isLoading = false;
   state.initialized = true;
@@ -29,16 +29,29 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getMe.pending, handlePending);
-    builder.addCase(
-      getMe.fulfilled,
-      (state: UserInitialState, action: PayloadAction<{ user: IUser }>) => {
-        state.user = action.payload.user;
+    builder
+      .addCase(getMe.pending, handlePending)
+      .addCase(
+        getMe.fulfilled,
+        (state: UserInitialState, action: PayloadAction<{ user: IUser }>) => {
+          state.user = action.payload.user;
+          state.isLoading = false;
+          state.initialized = true;
+        },
+      )
+      .addCase(getMe.rejected, handleRejected)
+      .addCase(changePassword.pending, handlePending)
+      .addCase(changePassword.fulfilled, (state) => {
         state.isLoading = false;
-        state.initialized = true;
-      }
-    );
-    builder.addCase(getMe.rejected, handleRejected);
+        state.isError = null;
+      })
+      .addCase(changePassword.rejected, handleRejected)
+      .addCase(deleteAccount.pending, handlePending)
+      .addCase(deleteAccount.fulfilled, (state) => {
+        state.user = null;
+        state.isLoading = false;
+      })
+      .addCase(deleteAccount.rejected, handleRejected);
   },
 });
 
