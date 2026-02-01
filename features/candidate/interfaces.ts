@@ -35,3 +35,9 @@ export interface ICandidate {
   full_name: string;
   email: string;
 }
+
+export interface IDefaultContactForm {
+  location?: string;
+  phone?: string;
+  email?: string;
+}

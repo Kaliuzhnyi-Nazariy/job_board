@@ -1,5 +1,9 @@
 import api from "../api/api";
-import type { IUpdForm, UpdateProfile } from "./interfaces";
+import type {
+  IDefaultContactForm,
+  IUpdForm,
+  UpdateProfile,
+} from "./interfaces";
 
 export const getCandidates = async (search?: string, location?: string) => {
   const res = await api.get("/candidate", {
@@ -27,4 +31,9 @@ export const updateCandidateProfile = async (data: UpdateProfile) => {
   const res = await api.patch("candidate/update-profile", data);
 
   return res.data;
+};
+
+export const updateContact = async (data: IDefaultContactForm) => {
+  const res = await api.patch("candidate/update-contact", data);
+  return res.status;
 };
