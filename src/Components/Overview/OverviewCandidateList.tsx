@@ -1,13 +1,8 @@
 import { Link } from "react-router";
 import type { CandidateRecentApplications } from "../../../features/application/interfaces";
-import { dateFormat } from "../../helpers";
-
-import WorkTimeBadge from "../WorkTimeBadge";
 
 import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
-import ApplicationStatusBadge from "../ApplicationStatusBadge";
+import AppliedListItem from "../../pages/candidate/Applied/AppliedListItem";
 
 const OverviewCandidateList = ({
   applicationsLoading,
@@ -44,59 +39,7 @@ const OverviewCandidateList = ({
           </ul>
           <ul className="w-full mt-2">
             {candidateApplications.map((ca) => {
-              return (
-                <li
-                  key={ca.id}
-                  className="p-5 grid grid-cols-[3fr_1fr_1fr_1fr]"
-                >
-                  <div className="flex gap-4">
-                    <div className="size-14 bg-purple-500"></div>
-                    <div className="flex flex-col gap-2.5">
-                      <div className="flex gap-2">
-                        <h5 className="body_medium_500">{ca.title}</h5>
-                        <WorkTimeBadge jobTime={ca.work_time} />
-                      </div>
-                      <div className="flex gap-4">
-                        <span className="flex items-center gap-1.5">
-                          <LocationOnIcon
-                            sx={{
-                              height: "20px",
-                              width: "20px",
-                              color: "var(--gray2)",
-                            }}
-                          />
-                          <p className="body_small text-(--gray6)">
-                            {ca.location}
-                          </p>
-                        </span>
-                        <span className="flex items-center gap-1.5">
-                          <AttachMoneyOutlinedIcon
-                            sx={{
-                              width: "20px",
-                              height: "20px",
-                              color: "var(--gray2)",
-                            }}
-                          />
-                          <p className="body_small text-(--gray6)">
-                            {ca.salary}
-                          </p>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-(--gray6) body_small self-center">
-                    {dateFormat(ca.applied_at)}
-                  </p>
-                  <ApplicationStatusBadge status={ca.status} />
-                  {/* <p>{ca.status}</p> */}
-                  <button
-                    onClick={() => openModalFn(ca.id)}
-                    className="text-(--primary5) button px-6 py-3 bg-(--gray50)"
-                  >
-                    View Details
-                  </button>
-                </li>
-              );
+              return <AppliedListItem data={ca} handleOpen={openModalFn} />;
             })}
           </ul>
         </>
