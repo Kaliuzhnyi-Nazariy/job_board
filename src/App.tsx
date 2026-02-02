@@ -33,7 +33,7 @@ const AccountPage = lazy(
   () => import("./pages/candidate/Setting/Account/Account"),
 );
 
-const AppliedPage = lazy(() => import("./pages/candidate/Applied"));
+const AppliedPage = lazy(() => import("./pages/candidate/Applied/Applied"));
 
 // employer
 const EmployerDashboard = lazy(() => import("./pages/employer/Dashboard"));
