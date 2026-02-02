@@ -1,6 +1,6 @@
 type workTime = "full_time" | "part_time" | "internship" | "contract";
 
-type statuses = "applied" | "rejected" | "accepted";
+export type statuses = "applied" | "rejected" | "accepted";
 
 export interface CandidateApplication {
   id: string;
