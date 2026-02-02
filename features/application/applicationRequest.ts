@@ -1,5 +1,8 @@
 import api from "../api/api";
-import type { CandidateApplication } from "./interfaces";
+import type {
+  // CandiadteAnswers,
+  CandidateApplication,
+} from "./interfaces";
 
 export const apply = async ({
   jobId,
@@ -13,10 +16,18 @@ export const apply = async ({
   return res.data;
 };
 
-export const getCandidateApplications = async (): Promise<
-  CandidateApplication[]
-> => {
-  const res = await api.get("/application/candidate-applications");
+export const getCandidateCountApplications = async () => {
+  const res = await api.get("/application/candidate-applications/count");
+
+  return res.data;
+};
+
+export const getCandidateApplications = async (
+  page?: string | null,
+): Promise<CandidateApplication[]> => {
+  const res = await api.get("/application/candidate-applications", {
+    params: { page },
+  });
 
   return res.data;
 };
