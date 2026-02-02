@@ -39,7 +39,18 @@ const userSlice = createSlice({
           state.initialized = true;
         },
       )
-      .addCase(getMe.rejected, handleRejected)
+      .addCase(
+        getMe.rejected,
+        (
+          state: UserInitialState,
+          action: PayloadAction<RejectValue | undefined>,
+        ) => {
+          state.isLoading = false;
+          state.initialized = true;
+          state.isError = action.payload?.message || "Server error!";
+          state.user = null;
+        },
+      )
       .addCase(changePassword.pending, handlePending)
       .addCase(changePassword.fulfilled, (state) => {
         state.isLoading = false;
