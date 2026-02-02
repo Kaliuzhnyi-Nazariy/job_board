@@ -12,6 +12,8 @@ export interface CandidateApplication {
   applied_at: Date;
 }
 
+export type CandiadteAnswers = { total: number; data: CandidateApplication[] };
+
 export interface JobApplicatinon {
   id: string;
   status: statuses;
