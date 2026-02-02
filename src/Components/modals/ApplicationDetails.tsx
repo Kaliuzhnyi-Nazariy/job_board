@@ -18,8 +18,13 @@ const ApplicationDetails = ({
   const { data, isLoading, isError } = useQuery({
     queryKey: ["getApplicationDetails", applicationId],
     queryFn: () => getCandidateApplicationDetails(applicationId),
+    enabled: !!applicationId,
     retry: 1,
   });
+
+  if (!data) {
+    return null;
+  }
 
   // if (!isLoading && !isError) {
   //   dateFormat(data.applied_at || undefined);
