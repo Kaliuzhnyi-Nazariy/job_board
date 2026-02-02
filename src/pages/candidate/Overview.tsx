@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { username } from "../../../features/user/userSelector";
 import { useQuery } from "@tanstack/react-query";
 import {
-  getCandidateApplications,
+  getCandidateCountApplications,
   getCandidateRecentApplications,
 } from "../../../features/application/applicationRequest";
 import { Link } from "react-router";
@@ -19,8 +19,8 @@ const Overview = () => {
   const usernameValue = useSelector(username);
 
   const { data, isLoading } = useQuery({
-    queryKey: ["getMyApplications"],
-    queryFn: getCandidateApplications,
+    queryKey: ["getMyApplicationsCount"],
+    queryFn: getCandidateCountApplications,
   });
 
   const {
@@ -58,7 +58,7 @@ const Overview = () => {
         >
           <div className="flex flex-col gap-1 justify-center  ">
             <p className="font-semibold text-2xl">
-              {isLoading ? "Loading..." : data?.length}
+              {isLoading ? "Loading..." : data?.count}
             </p>
             <p className="body_small">Applied jobs</p>
           </div>
