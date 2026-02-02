@@ -9,10 +9,12 @@
   --primary6: #0851a3;
   --gray50: #f1f2f4;
   --gray1: #e4e5e8;
+  --gray2: #c8ccd1;
   --gray4: #9199a3;
   --gray5: #767f8c;
   --gray6: #5e6670;
   --danger5: #e05151;
+  --success5: #0ba02c;
 }
 
 body,
@@ -83,6 +85,7 @@ h5 {
 .body_xs {
   font-size: 12px;
   line-height: 18px;
+  font-weight: 400;
 }
 
 .body_xs_500 {
