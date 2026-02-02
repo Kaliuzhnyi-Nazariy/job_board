@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   return (
     <Section extraStyles="flex">
-      <div className="outline outline-orange-600">
+      <div>
         <h4
           className="uppetcase body_xs_500 text-(--gray4) ml-5 w-72 "
           style={{ marginBottom: 12 }}
