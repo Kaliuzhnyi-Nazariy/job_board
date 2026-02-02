@@ -1,14 +1,22 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router";
-import { userError, userRole } from "../../../features/user/userSelector";
+import {
+  userError,
+  userInitialized,
+  userRole,
+} from "../../../features/user/userSelector";
 
 const Forbidden = () => {
   const role = useSelector(userRole);
 
   const userErrorMessage = useSelector(userError);
+  const userInitializedValue = useSelector(userInitialized);
 
   const link = () => {
-    if (userErrorMessage === "Unauthorized!") {
+    if (
+      userErrorMessage === "Unauthorized!" ||
+      (!role && userInitializedValue)
+    ) {
       return "/auth/signin";
     } else {
       return role == "employer" ? "/employer/home" : "/candidate/home";
