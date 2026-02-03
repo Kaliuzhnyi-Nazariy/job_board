@@ -10,6 +10,7 @@ import ApplicationDetails from "../../../Components/modals/ApplicationDetails";
 import DashboardSection from "../../../Components/DashboardSection";
 import { useSearchParams } from "react-router";
 import AppliedListItem from "./AppliedListItem";
+import { Pagination } from "@mui/material";
 
 const Applied = () => {
   const [openModal, setModalOpen] = useState(false);
@@ -60,6 +61,8 @@ const Applied = () => {
     return <p>Error ocurred!</p>;
   }
 
+  const amountOfPages = Math.ceil(applicationsCount.count / 8);
+
   // make a model which is going to be opened after clicking view details button, the request to get data is already exist
 
   return (
@@ -88,14 +91,40 @@ const Applied = () => {
       ) : (
         <p>You haven't applied yet!</p>
       )}
+      <Pagination
+        count={amountOfPages}
+        page={Number(applicationsPage)}
+        className="flex justify-center mt-12"
+        onChange={(_, page) => {
+          setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+            params.set("page", String(page));
+            return params;
+          });
+        }}
+        sx={{
+          "& .Mui-disabled": {
+            color: "#99C2FF",
+            bgcolor: "transparent",
+          },
+          "& .css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected":
+            {
+              bgcolor: "#0a65cc",
+              backgroundColor: "#0a65cc",
+              color: "white",
+            },
+          "& .MuiPaginationItem-previousNext": {
+            bgcolor: "#e7f0fa",
+            color: "#0a65cc",
+          },
+        }}
+      />
       <ApplicationDetails
         open={openModal}
         handleClose={handleClose}
         applicationId={applicationId!}
       />
     </DashboardSection>
-
-    // TO-DO: add pagination
   );
 };
 
