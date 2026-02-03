@@ -3,12 +3,12 @@ import {
   MenuItem,
   Modal,
   Select,
-  TextareaAutosize,
-  Typography,
+  // TextareaAutosize,
+  TextField,
+  // Typography,
 } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
-// import React from "react";
-// import Modal from "./Modal";
+
 import { apply } from "../../../features/application/applicationRequest";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
@@ -61,18 +61,17 @@ const ApplyModal = ({
           width: "648px",
         }}
       >
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          Apply Job: {jobTitle}
-        </Typography>
+        <h2 className="body_large_500">Apply Job: {jobTitle}</h2>
         <form onSubmit={handleSubmit(handleApplySubmit)}>
           <>
-            <Typography>Choose Resume</Typography>
+            <p className="mt-4 body_small">Choose Resume</p>
             <Select
-              labelId="demo-simple-select-label"
+              // labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={"Select..."}
-              label="Select..."
-              sx={{ width: "100%" }}
+              // label="Select..."
+              sx={{ width: "100%", marginTop: "8px" }}
+
               // onChange={handleChange}
             >
               <MenuItem value={10}>Ten</MenuItem>
@@ -81,11 +80,20 @@ const ApplyModal = ({
             </Select>
           </>
           <>
-            <Typography>Cover Letter</Typography>
-            <TextareaAutosize
-              minRows={3}
+            <p className="body_small mt-4">Cover Letter</p>
+            <TextField
+              id="standard-multiline-static"
+              multiline
+              rows={6}
               placeholder="Write down your biography here. Let the employers know who you are..."
-              style={{ width: "100%", padding: "12px 18px" }}
+              sx={{
+                width: "100%",
+                // padding: "12px 18px",
+                marginTop: "8px",
+                // "& .css-m1j2os-MuiFormControl-root-MuiTextField-root": {
+                //   padding: "0px",
+                // },
+              }}
               {...register("coveringLetter")}
             />
           </>
@@ -93,18 +101,20 @@ const ApplyModal = ({
           {isPending ? (
             "Loading..."
           ) : (
-            <ul className="flex w-full justify-between items-center">
+            <ul className="flex w-full justify-between items-center mt-4">
               <li>
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="cursor-pointer"
+                  className="cursor-pointer px-6 py-3 bg-(--primary50) button text-(--primary5) hover:text-(--primary6) hover:bg-(--primary1) rounded-[3px] transition-colors duration-150"
                 >
                   Cancel
                 </button>
               </li>
               <li>
-                <button className="cursor-pointer">Apply Now</button>
+                <button className="cursor-pointer px-6 py-3 bg-(--primary5) button text-white hover:bg-(--primary6) rounded-[3px] transition-colors duration-150">
+                  Apply Now
+                </button>
               </li>
             </ul>
           )}
