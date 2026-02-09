@@ -15,13 +15,9 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // icons
-// import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import PictureLayout from "./PictureLayout";
-
-// import WorkIcon from "@mui/icons-material/Work";
-// import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 
 type AuthUser = {
   role: "candidate" | "employer";
@@ -79,18 +75,15 @@ const Signup = () => {
 
   const onSubmit: SubmitHandler<AuthUser> = async (data) => {
     if (!isCheckTerms) return;
-    const res = await dispatch(signup(data));
 
-    console.log(res.meta.requestStatus == "rejected");
-
-    if (res.payload?.ok) {
-      if (data.role == "candidate") {
-        navigate("/candidate/dashboard");
-      } else {
-        navigate("/employer/dashboard");
-      }
+    try {
+      await dispatch(signup(data)).unwrap();
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
     }
-    console.log(data);
+
+    // console.log(data);
   };
 
   const [showPassword, setShowPassword] = useState(false);

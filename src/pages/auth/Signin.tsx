@@ -46,13 +46,9 @@ const Signin = () => {
 
   const onSubmit: SubmitHandler<SignIn> = async (data) => {
     try {
-      const payload = await dispatch(signin(data)).unwrap();
+      await dispatch(signin(data)).unwrap();
 
-      if (payload.data === "employer") {
-        await navigate("/employer/home");
-      } else {
-        await navigate("/candidate/home");
-      }
+      await navigate("/home");
     } catch (err) {
       console.error(err);
     }
