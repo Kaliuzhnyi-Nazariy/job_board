@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 
-import { apply } from "../../../features/application/applicationRequest";
+import { applyToJob } from "../../../features/application/applicationRequest";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 export interface ApplyState {
@@ -37,9 +37,9 @@ const ApplyModal = ({
   });
 
   const { mutate, isPending } = useMutation({
-    mutationKey: ["apply"],
+    mutationKey: ["applyToJob"],
     mutationFn: (data: ApplyState) =>
-      apply({ jobId: jobId!, coveringLetter: data.coveringLetter }),
+      applyToJob({ jobId: jobId!, coveringLetter: data.coveringLetter }),
     onSuccess: () => handleClose(),
   });
 
