@@ -4,7 +4,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import DashboardSection from "../DashboardSection";
+import DashboardSection from "../Dashboard/DashboardSection";
 
 const basicStyles = "px-5 py-3 flex gap-2 items-center relative";
 const activeStyles = `text-(--primary5) before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-full before:h-px before:bg-(--primary5)`;
