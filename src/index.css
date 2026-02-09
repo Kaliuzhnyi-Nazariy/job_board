@@ -13,6 +13,7 @@
   --gray4: #9199a3;
   --gray5: #767f8c;
   --gray6: #5e6670;
+  --gray7: #474c54;
   --danger5: #e05151;
   --success5: #0ba02c;
 }
@@ -32,7 +33,11 @@ h7 {
 body {
   font-family: "Inter", sans-serif;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  /* height: 100vh; */
+  min-height: 100vh;
+
+  overflow-x: hidden;
 }
 
 .logo {
