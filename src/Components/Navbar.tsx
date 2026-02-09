@@ -7,9 +7,9 @@ import PhoneInTalkOutlinedIcon from "@mui/icons-material/PhoneInTalkOutlined";
 const Navbar = () => {
   const role = useSelector(userRole);
 
-  const homeLink = () => {
-    return role == "employer" ? "/employer/home" : "/candidate/home";
-  };
+  // const homeLink = () => {
+  //   return role == "employer" ? "/employer/home" : "/candidate/home";
+  // };
 
   const findLink = () => {
     if (role == "employer") {
@@ -33,7 +33,7 @@ const Navbar = () => {
     <header className="bg-(--gray50) px-75 h-12 flex justify-between">
       <nav className="flex gap-6 h-full">
         <NavLink
-          to={homeLink()}
+          to={"/home"}
           className={({ isActive }) =>
             `${navItem} ${isActive ? active : inactive}`
           }
