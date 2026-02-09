@@ -38,8 +38,8 @@ const userSlice = createSlice({
       .addCase(getMe.pending, handlePending)
       .addCase(
         getMe.fulfilled,
-        (state: UserInitialState, action: PayloadAction<{ user: IUser }>) => {
-          state.user = action.payload.user;
+        (state: UserInitialState, action: PayloadAction<IUser>) => {
+          state.user = action.payload;
           state.isLoading = false;
           state.initialized = true;
         },

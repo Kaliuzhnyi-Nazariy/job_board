@@ -4,7 +4,7 @@ import api from "../api/api";
 import axios from "axios";
 
 export const getMe = createAsyncThunk<
-  { user: IUser },
+  IUser,
   void,
   { rejectValue: { message: string } }
 >("/user/getMe", async (_, { rejectWithValue }) => {
