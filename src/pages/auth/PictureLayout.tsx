@@ -1,12 +1,12 @@
-import { Outlet } from "react-router";
+// import { Outlet } from "react-router";
 
 import WorkIcon from "@mui/icons-material/Work";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 
-const Auth = () => {
+const PictureLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="grid grid-cols-2 w-full h-screen justify-between">
-      <Outlet />
+      {children}
 
       <div className="relative h-full  ">
         <div className="absolute w-full h-full bg-linear-[0deg,#041A3C_1%,#041a3c7c_100%,transparent] select-none"></div>
@@ -55,4 +55,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default PictureLayout;

@@ -10,6 +10,7 @@ import { TextField } from "@mui/material";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import PictureLayout from "./PictureLayout";
 
 type SignIn = {
   email: string;
@@ -62,47 +63,31 @@ const Signin = () => {
   const errorMessage = "text-(--danger5) px-3 pt-1";
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="justify-self-center self-center w-134 ml-[10%]"
-    >
-      <div className="">
+    <PictureLayout>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="justify-self-center self-center w-134 ml-[10%]"
+      >
         <div className="">
-          <h4>Sign in</h4>
-          <p className="mt-4 body_medium text-(--gray6)">
-            Don't have account{" "}
-            <Link
-              to="/auth/signup"
-              className="text-(--primary5) body_medium_500"
-            >
-              Create account
-            </Link>
-          </p>
+          <div className="">
+            <h4>Sign in</h4>
+            <p className="mt-4 body_medium text-(--gray6)">
+              Don't have account{" "}
+              <Link
+                to="/auth/signup"
+                className="text-(--primary5) body_medium_500"
+              >
+                Create account
+              </Link>
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="my-8 flex flex-col gap-5">
-        <div className="">
-          <TextField
-            variant="outlined"
-            {...register("email")}
-            placeholder="Email address"
-            sx={{ width: "100%", height: "48px", padding: 0 }}
-            InputProps={{
-              sx: {
-                height: "48px",
-                // padding: "0 18px",
-              },
-            }}
-          />
-          <p>{errors.email?.message}</p>
-        </div>
-        <div className="">
-          <div className="relative">
+        <div className="my-8 flex flex-col gap-5">
+          <div className="">
             <TextField
               variant="outlined"
-              {...register("password")}
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
+              {...register("email")}
+              placeholder="Email address"
               sx={{ width: "100%", height: "48px", padding: 0 }}
               InputProps={{
                 sx: {
@@ -111,28 +96,46 @@ const Signin = () => {
                 },
               }}
             />
-
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-0 top-1/2 -translate-1/2"
-            >
-              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-            </button>
+            <p>{errors.email?.message}</p>
           </div>
-          <p className={errorMessage}>{errors.password?.message}</p>
+          <div className="">
+            <div className="relative">
+              <TextField
+                variant="outlined"
+                {...register("password")}
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                sx={{ width: "100%", height: "48px", padding: 0 }}
+                InputProps={{
+                  sx: {
+                    height: "48px",
+                    // padding: "0 18px",
+                  },
+                }}
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-0 top-1/2 -translate-1/2"
+              >
+                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+              </button>
+            </div>
+            <p className={errorMessage}>{errors.password?.message}</p>
+          </div>
+
+          <Link
+            to="/forget-password"
+            className="body_medium_500 text-(--primary5)"
+          >
+            Forget password
+          </Link>
         </div>
 
-        <Link
-          to="/auth/forget-password"
-          className="body_medium_500 text-(--primary5)"
-        >
-          Forget password
-        </Link>
-      </div>
-
-      <ButtonAuth isButtonEnabled={isValid} text="Sign In" />
-    </form>
+        <ButtonAuth isButtonEnabled={isValid} text="Sign In" />
+      </form>
+    </PictureLayout>
   );
 };
 

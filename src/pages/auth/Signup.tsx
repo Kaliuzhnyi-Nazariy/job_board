@@ -18,6 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 // import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import PictureLayout from "./PictureLayout";
 
 // import WorkIcon from "@mui/icons-material/Work";
 // import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
@@ -104,107 +105,92 @@ const Signup = () => {
 
   return (
     // <div className="grid grid-cols-2 w-full h-screen justify-between">
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="justify-self-center self-center w-134 ml-[10%]"
-    >
-      <div className="flex justify-between items-center">
-        <div className="w-78 flex flex-col gap-4">
-          <h3>Create account.</h3>
-          <p>
-            <span className="body_medium text-(--gray6)">
-              Already have account?
-            </span>{" "}
-            <Link
-              to="/auth/signin"
-              className="body_medium_500 text-(--primary5)"
-            >
-              Log in
-            </Link>
-          </p>
-        </div>
-        <>
-          <Controller
-            name="role"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                labelId="role-label"
-                id="role"
-                sx={{ width: "150px", height: "48px" }}
+    <PictureLayout>
+      {" "}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="justify-self-center self-center w-134 ml-[10%]"
+      >
+        <div className="flex justify-between items-center">
+          <div className="w-78 flex flex-col gap-4">
+            <h3>Create account.</h3>
+            <p>
+              <span className="body_medium text-(--gray6)">
+                Already have account?
+              </span>{" "}
+              <Link
+                to="/auth/signin"
+                className="body_medium_500 text-(--primary5)"
               >
-                <MenuItem value="employer">Employers</MenuItem>
-                <MenuItem value="candidate">Candidates</MenuItem>
-              </Select>
-            )}
-          />
-        </>
-        {/* <select {...register("role")}>
+                Log in
+              </Link>
+            </p>
+          </div>
+          <>
+            <Controller
+              name="role"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  labelId="role-label"
+                  id="role"
+                  sx={{ width: "150px", height: "48px" }}
+                >
+                  <MenuItem value="employer">Employers</MenuItem>
+                  <MenuItem value="candidate">Candidates</MenuItem>
+                </Select>
+              )}
+            />
+          </>
+          {/* <select {...register("role")}>
               <option value="employer">Employers</option>
               <option value="candidate">Candidates</option>
             </select> */}
-      </div>
-      <p>{errors.role?.message}</p>
-      <div className="mt-8 flex flex-col gap-5">
-        <div className="flex gap-5">
-          <>
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              {...register("fullName")}
-              placeholder="Full Name"
-              sx={{ height: "48px", width: "258px", padding: 0 }}
-              InputProps={{
-                sx: {
-                  height: "48px",
-                  padding: 0,
-                  // padding: "0 18px",
-                },
-              }}
-            />
-            <p>{errors.fullName?.message}</p>
-          </>
-          <div>
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              {...register("username")}
-              placeholder="Username"
-              sx={{ height: "48px", width: "258px", padding: 0 }}
-              InputProps={{
-                sx: {
-                  height: "48px",
-                  padding: 0,
-                  // padding: "0 18px",
-                },
-              }}
-            />
-            <p className="text-[10px]">{errors.username?.message}</p>
+        </div>
+        <p>{errors.role?.message}</p>
+        <div className="mt-8 flex flex-col gap-5">
+          <div className="flex gap-5">
+            <>
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                {...register("fullName")}
+                placeholder="Full Name"
+                sx={{ height: "48px", width: "258px", padding: 0 }}
+                InputProps={{
+                  sx: {
+                    height: "48px",
+                    padding: 0,
+                    // padding: "0 18px",
+                  },
+                }}
+              />
+              <p>{errors.fullName?.message}</p>
+            </>
+            <div>
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                {...register("username")}
+                placeholder="Username"
+                sx={{ height: "48px", width: "258px", padding: 0 }}
+                InputProps={{
+                  sx: {
+                    height: "48px",
+                    padding: 0,
+                    // padding: "0 18px",
+                  },
+                }}
+              />
+              <p className="text-[10px]">{errors.username?.message}</p>
+            </div>
           </div>
-        </div>
-        <div className="">
-          <TextField
-            variant="outlined"
-            {...register("email")}
-            placeholder="Email address"
-            sx={{ width: "100%", height: "48px", padding: 0 }}
-            InputProps={{
-              sx: {
-                height: "48px",
-                // padding: "0 18px",
-              },
-            }}
-          />
-          <p className={errorMessage}>{errors.email?.message}</p>
-        </div>
-        <div className="">
-          <div className="relative">
+          <div className="">
             <TextField
               variant="outlined"
-              {...register("password")}
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
+              {...register("email")}
+              placeholder="Email address"
               sx={{ width: "100%", height: "48px", padding: 0 }}
               InputProps={{
                 sx: {
@@ -213,67 +199,89 @@ const Signup = () => {
                 },
               }}
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-0 top-1/2 -translate-1/2"
-            >
-              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-            </button>
+            <p className={errorMessage}>{errors.email?.message}</p>
           </div>
-          <p className={errorMessage}>{errors.password?.message}</p>
-        </div>
-        <div className="">
-          <div className="relative">
-            <TextField
-              variant="outlined"
-              {...register("confirmPassword")}
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm Password"
-              sx={{ width: "100%", height: "48px", padding: 0 }}
-              InputProps={{
-                sx: {
-                  height: "48px",
-                  // padding: "0 18px",
-                },
-              }}
+          <div className="">
+            <div className="relative">
+              <TextField
+                variant="outlined"
+                {...register("password")}
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                sx={{ width: "100%", height: "48px", padding: 0 }}
+                InputProps={{
+                  sx: {
+                    height: "48px",
+                    // padding: "0 18px",
+                  },
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-0 top-1/2 -translate-1/2"
+              >
+                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+              </button>
+            </div>
+            <p className={errorMessage}>{errors.password?.message}</p>
+          </div>
+          <div className="">
+            <div className="relative">
+              <TextField
+                variant="outlined"
+                {...register("confirmPassword")}
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                sx={{ width: "100%", height: "48px", padding: 0 }}
+                InputProps={{
+                  sx: {
+                    height: "48px",
+                    // padding: "0 18px",
+                  },
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-0 top-1/2 -translate-1/2"
+              >
+                {showConfirmPassword ? (
+                  <VisibilityOffIcon />
+                ) : (
+                  <VisibilityIcon />
+                )}
+              </button>
+            </div>
+            <p className={errorMessage}>{errors.confirmPassword?.message}</p>
+          </div>
+          <label className="flex gap-2.5">
+            {" "}
+            <input
+              type="checkbox"
+              onChange={() => setCheckTerms(!isCheckTerms)}
+              className="body_small"
             />
-            <button
-              type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-0 top-1/2 -translate-1/2"
-            >
-              {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-            </button>
-          </div>
-          <p className={errorMessage}>{errors.confirmPassword?.message}</p>
-        </div>
-        <label className="flex gap-2.5">
-          {" "}
-          <input
-            type="checkbox"
-            onChange={() => setCheckTerms(!isCheckTerms)}
-            className="body_small"
-          />
-          <span className="w-full flex">
-            <p>
-              I've read and agree with your{" "}
-              <Link to="/terms" className="text-(--primary5) font-medium">
-                Terms of Services
-              </Link>
-            </p>
-          </span>
-        </label>
-        <ButtonAuth isButtonEnabled={isButtonEnabled} text="Create account" />
-        {/* <button
+            <span className="w-full flex">
+              <p>
+                I've read and agree with your{" "}
+                <Link to="/terms" className="text-(--primary5) font-medium">
+                  Terms of Services
+                </Link>
+              </p>
+            </span>
+          </label>
+          <ButtonAuth isButtonEnabled={isButtonEnabled} text="Create account" />
+          {/* <button
           type="submit"
           className="py-4 bg-(--primary5) rounded-sm text-white button flex gap-3 items-center justify-center cursor-pointer hover:bg-(--primary6) disabled:bg-(--primary1) disabled:cursor-not-allowed transition-colors duration-150"
           disabled={!isButtonEnabled}
         >
           <span>Create account</span> <ArrowRightAltIcon />
         </button> */}
-      </div>
-    </form>
+        </div>
+      </form>
+    </PictureLayout>
   );
 };
 
