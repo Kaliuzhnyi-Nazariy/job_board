@@ -4,15 +4,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getJobs } from "../../../../features/job/jobRequests";
 import { Link, useSearchParams } from "react-router";
 import Section from "../../Section";
-import { Pagination } from "@mui/material";
+import PaginationComponent from "../../Pagination";
 
-const JobList = ({
-  listView,
-  jobSortingType,
-}: {
-  listView: "grid" | "list";
-  jobSortingType: "oldest" | "newest";
-}) => {
+const JobList = () => {
   const listStyles = "flex flex-col gap-y-6";
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +16,7 @@ const JobList = ({
   const order = searchParams.get("order") || "newest";
   const title = searchParams.get("title") || null;
   const location = searchParams.get("location") || null;
+  const listView = searchParams.get("list-view") || "grid";
 
   const gridStyles = `grid  ${
     limit === 12
@@ -41,18 +36,6 @@ const JobList = ({
       }),
   });
 
-  const orderedJobs = data
-    ? [...data.jobs].sort((a, b) => {
-        const aTime = new Date(a.created_at).getTime();
-        const bTime = new Date(b.created_at).getTime();
-
-        if (jobSortingType === "oldest") {
-          return aTime - bTime;
-        }
-        return bTime - aTime;
-      })
-    : [];
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -69,7 +52,7 @@ const JobList = ({
       {data?.jobs?.length > 0 && (
         <Section>
           <ul className={`${listView === "grid" ? gridStyles : listStyles} `}>
-            {orderedJobs.map((job) => {
+            {data.jobs.map((job) => {
               return (
                 <li className="h-51" key={job.id}>
                   <Link
@@ -84,33 +67,10 @@ const JobList = ({
             })}
           </ul>
 
-          <Pagination
-            className="justify-center w-full grid mt-12"
-            count={pageAmount}
+          <PaginationComponent
             page={page}
-            onChange={(_, newPage) => {
-              setSearchParams((prev) => {
-                const params = new URLSearchParams(prev);
-                params.set("page", String(newPage));
-                return params;
-              });
-            }}
-            sx={{
-              "& .Mui-disabled": {
-                color: "#99C2FF",
-                bgcolor: "transparent",
-              },
-              "& .css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected":
-                {
-                  bgcolor: "#0a65cc",
-                  backgroundColor: "#0a65cc",
-                  color: "white",
-                },
-              "& .MuiPaginationItem-previousNext": {
-                bgcolor: "#e7f0fa",
-                color: "#0a65cc",
-              },
-            }}
+            pageAmount={pageAmount}
+            setSearchParams={setSearchParams}
           />
         </Section>
       )}
