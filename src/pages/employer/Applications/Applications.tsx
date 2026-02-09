@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { getApplications } from "../../../../features/application/applicationRequest";
 import ApplicationCandidateDetails from "../../../Components/modals/Applications/ApplicationCandidateDetails";
 import React, { useState } from "react";
 import ApplicationCard from "./ApplicationCard";
 import type { JobApplicatinon } from "../../../../features/application/interfaces";
+import DashboardSection from "../../../Components/Dashboard/DashboardSection";
 
 const Applications = () => {
   const [open, setOpen] = React.useState(false);
@@ -30,15 +31,26 @@ const Applications = () => {
   );
   const submittedCandidates = data.filter((aj) => aj.status === "accepted");
 
+  const listStyle = "px-5 py-4 border border-(--gray1) rounded-md bg-[#F1F2F4]";
+
   return (
     <>
-      <div>
-        <h1>Applications</h1>
-        <ul className="grid grid-cols-3">
-          <li>
-            <h2>All application ({data.length})</h2>
+      <DashboardSection>
+        <span className="body_small text-(--gray6) block">
+          <Link to={"/employer/home"}>Home</Link>
+          {" / "}
+          <Link to={"/employer/dashboard/my-jobs"}>Job</Link>
+          {" / "}
+          <span className="body_small_500 text-(--primary5)">Applications</span>
+        </span>
+
+        <label className="body_xl_500 mt-1.5">Job Applications</label>
+
+        <ul className="grid grid-cols-3 mt-6 gap-6">
+          <li className={listStyle}>
+            <p className="body_small_400">All application ({data.length})</p>
             {data.length > 0 ? (
-              <ul>
+              <ul className="mt-3 flex flex-col gap-3 max-h-140 overflow-x-hidden overflow-y-auto">
                 {data.map((ap) => {
                   return (
                     <ApplicationCard
@@ -54,11 +66,11 @@ const Applications = () => {
               <p>No applications yet!</p>
             )}
           </li>
-          <li>
+          <li className={listStyle}>
             <ul>
-              <h2>Applied ({candidateList.length})</h2>
+              <p className="body_small_400">Applied ({candidateList.length})</p>
               {candidateList.length > 0 ? (
-                <ul>
+                <ul className="mt-3 flex flex-col gap-3 max-h-140 overflow-x-hidden overflow-y-auto">
                   {candidateList.map((ap) => {
                     return (
                       <ApplicationCard
@@ -75,10 +87,12 @@ const Applications = () => {
               )}
             </ul>
           </li>
-          <li>
-            <h2>Submitted ({submittedCandidates.length})</h2>
+          <li className={listStyle}>
+            <p className="body_small_400">
+              Submitted ({submittedCandidates.length})
+            </p>
             {submittedCandidates.length > 0 ? (
-              <ul>
+              <ul className="mt-3 flex flex-col gap-3 max-h-140 overflow-x-hidden overflow-y-auto">
                 {submittedCandidates.map((ap) => {
                   return (
                     <ApplicationCard
@@ -95,7 +109,7 @@ const Applications = () => {
             )}
           </li>
         </ul>
-      </div>
+      </DashboardSection>
       <ApplicationCandidateDetails
         open={open}
         handleClose={handleClose}

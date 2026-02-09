@@ -10,7 +10,7 @@ import { Link } from "react-router";
 import ApplicationDetails from "../../Components/modals/ApplicationDetails";
 import { useState } from "react";
 import type { CandidateRecentApplications } from "../../../features/application/interfaces";
-import DashboardSection from "../../Components/DashboardSection";
+import DashboardSection from "../../Components/Dashboard/DashboardSection";
 
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import OverviewCandidateList from "../../Components/Overview/OverviewCandidateList";

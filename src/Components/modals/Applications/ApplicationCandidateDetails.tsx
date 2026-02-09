@@ -2,10 +2,14 @@ import { Box, Modal } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   getApplicantDetails,
-  updateStatusOfApplication,
+  updateApplicationStatus,
 } from "../../../../features/application/applicationRequest";
 import { Link } from "react-router";
-import CandidateContactInformation from "./CandidateContactInformation";
+import ContactData from "../../Candidate/ContactData";
+
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
+import GeneralData from "../../Candidate/GeneralData";
 
 const ApplicationCandidateDetails = ({
   open,
@@ -26,12 +30,12 @@ const ApplicationCandidateDetails = ({
 
   const { mutate: rejectApplication } = useMutation({
     mutationKey: ["rejectApplicationStatus"],
-    mutationFn: () => updateStatusOfApplication(applicationId!, "rejected"),
+    mutationFn: () => updateApplicationStatus(applicationId!, "rejected"),
   });
 
   const { mutate: hireApplication } = useMutation({
     mutationKey: ["rejectApplicationStatus"],
-    mutationFn: () => updateStatusOfApplication(applicationId!, "accepted"),
+    mutationFn: () => updateApplicationStatus(applicationId!, "accepted"),
   });
 
   if (!open) return null;
@@ -48,11 +52,9 @@ const ApplicationCandidateDetails = ({
           p: 2.5,
           borderRadius: "12px",
           width: "80%",
+          padding: "48px",
         }}
       >
-        {/* <h2>Applicant data</h2> */}
-        {/* <p>{applicationId}</p>
-        <p>{jobId}</p> */}
         {isLoading || !data ? (
           "Loading"
         ) : (
@@ -61,113 +63,64 @@ const ApplicationCandidateDetails = ({
               <div className="flex gap-6 items-center">
                 <div className="size-20 rounded-full bg-gray-500"></div>
                 <div className="flex flex-col gap-2">
-                  <h3>{data.full_name}</h3>
-                  <span className="opacity-50">{data.speciality}</span>
+                  <h5>{data.full_name}</h5>
+                  <span className="mt-1 body_small text-(--gray5)">
+                    {data.speciality}
+                  </span>
                 </div>
               </div>
-              <ul className="flex gap-3">
+              <ul className="flex gap-3 items-center">
                 <li>
-                  <Link to={`mailto:` + data.email}>Send Mail</Link>
+                  <Link
+                    to={`mailto:${data.email}`}
+                    className="border-2 border-(--primary5) rounded-sm px-6 py-3 flex gap-3 items-center h-12 button text-(--primary5) transition-colors duration-150 hover:bg-(--primary50) hover:text-(--primary6) hover:border-(--primary6) "
+                  >
+                    <EmailOutlinedIcon />
+                    <span>Send email</span>
+                  </Link>{" "}
                 </li>
                 {data.status === "applied" && (
                   <li>
-                    <button onClick={() => hireApplication()}>
-                      Hire Candidate
+                    <button
+                      className="border border-transparent bg-(--primary5) text-white button flex gap-3 items-center px-6 py-3 rounded-sm h-12 cursor-pointer hover:bg-(--primary6) transition-colors duration-150"
+                      onClick={() => hireApplication()}
+                    >
+                      <ArrowCircleRightOutlinedIcon />
+                      <span>Hire Candidate</span>
                     </button>
                   </li>
                 )}
               </ul>
             </div>
-            <div className="grid grid-cols-2 g-18">
-              <div className="">
-                <>
-                  <h3>Biography</h3>
-                  <article>{data.biography || "No biography"}</article>
-                </>
 
-                <>
-                  <h3>Cover letter</h3>
-                  <article>{data.covering_letter || "No letter"}</article>
-                </>
+            <div className="grid grid-cols-[2fr_1fr] gap-18 mt-10">
+              <div className="">
+                <h4 className="uppercase text-lg font-medium">Biography</h4>
+                <article className="mt-6 body_medimum text-(--gray6)">
+                  {data.biography || "no bio"}
+                </article>
+
+                <hr className="h-px text-(--gray1) my-8" />
+
+                <h4 className="uppercase text-lg font-medium">COVER LETTER</h4>
+                <article className="mt-6 body_medimum text-(--gray6)">
+                  {data.covering_letter || "no cover letter"}
+                </article>
               </div>
+              <div className="flex flex-col gap-6">
+                <GeneralData
+                  date_of_birth={data.date_of_birth}
+                  gender={data.gender}
+                  experience={data.experience}
+                  education={data.education}
+                />
 
-              <div className="">
-                <div className="grid grid-cols-2 gap-x-4 gap-y-6">
-                  <div className="">
-                    <div className="size-6 bg-blue-500"></div>
-                    <h5>DATE OF BIRTH</h5>
-                    <p className="text-[12px]">{data.date_of_birth}</p>
-                  </div>
-
-                  <div className="">
-                    <div className="size-6 bg-blue-500"></div>
-                    <h5>gender</h5>
-                    <p className="text-[12px]">{data.gender}</p>
-                  </div>
-
-                  <div className="">
-                    <div className="size-6 bg-blue-500"></div>
-                    <h5>experience</h5>
-                    <p className="text-[12px]">{data.experience}</p>
-                  </div>
-
-                  <div className="">
-                    <div className="size-6 bg-blue-500"></div>
-                    <h5>education</h5>
-                    <p className="text-[12px]">{data.education}</p>
-                  </div>
-                </div>
-
-                <CandidateContactInformation data={data} />
-                {/* <div className="">
-                  <h3>Contact Information</h3>
-                  <ul>
-                    {data.website && (
-                      <li>
-                        <div className="flex gap-4">
-                          <div className="size-8 rounded-full bg-blue-500"></div>
-                          <div>
-                            <h5>WEBSite</h5>
-                            <Link to={data.website}>{data.website}</Link>
-                          </div>
-                        </div>
-                      </li>
-                    )}
-                    {data.location && (
-                      <li>
-                        <div className="flex gap-4">
-                          <div className="size-8 rounded-full bg-blue-500"></div>
-                          <div>
-                            <h5>location</h5>
-                            <p>{data.location}</p>
-                          </div>
-                        </div>
-                      </li>
-                    )}
-                    {data.phone && (
-                      <li>
-                        <div className="flex gap-4">
-                          <div className="size-8 rounded-full bg-blue-500"></div>
-                          <div>
-                            <h5>phone</h5>
-                            <p>{data.phone}</p>
-                          </div>
-                        </div>
-                      </li>
-                    )}
-                    <li>
-                      <div className="flex gap-4">
-                        <div className="size-8 rounded-full bg-blue-500"></div>
-                        <div>
-                          <h5>Email Address</h5>
-                          <Link to={`mailto:${data.website}`}>
-                            {data.email}
-                          </Link>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div> */}
+                <ContactData
+                  website={data.website}
+                  location={data.location}
+                  phone={data.phone}
+                  email={data.email}
+                />
               </div>
             </div>
             {data.status === "applied" && (

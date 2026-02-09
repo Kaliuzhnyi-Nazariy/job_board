@@ -7,10 +7,11 @@ import {
 } from "../../../../features/application/applicationRequest";
 import { useEffect, useState } from "react";
 import ApplicationDetails from "../../../Components/modals/ApplicationDetails";
-import DashboardSection from "../../../Components/DashboardSection";
+import DashboardSection from "../../../Components/Dashboard/DashboardSection";
 import { useSearchParams } from "react-router";
 import AppliedListItem from "./AppliedListItem";
-import { Pagination } from "@mui/material";
+// import { Pagination } from "@mui/material";
+import PaginationComponent from "../../../Components/Pagination";
 
 const Applied = () => {
   const [openModal, setModalOpen] = useState(false);
@@ -91,7 +92,7 @@ const Applied = () => {
       ) : (
         <p>You haven't applied yet!</p>
       )}
-      <Pagination
+      {/* <Pagination
         count={amountOfPages}
         page={Number(applicationsPage)}
         className="flex justify-center mt-12"
@@ -118,7 +119,14 @@ const Applied = () => {
             color: "#0a65cc",
           },
         }}
+      /> */}
+
+      <PaginationComponent
+        page={Number(applicationsPage)}
+        pageAmount={amountOfPages}
+        setSearchParams={setSearchParams}
       />
+
       <ApplicationDetails
         open={openModal}
         handleClose={handleClose}
