@@ -18,7 +18,7 @@ export const dateFormat = (
   const applyMonth = parsedDate.getMonth();
   const applyYear = parsedDate.getFullYear();
 
-  const applyHour = parsedDate.getHours() - 1;
+  const applyHour = parsedDate.getHours();
   const applyMinutes = parsedDate.getMinutes();
 
   if (format == "dateOfBirth") {
@@ -28,6 +28,14 @@ export const dateFormat = (
     return date_of_birth;
   }
 
+  const timeFormat = (time: number) => {
+    if (time.toString().length > 1) {
+      return time;
+    } else {
+      return "0" + time;
+    }
+  };
+
   const applyingDate =
     monthsShort[applyMonth] +
     " " +
@@ -35,11 +43,9 @@ export const dateFormat = (
     ", " +
     applyYear +
     " " +
-    applyHour +
+    timeFormat(applyHour) +
     ":" +
-    applyMinutes;
+    timeFormat(applyMinutes);
 
   return applyingDate;
-  // const timeValue = date.split("T")[1];
-  // console.log(timeValue);
 };
