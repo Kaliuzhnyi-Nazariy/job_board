@@ -92,8 +92,12 @@ function App() {
             <Route path="post-a-job" element={<PostJobPage />} />
             <Route path="my-jobs" element={<MyJobsPage />} />
             <Route path="my-jobs/:jobId" element={<MyJobPage />} />
+            <Route
+              path="view-application/:jobId"
+              element={<ApplicationPage />}
+            />
           </Route>
-          <Route path="view-application/:jobId" element={<ApplicationPage />} />
+          {/* <Route path="view-application/:jobId" element={<ApplicationPage />} /> */}
           <Route path="candidates" element={<FindACandidatePage />} />
           <Route path="candidates/:candidateId" element={<CandidatePage />} />
         </Route>
