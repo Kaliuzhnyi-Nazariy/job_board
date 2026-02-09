@@ -5,17 +5,20 @@ import {
   userInitialized,
   userRole,
 } from "../../../features/user/userSelector";
+import { authLoading } from "../../../features/auth/authSelector";
 
 const Forbidden = () => {
   const role = useSelector(userRole);
 
   const userErrorMessage = useSelector(userError);
   const userInitializedValue = useSelector(userInitialized);
+  const isAuthLoading = useSelector(authLoading);
 
   const link = () => {
     if (
-      userErrorMessage === "Unauthorized!" ||
-      (!role && userInitializedValue)
+      userErrorMessage ||
+      // userErrorMessage === "Unauthorized!" ||
+      (!role && userInitializedValue && !isAuthLoading)
     ) {
       return "/auth/signin";
     } else {
