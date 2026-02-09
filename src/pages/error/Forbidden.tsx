@@ -22,7 +22,8 @@ const Forbidden = () => {
     ) {
       return "/auth/signin";
     } else {
-      return role == "employer" ? "/employer/home" : "/candidate/home";
+      return "/home";
+      // return role == "employer" ? "/employer/home" : "/candidate/home";
     }
   };
 
