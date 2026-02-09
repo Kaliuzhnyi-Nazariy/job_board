@@ -12,7 +12,7 @@ const initialState: UserInitialState = {
 const handlePending = (state: UserInitialState) => {
   // console.log("start fetching user data");
   state.isError = null;
-  state.isLoading = false;
+  state.isLoading = true;
 };
 
 const handleRejected = (
@@ -27,7 +27,12 @@ const handleRejected = (
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logoutUser: (state: UserInitialState) => {
+      state.user = null;
+      state.initialized = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getMe.pending, handlePending)
@@ -66,4 +71,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { logoutUser } = userSlice.actions;
 export const userReducer = userSlice.reducer;
