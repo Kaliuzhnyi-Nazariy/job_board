@@ -3,8 +3,6 @@ import Section from "../Section";
 import { useAppDispatch } from "../../../features/hooks/dispatchHook";
 import { Outlet, useNavigate } from "react-router";
 import { logout } from "../../../features/auth/authRequest";
-import type { IResponse } from "../../../features/auth/interface";
-import { logoutUser } from "../../../features/user/userSlice";
 
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
@@ -24,11 +22,11 @@ const DashboardLayout = ({
 
   const navigate = useNavigate();
   const handleLogout = async () => {
-    const res = await dispatch(logout());
-
-    if ((res.payload as IResponse).ok) {
-      dispatch(logoutUser());
+    try {
+      await dispatch(logout());
       navigate("/auth/signin");
+    } catch (error) {
+      console.log(error);
     }
   };
 
