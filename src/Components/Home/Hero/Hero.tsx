@@ -15,18 +15,15 @@ const Hero = () => {
   const role = useSelector(userRole);
 
   const handleRedirect = (request: string) => {
-    console.log({ role });
-    console.log({ request });
-
     if (role === "employer") {
       navigate("/employer/candidates?search=" + request);
     } else {
-      console.log(request);
+      navigate("/candidate/find-job?title=" + request);
     }
   };
 
   return (
-    <Section extraStyles="bg-[#F1F2F4] py-10 grid grid-cols-auto grid-rows-[1fr_auto] gap-x-[149px] gap-y-10">
+    <Section extraStyles="bg-[#F1F2F4] py-20.5 grid grid-cols-auto grid-rows-[1fr_auto] gap-x-[149px] gap-y-10">
       <div className="">
         <div className="w-163">
           <h1>Find a job that suits your interest & skills.</h1>
