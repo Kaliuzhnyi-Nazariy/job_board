@@ -63,7 +63,6 @@ const Overview = () => {
             <p className="body_small">Applied jobs</p>
           </div>
           <div className="size-16 bg-white rounded-[5px] p-4">
-            {/* <div className="size-8 bg-(--primary5)"></div> */}
             <WorkOutlineOutlinedIcon
               sx={{ fill: "var(--primary5)", fontSize: "32px" }}
             />
