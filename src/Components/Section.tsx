@@ -8,7 +8,7 @@ const Section = ({
   extraStyles?: string;
 }) => {
   return (
-    <section className={`px-75 ${extraStyles && extraStyles}`}>
+    <section className={`px-75 ${extraStyles ? extraStyles : ""}`}>
       {children}
     </section>
   );
