@@ -23,7 +23,7 @@ const PictureLayout = ({ children }: { children: React.ReactNode }) => {
           <ul className="flex gap-2.5">
             <li className="flex flex-col gap-6 w-45 h-36">
               <div className="size-16 bg-white/10 rounded-lg flex items-center justify-center">
-                <WorkIcon className="size-8" />
+                <WorkIcon className="text-8" />
               </div>
               <span>
                 <p>1,75,324</p>
@@ -32,7 +32,7 @@ const PictureLayout = ({ children }: { children: React.ReactNode }) => {
             </li>
             <li className="flex flex-col gap-6 w-45 h-36">
               <div className="size-16 bg-white/10 rounded-lg flex items-center justify-center">
-                <BusinessOutlinedIcon className="size-8" />
+                <BusinessOutlinedIcon className="text-8" />
               </div>
               <span>
                 <p>1,75,324</p>
@@ -41,7 +41,7 @@ const PictureLayout = ({ children }: { children: React.ReactNode }) => {
             </li>
             <li className="flex flex-col gap-6 w-45 h-36">
               <div className="size-16 bg-white/10 rounded-lg flex items-center justify-center">
-                <WorkIcon className="size-8" />
+                <WorkIcon className="text-8" />
               </div>
               <span>
                 <p>1,75,324</p>

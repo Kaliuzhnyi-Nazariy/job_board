@@ -17,7 +17,7 @@ const ContactData = ({
   email?: string;
 }) => {
   const liStyle = "flex gap-4";
-  const iconStyle = "size-8 text-(--primary5)";
+  const iconStyle = "text-8 text-(--primary5)";
   const titleStyle = "text-(--gray5) text-[12px] uppercase ";
   const valueStyle = "body_small_500 mt-1";
 

@@ -78,7 +78,7 @@ const Job = () => {
           <ul className="grid grid-cols-3 mt-6 gap-y-6">
             <li className="flex flex-col gap-4">
               <CalendarTodayOutlinedIcon
-                className="size-8"
+                className="text-8"
                 sx={{ fill: "var(--primary5)" }}
               />
               <div className="">
@@ -92,7 +92,7 @@ const Job = () => {
             </li>
             <li className="flex flex-col gap-4">
               <WorkOutlineOutlinedIcon
-                className="size-8"
+                className="text-8"
                 sx={{ fill: "var(--primary5)" }}
               />
               <div className="">
@@ -104,7 +104,7 @@ const Job = () => {
             </li>
             <li className="flex flex-col gap-4">
               <WalletOutlinedIcon
-                className="size-8"
+                className="text-8"
                 sx={{ fill: "var(--primary5)" }}
               />
               <div className="">
@@ -116,7 +116,7 @@ const Job = () => {
             </li>
             <li className="flex flex-col gap-4">
               <LocationOnIcon
-                className="size-8"
+                className="text-8"
                 sx={{ fill: "var(--primary5)" }}
               />
               <div className="">
@@ -128,7 +128,7 @@ const Job = () => {
             </li>
             <li className="flex flex-col gap-4">
               <WorkOutlineOutlinedIcon
-                className="size-8"
+                className="text-8"
                 sx={{ fill: "var(--primary5)" }}
               />
               <div className="">
@@ -140,7 +140,7 @@ const Job = () => {
             </li>
             <li className="flex flex-col gap-4">
               <WorkOutlineOutlinedIcon
-                className="size-8"
+                className="text-8"
                 sx={{ fill: "var(--primary5)" }}
               />
               <div className="">
