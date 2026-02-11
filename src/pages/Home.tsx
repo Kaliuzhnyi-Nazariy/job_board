@@ -3,9 +3,8 @@ import MostPopularVacancies from "../Components/Home/MostPopularVacancies/MostPo
 import Instruction from "../Components/Home/Instruction/Instruction";
 import PopularCategory from "../Components/Home/PopularCategory/PopularCategory";
 import ClientsTestimonial from "../Components/Home/ClientsTestimonial/ClientsTestimonial";
-
-// import Join from "../Components/Home/Join/Join";
-// import Footer from "../Components/Home/Footer/Footer";
+import Join from "../Components/Home/Join/Join";
+import Footer from "../Components/Home/Footer/Footer";
 
 const Home = () => {
   return (
@@ -15,8 +14,8 @@ const Home = () => {
       <Instruction />
       <PopularCategory />
       <ClientsTestimonial />
-      {/*<Join />
-      <Footer /> */}
+      <Join />
+      <Footer />
     </>
   );
 };
