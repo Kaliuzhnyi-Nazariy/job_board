@@ -4,6 +4,7 @@
 :root {
   --primary50: #e7f0fa;
   --primary1: #cee0f5;
+  --primary2: #9dc1eb;
   --primary4: #3b84d6;
   --primary5: #0a65cc;
   --primary6: #0851a3;
@@ -16,6 +17,7 @@
   --gray7: #474c54;
   --danger5: #e05151;
   --success5: #0ba02c;
+  --warning5: #ffa500;
 }
 
 body,
@@ -113,7 +115,7 @@ h5 {
 .body_medium {
   font-weight: 400;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 28px;
 }
 
 .body_medium_500 {
