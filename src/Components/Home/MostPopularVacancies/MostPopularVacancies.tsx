@@ -1,5 +1,5 @@
 import Section from "../../Section";
-import { theMostPopularVacancies } from "../../../extras/categories";
+import { theMostPopularVacancies } from "../../../extras/vacancies";
 import { Link } from "react-router";
 import { useSelector } from "react-redux";
 import { userRole } from "../../../../features/user/userSelector";
