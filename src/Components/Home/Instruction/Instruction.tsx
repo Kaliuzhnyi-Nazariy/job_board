@@ -8,7 +8,7 @@ import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
 
 const Instruction = () => {
   return (
-    <Section extraStyles="py-20.5 text-center bg-(--gray50)">
+    <Section extraStyles="py-25 text-center bg-(--gray50)">
       <h1>How jobpilot work</h1>
       <ul className="mt-12.5 flex gap-6">
         <StepItem

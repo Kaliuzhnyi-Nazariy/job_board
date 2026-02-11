@@ -5,7 +5,7 @@ import { popularCategories } from "../../../extras/categories";
 
 const PopularCategory = () => {
   return (
-    <Section extraStyles="py-20.5">
+    <Section extraStyles="py-25">
       <div className="flex justify-between">
         <h1>Popular category</h1>
       </div>

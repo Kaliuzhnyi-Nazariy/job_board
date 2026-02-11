@@ -16,7 +16,7 @@ const MostPopularVacancies = () => {
   };
 
   return (
-    <Section extraStyles="py-20.5">
+    <Section extraStyles="py-25">
       <h1>Most Popular Vacancies</h1>
       <ul className="mt-12.5 grid grid-cols-4 grid-rows-3 gap-x-6 gap-y-8">
         {theMostPopularVacancies.map(({ title, amount }) => {
