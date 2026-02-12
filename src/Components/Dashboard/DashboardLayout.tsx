@@ -5,6 +5,8 @@ import { Outlet, useNavigate } from "react-router";
 import { logout } from "../../../features/auth/authRequest";
 
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { logoutUser } from "../../../features/user/userSlice";
+import { errorToast, successToast } from "../Toasts/Toasts";
 
 const DashboardLayout = ({
   title,
@@ -21,12 +23,17 @@ const DashboardLayout = ({
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
       await dispatch(logout());
+      dispatch(logoutUser());
       navigate("/auth/signin");
+      successToast({ text: "Logged out successfully!" });
     } catch (error) {
-      console.log(error);
+      errorToast({
+        text: (error as { message: string }).message || "Something went wrong!",
+      });
     }
   };
 
@@ -41,44 +48,6 @@ const DashboardLayout = ({
             {title}
           </h4>
           {children}
-          {/* <nav className="body_small_500 text-(--gray5) h-full ">
-            <NavLink
-              to={baseURL}
-              end
-              className={({ isActive }) =>
-                `${liStyle} ${isActive ? active : inactive}`
-              }
-            >
-              <FilterNoneOutlinedIcon className="size-6" /> Overview
-            </NavLink>
-
-            <NavLink
-              to={`${baseURL}/applied-jobs`}
-              end
-              className={({ isActive }) =>
-                `${liStyle} ${isActive ? active : inactive}`
-              }
-            >
-              <WorkOutlineOutlinedIcon className="size-6" /> Applied Jobs
-            </NavLink>
-
-            <NavLink to={baseURL} className={`${liStyle} ${inactive}`}>
-              <BookmarkBorderOutlinedIcon className="size-6" /> Favorite Jobs
-            </NavLink>
-
-            <NavLink to={baseURL} className={`${liStyle} ${inactive}`}>
-              <NotificationsActiveOutlinedIcon className="size-6" /> Job alert
-            </NavLink>
-
-            <NavLink
-              to={`${baseURL}/setting`}
-              className={({ isActive }) =>
-                `${liStyle} ${isActive ? active : inactive}`
-              }
-            >
-              <SettingsOutlinedIcon className="size-6" /> Settings
-            </NavLink>
-          </nav>*/}
         </div>
 
         <button
