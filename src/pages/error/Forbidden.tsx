@@ -22,7 +22,7 @@ const Forbidden = () => {
     ) {
       return "/auth/signin";
     } else {
-      return "/home";
+      return "/";
       // return role == "employer" ? "/employer/home" : "/candidate/home";
     }
   };
