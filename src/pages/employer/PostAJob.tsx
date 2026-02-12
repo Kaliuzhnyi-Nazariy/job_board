@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import DashboardSection from "../../Components/Dashboard/DashboardSection";
 import { MenuItem, Select, TextField } from "@mui/material";
+import { errorToast, successToast } from "../../Components/Toasts/Toasts";
 
 const PostAJob = () => {
   const JobForm: IJobForm = {
@@ -69,7 +70,7 @@ const PostAJob = () => {
 
   const mutation = useMutation({
     mutationFn: (data: IJobForm) => postJob(data),
-    onSuccess: () =>
+    onSuccess: () => {
       reset({
         title: "",
         position: "",
@@ -82,6 +83,13 @@ const PostAJob = () => {
         education: "",
         responsibilities: "",
         experience: "",
+      });
+      successToast({ text: "Job has been created!" });
+    },
+    onError: (err) =>
+      errorToast({
+        text:
+          (err as { message: string }).message || "Job hasn't been created!",
       }),
   });
 
@@ -89,9 +97,9 @@ const PostAJob = () => {
     mutation.mutate(data);
   };
 
-  console.log({ errors });
-
   const inputBlock = "flex flex-col";
+
+  const errorMessage = "text-(--danger5) px-3 pt-1";
 
   return (
     <DashboardSection>
@@ -115,6 +123,10 @@ const PostAJob = () => {
             }}
             {...register("title")}
           />
+
+          {errors.title?.message && (
+            <p className={errorMessage}>{errors.title?.message}</p>
+          )}
         </div>
 
         <h3
@@ -146,6 +158,9 @@ const PostAJob = () => {
                 },
               }}
             />
+            {errors.minSalary?.message && (
+              <p className={errorMessage}>{errors.minSalary?.message}</p>
+            )}
           </div>
           <div className={inputBlock}>
             <label className="body_small">Max Salary</label>
@@ -168,6 +183,9 @@ const PostAJob = () => {
                 },
               }}
             />
+            {errors.maxSalary?.message && (
+              <p className={errorMessage}>{errors.maxSalary?.message}</p>
+            )}
           </div>
           <div className={inputBlock}>
             <label className="body_small">Salary Type</label>
@@ -194,6 +212,9 @@ const PostAJob = () => {
               <MenuItem value="year">Year</MenuItem>
               <MenuItem value="contract">Contract</MenuItem>
             </Select>
+            {errors.salaryType?.message && (
+              <p className={errorMessage}>{errors.salaryType?.message}</p>
+            )}
           </div>
         </div>
 
@@ -221,6 +242,9 @@ const PostAJob = () => {
                 },
               }}
             />
+            {errors.education?.message && (
+              <p className={errorMessage}>{errors.education?.message}</p>
+            )}
           </div>
           <div className={inputBlock}>
             <label className="body_small">Experience</label>
@@ -238,6 +262,10 @@ const PostAJob = () => {
                 },
               }}
             />
+
+            {errors.experience?.message && (
+              <p className={errorMessage}>{errors.experience?.message}</p>
+            )}
           </div>
           <div className={inputBlock}>
             <label className="body_small">Job Type</label>
@@ -264,6 +292,10 @@ const PostAJob = () => {
               <MenuItem value="internship">internship</MenuItem>
               <MenuItem value="contract">contract</MenuItem>
             </Select>
+
+            {errors.workTime?.message && (
+              <p className={errorMessage}>{errors.workTime?.message}</p>
+            )}
           </div>
           <div className={inputBlock}>
             <label className="body_small">Job level</label>
@@ -281,6 +313,10 @@ const PostAJob = () => {
                 },
               }}
             />
+
+            {errors.position?.message && (
+              <p className={errorMessage}>{errors.position?.message}</p>
+            )}
           </div>
           <div className={inputBlock}>
             <label className="body_small">Job location</label>
@@ -298,6 +334,9 @@ const PostAJob = () => {
                 },
               }}
             />{" "}
+            {errors.location?.message && (
+              <p className={errorMessage}>{errors.location?.message}</p>
+            )}
           </div>
         </div>
 
@@ -325,6 +364,9 @@ const PostAJob = () => {
             }}
             {...register("description")}
           />
+          {errors.description?.message && (
+            <p className={errorMessage}>{errors.description?.message}</p>
+          )}
         </div>
 
         <div className={inputBlock + " mt-4.5"}>
@@ -344,6 +386,9 @@ const PostAJob = () => {
             }}
             {...register("responsibilities")}
           />
+          {errors.responsibilities?.message && (
+            <p className={errorMessage}>{errors.responsibilities?.message}</p>
+          )}
         </div>
 
         <button
