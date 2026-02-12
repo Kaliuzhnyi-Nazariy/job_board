@@ -1,16 +1,16 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import z from "zod";
 import { useAppDispatch } from "../../../features/hooks/dispatchHook";
 import { resetPassword } from "../../../features/auth/authRequest";
-import type { IResponse } from "../../../features/auth/interface";
 import { TextField } from "@mui/material";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ButtonAuth from "../../Components/Auth/ButtonAuth";
+import { errorToast, successToast } from "../../Components/Toasts/Toasts";
 
 type ResetPassword = {
   password: string;
@@ -50,26 +50,31 @@ const ResetPassword = () => {
 
   const dispatch = useAppDispatch();
 
+  const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<ResetPassword> = async (data) => {
     if (data.password !== data.confirmPassword) {
+      errorToast({ text: "Passwords are not match!" });
       return;
     }
     const token = path["*"];
 
-    const res = await dispatch(
-      resetPassword({
-        password: data.password,
-        confirmPassword: data.confirmPassword,
-        token: token as string,
-      }),
-    );
+    try {
+      await dispatch(
+        resetPassword({
+          password: data.password,
+          confirmPassword: data.confirmPassword,
+          token: token as string,
+        }),
+      ).unwrap();
 
-    if ((res.payload as IResponse).ok) {
-      console.log("password changed successfully!");
+      successToast({ text: "Password changed!" });
+      navigate("/auth/signin");
+    } catch (error) {
+      errorToast({
+        text: (error as { message: string }).message || "Something went wrong!",
+      });
     }
-
-    // console.log(token);
-    // console.log(data);
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -96,7 +101,6 @@ const ResetPassword = () => {
               InputProps={{
                 sx: {
                   height: "48px",
-                  // padding: "0 18px",
                 },
               }}
             />
@@ -125,7 +129,6 @@ const ResetPassword = () => {
               InputProps={{
                 sx: {
                   height: "48px",
-                  // padding: "0 18px",
                 },
               }}
             />
