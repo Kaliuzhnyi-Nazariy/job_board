@@ -13,6 +13,7 @@ import { getMe } from "../../../../features/user/userRequest";
 import { InputAdornment, TextField } from "@mui/material";
 
 import InsertLinkOutlinedIcon from "@mui/icons-material/InsertLinkOutlined";
+import { errorToast, successToast } from "../../../Components/Toasts/Toasts";
 
 const Personal = () => {
   const userFullNameValue = useSelector(userFullName);
@@ -64,6 +65,16 @@ const Personal = () => {
 
       queryClient.invalidateQueries({
         queryKey: ["candidate", userIdValue],
+      });
+
+      successToast({ text: "Personal data updated successfully!" });
+    },
+
+    onError: (err) => {
+      errorToast({
+        text:
+          (err as { message: string }).message ||
+          "Personal data is not updated!",
       });
     },
   });

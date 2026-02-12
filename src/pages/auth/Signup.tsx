@@ -18,6 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import PictureLayout from "./PictureLayout";
+import { errorToast, successToast } from "../../Components/Toasts/Toasts";
 
 type AuthUser = {
   role: "candidate" | "employer";
@@ -78,12 +79,13 @@ const Signup = () => {
 
     try {
       await dispatch(signup(data)).unwrap();
-      navigate("/home");
+      navigate("/");
+      successToast({ text: "Account created successfully!" });
     } catch (error) {
-      console.log(error);
+      errorToast({
+        text: (error as { message: string }).message || "Something went wrong!",
+      });
     }
-
-    // console.log(data);
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -97,7 +99,6 @@ const Signup = () => {
   const isButtonEnabled = isValid && isCheckTerms;
 
   return (
-    // <div className="grid grid-cols-2 w-full h-screen justify-between">
     <PictureLayout>
       {" "}
       <form
@@ -129,6 +130,9 @@ const Signup = () => {
                   labelId="role-label"
                   id="role"
                   sx={{ width: "150px", height: "48px" }}
+                  MenuProps={{
+                    disableScrollLock: true,
+                  }}
                 >
                   <MenuItem value="employer">Employers</MenuItem>
                   <MenuItem value="candidate">Candidates</MenuItem>
@@ -136,12 +140,8 @@ const Signup = () => {
               )}
             />
           </>
-          {/* <select {...register("role")}>
-              <option value="employer">Employers</option>
-              <option value="candidate">Candidates</option>
-            </select> */}
         </div>
-        <p>{errors.role?.message}</p>
+        <p className={errorMessage}>{errors.role?.message}</p>
         <div className="mt-8 flex flex-col gap-5">
           <div className="flex gap-5">
             <>
@@ -154,12 +154,14 @@ const Signup = () => {
                 InputProps={{
                   sx: {
                     height: "48px",
-                    padding: 0,
-                    // padding: "0 18px",
+                    "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input":
+                      {
+                        padding: "12px 18px",
+                      },
                   },
                 }}
               />
-              <p>{errors.fullName?.message}</p>
+              <p className={errorMessage}>{errors.fullName?.message}</p>
             </>
             <div>
               <TextField
@@ -171,12 +173,14 @@ const Signup = () => {
                 InputProps={{
                   sx: {
                     height: "48px",
-                    padding: 0,
-                    // padding: "0 18px",
+                    "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input":
+                      {
+                        padding: "12px 18px",
+                      },
                   },
                 }}
               />
-              <p className="text-[10px]">{errors.username?.message}</p>
+              <p className={errorMessage}>{errors.username?.message}</p>
             </div>
           </div>
           <div className="">
@@ -188,7 +192,9 @@ const Signup = () => {
               InputProps={{
                 sx: {
                   height: "48px",
-                  // padding: "0 18px",
+                  "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input": {
+                    padding: "12px 18px",
+                  },
                 },
               }}
             />
@@ -205,7 +211,10 @@ const Signup = () => {
                 InputProps={{
                   sx: {
                     height: "48px",
-                    // padding: "0 18px",
+                    "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input":
+                      {
+                        padding: "12px 18px",
+                      },
                   },
                 }}
               />
@@ -230,7 +239,10 @@ const Signup = () => {
                 InputProps={{
                   sx: {
                     height: "48px",
-                    // padding: "0 18px",
+                    "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input":
+                      {
+                        padding: "12px 18px",
+                      },
                   },
                 }}
               />
@@ -265,13 +277,6 @@ const Signup = () => {
             </span>
           </label>
           <ButtonAuth isButtonEnabled={isButtonEnabled} text="Create account" />
-          {/* <button
-          type="submit"
-          className="py-4 bg-(--primary5) rounded-sm text-white button flex gap-3 items-center justify-center cursor-pointer hover:bg-(--primary6) disabled:bg-(--primary1) disabled:cursor-not-allowed transition-colors duration-150"
-          disabled={!isButtonEnabled}
-        >
-          <span>Create account</span> <ArrowRightAltIcon />
-        </button> */}
         </div>
       </form>
     </PictureLayout>

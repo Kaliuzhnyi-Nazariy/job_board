@@ -11,6 +11,7 @@ import { TextField } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import PictureLayout from "./PictureLayout";
+import { errorToast, successToast } from "../../Components/Toasts/Toasts";
 
 type SignIn = {
   email: string;
@@ -46,11 +47,19 @@ const Signin = () => {
 
   const onSubmit: SubmitHandler<SignIn> = async (data) => {
     try {
-      await dispatch(signin(data)).unwrap();
+      const { role } = await dispatch(signin(data)).unwrap();
 
-      await navigate("/home");
+      if (role) {
+        await navigate("/employer/dashboard");
+        successToast({ text: "Signed in successfully!" });
+      } else {
+        await navigate("/candidate/dashboard");
+        successToast({ text: "Signed in successfully!" });
+      }
     } catch (err) {
-      console.error(err);
+      errorToast({
+        text: (err as { message: string }).message || "Something went wrong!",
+      });
     }
   };
 
@@ -88,11 +97,13 @@ const Signin = () => {
               InputProps={{
                 sx: {
                   height: "48px",
-                  // padding: "0 18px",
+                  "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input": {
+                    padding: "12px 18px",
+                  },
                 },
               }}
             />
-            <p>{errors.email?.message}</p>
+            <p className={errorMessage}>{errors.email?.message}</p>
           </div>
           <div className="">
             <div className="relative">
@@ -105,7 +116,10 @@ const Signin = () => {
                 InputProps={{
                   sx: {
                     height: "48px",
-                    // padding: "0 18px",
+                    "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input":
+                      {
+                        padding: "12px 18px",
+                      },
                   },
                 }}
               />

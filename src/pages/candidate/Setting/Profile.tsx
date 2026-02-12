@@ -9,6 +9,7 @@ import {
 } from "../../../../features/candidate/candidatesRequsts";
 import type { UpdateProfile } from "../../../../features/candidate/interfaces";
 import { MenuItem, Select, TextField } from "@mui/material";
+import { errorToast, successToast } from "../../../Components/Toasts/Toasts";
 
 export type IGender = "Mr" | "Ms" | "Mx";
 export interface IUpdProfile {
@@ -48,6 +49,15 @@ const Profile = () => {
   const { mutate } = useMutation({
     mutationKey: ["updateProfile"],
     mutationFn: (data: UpdateProfile) => updateCandidateProfile(data),
+    onSuccess: () => {
+      successToast({ text: "Profile updated!" });
+    },
+    onError: (error) => {
+      errorToast({
+        text:
+          (error as { message: string }).message || "Profile is not updated!",
+      });
+    },
   });
 
   const handleSubmitUpdate: SubmitHandler<IUpdProfile> = async (data) => {

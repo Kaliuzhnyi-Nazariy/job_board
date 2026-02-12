@@ -8,6 +8,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import SettingsButton from "../../../../Components/SettingsButton";
 import { useAppDispatch } from "../../../../../features/hooks/dispatchHook";
 import { changePassword } from "../../../../../features/user/userRequest";
+import { errorToast, successToast } from "../../../../Components/Toasts/Toasts";
 
 const ChangePasswordForm = () => {
   const defaultValues: ChangePasswordState = {
@@ -33,8 +34,15 @@ const ChangePasswordForm = () => {
   const handlePasswordSubmit: SubmitHandler<ChangePasswordState> = async (
     data,
   ) => {
-    await dispatch(changePassword(data));
-    // TO-DO: toasts
+    try {
+      await dispatch(changePassword(data)).unwrap();
+      successToast({ text: "Password has been changed successfully!" });
+    } catch (error) {
+      errorToast({
+        text:
+          (error as { message: string }).message || "Password is not updated!",
+      });
+    }
   };
 
   return (

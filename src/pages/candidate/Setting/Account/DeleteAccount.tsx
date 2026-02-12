@@ -1,12 +1,21 @@
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { useAppDispatch } from "../../../../../features/hooks/dispatchHook";
 import { deleteAccount } from "../../../../../features/user/userRequest";
+import { errorToast, successToast } from "../../../../Components/Toasts/Toasts";
 
 const DeleteAccount = () => {
   const dispatch = useAppDispatch();
 
   const handleDelete = async () => {
-    await dispatch(deleteAccount());
+    try {
+      await dispatch(deleteAccount()).unwrap();
+      successToast({ text: "Account was deleted!" });
+    } catch (error) {
+      errorToast({
+        text:
+          (error as { message: string }).message || "Account is not deleted!",
+      });
+    }
   };
 
   return (

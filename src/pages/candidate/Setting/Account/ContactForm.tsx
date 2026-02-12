@@ -10,6 +10,7 @@ import {
 } from "../../../../../features/candidate/candidatesRequsts";
 import type { IDefaultContactForm } from "../../../../../features/candidate/interfaces";
 import SettingsButton from "../../../../Components/SettingsButton";
+import { errorToast, successToast } from "../../../../Components/Toasts/Toasts";
 
 const ContactForm = () => {
   const labelStyles = "body_small mb-2";
@@ -51,7 +52,12 @@ const ContactForm = () => {
   }, [data]);
 
   const handleSubmit: SubmitHandler<IDefaultContactForm> = async (data) => {
-    await updateContact(data);
+    try {
+      await updateContact(data);
+      successToast({ text: "Contact info updated!" });
+    } catch (error) {
+      errorToast({ text: (error as { message: string }).message });
+    }
     //   make popup messages
   };
 

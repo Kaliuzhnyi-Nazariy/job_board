@@ -11,6 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import { applyToJob } from "../../../features/application/applicationRequest";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { errorToast, successToast } from "../Toasts/Toasts";
 
 export interface ApplyState {
   coveringLetter: string;
@@ -32,7 +33,7 @@ const ApplyModal = ({
     coveringLetter: "",
   };
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     defaultValues: defaultValue,
   });
 
@@ -40,7 +41,14 @@ const ApplyModal = ({
     mutationKey: ["applyToJob"],
     mutationFn: (data: ApplyState) =>
       applyToJob({ jobId: jobId!, coveringLetter: data.coveringLetter }),
-    onSuccess: () => handleClose(),
+    onSuccess: () => {
+      handleClose();
+      successToast({ text: "You successfully applied!" });
+      reset({ coveringLetter: "" });
+    },
+    onError: (error) => {
+      errorToast({ text: (error as { message: string }).message });
+    },
   });
 
   const handleApplySubmit: SubmitHandler<ApplyState> = (data) => {
