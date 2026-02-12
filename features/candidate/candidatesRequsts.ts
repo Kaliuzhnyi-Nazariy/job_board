@@ -5,9 +5,14 @@ import type {
   UpdateProfile,
 } from "./interfaces";
 
-export const getCandidates = async (search?: string, location?: string) => {
+export const getCandidates = async (
+  limit: number,
+  search?: string,
+  location?: string,
+  order?: "DESC" | "ASC",
+) => {
   const res = await api.get("/candidate", {
-    params: { search, location },
+    params: { search, location, order, limit },
   });
 
   return res.data;
