@@ -1,16 +1,22 @@
 import { Navigate, Route, Routes } from "react-router";
-import Greeting from "./pages";
+// import Greeting from "./pages";
 import { lazy } from "react";
 
-// const AuthPage = lazy(() => import("./pages/auth/Auth"));
+import { ToastContainer } from "react-toastify";
+
+// Auth
 const SigninPage = lazy(() => import("./pages/auth/Signin"));
 const SignupPage = lazy(() => import("./pages/auth/Signup"));
 const ForgetPage = lazy(() => import("./pages/auth/ForgetPassword"));
 const ResetPasswordPage = lazy(() => import("./pages/auth/ResetPassword"));
 
+// Home
 const HomePage = lazy(() => import("./pages/Home"));
+
+// Terms
 const TermsPage = lazy(() => import("./pages/terms"));
 
+// Protecting routes
 const UserLayoutComponent = lazy(() => import("./layouts/UserLayout"));
 const CandidateRouteComponent = lazy(() => import("./layouts/CandidateRoute"));
 const EmployerRouteComponent = lazy(() => import("./layouts/EmployerRoute"));
@@ -54,60 +60,78 @@ const ApplicationPage = lazy(
   () => import("./pages/employer/Applications/Applications"),
 );
 
+// forbidden
+
 const Forbidden = lazy(() => import("./pages/error/Forbidden"));
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Greeting />} />
+    <>
+      <Routes>
+        {/* <Route path="/" element={<Greeting />} /> */}
 
-      <Route path="/auth">
-        <Route index element={<Navigate to="signin" replace />} />
-        <Route path="signin" element={<SigninPage />} />
-        <Route path="signup" element={<SignupPage />} />
-      </Route>
-      <Route path="/forget-password" element={<ForgetPage />} />
-      <Route path="/reset-password/*" element={<ResetPasswordPage />} />
-      <Route path="/" element={<UserLayoutComponent />}>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/candidate" element={<CandidateRouteComponent />}>
-          <Route index element={<Navigate to="find-job" replace />} />
-          {/* <Route path="home" element={<HomeCandidate />} /> */}
-          <Route path="find-job" element={<FindJob />} />
-          <Route path="find-job/:jobId" element={<JobPage />} />
-          <Route path="dashboard" element={<CandidateDashboard />}>
-            <Route path="" element={<OverviewCandidate />} />
-            <Route path="setting" element={<SettingsLayout />}>
-              <Route index element={<Navigate to="personal" replace />} />
-              <Route path="personal" element={<PersonalPage />} />
-              <Route path="profile" element={<ProfilePage />} />
-              <Route path="social" element={<SocialPage />} />
-              <Route path="account" element={<AccountPage />} />
+        <Route path="/auth">
+          <Route index element={<Navigate to="signin" replace />} />
+          <Route path="signin" element={<SigninPage />} />
+          <Route path="signup" element={<SignupPage />} />
+        </Route>
+        <Route path="/forget-password" element={<ForgetPage />} />
+        <Route path="/reset-password/*" element={<ResetPasswordPage />} />
+        <Route path="/" element={<UserLayoutComponent />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/candidate" element={<CandidateRouteComponent />}>
+            <Route index element={<Navigate to="find-job" replace />} />
+            {/* <Route path="home" element={<HomeCandidate />} /> */}
+            <Route path="find-job" element={<FindJob />} />
+            <Route path="find-job/:jobId" element={<JobPage />} />
+            <Route path="dashboard" element={<CandidateDashboard />}>
+              <Route path="" element={<OverviewCandidate />} />
+              <Route path="setting" element={<SettingsLayout />}>
+                <Route index element={<Navigate to="personal" replace />} />
+                <Route path="personal" element={<PersonalPage />} />
+                <Route path="profile" element={<ProfilePage />} />
+                <Route path="social" element={<SocialPage />} />
+                <Route path="account" element={<AccountPage />} />
+              </Route>
+              <Route path="applied-jobs" element={<AppliedPage />} />
             </Route>
-            <Route path="applied-jobs" element={<AppliedPage />} />
+          </Route>
+          <Route path="/employer" element={<EmployerRouteComponent />}>
+            {/* <Route path="home" element={<HomeEmployer />} /> */}
+            <Route path="dashboard" element={<EmployerDashboard />}>
+              {/* <Route index element={<Navigate to="" replace />} /> */}
+              <Route path="" element={<EmployerOverviewPage />} />
+              <Route path="post-a-job" element={<PostJobPage />} />
+              <Route path="my-jobs" element={<MyJobsPage />} />
+              <Route path="my-jobs/:jobId" element={<MyJobPage />} />
+              <Route
+                path="view-application/:jobId"
+                element={<ApplicationPage />}
+              />
+            </Route>
+            {/* <Route path="view-application/:jobId" element={<ApplicationPage />} /> */}
+            <Route path="candidates" element={<FindACandidatePage />} />
+            <Route path="candidates/:candidateId" element={<CandidatePage />} />
           </Route>
         </Route>
-        <Route path="/employer" element={<EmployerRouteComponent />}>
-          {/* <Route path="home" element={<HomeEmployer />} /> */}
-          <Route path="dashboard" element={<EmployerDashboard />}>
-            {/* <Route index element={<Navigate to="" replace />} /> */}
-            <Route path="" element={<EmployerOverviewPage />} />
-            <Route path="post-a-job" element={<PostJobPage />} />
-            <Route path="my-jobs" element={<MyJobsPage />} />
-            <Route path="my-jobs/:jobId" element={<MyJobPage />} />
-            <Route
-              path="view-application/:jobId"
-              element={<ApplicationPage />}
-            />
-          </Route>
-          {/* <Route path="view-application/:jobId" element={<ApplicationPage />} /> */}
-          <Route path="candidates" element={<FindACandidatePage />} />
-          <Route path="candidates/:candidateId" element={<CandidatePage />} />
-        </Route>
-      </Route>
-      <Route path="/forbidden" element={<Forbidden />} />
-      <Route path="/terms" element={<TermsPage />} />
-    </Routes>
+        <Route path="/forbidden" element={<Forbidden />} />
+        <Route path="/terms" element={<TermsPage />} />
+      </Routes>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        // transition={Bounce}
+      />
+    </>
   );
 }
 
