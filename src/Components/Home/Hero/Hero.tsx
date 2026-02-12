@@ -8,6 +8,7 @@ import InfoItem from "./InfoItem";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
+import Searchbar from "./Searchbar";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -32,9 +33,9 @@ const Hero = () => {
             in scelerisque leo, eget sollicitudin velit bestibulum.
           </p>
         </div>
-
         {/* change on searchbar */}
-        <div className="w-169.75 h-20 bg-white mt-8"></div>
+        {/* <div className="w-169.75 h-20 bg-white mt-8"></div> */}
+        <Searchbar />
 
         <div className="text-(--gray7) body_small flex mt-6">
           <p>Suggestion: </p>
