@@ -10,17 +10,20 @@ import ContactData from "../../Candidate/ContactData";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 import GeneralData from "../../Candidate/GeneralData";
+import { errorToast, successToast } from "../../Toasts/Toasts";
 
 const ApplicationCandidateDetails = ({
   open,
   handleClose,
   applicationId,
   jobId,
+  refetchApplications,
 }: {
   open: boolean;
   handleClose: () => void;
   applicationId: string | null;
   jobId: string;
+  refetchApplications: () => void;
 }) => {
   const { data, isLoading } = useQuery({
     queryKey: ["getCandidateDetails", applicationId],
@@ -31,11 +34,29 @@ const ApplicationCandidateDetails = ({
   const { mutate: rejectApplication } = useMutation({
     mutationKey: ["rejectApplicationStatus"],
     mutationFn: () => updateApplicationStatus(applicationId!, "rejected"),
+    onSuccess: () => {
+      successToast({ text: "Candidate rejected!" });
+      refetchApplications();
+      handleClose();
+    },
+    onError: () => {
+      errorToast({ text: "Candidate rejection is not happened!" });
+      handleClose();
+    },
   });
 
   const { mutate: hireApplication } = useMutation({
-    mutationKey: ["rejectApplicationStatus"],
+    mutationKey: ["acceptApplicationStatus"],
     mutationFn: () => updateApplicationStatus(applicationId!, "accepted"),
+    onSuccess: () => {
+      successToast({ text: "Candidate accepted!" });
+      refetchApplications();
+      handleClose();
+    },
+    onError: () => {
+      errorToast({ text: "Candidate acceptation is not happened!" });
+      handleClose();
+    },
   });
 
   if (!open) return null;
@@ -124,20 +145,24 @@ const ApplicationCandidateDetails = ({
               </div>
             </div>
             {data.status === "applied" && (
-              <div className="w-full flex justify-around items-center">
-                <button
-                  className="cursor-pointer"
-                  onClick={() => rejectApplication()}
-                >
-                  Reject
-                </button>
-                <button
-                  className="cursor-pointer"
-                  onClick={() => hireApplication()}
-                >
-                  Hire
-                </button>
-              </div>
+              <ul className="w-full flex justify-around items-center mt-8 gap-12">
+                <li>
+                  <button
+                    className="cursor-pointer  w-90 py-3 button border border-(--primary5) text-(--primary5) rounded-sm hover:bg-(--primary50) hover:border-(--primary6)  hover:text-(--primary6) transition-colors duration-150 "
+                    onClick={() => rejectApplication()}
+                  >
+                    Reject
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="cursor-pointer w-90 py-3 button bg-(--primary5) text-white rounded-sm hover:bg-(--primary6) transition-colors duration-150 "
+                    onClick={() => hireApplication()}
+                  >
+                    Hire
+                  </button>
+                </li>
+              </ul>
             )}
           </>
         )}

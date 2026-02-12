@@ -15,7 +15,7 @@ const Applications = () => {
 
   const [applicationId, setApplicationId] = useState<string | null>(null);
 
-  const { data, isLoading, isError } = useQuery<JobApplicatinon[]>({
+  const { data, isLoading, isError, refetch } = useQuery<JobApplicatinon[]>({
     queryKey: ["getApplications", jobId],
     queryFn: () => getApplications(jobId!),
   });
@@ -115,6 +115,7 @@ const Applications = () => {
         handleClose={handleClose}
         applicationId={applicationId}
         jobId={jobId!}
+        refetchApplications={refetch}
       />
       ;
     </>
