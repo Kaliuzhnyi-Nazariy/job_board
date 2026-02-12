@@ -33,7 +33,7 @@ const Navbar = () => {
     <header className="bg-(--gray50) px-75 h-12 flex justify-between">
       <nav className="flex gap-6 h-full">
         <NavLink
-          to={"/home"}
+          to={"/"}
           className={({ isActive }) =>
             `${navItem} ${isActive ? active : inactive}`
           }
