@@ -22,8 +22,10 @@ export const getJobs = async (params: IGetJob) => {
   return res.data;
 };
 
-export const getMyJobs = async () => {
-  const res = await api.get("/job/my-jobs");
+export const getMyJobs = async (page: number) => {
+  const res = await api.get("/job/my-jobs", {
+    params: { page },
+  });
 
   return res.data;
 };
@@ -50,14 +52,25 @@ export const updateMyJob = async ({
   return res.data;
 };
 
+// export const getJobById = async (jobId: string) => {
 export const getJob = async (jobId: string) => {
   const res = await api.get("/job/jobs/" + jobId);
 
   return res.data;
 };
 
-export const getRecentJobs = async () => {
-  const res = await api.get("/job/my-jobs/recent");
+export const getFiveRecentJobs = async () => {
+  const res = await api.get("/job/my-jobs/five-recent");
+
+  return res.data;
+};
+
+export const getRecentJobs = async (page: string) => {
+  const res = await api.get("/job/my-jobs/recent", {
+    params: {
+      page,
+    },
+  });
 
   return res.data;
 };
