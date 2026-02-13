@@ -41,3 +41,8 @@ export interface IDefaultContactForm {
   phone?: string;
   email?: string;
 }
+
+export interface ICandidateData extends ICandidate {
+  location: string;
+  experience: string;
+}

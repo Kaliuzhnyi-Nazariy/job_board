@@ -17,7 +17,7 @@ export interface IResponse {
 }
 
 export interface ISignInResponse extends IResponse {
-  data: "employer" | "candidate";
+  role: "employer" | "candidate";
 }
 
 export interface ResetPassword {
