@@ -22,3 +22,9 @@ export interface ChangePasswordState {
   newPassword?: string;
   confirmPassword?: string;
 }
+
+export interface IServiceSigninResponse {
+  data: IUser;
+  token: string;
+  role: "employer" | "candidate";
+}

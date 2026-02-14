@@ -1,6 +1,12 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { IUser, RejectValue, UserInitialState } from "./interfaces";
+import type {
+  IServiceSigninResponse,
+  IUser,
+  RejectValue,
+  UserInitialState,
+} from "./interfaces";
 import { changePassword, deleteAccount, getMe } from "./userRequest";
+import { logout, signin, signup } from "../auth/authRequest";
 
 const initialState: UserInitialState = {
   user: null,
@@ -27,12 +33,7 @@ const handleRejected = (
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    logoutUser: (state: UserInitialState) => {
-      state.user = null;
-      state.initialized = false;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getMe.pending, handlePending)
@@ -67,9 +68,41 @@ const userSlice = createSlice({
         state.user = null;
         state.isLoading = false;
       })
-      .addCase(deleteAccount.rejected, handleRejected);
+      .addCase(deleteAccount.rejected, handleRejected)
+
+      .addCase(signup.pending, handlePending)
+      .addCase(
+        signup.fulfilled,
+        (state: UserInitialState, action: PayloadAction<IUser>) => {
+          console.log(action.payload);
+          state.isLoading = false;
+          state.initialized = true;
+          state.user = action.payload;
+        },
+      )
+      .addCase(signup.rejected, handleRejected)
+
+      .addCase(signin.pending, handlePending)
+      .addCase(
+        signin.fulfilled,
+        (
+          state: UserInitialState,
+          action: PayloadAction<IServiceSigninResponse>,
+        ) => {
+          state.isLoading = false;
+          state.initialized = true;
+          state.user = action.payload.data;
+        },
+      )
+      .addCase(signin.rejected, handleRejected)
+
+      .addCase(logout.pending, handlePending)
+      .addCase(logout.fulfilled, (state: UserInitialState) => {
+        state.user = null;
+        state.isLoading = false;
+      })
+      .addCase(logout.rejected, handleRejected);
   },
 });
 
-export const { logoutUser } = userSlice.actions;
 export const userReducer = userSlice.reducer;
