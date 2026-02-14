@@ -3,16 +3,16 @@ import { Link } from "react-router";
 import {
   userError,
   userInitialized,
+  userLoading,
   userRole,
 } from "../../../features/user/userSelector";
-import { authLoading } from "../../../features/auth/authSelector";
 
 const Forbidden = () => {
   const role = useSelector(userRole);
 
   const userErrorMessage = useSelector(userError);
   const userInitializedValue = useSelector(userInitialized);
-  const isAuthLoading = useSelector(authLoading);
+  const isAuthLoading = useSelector(userLoading);
 
   const link = () => {
     if (

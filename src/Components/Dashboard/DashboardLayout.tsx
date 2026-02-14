@@ -5,7 +5,6 @@ import { Outlet, useNavigate } from "react-router";
 import { logout } from "../../../features/auth/authRequest";
 
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { logoutUser } from "../../../features/user/userSlice";
 import { errorToast, successToast } from "../Toasts/Toasts";
 
 const DashboardLayout = ({
@@ -27,7 +26,6 @@ const DashboardLayout = ({
   const handleLogout = async () => {
     try {
       await dispatch(logout());
-      dispatch(logoutUser());
       navigate("/auth/signin");
       successToast({ text: "Logged out successfully!" });
     } catch (error) {
