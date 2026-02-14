@@ -78,8 +78,13 @@ const Signup = () => {
     if (!isCheckTerms) return;
 
     try {
-      await dispatch(signup(data)).unwrap();
-      navigate("/");
+      const { role } = await dispatch(signup(data)).unwrap();
+
+      if (role === "employer") {
+        navigate("/employer/dashboard");
+      } else {
+        navigate("/candidate/dashboard");
+      }
       successToast({ text: "Account created successfully!" });
     } catch (error) {
       errorToast({

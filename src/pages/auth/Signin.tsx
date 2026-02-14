@@ -4,7 +4,6 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import z from "zod";
 import { useAppDispatch } from "../../../features/hooks/dispatchHook";
-import { signin } from "../../../features/auth/authRequest";
 import ButtonAuth from "../../Components/Auth/ButtonAuth";
 import { TextField } from "@mui/material";
 
@@ -12,6 +11,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import PictureLayout from "./PictureLayout";
 import { errorToast, successToast } from "../../Components/Toasts/Toasts";
+import { signin } from "../../../features/auth/authRequest";
 
 type SignIn = {
   email: string;
@@ -47,9 +47,9 @@ const Signin = () => {
 
   const onSubmit: SubmitHandler<SignIn> = async (data) => {
     try {
-      const { role } = await dispatch(signin(data)).unwrap();
+      const res = await dispatch(signin(data)).unwrap();
 
-      if (role) {
+      if (res.data.role === "employer") {
         await navigate("/employer/dashboard");
         successToast({ text: "Signed in successfully!" });
       } else {
