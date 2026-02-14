@@ -13,8 +13,9 @@ const Header = () => {
   const isUserInitialized = useSelector(userInitialized);
   const userIdData = useSelector(userId);
 
-  const isUserLoggedIn =
-    !isUserLoading && isUserInitialized && userIdData && userIdData?.length > 0;
+  const isUserLoggedIn = Boolean(
+    !isUserLoading && isUserInitialized && userIdData,
+  );
 
   return (
     <div className="px-75 flex py-5 justify-between items-center">
