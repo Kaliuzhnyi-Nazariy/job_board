@@ -3,14 +3,14 @@ import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import z from "zod";
-import { useAppDispatch } from "../../../features/hooks/dispatchHook";
-import { resetPassword } from "../../../features/auth/authRequest";
+import { resetPassword } from "../../../features/auth/authAPI";
 import { TextField } from "@mui/material";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ButtonAuth from "../../Components/Auth/ButtonAuth";
 import { errorToast, successToast } from "../../Components/Toasts/Toasts";
+import { useMutation } from "@tanstack/react-query";
 
 type ResetPassword = {
   password: string;
@@ -48,9 +48,22 @@ const ResetPassword = () => {
 
   const path = useParams();
 
-  const dispatch = useAppDispatch();
-
   const navigate = useNavigate();
+
+  const { mutate } = useMutation({
+    mutationKey: ["resetPassword"],
+    mutationFn: ({ data, token }: { data: ResetPassword; token: string }) =>
+      resetPassword({ ...data, token }),
+    onSuccess: () => {
+      successToast({ text: "Password changed!" });
+      navigate("/auth/signin");
+    },
+    onError: (error) => {
+      errorToast({
+        text: error.message || "Something went wrong!",
+      });
+    },
+  });
 
   const onSubmit: SubmitHandler<ResetPassword> = async (data) => {
     if (data.password !== data.confirmPassword) {
@@ -59,22 +72,12 @@ const ResetPassword = () => {
     }
     const token = path["*"];
 
-    try {
-      await dispatch(
-        resetPassword({
-          password: data.password,
-          confirmPassword: data.confirmPassword,
-          token: token as string,
-        }),
-      ).unwrap();
-
-      successToast({ text: "Password changed!" });
-      navigate("/auth/signin");
-    } catch (error) {
-      errorToast({
-        text: (error as { message: string }).message || "Something went wrong!",
-      });
+    if (!token) {
+      errorToast({ text: "Token is not found!" });
+      return;
     }
+
+    mutate({ data, token });
   };
 
   const [showPassword, setShowPassword] = useState(false);

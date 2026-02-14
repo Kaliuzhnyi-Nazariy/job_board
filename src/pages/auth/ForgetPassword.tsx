@@ -2,13 +2,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link } from "react-router";
 import z from "zod";
-import { useAppDispatch } from "../../../features/hooks/dispatchHook";
-import { forgetPassword } from "../../../features/auth/authRequest";
-import type { IResponse } from "../../../features/auth/interface";
 import { useState } from "react";
 import { TextField } from "@mui/material";
 import ButtonAuth from "../../Components/Auth/ButtonAuth";
 import Auth from "./PictureLayout";
+import { useMutation } from "@tanstack/react-query";
+
+import { forgetPassword } from "../../../features/auth/authAPI";
+import { errorToast, successToast } from "../../Components/Toasts/Toasts";
 
 type ForgetPassword = {
   email: string;
@@ -33,18 +34,22 @@ const ForgetPassword = () => {
     mode: "onChange",
   });
 
-  const dispatch = useAppDispatch();
-
   const [isEmailSent, setEmailSent] = useState(false);
 
-  const onSubmit: SubmitHandler<ForgetPassword> = async (data) => {
-    // console.log(data);
-    const res = await dispatch(forgetPassword(data));
-
-    if ((res.payload as IResponse).ok) {
-      console.log("everything is working well");
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["forgetPassword"],
+    mutationFn: (data: ForgetPassword) => forgetPassword(data),
+    onSuccess: () => {
       setEmailSent(true);
-    }
+      successToast({ text: "Email has been sent!" });
+    },
+    onError: (err) => {
+      errorToast({ text: err.message });
+    },
+  });
+
+  const onSubmit: SubmitHandler<ForgetPassword> = async (data) => {
+    mutate(data);
   };
 
   return (
@@ -92,7 +97,10 @@ const ForgetPassword = () => {
                 </p>
               )}
             </div>
-            <ButtonAuth isButtonEnabled={isValid} text="Reset Password" />
+            <ButtonAuth
+              isButtonEnabled={isValid || !isPending}
+              text="Reset Password"
+            />
           </form>
         )}
       </div>
