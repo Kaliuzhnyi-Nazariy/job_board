@@ -1,8 +1,12 @@
 import { Navigate, Route, Routes } from "react-router";
 // import Greeting from "./pages";
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 
 import { ToastContainer } from "react-toastify";
+import PrtoectedRoute from "./layouts/ProtectedRoute";
+import RestrictedRoute from "./layouts/RestrictedRoute";
+import { useAppDispatch } from "../features/hooks/dispatchHook";
+import { getMe } from "../features/user/userRequest";
 
 // Auth
 const SigninPage = lazy(() => import("./pages/auth/Signin"));
@@ -18,8 +22,8 @@ const TermsPage = lazy(() => import("./pages/terms"));
 
 // Protecting routes
 const UserLayoutComponent = lazy(() => import("./layouts/UserLayout"));
-const CandidateRouteComponent = lazy(() => import("./layouts/CandidateRoute"));
-const EmployerRouteComponent = lazy(() => import("./layouts/EmployerRoute"));
+// const CandidateRouteComponent = lazy(() => import("./layouts/CandidateRoute"));
+// const EmployerRouteComponent = lazy(() => import("./layouts/EmployerRoute"));
 
 // candidate
 // const HomeCandidate = lazy(() => import("./pages/candidate/home"));
@@ -65,21 +69,32 @@ const ApplicationPage = lazy(
 const Forbidden = lazy(() => import("./pages/error/Forbidden"));
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
+
   return (
     <>
       <Routes>
         {/* <Route path="/" element={<Greeting />} /> */}
 
-        <Route path="/auth">
-          <Route index element={<Navigate to="signin" replace />} />
-          <Route path="signin" element={<SigninPage />} />
-          <Route path="signup" element={<SignupPage />} />
+        <Route element={<RestrictedRoute />}>
+          <Route path="/auth">
+            <Route index element={<Navigate to="signin" replace />} />
+            <Route path="signin" element={<SigninPage />} />
+            <Route path="signup" element={<SignupPage />} />
+          </Route>
+          <Route path="/forget-password" element={<ForgetPage />} />
+          <Route path="/reset-password/*" element={<ResetPasswordPage />} />
         </Route>
-        <Route path="/forget-password" element={<ForgetPage />} />
-        <Route path="/reset-password/*" element={<ResetPasswordPage />} />
         <Route path="/" element={<UserLayoutComponent />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/candidate" element={<CandidateRouteComponent />}>
+          <Route
+            path="/candidate"
+            element={<PrtoectedRoute allowedRoles={["candidate"]} />}
+          >
             <Route index element={<Navigate to="find-job" replace />} />
             {/* <Route path="home" element={<HomeCandidate />} /> */}
             <Route path="find-job" element={<FindJob />} />
@@ -96,7 +111,10 @@ function App() {
               <Route path="applied-jobs" element={<AppliedPage />} />
             </Route>
           </Route>
-          <Route path="/employer" element={<EmployerRouteComponent />}>
+          <Route
+            path="/employer"
+            element={<PrtoectedRoute allowedRoles={["employer"]} />}
+          >
             {/* <Route path="home" element={<HomeEmployer />} /> */}
             <Route path="dashboard" element={<EmployerDashboard />}>
               {/* <Route index element={<Navigate to="" replace />} /> */}
