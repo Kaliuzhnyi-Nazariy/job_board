@@ -3,6 +3,7 @@ import JobHeader from "./filter/JobHeader";
 import JobList from "./JobList";
 
 export interface IJobList {
+  id: string;
   title: string;
   location: string;
   position: string;

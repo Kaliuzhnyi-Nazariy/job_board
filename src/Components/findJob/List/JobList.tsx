@@ -5,6 +5,7 @@ import { getJobs } from "../../../../features/job/jobRequests";
 import { Link, useSearchParams } from "react-router";
 import Section from "../../Section";
 import PaginationComponent from "../../Pagination";
+import type { IJobList } from "./JobComponent";
 
 const JobList = () => {
   const listStyles = "flex flex-col gap-y-6";
@@ -52,7 +53,7 @@ const JobList = () => {
       {data?.jobs?.length > 0 && (
         <Section>
           <ul className={`${listView === "grid" ? gridStyles : listStyles} `}>
-            {data.jobs.map((job) => {
+            {data.jobs.map((job: IJobList) => {
               return (
                 <li className="h-51" key={job.id}>
                   <Link
