@@ -108,10 +108,10 @@ const Signup = () => {
       {" "}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="justify-self-center self-center w-134 ml-[10%]"
+        className="justify-self-center self-center w-50 min-[1440px]:w-134 min-[1440px]:ml-[10%]"
       >
         <div className="flex justify-between items-center">
-          <div className="w-78 flex flex-col gap-4">
+          <div className="w-36 min-[1440px]:w-78 flex flex-col gap-4">
             <h3>Create account.</h3>
             <p>
               <span className="body_medium text-(--gray6)">
