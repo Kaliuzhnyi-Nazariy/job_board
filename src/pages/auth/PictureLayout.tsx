@@ -5,7 +5,7 @@ import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 
 const PictureLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="min-[1440px]:grid min-[1440px]:grid-cols-2 w-full h-screen justify-between">
+    <div className="grid min-[1440px]:grid-cols-2 w-full h-screen justify-between">
       {children}
 
       <div className="hidden min-[1440px]:block relative h-full  ">
