@@ -54,7 +54,7 @@ const ForgetPassword = () => {
 
   return (
     <Auth>
-      <div className="justify-self-center self-center w-134">
+      <div className="justify-self-center self-center w-50 min-[768px]:w-134">
         <h4>Forget Password</h4>
         <p className="body_medium text-(--gray6) mt-8 ">
           Go back to{" "}
