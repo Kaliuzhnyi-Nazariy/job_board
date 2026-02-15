@@ -64,9 +64,13 @@ const ApplicationPage = lazy(
   () => import("./pages/employer/Applications/Applications"),
 );
 
-// forbidden
+// error pages
 
 const Forbidden = lazy(() => import("./pages/error/Forbidden"));
+
+cons NotFoundPage = lazy(() => import("./pages/error/NotFound"));
+
+// routes
 
 function App() {
   const dispatch = useAppDispatch();
@@ -134,6 +138,7 @@ function App() {
         </Route>
         <Route path="/forbidden" element={<Forbidden />} />
         <Route path="/terms" element={<TermsPage />} />
+<Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       <ToastContainer
