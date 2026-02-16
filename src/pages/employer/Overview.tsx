@@ -32,7 +32,7 @@ const Overview = () => {
   });
 
   return (
-    <DashboardSection>
+    <DashboardSection extraStyles="text-center flex flex-col items-center min-[1024px]:text-start max-[1439px]:mx-auto">
       <h2 className="body_large_500">
         Hello,{" "}
         {isUserLoading ? "Loading..." : usernameValue ? usernameValue : "user"}
@@ -42,17 +42,22 @@ const Overview = () => {
       </small>
       <Link
         to={`my-jobs`}
-        className="w-78 h-26 bg-(--primary50) px-6 py-5 rounded-lg flex gap-6 justify-between items-center cursor-pointer mt-6"
+        className="w-full min-[425px]:w-78 h-26 bg-(--primary50) px-6 py-5 rounded-lg flex gap-6 justify-between items-center cursor-pointer mt-6"
       >
         <div className="flex flex-col gap-1 justify-center  ">
-          <p className="font-semibold text-2xl">
+          <p className="font-semibold text-lg min-[768px]:text-2xl">
             {isLoading ? "Loading..." : data.meta.allAmountOfJobs}
           </p>
-          <p className="body_small">jobs</p>
+          <p className="body_xs min-[768px]:body_small">jobs</p>
         </div>
-        <div className="size-16 bg-white rounded-[5px] p-4">
+        <div className="size-16 bg-white rounded-[5px] p-3 min-[768px]:p-4 max-[767px]:size-12">
           <WorkOutlineOutlinedIcon
-            sx={{ fill: "var(--primary5)", fontSize: "32px" }}
+            sx={{
+              fill: "var(--primary5)",
+              "@media (min-width:1440px)": {
+                fontSize: "32px",
+              },
+            }}
           />
         </div>
       </Link>
