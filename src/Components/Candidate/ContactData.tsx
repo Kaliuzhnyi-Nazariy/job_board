@@ -16,7 +16,7 @@ const ContactData = ({
   phone?: string;
   email?: string;
 }) => {
-  const liStyle = "flex gap-4";
+  const liStyle = "flex gap-4 overflow-hidden";
   const iconStyle = "text-8 text-(--primary5)";
   const titleStyle = "text-(--gray5) text-[12px] uppercase ";
   const valueStyle = "body_small_500 mt-1";
@@ -27,13 +27,13 @@ const ContactData = ({
       <ul className="mt-6 flex flex-col gap-y-5">
         <li className={liStyle}>
           <LanguageOutlinedIcon className={iconStyle} />
-          <div>
+          <div className="w-full">
             <p className={titleStyle}>Website</p>
             {website ? (
               <Link
                 to={website}
                 target="_blank"
-                className="body_small_500 mt-1"
+                className="body_small_500 mt-1 overflow-hidden text-ellipsis text-nowrap w-4/7 min-[425px]:w-6/7 block"
               >
                 {website}
               </Link>
