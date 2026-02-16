@@ -18,7 +18,7 @@ const Header = () => {
   );
 
   return (
-    <div className="px-75 flex py-5 justify-between items-center">
+    <div className="px-3 min-[428px]:px-6 min-[1024px]:px-8 min-[1440px]:px-22 min-[1920px]:px-75 flex py-5 justify-between items-center">
       <div className="flex items-center gap-8">
         <span className="flex gap-2 items-center">
           <WorkIcon className="size-10 text-(--primary5)" />

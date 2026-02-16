@@ -36,17 +36,15 @@ const DashboardLayout = ({
   };
 
   return (
-    <Section extraStyles="flex">
-      <div className="flex flex-col justify-between">
-        <div>
-          <h4
-            className="uppetcase body_xs_500 text-(--gray4) ml-5 w-72 "
-            style={{ marginBottom: 12 }}
-          >
-            {title}
-          </h4>
-          {children}
-        </div>
+    <Section extraStyles="flex flex-col-reverse min-[1440px]:flex-row">
+      <div className="flex flex-col justify-between mt-3 min-[1024px]:mt-6">
+        <h4
+          className="uppetcase body_xs_500 text-(--gray4) ml-5 w-full min-[1440px]:w-72 "
+          style={{ marginBottom: 12 }}
+        >
+          {title}
+        </h4>
+        {children}
 
         <button
           className={

@@ -10,7 +10,8 @@ const DashboardSection = ({
   return (
     <div
       className={
-        "mt-12 ml-12 max-w-246 w-full " + (extraStyles ? extraStyles : "")
+        "mt-5 min-[1440px]:mt-12 min-[1440px]:ml-12 mx-auto max-w-246 w-full " +
+        (extraStyles ? extraStyles : "")
       }
     >
       {children}
