@@ -4,13 +4,13 @@ import {
   getApplicantDetails,
   updateApplicationStatus,
 } from "../../../../features/application/applicationRequest";
-import { Link } from "react-router";
 import ContactData from "../../Candidate/ContactData";
 
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 import GeneralData from "../../Candidate/GeneralData";
 import { errorToast, successToast } from "../../Toasts/Toasts";
+import LinkButton from "../../LinkButton";
 
 const ApplicationCandidateDetails = ({
   open,
@@ -73,37 +73,43 @@ const ApplicationCandidateDetails = ({
           p: 2.5,
           borderRadius: "12px",
           width: "80%",
-          padding: "48px",
+          maxHeight: "80%",
+          overflowY: "auto",
+          padding: "12px",
+          "@media (min-width:1440px)": {
+            padding: "48px",
+          },
         }}
       >
         {isLoading || !data ? (
           "Loading"
         ) : (
           <>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col min-[1024px]:flex-row items-center justify-between">
               <div className="flex gap-6 items-center">
-                <div className="size-20 rounded-full bg-gray-500"></div>
-                <div className="flex flex-col gap-2">
+                <div className="size-5 min-[768px]:size-20 rounded-full bg-gray-500"></div>
+                <div className="flex flex-col min-[768px]:gap-2">
                   <h5>{data.full_name}</h5>
                   <span className="mt-1 body_small text-(--gray5)">
                     {data.speciality}
                   </span>
                 </div>
               </div>
-              <ul className="flex gap-3 items-center">
-                <li>
-                  <Link
-                    to={`mailto:${data.email}`}
-                    className="border-2 border-(--primary5) rounded-sm px-6 py-3 flex gap-3 items-center h-12 button text-(--primary5) transition-colors duration-150 hover:bg-(--primary50) hover:text-(--primary6) hover:border-(--primary6) "
+              <ul className="flex flex-col mt-3 min-[1024px]:mt-0 min-[768px]:flex-row gap-1 min-[768px]:gap-3 items-center ">
+                <li className="max-[767px]:w-full">
+                  <LinkButton
+                    type="outlined"
+                    link={`mailto:${data.email}`}
+                    extraStyles=" max-[767px]:w-full max-[767px]:justify-center flex gap-3 items-center max-[767px]:py-2 "
                   >
                     <EmailOutlinedIcon />
                     <span>Send email</span>
-                  </Link>{" "}
+                  </LinkButton>
                 </li>
                 {data.status === "applied" && (
                   <li>
                     <button
-                      className="border border-transparent bg-(--primary5) text-white button flex gap-3 items-center px-6 py-3 rounded-sm h-12 cursor-pointer hover:bg-(--primary6) transition-colors duration-150"
+                      className="border border-transparent bg-(--primary5) text-white button flex gap-3 items-center px-6 py-3 rounded-sm h-12 cursor-pointer hover:bg-(--primary6) transition-colors duration-150 max-[767px]:py-2"
                       onClick={() => hireApplication()}
                     >
                       <ArrowCircleRightOutlinedIcon />
@@ -114,17 +120,21 @@ const ApplicationCandidateDetails = ({
               </ul>
             </div>
 
-            <div className="grid grid-cols-[2fr_1fr] gap-18 mt-10">
+            <div className="flex flex-col mt-3 min-[1024px]:grid grid-cols-[2fr_1fr] min-[1024px]:gap-18 min-[1024px]:mt-10">
               <div className="">
-                <h4 className="uppercase text-lg font-medium">Biography</h4>
-                <article className="mt-6 body_medimum text-(--gray6)">
+                <h4 className="uppercase text-lg font-medium max-[1023px]:text-center">
+                  Biography
+                </h4>
+                <article className="min-[1024px]:mt-6 body_medimum text-(--gray6)">
                   {data.biography || "no bio"}
                 </article>
 
-                <hr className="h-px text-(--gray1) my-8" />
+                <hr className="h-px text-(--gray1) my-2 min-[1024px]:my-8" />
 
-                <h4 className="uppercase text-lg font-medium">COVER LETTER</h4>
-                <article className="mt-6 body_medimum text-(--gray6)">
+                <h4 className="uppercase text-lg font-medium max-[1023px]:text-center">
+                  COVER LETTER
+                </h4>
+                <article className="min-[1024px]:mt-6 body_medimum text-(--gray6)">
                   {data.covering_letter || "no cover letter"}
                 </article>
               </div>
@@ -144,19 +154,21 @@ const ApplicationCandidateDetails = ({
                 />
               </div>
             </div>
+
             {data.status === "applied" && (
-              <ul className="w-full flex justify-around items-center mt-8 gap-12">
-                <li>
+              <ul className="w-full flex flex-col justify-around items-center mt-3 gap-2 min-[1024px]:flex-row min-[1024px]:mt-8 min-[1024px]:gap-12">
+                <li className="max-[1023px]:w-full max-[1023px]:flex justify-center">
                   <button
-                    className="cursor-pointer  w-90 py-3 button border border-(--primary5) text-(--primary5) rounded-sm hover:bg-(--primary50) hover:border-(--primary6)  hover:text-(--primary6) transition-colors duration-150 "
+                    className="cursor-pointer min-[1024px]:w-90 w-4/5  py-3 button border border-(--primary5) text-(--primary5) rounded-sm hover:bg-(--primary50) hover:border-(--primary6)  hover:text-(--primary6) transition-colors duration-150 "
                     onClick={() => rejectApplication()}
                   >
                     Reject
                   </button>
                 </li>
-                <li>
+                <li className="max-[1023px]:w-full max-[1023px]:flex justify-center">
+                  {" "}
                   <button
-                    className="cursor-pointer w-90 py-3 button bg-(--primary5) text-white rounded-sm hover:bg-(--primary6) transition-colors duration-150 "
+                    className="cursor-pointer min-[1024px]:w-90 w-4/5 py-3 button bg-(--primary5) text-white rounded-sm hover:bg-(--primary6) transition-colors duration-150 "
                     onClick={() => hireApplication()}
                   >
                     Hire
