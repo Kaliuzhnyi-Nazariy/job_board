@@ -14,7 +14,7 @@ const ApplicationCard = ({
   return (
     <li
       key={ap.id}
-      className="w-68 p-4 bg-white border border-(--gray1) rounded-md cursor-pointer"
+      className="w-full min-[1024px]:w-68 p-4 bg-white border border-(--gray1) rounded-md cursor-pointer"
       onClick={() => {
         handleOpen();
         setApplicationId(ap.id);
