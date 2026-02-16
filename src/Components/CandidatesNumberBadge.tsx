@@ -6,14 +6,17 @@ const CandidatesNumberBadge = ({
   numberOfApplications: number;
 }) => {
   return (
-    <p className="flex items-center gap-2 body_small text-(--gray6)">
+    <span className="flex items-center gap-2 body_small text-(--gray6) justify-self-center">
       <PeopleOutlineOutlinedIcon className="size-6" />
-      {numberOfApplications > 0
-        ? numberOfApplications > 1
-          ? numberOfApplications + " applcations"
-          : numberOfApplications + " application"
-        : "No applications"}
-    </p>
+      <p className="hidden min-[768px]:block">
+        {numberOfApplications > 0
+          ? numberOfApplications > 1
+            ? numberOfApplications + " applcations"
+            : numberOfApplications + " application"
+          : "No applications"}
+      </p>
+      <p className="min-[768px]:hidden">({numberOfApplications})</p>
+    </span>
   );
 };
 
