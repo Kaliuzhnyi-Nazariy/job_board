@@ -108,9 +108,9 @@ const Signup = () => {
       {" "}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="justify-self-center self-center w-50 min-[1440px]:w-134 min-[1440px]:ml-[10%]"
+        className="justify-self-center self-center w-60 min-[425px]:w-65 min-[768px]:w-134 min-[1440px]:ml-[10%]"
       >
-        <div className="flex justify-between items-center">
+        <div className="flex-col min-[768px]:flex-row flex justify-between items-center">
           <div className="w-36 min-[1440px]:w-78 flex flex-col gap-4">
             <h3>Create account.</h3>
             <p>
@@ -134,7 +134,11 @@ const Signup = () => {
                   {...field}
                   labelId="role-label"
                   id="role"
-                  sx={{ width: "150px", height: "48px" }}
+                  sx={{
+                    width: "200px",
+                    "@media (min-width:425px)": { width: "150px" },
+                    height: "48px",
+                  }}
                   MenuProps={{
                     disableScrollLock: true,
                   }}
@@ -146,35 +150,45 @@ const Signup = () => {
             />
           </>
         </div>
-        <p className={errorMessage}>{errors.role?.message}</p>
-        <div className="mt-8 flex flex-col gap-5">
-          <div className="flex gap-5">
-            <>
-              <TextField
-                id="outlined-basic"
-                variant="outlined"
-                {...register("fullName")}
-                placeholder="Full Name"
-                sx={{ height: "48px", width: "258px", padding: 0 }}
-                InputProps={{
-                  sx: {
-                    height: "48px",
-                    "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input":
-                      {
-                        padding: "12px 18px",
-                      },
+        {errors.role && <p className={errorMessage}>{errors.role?.message}</p>}
+        <div className="mt-8 flex flex-col gap-5 min-[425px]:w-64.5 min-[768px]:w-full">
+          <div className="flex flex-col min-[768px]:flex-row gap-5 ">
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              {...register("fullName")}
+              placeholder="Full Name"
+              sx={{
+                height: "48px",
+                width: "100%",
+                "@media (min-width:425px)": { width: "258px" },
+                padding: 0,
+              }}
+              InputProps={{
+                sx: {
+                  height: "48px",
+                  "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input": {
+                    padding: "12px 18px",
                   },
-                }}
-              />
+                },
+              }}
+            />
+            {errors.fullName && (
               <p className={errorMessage}>{errors.fullName?.message}</p>
-            </>
+            )}
             <div>
               <TextField
                 id="outlined-basic"
                 variant="outlined"
                 {...register("username")}
                 placeholder="Username"
-                sx={{ height: "48px", width: "258px", padding: 0 }}
+                sx={{
+                  height: "48px",
+                  width: "100%",
+                  "@media (min-width:425px)": { width: "258px" },
+
+                  padding: 0,
+                }}
                 InputProps={{
                   sx: {
                     height: "48px",

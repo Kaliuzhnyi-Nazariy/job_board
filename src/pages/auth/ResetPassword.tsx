@@ -85,7 +85,7 @@ const ResetPassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
-    <div className="absolute -translate-1/2 top-1/2 left-1/2 w-134 flex flex-col items-center text-center">
+    <div className="absolute -translate-1/2 top-1/2 left-1/2 w-50 min-[768px]:w-134 flex flex-col items-center text-center">
       <h4>Reset Password</h4>
       <article className="mt-6 body_medium text-(--gray6)">
         Duis luctus interdum metus, ut consectetur ante consectetur sed.
