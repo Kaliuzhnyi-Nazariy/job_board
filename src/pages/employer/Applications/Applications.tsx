@@ -36,7 +36,7 @@ const Applications = () => {
     <>
       <DashboardSection>
         <span className="body_small text-(--gray6) block">
-          <Link to={"/employer/"}>Home</Link>
+          <Link to={"/"}>Home</Link>
           {" / "}
           <Link to={"/employer/dashboard/my-jobs"}>Job</Link>
           {" / "}
