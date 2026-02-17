@@ -63,14 +63,36 @@ const Searchbar = () => {
   return (
     <Box
       sx={{
-        display: "flex",
+        display: "none",
+        "@media (min-width: 768px)": {
+          display: "flex",
+        },
         alignItems: "center",
         bgcolor: "background.paper",
         borderRadius: 1,
         // boxShadow: 1,
         padding: "12px",
         border: "1px solid var(--gray1)",
-        width: "679px",
+        marginX: "auto",
+        // margin: "0 auto",
+        "@media (min-width: 1440px)": {
+          marginX: 0,
+        },
+        // width: {
+        //   // "@media (min-width:1440px)": { width: "560px" },
+        //   // "@media (min-width:1920px)": {
+        //   //   width: "679px",
+        //   // },
+        //   lg: "560px",
+        //   xl: "679px",
+        // },
+        width: "720px",
+        "@media (min-width:1440px)": {
+          width: "560px",
+        },
+        "@media (min-width:1920px)": {
+          width: "679px",
+        },
         height: "80px",
         marginTop: "32px",
       }}
@@ -85,7 +107,18 @@ const Searchbar = () => {
           }
           variant="standard"
           sx={{
-            width: "288px",
+            width: "326px",
+            "@media (min-width: 1024px)": {
+              width: "300px",
+            },
+
+            "@media (min-width: 1440px)": {
+              width: "208px",
+            },
+
+            "@media (min-width: 1920px)": {
+              width: "288px",
+            },
             "& .MuiOutlinedInput-root": {
               height: 56,
             },
@@ -108,7 +141,18 @@ const Searchbar = () => {
           }
           variant="standard"
           sx={{
-            width: "288px",
+            width: "326px",
+            "@media (min-width: 1024px)": {
+              width: "300px",
+            },
+
+            "@media (min-width: 1440px)": {
+              width: "208px",
+            },
+
+            "@media (min-width: 1920px)": {
+              width: "288px",
+            },
             "& .MuiOutlinedInput-root": {
               height: 56,
             },
@@ -132,6 +176,12 @@ const Searchbar = () => {
         variant="standard"
         sx={{
           width: "224px",
+          "@media (min-width: 1024px)": {
+            width: "250px",
+          },
+          "@media (min-width: 1440px)": {
+            width: "180px",
+          },
           "& .MuiOutlinedInput-root": {
             height: 56,
           },

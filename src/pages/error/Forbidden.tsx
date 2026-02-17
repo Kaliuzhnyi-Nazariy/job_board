@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router";
 import {
   userError,
   userInitialized,
   userLoading,
   userRole,
 } from "../../../features/user/userSelector";
+import Section from "../../Components/Section";
+import LinkButton from "../../Components/LinkButton";
 
 const Forbidden = () => {
   const role = useSelector(userRole);
@@ -15,23 +16,21 @@ const Forbidden = () => {
   const isAuthLoading = useSelector(userLoading);
 
   const link = () => {
-    if (
-      userErrorMessage ||
-      // userErrorMessage === "Unauthorized!" ||
-      (!role && userInitializedValue && !isAuthLoading)
-    ) {
+    if (userErrorMessage || (!role && userInitializedValue && !isAuthLoading)) {
       return "/auth/signin";
     } else {
       return "/";
-      // return role == "employer" ? "/employer/home" : "/candidate/home";
     }
   };
 
   return (
-    <div>
+    <Section extraStyles="w-full h-screen flex items-center justify-center flex-col">
       <h1>Forbidden</h1>
-      <Link to={link()}>Go home</Link>
-    </div>
+      <p className="text-center my-8">
+        Unfortunately you don't have access to that page!
+      </p>
+      <LinkButton link={link()}>Go home</LinkButton>
+    </Section>
   );
 };
 

@@ -25,7 +25,8 @@ const Navbar = () => {
   const dashboardLink =
     role == "employer" ? "/employer/dashboard" : "/candidate/dashboard";
 
-  const navItem = "flex items-center border-b-2 transition-all duration-150";
+  const navItem =
+    "flex items-center border-b-2 transition-all duration-150 w-full ";
 
   const active = "text-(--primary5)";
 

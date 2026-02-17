@@ -6,12 +6,12 @@ const LinkItem = ({
   handleRedirect: (value: string) => void;
 }) => {
   return (
-    <li className="">
+    <li className="justify-self-center">
       <button
         onClick={() => handleRedirect(value)}
         className="cursor-pointer hover:font-medium hover:text-(--primary5)"
       >
-        {value},
+        {value}
       </button>
     </li>
   );
