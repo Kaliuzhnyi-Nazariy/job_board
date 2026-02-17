@@ -32,7 +32,7 @@ const Overview = () => {
   });
 
   return (
-    <DashboardSection extraStyles="text-center flex flex-col items-center min-[1024px]:text-start max-[1439px]:mx-auto">
+    <DashboardSection extraStyles="text-center flex flex-col max-[1439px]:items-center min-[1024px]:text-start max-[1439px]:mx-auto">
       <h2 className="body_large_500">
         Hello,{" "}
         {isUserLoading ? "Loading..." : usernameValue ? usernameValue : "user"}
