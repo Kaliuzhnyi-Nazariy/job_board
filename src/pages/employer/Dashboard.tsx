@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout title="EMPLOYERS DASHBOARD">
-      <nav className="body_small_500 text-(--gray5) h-full ">
+      <nav className="body_small_500 text-(--gray5) h-full min-[425px]:grid min-[425px]:grid-cols-2 min-[600px]:grid-cols-3 min-[1024px]:grid-cols-4 min-[1440px]:block ">
         <NavLink
           to={baseURL}
           end
