@@ -22,7 +22,7 @@ const MobMenu = ({
     userrole === "candidate" ? "/candidate/dashboard" : "/employer/dashboard";
 
   // style
-  const liItem = "py-4 border-b border-b-(--gray1)";
+  const liItem = "w-full border-b border-b-(--gray1)";
 
   // block scrolling
   if (isOpen) {
@@ -44,18 +44,26 @@ const MobMenu = ({
       <div className="p-6 bg-white rounded-b-2xl">
         <ul className="">
           <li className={liItem}>
-            <Link to="/" onClick={handleClose}>
+            <Link to="/" onClick={handleClose} className="block w-full py-4 ">
               Home
             </Link>
           </li>
 
           <li className={liItem}>
-            <Link to={findRoute} onClick={handleClose}>
+            <Link
+              to={findRoute}
+              onClick={handleClose}
+              className="block w-full py-4"
+            >
               {findText}
             </Link>
           </li>
           <li className={liItem}>
-            <Link to={dashboardRoute} onClick={handleClose}>
+            <Link
+              to={dashboardRoute}
+              onClick={handleClose}
+              className="block w-full py-4"
+            >
               Dashboard
             </Link>
           </li>
