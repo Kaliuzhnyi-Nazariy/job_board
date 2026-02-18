@@ -16,7 +16,7 @@ const JobHeader = () =>
   //   }
   {
     return (
-      <Section extraStyles="flex justify-between py-4.5 items-center">
+      <Section extraStyles="flex flex-col gap-3 min-[1024px]:gap-0 min-[1024px]:flex-row justify-between py-4.5 items-center">
         <JobFilter />
         <FilterListView
         // listView={listView}

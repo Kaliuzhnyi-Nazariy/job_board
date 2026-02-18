@@ -20,10 +20,11 @@ const GeneralData = ({
   const titleStyle = "min-[768px]:mt-3 text-[12px] uppercase text-(--gray5)";
   const valueStyle = "mt-1 body_small_500";
 
-  const liItemStyle = "max-[767px]:flex items-center gap-6";
+  const liItemStyle =
+    "flex min-[768px]:flex-col items-center gap-6 min-[768px]:gap-3 min-[768px]:self-center min-[768px]:justify-self-center min-[768px]:justify-center min-[1440px]:items-start min-[1440px]:self-start min-[1440px]:justify-self-start ";
 
   return (
-    <ul className="grid min-[768px]:grid-cols-2 gap-x-4 gap-y-6 p-6 border-[1.5px] border-(--primary50) rounded-lg max-[1023px]:mt-3 ">
+    <ul className="grid min-[768px]:grid-cols-2 gap-x-4 gap-y-6 py-3 px-2 min-[1920px]:p-6 border-[1.5px] border-(--primary50) rounded-lg max-[1023px]:mt-3 ">
       <li className={liItemStyle}>
         <CakeOutlinedIcon className={iconStyle} />
         <div className="">

@@ -17,12 +17,12 @@ const JobList = () => {
   const order = searchParams.get("order") || "newest";
   const title = searchParams.get("title") || null;
   const location = searchParams.get("location") || null;
-  const listView = searchParams.get("list-view") || "grid";
+  const listView = searchParams.get("list-view") || ("grid" as "grid" | "list");
 
-  const gridStyles = `grid  ${
+  const gridStyles = `grid grid-cols-1 min-[425px]:grid-cols-2 ${
     limit === 12
-      ? "grid-cols-3 gap-x-6 gap-y-6.5"
-      : "grid-cols-4 gap-x-3 gap-y-3.5"
+      ? "min-[768px]:grid-cols-3 gap-x-6 gap-y-6.5"
+      : "min-[768px]:grid-cols-4 gap-x-3 gap-y-3.5"
   }`;
 
   const { data, isLoading, error } = useQuery({
@@ -55,13 +55,16 @@ const JobList = () => {
           <ul className={`${listView === "grid" ? gridStyles : listStyles} `}>
             {data.jobs.map((job: IJobList) => {
               return (
-                <li className="h-51" key={job.id}>
+                <li className=" outline outline-blue-500" key={job.id}>
                   <Link
                     to={`/candidate/find-job/${job.id}`}
                     key={job.id}
                     className="h-full"
                   >
-                    <JobCard job={job}></JobCard>
+                    <JobCard
+                      job={job}
+                      listView={listView as "grid" | "list"}
+                    ></JobCard>
                   </Link>
                 </li>
               );

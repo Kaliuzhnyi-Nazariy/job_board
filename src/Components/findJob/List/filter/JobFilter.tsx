@@ -26,9 +26,12 @@ const JobFilter = () => {
   });
 
   return (
-    <div className="flex gap-2">
+    <div className="grid grid-cols-2 max-[1023px]:w-full min-[1024px]:flex gap-2">
       {jobTitle && (
-        <span className="flex items-center gap-3 pl-4 py-1.5 pr-1.5 rounded-full bg-(--gray50) body_smal h-8">
+        <span
+          className="flex items-center justify-between min-[1024
+        px]:gap-3 pl-4 py-1.5 pr-1.5 rounded-full bg-(--gray50) body_smal h-8"
+        >
           <p>{jobTitle}</p>
           <button
             onClick={async () => {
@@ -48,7 +51,10 @@ const JobFilter = () => {
         </span>
       )}
       {jobLocation && (
-        <span className="flex items-center gap-3 pl-4 py-1.5 pr-1.5 rounded-full bg-(--gray50) body_smal h-8">
+        <span
+          className="flex items-center justify-between min-[1024
+        px]:gap-3 pl-4 py-1.5 pr-1.5 rounded-full bg-(--gray50) body_smal h-8"
+        >
           <p>{jobLocation}</p>
           <button
             onClick={async () => {

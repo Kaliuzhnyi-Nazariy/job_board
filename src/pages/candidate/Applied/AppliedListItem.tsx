@@ -14,15 +14,18 @@ const AppliedListItem = ({
   handleOpen: (id: string) => void;
 }) => {
   return (
-    <li key={data.id} className="p-5 grid grid-cols-[3fr_1fr_1fr_1fr]">
+    <li
+      key={data.id}
+      className="p-5 grid grid-cols-[2fr_1fr_1fr] min-[1024px]:grid-cols-[3fr_1fr_1fr_1fr] outline outline-blue-500"
+    >
       <div className="flex gap-4">
-        <div className="size-14 bg-purple-500"></div>
+        <div className="size-14 bg-purple-500 hidden min-[1024px]:block"></div>
         <div className="flex flex-col gap-2.5">
-          <div className="flex gap-2">
+          <div className="flex flex-col min-[1024px]:flex-row gap-2">
             <h5 className="body_medium_500">{data.title}</h5>
             <WorkTimeBadge jobTime={data.work_time} />
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-col min-[1024px]:flex-row min-[1024px]:gap-4">
             <span className="flex items-center gap-1.5">
               <LocationOnIcon
                 sx={{
@@ -46,7 +49,7 @@ const AppliedListItem = ({
           </div>
         </div>
       </div>
-      <p className="text-(--gray6) body_small self-center">
+      <p className="text-(--gray6) body_small self-center hidden min-[1024px]:block">
         {dateFormat(data.applied_at)}
       </p>
       <ApplicationStatusBadge status={data.status} />

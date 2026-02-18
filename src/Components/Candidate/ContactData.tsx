@@ -22,7 +22,7 @@ const ContactData = ({
   const valueStyle = "body_small_500 mt-1";
 
   return (
-    <div className=" p-6 border-[1.5px] border-(--primary50) rounded-lg">
+    <div className=" py-3 px-2 min-[1920px]:p-6 border-[1.5px] border-(--primary50) rounded-lg ">
       <p className="body_medium_500">Contact Information</p>
       <ul className="mt-6 flex flex-col gap-y-5">
         <li className={liStyle}>

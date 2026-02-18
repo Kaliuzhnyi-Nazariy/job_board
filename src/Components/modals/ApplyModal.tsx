@@ -66,7 +66,13 @@ const ApplyModal = ({
           transform: "translate(-50%, -50%)",
           p: 2.5,
           borderRadius: "12px",
-          width: "648px",
+          width: "300px",
+          "@media (min-width: 640px)": {
+            width: "420px",
+          },
+          "@media (min-width: 1024px)": {
+            width: "648px",
+          },
         }}
       >
         <h2 className="body_large_500">Apply Job: {jobTitle}</h2>
