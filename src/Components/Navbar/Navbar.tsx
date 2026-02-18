@@ -26,7 +26,7 @@ const Navbar = () => {
     role == "employer" ? "/employer/dashboard" : "/candidate/dashboard";
 
   const navItem =
-    "flex items-center border-b-2 transition-all duration-150 w-full ";
+    "flex items-center border-b-2 transition-all duration-150 w-full text-center justify-center text-nowrap ";
 
   const active = "text-(--primary5)";
 
@@ -41,7 +41,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-(--gray50) h-12 flex justify-between px-3 min-[428px]:px-6 min-[1024px]:px-8 min-[1440px]:px-22 min-[1920px]:px-75 z-10">
+    <header className="bg-(--gray50) h-12 flex justify-between px-3 min-[428px]:px-6 min-[1024px]:px-8 min-[1440px]:px-22 min-[1920px]:px-75 z-10 w-full">
       <nav className="min-[1024px]:flex gap-6 h-full hidden">
         <NavLink
           to={"/"}
