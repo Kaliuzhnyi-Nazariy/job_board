@@ -11,7 +11,7 @@ const FilterListView = () => {
   const limit = searchParams.get("limit") || (12 as 12 | 16);
 
   return (
-    <div className="flex mx-auto min-[768px]:mx-0 gap-4 items-center">
+    <div className="grid grid-cols-2 max-[424px]:w-full min-[425px]:flex min-[425px]:mx-auto min-[768px]:mx-0 gap-4 items-center">
       <Select
         // id="demo-simple-select"
         value={searchParams.get("order") || "oldest"}
@@ -25,7 +25,7 @@ const FilterListView = () => {
         MenuProps={{
           disableScrollLock: true,
         }}
-        className="w-22 min-[425px]:w-34 min-[1440px]:w-45 h-12"
+        className="w-full min-[425px]:w-34 min-[1440px]:w-45 h-12"
         sx={{
           "& .MuiOutlinedInput-root": {
             height: 48,
@@ -48,7 +48,7 @@ const FilterListView = () => {
             return params;
           })
         }
-        className="w-22 min-[425px]:w-35 min-[1440px]:w-45 h-12"
+        className="w-full min-[425px]:w-35 min-[1440px]:w-45 h-12"
         sx={{
           "& .MuiOutlinedInput-root": {
             height: 48,
@@ -65,7 +65,7 @@ const FilterListView = () => {
         <MenuItem value="16">16 per page</MenuItem>
       </Select>
 
-      <ul className="flex gap-2 p-2 rounded-md border border-(--gray1) h-12">
+      <ul className=" gap-2 p-2 rounded-md border border-(--gray1) h-12 hidden min-[425px]:flex">
         <li className="size-8 flex items-center justify-center">
           <button
             type="button"
