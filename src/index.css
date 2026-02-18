@@ -57,17 +57,22 @@ h1 {
   line-height: 48px;
 }
 
+h2 {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
 @media screen and (min-width: 768px) {
   h1 {
     font-size: 56px;
     line-height: 64px;
   }
-}
 
-h2 {
-  font-size: 48px;
-  font-weight: 500;
-  line-height: 56px;
+  h2 {
+    font-size: 48px;
+    line-height: 56px;
+  }
 }
 
 h3 {
