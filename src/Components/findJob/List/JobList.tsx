@@ -55,7 +55,7 @@ const JobList = () => {
           <ul className={`${listView === "grid" ? gridStyles : listStyles} `}>
             {data.jobs.map((job: IJobList) => {
               return (
-                <li className=" outline outline-blue-500" key={job.id}>
+                <li className=" " key={job.id}>
                   <Link
                     to={`/candidate/find-job/${job.id}`}
                     key={job.id}
