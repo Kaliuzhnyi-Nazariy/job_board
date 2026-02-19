@@ -8,10 +8,13 @@ import { FaInstagram, FaFacebookF, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
+  const footerNavStyles = "w-full ";
+
   return (
     <footer className="bg-(--gray9) text-(--gray4)">
-      <Section extraStyles="pt-25 py-20  body_medium flex gap-22.5">
-        <div className="w-78">
+      {/* <Section extraStyles="pt-25 py-20  body_medium flex gap-22.5"> */}
+      <Section extraStyles="pt-25 py-20  body_medium flex flex-col min-[1440px]:flex-row gap-22.5">
+        <div className="max-w-78">
           <span className="flex gap-2 items-center text-white">
             <WorkIcon className="" />
 
@@ -32,8 +35,9 @@ const Footer = () => {
           </p>
         </div>
 
-        <ul className="grid grid-cols-[repeat(4,200px)] gap-10">
-          <li className="w-full">
+        {/* <ul className="grid grid-cols-[repeat(4,200px)] gap-10"> */}
+        <ul className="grid grid-cols-1 min-[640px]:w-full min-[640px]:grid-cols-2 self-center min-[1440px]:grid-cols-[repeat(4,200px)] gap-10 w-full">
+          <li className={footerNavStyles}>
             <p className="body_xl_500 text-white">Quick Link</p>
             <ul className="mt-4 flex flex-col gap-1 body_medium">
               <FooterNavigation title="About" />
@@ -42,9 +46,9 @@ const Footer = () => {
               <FooterNavigation title="Blog" />
             </ul>
           </li>
-          <li className="w-full">
+          <li className={footerNavStyles}>
             <p className="body_xl_500 text-white">Candidate</p>
-            <ul className="mt-4 flex flex-col gap-1 body_medium">
+            <ul className="mt-4 flex flex-col  gap-1 body_medium ">
               <FooterNavigation
                 title="Browse Jobs"
                 linkTo="/candidate/find-job"
@@ -60,9 +64,9 @@ const Footer = () => {
               <FooterNavigation title="Saved Jobs" />
             </ul>
           </li>
-          <li className="w-full">
+          <li className={footerNavStyles}>
             <p className="body_xl_500 text-white">Employers</p>
-            <ul className="mt-4 flex flex-col gap-1 body_medium">
+            <ul className="mt-4 flex flex-col  gap-1 body_medium">
               <FooterNavigation
                 title="Post a Job"
                 linkTo="/employer/dashboard/post-a-job"
@@ -81,9 +85,9 @@ const Footer = () => {
               />
             </ul>
           </li>
-          <li className="w-full">
+          <li className={footerNavStyles}>
             <p className="body_xl_500 text-white">Support</p>
-            <ul className="mt-4 flex flex-col gap-1 body_medium">
+            <ul className="mt-4 flex flex-col  gap-1 body_medium">
               <FooterNavigation title="FAQs" />
               <FooterNavigation title="Privacy Policy" />
               <FooterNavigation title="Terms & Conditions" />
@@ -92,9 +96,9 @@ const Footer = () => {
         </ul>
       </Section>
       <hr />
-      <div className="px-75 py-6 flex justify-between body_small  text-(--gray5)">
+      {/* <div className="px-75 py-6 flex justify-between body_small  text-(--gray5)">
         <p>@ 2024 MyJob - Job Portal. All rights Reserved</p>
-        {/* social medias */}
+       
         <ul className="flex gap-5 items-center">
           <li>
             <Link to="https://www.facebook.com/">
@@ -120,7 +124,7 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-      </div>
+      </div> */}
     </footer>
   );
 };
