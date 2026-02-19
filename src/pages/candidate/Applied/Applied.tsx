@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 import ApplicationDetails from "../../../Components/modals/ApplicationDetails";
 import DashboardSection from "../../../Components/Dashboard/DashboardSection";
 import { useSearchParams } from "react-router";
-import AppliedListItem from "./AppliedListItem";
+// import AppliedListItem from "./AppliedListItem";
 // import { Pagination } from "@mui/material";
 import PaginationComponent from "../../../Components/Pagination";
+import AppliedList from "../../../Components/AppliedList";
 
 const Applied = () => {
   const [openModal, setModalOpen] = useState(false);
@@ -77,9 +78,9 @@ const Applied = () => {
       </h2>
       {data && data.length > 0 ? (
         <>
-          <ul className="w-full grid grid-cols-[3fr_1fr_1fr_1fr] px-5 py-2.5 body_xs bg-(--gray50) mt-4">
+          {/* <ul className="w-full grid grid-cols-[3fr_1fr_1fr_1fr] px-5 py-2.5 body_xs bg-(--gray50) mt-4">
             <li>Job</li>
-            <li className="justify-self-center">Date Applied</li>
+            <li className="justify-self-center hidden">Date Applied</li>
             <li className="justify-self-center">Status</li>
             <li className="justify-self-center">Action</li>
           </ul>
@@ -87,7 +88,8 @@ const Applied = () => {
             {data.map((aj) => {
               return <AppliedListItem data={aj} handleOpen={handleOpen} />;
             })}
-          </ul>
+          </ul> */}
+          <AppliedList applications={data} handleOpen={handleOpen} />
         </>
       ) : (
         <p>You haven't applied yet!</p>
