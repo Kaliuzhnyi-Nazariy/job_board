@@ -54,7 +54,7 @@ const Overview = () => {
         </small>
         <Link
           to={`applied-jobs`}
-          className="w-78 h-26 bg-(--primary50) px-6 py-5 rounded-lg flex gap-6 justify-between items-center cursor-pointer mt-6"
+          className="w-75 min-[425px]:w-78 h-26 bg-(--primary50) px-6 py-5 rounded-lg flex gap-6 justify-between items-center cursor-pointer mt-6"
         >
           <div className="flex flex-col gap-1 justify-center  ">
             <p className="font-semibold text-2xl">

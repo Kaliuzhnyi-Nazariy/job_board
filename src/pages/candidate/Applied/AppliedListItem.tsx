@@ -16,16 +16,16 @@ const AppliedListItem = ({
   return (
     <li
       key={data.id}
-      className="p-5 grid grid-cols-[2fr_1fr_1fr] min-[1024px]:grid-cols-[3fr_1fr_1fr_1fr] outline outline-blue-500"
+      className="p-2 min-[1024px]:p-5 grid grid-cols-[2fr_1fr_1fr] min-[1024px]:grid-cols-[3fr_1fr_1fr_1fr]  items-center"
     >
       <div className="flex gap-4">
-        <div className="size-14 bg-purple-500 hidden min-[1024px]:block"></div>
+        <div className="size-14 bg-purple-500 hidden min-[768px]:block"></div>
         <div className="flex flex-col gap-2.5">
-          <div className="flex flex-col min-[1024px]:flex-row gap-2">
+          <div className="flex flex-col min-[425px]:flex-row gap-2">
             <h5 className="body_medium_500">{data.title}</h5>
             <WorkTimeBadge jobTime={data.work_time} />
           </div>
-          <div className="flex flex-col min-[1024px]:flex-row min-[1024px]:gap-4">
+          <div className="flex flex-col min-[640px]:flex-row min-[1024px]:gap-4">
             <span className="flex items-center gap-1.5">
               <LocationOnIcon
                 sx={{
@@ -55,9 +55,9 @@ const AppliedListItem = ({
       <ApplicationStatusBadge status={data.status} />
       <button
         onClick={() => handleOpen(data.id)}
-        className="text-(--primary5) button px-6 py-3 bg-(--gray50) cursor-pointer"
+        className="text-(--primary5) button min-[1024px]:px-6 min-[1024px]:py-3 bg-(--gray50) cursor-pointer p-2 h-12 flex items-center justify-center gap-1"
       >
-        View Details
+        View <span className="hidden min-[768px]:block"> Details</span>
       </button>
     </li>
   );

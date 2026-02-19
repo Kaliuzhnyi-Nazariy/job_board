@@ -6,7 +6,7 @@ import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 
 const ApplicationStatusBadge = ({ status }: { status: statuses }) => {
   return (
-    <p
+    <span
       className={
         `body_small_500 flex gap-1.5 items-center self-center justify-self-center ` +
         (status == "accepted"
@@ -16,15 +16,18 @@ const ApplicationStatusBadge = ({ status }: { status: statuses }) => {
           : "text-(--gray4)")
       }
     >
-      {status == "accepted" ? (
-        <CheckOutlinedIcon className="size-4" />
-      ) : status == "applied" ? (
-        <AccessTimeOutlinedIcon className="size-4" />
-      ) : (
-        <ClearOutlinedIcon className="size-4" />
-      )}{" "}
-      {status}
-    </p>
+      <span className="hidden min-[640px]:block ">
+        {" "}
+        {status == "accepted" ? (
+          <CheckOutlinedIcon className="size-2 min-[1024px]:size-4" />
+        ) : status == "applied" ? (
+          <AccessTimeOutlinedIcon className="size-2 min-[1024px]:size-4" />
+        ) : (
+          <ClearOutlinedIcon className="size-2 min-[1024px]:size-4" />
+        )}
+      </span>{" "}
+      <p>{status}</p>
+    </span>
   );
 };
 

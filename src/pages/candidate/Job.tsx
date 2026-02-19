@@ -47,24 +47,24 @@ const Job = () => {
 
   return (
     <Section>
-      <div className="flex justify-between py-8">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col min-[640px]:flex-row justify-between  py-8">
+        <div className="flex justify-between items-center gap-2">
           <h5>{title}</h5>
           <WorkTimeBadge jobTime={work_time} />
         </div>
         <button
           type="button"
           onClick={handleOpen}
-          className="px-16 py-4 bg-(--primary5) button text-white rounded-sm flex gap-3 items-center cursor-pointer hover:bg-(--primary6) transition-colors duration-150"
+          className="mt-3 min-[640px]:mt-0 py-2 justify-center min-[640px]:px-16 min-[1440px]:py-4 bg-(--primary5) button text-white rounded-sm flex gap-3 items-center cursor-pointer hover:bg-(--primary6) transition-colors duration-150"
         >
           Apply now <ArrowRightAltIcon />
         </button>
       </div>
       {/* <div className="flex gap-12.5"> */}
-      <div className="grid grid-cols-[55%_45%] gap-12.5">
+      <div className="grid grid-cols-1 min-[1024px]:grid-cols-[55%_45%] min-[1024px]:gap-12.5">
         <div className="w-full">
           <h6 className="body_large">Job Description</h6>
-          <article className="mt-4 text-(--gray6)">
+          <article className="mt-4 text-(--gray6) wrap-break-word">
             {description || "No description"}
           </article>
 
@@ -73,9 +73,9 @@ const Job = () => {
             {responsibilities || "No responsibilities"}
           </article>
         </div>
-        <div className="w-full border border-(--primary50) rounded-lg p-8 max-w-134">
+        <div className="w-full border border-(--primary50) rounded-lg p-2 min-[640px]:p-8 max-w-134 mt-6 min-[640px]:mx-auto min-[1024px]:m-0 min-[1440px]:justify-self-center">
           <p className="body_large ">Job overview</p>
-          <ul className="grid grid-cols-3 mt-6 gap-y-6">
+          <ul className="grid grid-cols-2 min-[640px]:grid-cols-3 mt-6 gap-y-6 ">
             <li className="flex flex-col gap-4">
               <CalendarTodayOutlinedIcon
                 className="text-8"
