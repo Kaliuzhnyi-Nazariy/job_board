@@ -63,18 +63,6 @@ h2 {
   line-height: 32px;
 }
 
-@media screen and (min-width: 768px) {
-  h1 {
-    font-size: 56px;
-    line-height: 64px;
-  }
-
-  h2 {
-    font-size: 48px;
-    line-height: 56px;
-  }
-}
-
 h3 {
   font-size: 40px;
   font-weight: 500;
@@ -117,8 +105,8 @@ h5 {
 }
 
 .body_small {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .body_small_500 {
@@ -163,4 +151,21 @@ h5 {
 
 .disable_scrolling {
   overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 56px;
+    line-height: 64px;
+  }
+
+  h2 {
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  .body_small {
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
