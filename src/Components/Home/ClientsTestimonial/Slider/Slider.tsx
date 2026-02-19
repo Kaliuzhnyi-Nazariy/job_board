@@ -23,8 +23,24 @@ export default function App() {
     loop: true,
     slides: {
       origin: "center",
-      perView: 3,
-      spacing: 24,
+      perView: 1,
+      spacing: 16,
+    },
+    breakpoints: {
+      "(min-width: 768px)": {
+        slides: {
+          origin: "auto",
+          perView: 2,
+          spacing: 16,
+        },
+      },
+      "(min-width: 1440px)": {
+        slides: {
+          origin: "auto",
+          perView: 3,
+          spacing: 24,
+        },
+      },
     },
   });
 

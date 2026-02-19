@@ -10,7 +10,7 @@ const Instruction = () => {
   return (
     <Section extraStyles="py-25 text-center bg-(--gray50)">
       <h1>How jobpilot work</h1>
-      <ul className="mt-12.5 flex gap-6">
+      <ul className="mt-12.5 flex flex-col min-[768px]:grid min-[768px]:grid-cols-2 min-[768px]:justify-center min-[1440px]:flex min-[1440px]:flex-row gap-6 min-[768px]:gap-2">
         <StepItem
           icon={
             <PersonAddAltOutlinedIcon className="text-8 text-(--primary5) group-hover:text-white " />

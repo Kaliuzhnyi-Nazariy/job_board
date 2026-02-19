@@ -17,11 +17,13 @@ const MostPopularVacancies = () => {
 
   return (
     <Section extraStyles="py-25">
-      <h1>Most Popular Vacancies</h1>
-      <ul className="mt-12.5 grid grid-cols-4 grid-rows-3 gap-x-6 gap-y-8">
+      <h1 className="text-center min-[1440px]:text-start">
+        Most Popular Vacancies
+      </h1>
+      <ul className="mt-12.5 grid grid-cols-1 min-[640px]:grid-cols-2 min-[1024px]:grid-cols-3 min-[1440px]:grid-cols-4 min-[1440px]:grid-rows-3 gap-x-6 gap-y-8">
         {theMostPopularVacancies.map(({ title, amount }) => {
           return (
-            <li key={title} className="w-78">
+            <li key={title} className="max-w-78">
               <Link to={handleRedirect(title)} className="group">
                 <p className="body_large_500 group-hover:underline group-hover:text-(--primary5)">
                   {title}

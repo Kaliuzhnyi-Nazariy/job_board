@@ -10,7 +10,7 @@ const StepItem = ({
   icon: React.ReactNode;
 }) => {
   return (
-    <li className="p-6 rounded-xl group hover:bg-white flex flex-col items-center transition-colors duration-150 hover:cursor-none">
+    <li className="p-2 min-[1024px]:p-6 rounded-xl group hover:bg-white flex flex-col items-center transition-colors duration-150 hover:cursor-none">
       <div className="p-5 size-18 bg-white rounded-full flex items-center justify-center group-hover:bg-(--primary5) ">
         {icon}
       </div>

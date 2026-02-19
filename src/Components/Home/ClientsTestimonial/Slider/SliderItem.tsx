@@ -10,7 +10,7 @@ const SliderItem = ({
   job: string;
 }) => {
   return (
-    <div className="keen-slider__slide bg-white flex flex-col justify-between px-6 pt-6 pb-6.5 h-73.5 w-106 rounded-xl  ">
+    <div className="keen-slider__slide bg-white flex flex-col justify-between px-6 pt-6 pb-6.5 h-85 min-[768px]:h-73.5 w-72 min-[1440px]:w-106 rounded-xl  ">
       <div className="">
         <ul className="flex">
           <li>

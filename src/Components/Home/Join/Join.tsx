@@ -5,10 +5,10 @@ import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined
 
 const Join = () => {
   return (
-    <Section extraStyles="py-25 grid grid-cols-2 gap-6">
-      <div className="h-72.5 rounded-xl p-12.5 bg-(--gray1)">
+    <Section extraStyles="py-25 grid min-[768px]:grid-cols-2 gap-6">
+      <div className="min-[1024px]:h-72.5 rounded-xl p-5 min-[1024px]:p-12.5 bg-(--gray1) min-w-70">
         <h4>Become a Candidate</h4>
-        <article className="mt-4 body_small text-(--gray6) w-78">
+        <article className="mt-4 body_small text-(--gray6) min-w-60 min-[640px]:w-78">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus a
           dolor convallis efficitur.
         </article>
@@ -20,9 +20,9 @@ const Join = () => {
         </Link>
       </div>
 
-      <div className="h-72.5 rounded-xl p-12.5 bg-(--primary6) text-white">
+      <div className="min-[1024px]:h-72.5 rounded-xl p-5 min-[1024px]:p-12.5 bg-(--primary6) text-white  min-w-70">
         <h4>Become a Employer</h4>
-        <article className="mt-4 body_small  w-78">
+        <article className="mt-4 body_small  min-w-60 min-[640px]:w-78">
           Cras in massa pellentesque, mollis ligula non, luctus dui. Morbi sed
           efficitur dolor. Pelque augue risus, aliqu.
         </article>
