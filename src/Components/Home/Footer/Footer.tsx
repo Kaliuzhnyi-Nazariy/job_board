@@ -96,35 +96,37 @@ const Footer = () => {
         </ul>
       </Section>
       <hr />
-      {/* <div className="px-75 py-6 flex justify-between body_small  text-(--gray5)">
-        <p>@ 2024 MyJob - Job Portal. All rights Reserved</p>
-       
-        <ul className="flex gap-5 items-center">
-          <li>
+      <div className="px-3 min-[428px]:px-6 min-[1024px]:px-8 min-[1440px]:px-22 min-[1920px]:px-75 py-6 min-[768px]:flex items-center grid grid-cols-1 grid-rows-auto min-[1024px]:flex-row justify-between body_small  text-(--gray5)">
+        <p className="text-center mt-6 min-[768px]:mt-0">
+          @ 2024 MyJob - Job Portal. All rights Reserved
+        </p>
+
+        <ul className=" min-[1024px]:flex flex-row gap-5 items-center row-start-1 grid grid-cols-2 max-[1023px]:w-full">
+          <li className="justify-self-center">
             <Link to="https://www.facebook.com/">
               <FaFacebookF className="w-2.5 h-5 fill-(--gray5) hover:fill-white transition-colors duration-150 " />
             </Link>
           </li>
 
-          <li>
+          <li className="justify-self-center">
             <Link to="https://www.youtube.com/">
               <FaYoutube className="size-5 fill-(--gray5) hover:fill-white transition-colors duration-150 " />
             </Link>
           </li>
 
-          <li className="size-5">
+          <li className="justify-self-center">
             <Link to="https://www.instagram.com/" target="_blank">
               <FaInstagram className="size-5 fill-(--gray5) hover:fill-white transition-colors duration-150 " />
             </Link>
           </li>
 
-          <li>
+          <li className="justify-self-center">
             <Link to="https://x.com/">
               <FaXTwitter className="size-5 fill-(--gray5) hover:fill-white transition-colors duration-150 " />
             </Link>
           </li>
         </ul>
-      </div> */}
+      </div>
     </footer>
   );
 };
