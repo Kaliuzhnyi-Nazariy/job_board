@@ -64,9 +64,9 @@ h2 {
 }
 
 h3 {
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 500;
-  line-height: 48px;
+  line-height: 36px;
 }
 
 h4 {
@@ -162,6 +162,11 @@ h5 {
   h2 {
     font-size: 48px;
     line-height: 56px;
+  }
+
+  h3 {
+    font-size: 40px;
+    line-height: 48px;
   }
 
   .body_small {
