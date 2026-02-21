@@ -18,7 +18,7 @@ const ResetPasswordPage = lazy(() => import("./pages/auth/ResetPassword"));
 const HomePage = lazy(() => import("./pages/Home"));
 
 // Terms
-const TermsPage = lazy(() => import("./pages/terms"));
+const TermsPage = lazy(() => import("./pages/Terms/terms"));
 
 // Protecting routes
 const UserLayoutComponent = lazy(() => import("./layouts/UserLayout"));
@@ -135,9 +135,9 @@ function App() {
             <Route path="candidates" element={<FindACandidatePage />} />
             <Route path="candidates/:candidateId" element={<CandidatePage />} />
           </Route>
+          <Route path="/terms" element={<TermsPage />} />
         </Route>
         <Route path="/forbidden" element={<Forbidden />} />
-        <Route path="/terms" element={<TermsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
