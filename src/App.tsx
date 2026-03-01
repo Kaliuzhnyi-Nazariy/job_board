@@ -37,7 +37,9 @@ const SettingsLayout = lazy(
   () => import("./Components/candidateSettings/SettingsLayout"),
 );
 
-const PersonalPage = lazy(() => import("./pages/candidate/Setting/Personal"));
+const PersonalPage = lazy(
+  () => import("./pages/candidate/Setting/Personal/Personal"),
+);
 const ProfilePage = lazy(() => import("./pages/candidate/Setting/Profile"));
 const SocialPage = lazy(() => import("./pages/candidate/Setting/Social"));
 const AccountPage = lazy(

@@ -3,14 +3,18 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   getApplicantDetails,
   updateApplicationStatus,
-} from "../../../../features/application/applicationRequest";
-import ContactData from "../../Candidate/ContactData";
+} from "../../../features/application/applicationRequest";
+import ContactData from "../Candidate/ContactData";
 
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
-import GeneralData from "../../Candidate/GeneralData";
-import { errorToast, successToast } from "../../Toasts/Toasts";
-import LinkButton from "../../LinkButton";
+import GeneralData from "../Candidate/GeneralData";
+import { errorToast, successToast } from "../Toasts/Toasts";
+import LinkButton from "../Buttons/LinkButton";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+import { getPresignedLink } from "../../../features/cv/requests";
+import { useNavigate } from "react-router";
 
 const ApplicationCandidateDetails = ({
   open,
@@ -59,7 +63,21 @@ const ApplicationCandidateDetails = ({
     },
   });
 
+  // console.log(data.cv_id);
+
+  const navigate = useNavigate();
+
+  const { mutate: downloadCV, isPending: downloadLoading } = useMutation({
+    mutationKey: ["downloadCV"],
+    mutationFn: () => getPresignedLink(data.cv_id),
+    onSuccess: (data) => {
+      navigate(data);
+    },
+  });
+
   if (!open) return null;
+
+  // console.log({ data });
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -145,7 +163,36 @@ const ApplicationCandidateDetails = ({
                   experience={data.experience}
                   education={data.education}
                 />
-
+                <div className="py-3 px-2 min-[1920px]:p-6 border-[1.5px] border-(--primary50) rounded-lg">
+                  <p className="body_medium_500">Download My Resume</p>
+                  <div className="w-full flex justify-between items-center mt-4">
+                    <div className="flex items-center gap-3">
+                      <DescriptionOutlinedIcon
+                        sx={{ fontSize: "48px" }}
+                        className="text-(--gray1)"
+                      />
+                      <span>
+                        <p className="body_xs text-(--gray5)">
+                          {data.filename.split(".")[0]}
+                        </p>
+                        <p className="body_small_500">
+                          {data.filename.split(".")[1]}
+                        </p>
+                      </span>
+                    </div>
+                    {downloadLoading ? (
+                      <p>Loading...</p>
+                    ) : (
+                      <button
+                        type="button"
+                        className="size-12 p-3 bg-(--primary50) text-(--primary5) rounded-md"
+                        onClick={() => downloadCV()}
+                      >
+                        <FileDownloadOutlinedIcon sx={{ fontSize: "24px" }} />
+                      </button>
+                    )}
+                  </div>
+                </div>
                 <ContactData
                   website={data.website}
                   location={data.location}
