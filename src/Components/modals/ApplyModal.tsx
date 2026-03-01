@@ -7,15 +7,17 @@ import {
   TextField,
   // Typography,
 } from "@mui/material";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { applyToJob } from "../../../features/application/applicationRequest";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { errorToast, successToast } from "../Toasts/Toasts";
+import { getCVs } from "../../../features/cv/requests";
+import type { ICV } from "../../../features/cv/interfaces";
 
 export interface ApplyState {
   coveringLetter: string;
-  // CV: string;
+  cvId: string;
 }
 
 const ApplyModal = ({
@@ -31,16 +33,21 @@ const ApplyModal = ({
 }) => {
   const defaultValue: ApplyState = {
     coveringLetter: "",
+    cvId: "",
   };
 
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit, reset, control } = useForm({
     defaultValues: defaultValue,
   });
 
   const { mutate, isPending } = useMutation({
     mutationKey: ["applyToJob"],
     mutationFn: (data: ApplyState) =>
-      applyToJob({ jobId: jobId!, coveringLetter: data.coveringLetter }),
+      applyToJob({
+        jobId: jobId!,
+        coveringLetter: data.coveringLetter,
+        cvId: data.cvId,
+      }),
     onSuccess: () => {
       handleClose();
       successToast({ text: "You successfully applied!" });
@@ -54,6 +61,14 @@ const ApplyModal = ({
   const handleApplySubmit: SubmitHandler<ApplyState> = (data) => {
     mutate(data);
   };
+
+  const {
+    data: cvs,
+    // isPending: cvLoading
+  } = useQuery({
+    queryKey: ["getCVs"],
+    queryFn: () => getCVs(),
+  });
 
   return (
     <Modal open={open} onClose={handleClose} aria-labelledby="apply-modal">
@@ -79,19 +94,32 @@ const ApplyModal = ({
         <form onSubmit={handleSubmit(handleApplySubmit)}>
           <>
             <p className="mt-4 body_small">Choose Resume</p>
-            <Select
-              // labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={"Select..."}
-              // label="Select..."
-              sx={{ width: "100%", marginTop: "8px" }}
+            {cvs && cvs.length > 0 ? (
+              <Controller
+                name="cvId"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    displayEmpty
+                    sx={{ width: "100%", marginTop: "8px" }}
+                  >
+                    <MenuItem value="">
+                      <em>Select your CV</em>
+                    </MenuItem>
 
-              // onChange={handleChange}
-            >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
+                    {cvs.map((cv: ICV) => (
+                      <MenuItem key={cv.id} value={cv.id}>
+                        {cv.filename}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            ) : (
+              <p>You don't have CVs!</p>
+            )}
           </>
           <>
             <p className="body_small mt-4">Cover Letter</p>
