@@ -19,7 +19,7 @@ const DeleteAccount = () => {
   };
 
   return (
-    <div className="w-1/2">
+    <div className="min-[1024px]:w-1/2">
       <h6 className="body_large_500">Delete Your Account</h6>
       <article className="mt-3 w-full">
         If you delete your Jobpilot account, you will no longer be able to get

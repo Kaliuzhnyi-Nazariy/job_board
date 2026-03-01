@@ -91,7 +91,7 @@ const Profile = () => {
 
   return (
     <form
-      className="w-full grid grid-cols-2 gap-4.5"
+      className="w-full grid grid-cols-1 min-[480px]:grid-cols-2 gap-4.5"
       onSubmit={handleSubmit(handleSubmitUpdate)}
     >
       <div className="flex flex-col">
@@ -166,7 +166,7 @@ const Profile = () => {
         />
         {errors.education && <p>{errors.education?.message}</p>}
       </div>
-      <div className="flex flex-col col-start-1 col-end-3">
+      <div className="flex flex-col col-start-1 min-[480px]:col-end-3">
         <label className={labelStyles}>Biography</label>
         <TextField
           id="standard-multiline-static"

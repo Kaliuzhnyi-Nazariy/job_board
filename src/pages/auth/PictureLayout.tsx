@@ -21,11 +21,11 @@ const PictureLayout = ({ children }: { children: React.ReactNode }) => {
           <p>Over 1,75,324 candidates waiting for good employees.</p>
 
           <ul className="flex gap-2.5">
-            <li className="flex flex-col gap-6 w-45 h-36">
+            <li className="flex flex-col gap-6 w-45 h-36 ">
               <div className="size-16 bg-white/10 rounded-lg flex items-center justify-center">
                 <WorkIcon className="text-8" />
               </div>
-              <span>
+              <span className="text-start">
                 <p>1,75,324</p>
                 <p>Live Job</p>
               </span>
@@ -34,7 +34,7 @@ const PictureLayout = ({ children }: { children: React.ReactNode }) => {
               <div className="size-16 bg-white/10 rounded-lg flex items-center justify-center">
                 <BusinessOutlinedIcon className="text-8" />
               </div>
-              <span>
+              <span className="text-start">
                 <p>1,75,324</p>
                 <p>Employers</p>
               </span>
@@ -43,7 +43,7 @@ const PictureLayout = ({ children }: { children: React.ReactNode }) => {
               <div className="size-16 bg-white/10 rounded-lg flex items-center justify-center">
                 <WorkIcon className="text-8" />
               </div>
-              <span>
+              <span className="text-start">
                 <p>1,75,324</p>
                 <p>New Jobs</p>
               </span>

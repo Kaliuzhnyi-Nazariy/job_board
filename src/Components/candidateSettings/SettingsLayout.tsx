@@ -20,7 +20,7 @@ const SettingsLayout = () => {
       >
         Settings
       </h5>
-      <nav className="flex gap-3 mb-8">
+      <nav className="grid grid-cols-2 min-[1024px]:flex gap-3 mb-8">
         {/* <Link to="personal" className="px-5 py-3 flex gap-2 items-center"> */}
         <NavLink
           to="personal"

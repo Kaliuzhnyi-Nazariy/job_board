@@ -71,7 +71,7 @@ const Signin = () => {
     <PictureLayout>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="justify-self-center self-center w-50 min-[768px]:w-134 min-[1440px]:ml-[10%]"
+        className="justify-self-center self-center w-50 min-[768px]:w-134 min-[1440px]:ml-[10%] min-[1440px]:text-start"
       >
         <div className="">
           <div className="">

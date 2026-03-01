@@ -108,10 +108,10 @@ const Signup = () => {
       {" "}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="justify-self-center self-center w-60 min-[425px]:w-65 min-[768px]:w-134 min-[1440px]:ml-[10%]"
+        className="justify-self-center self-center w-60 min-[425px]:w-65 min-[640px]:w-134 min-[1440px]:ml-[10%]"
       >
-        <div className="flex-col min-[768px]:flex-row flex justify-between items-center">
-          <div className="w-36 min-[1440px]:w-78 flex flex-col gap-4">
+        <div className="flex-col min-[640px]:flex-row flex justify-between items-center">
+          <div className="w-36 min-[640px]:w-full min-[1440px]:w-78 flex flex-col gap-4 min-[640px]:text-start">
             <h3>Create account.</h3>
             <p>
               <span className="body_medium text-(--gray6)">
@@ -136,7 +136,7 @@ const Signup = () => {
                   id="role"
                   sx={{
                     width: "200px",
-                    "@media (min-width:425px)": { width: "150px" },
+                    "@media (min-width:425px)": { minWidth: "150px" },
                     height: "48px",
                   }}
                   MenuProps={{
@@ -151,8 +151,8 @@ const Signup = () => {
           </>
         </div>
         {errors.role && <p className={errorMessage}>{errors.role?.message}</p>}
-        <div className="mt-8 flex flex-col gap-5 min-[425px]:w-64.5 min-[768px]:w-full">
-          <div className="flex flex-col min-[768px]:flex-row gap-5 ">
+        <div className="mt-8 flex flex-col gap-5 min-[425px]:w-64.5 min-[640px]:w-full">
+          <div className="flex flex-col min-[640px]:flex-row gap-5 ">
             <TextField
               id="outlined-basic"
               variant="outlined"

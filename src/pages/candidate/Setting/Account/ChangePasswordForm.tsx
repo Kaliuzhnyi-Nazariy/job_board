@@ -47,8 +47,8 @@ const ChangePasswordForm = () => {
 
   return (
     <form className="mt-4.5" onSubmit={handleSubmit(handlePasswordSubmit)}>
-      <ul className="flex gap-4.5">
-        <li>
+      <ul className="flex flex-col min-[768px]:flex-row gap-4.5">
+        <li className="w-full">
           <label className={labelStyles}>Current Password</label>
           <div className="relative">
             <Controller
@@ -65,6 +65,10 @@ const ChangePasswordForm = () => {
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderColor: "#e4e5e8",
                     },
+                    width: "100%",
+                    "@media (min-width:768px)": {
+                      maxWidth: "316px",
+                    },
                   }}
                 />
               )}
@@ -78,7 +82,7 @@ const ChangePasswordForm = () => {
             </button>
           </div>
         </li>
-        <li>
+        <li className="w-full">
           <label className={labelStyles}>New Password</label>
           <div className="relative">
             <Controller
@@ -95,6 +99,10 @@ const ChangePasswordForm = () => {
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderColor: "#e4e5e8",
                     },
+                    width: "100%",
+                    "@media (min-width:768px)": {
+                      maxWidth: "316px",
+                    },
                   }}
                 />
               )}
@@ -108,7 +116,7 @@ const ChangePasswordForm = () => {
             </button>
           </div>
         </li>
-        <li>
+        <li className="w-full">
           <label className={labelStyles}>Confirm Password</label>
           <div className="relative">
             <Controller
@@ -124,6 +132,10 @@ const ChangePasswordForm = () => {
                     },
                     "& .MuiOutlinedInput-notchedOutline": {
                       borderColor: "#e4e5e8",
+                    },
+                    width: "100%",
+                    "@media (min-width:768px)": {
+                      maxWidth: "316px",
                     },
                   }}
                 />

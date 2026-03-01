@@ -59,8 +59,13 @@ const FindJobSearchbar = () => {
           // boxShadow: 1,
           padding: "12px",
           border: "1px solid #767E94",
-          width: "1320px",
-          height: "80px",
+
+          width: "100%",
+
+          "@media (min-width: 1920px)": {
+            width: "1320px",
+            height: "80px",
+          },
         }}
       >
         {/* Job title */}
@@ -68,7 +73,13 @@ const FindJobSearchbar = () => {
           placeholder="Job title, Keyword..."
           variant="standard"
           sx={{
-            width: "375px",
+            width: "40%",
+            "@media (min-width: 768px)": {
+              width: "30%",
+            },
+            "@media (min-width: 1920px)": {
+              width: "375px",
+            },
             "& .MuiOutlinedInput-root": {
               height: 56,
             },
@@ -90,7 +101,14 @@ const FindJobSearchbar = () => {
           placeholder="Location"
           variant="standard"
           sx={{
-            width: "300px",
+            // width: "300px",
+            width: "30%",
+            "@media (min-width: 768px)": {
+              width: "25%",
+            },
+            "@media (min-width: 1920px)": {
+              width: "300px",
+            },
             "& .MuiOutlinedInput-root": {
               height: 56,
             },
@@ -113,7 +131,14 @@ const FindJobSearchbar = () => {
           placeholder="Select Category"
           variant="standard"
           sx={{
-            width: "300px",
+            display: "none",
+            "@media (min-width: 768px)": {
+              display: "block",
+            },
+            width: "15%",
+            "@media (min-width: 1920px)": {
+              width: "300px",
+            },
             "& .MuiOutlinedInput-root": {
               height: 56,
             },
@@ -145,7 +170,15 @@ const FindJobSearchbar = () => {
           //   height: "56px",
           // }}
           sx={{
-            width: "178px",
+            fontSize: 10,
+            display: "none",
+            "@media (min-width: 768px)": {
+              display: "block",
+            },
+            width: "10%",
+            "@media (min-width: 1920px)": {
+              width: "178px",
+            },
             "& .MuiOutlinedInput-root": {
               height: 56,
             },
@@ -161,9 +194,21 @@ const FindJobSearchbar = () => {
           variant="contained"
           size="large"
           onClick={handleSubmit(onHandleSubmit)}
-          sx={{ ml: "12px", width: "131px", height: 56 }}
+          sx={{
+            ml: "12px",
+            width: "20%",
+            fontSize: "10px",
+            padding: "8px",
+            display: "flex",
+            gap: "2px",
+            "@media (min-width: 1440px)": {
+              width: "131px",
+              fontSize: "18px",
+            },
+            height: 56,
+          }}
         >
-          Find Job
+          Find <span className="hidden min-[640px]:flex"> Job</span>
         </Button>
       </Box>
     </Section>
