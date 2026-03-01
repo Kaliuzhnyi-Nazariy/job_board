@@ -4,11 +4,13 @@ import type { CandidateApplication } from "./interfaces";
 export const applyToJob = async ({
   jobId,
   coveringLetter,
+  cvId,
 }: {
   jobId: string;
   coveringLetter?: string;
+  cvId: string;
 }) => {
-  const res = await api.post("/application/" + jobId, { coveringLetter });
+  const res = await api.post("/application/" + jobId, { coveringLetter, cvId });
 
   return res.data;
 };
