@@ -33,18 +33,10 @@ const MyJobs = () => {
     return <p>Loading...</p>;
   }
 
-  console.log("data in my jobs: ", { data });
-
   const pageAmount = Math.ceil(data.meta.allAmountOfJobs / data.meta.limit);
-  // const pageAmount = Math.ceil(data.allAmountOfJobs / 10);
-
-  // console.log(pageAmount);
-
-  // in the future I will add ststuse and filter on that page
 
   return (
     <DashboardSection>
-      {/* <div className="flex justify-between"> */}
       <div className="flex">
         <h1 className="body_large_500">
           My Jobs{" "}
