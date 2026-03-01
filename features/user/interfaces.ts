@@ -4,6 +4,7 @@ export interface IUser {
   username: string;
   full_name: string;
   email: string;
+  photo?: null | string;
 }
 
 export interface UserInitialState {

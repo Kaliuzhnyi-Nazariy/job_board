@@ -8,3 +8,4 @@ export const username = (state: StoreState) => state.user.user?.username;
 export const userFullName = (state: StoreState) => state.user.user?.full_name;
 export const userId = (state: StoreState) => state.user.user?.id;
 export const userEmail = (state: StoreState) => state.user.user?.email;
+export const userPhoto = (state: StoreState) => state.user.user?.photo;
