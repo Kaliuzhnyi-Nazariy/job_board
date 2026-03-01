@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import LinkButton from "../LinkButton";
+import LinkButton from "../Buttons/LinkButton";
 import { useSelector } from "react-redux";
 import { userRole } from "../../../features/user/userSelector";
 
@@ -36,7 +36,7 @@ const MobMenu = ({
 
   return (
     <div
-      className={`z-1 fixed ${
+      className={`z-100 fixed ${
         isOpen ? "top-12" : "-top-full"
       } left-0 h-full w-full bg-(--gray9) transition-all duration-200 min-[1024px]:hidden`}
       onClick={handleClose}

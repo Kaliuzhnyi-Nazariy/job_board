@@ -9,7 +9,7 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 import GeneralData from "../../../Components/Candidate/GeneralData";
 import ContactData from "../../../Components/Candidate/ContactData";
-import LinkButton from "../../../Components/LinkButton";
+import LinkButton from "../../../Components/Buttons/LinkButton";
 
 const Candidate = () => {
   const { candidateId } = useParams();

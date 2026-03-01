@@ -6,7 +6,7 @@ import {
   userRole,
 } from "../../../features/user/userSelector";
 import Section from "../../Components/Section";
-import LinkButton from "../../Components/LinkButton";
+import LinkButton from "../../Components/Buttons/LinkButton";
 
 const Forbidden = () => {
   const role = useSelector(userRole);

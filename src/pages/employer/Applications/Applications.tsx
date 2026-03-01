@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router";
 import { getApplications } from "../../../../features/application/applicationRequest";
-import ApplicationCandidateDetails from "../../../Components/modals/Applications/ApplicationCandidateDetails";
+import ApplicationCandidateDetails from "../../../Components/Applications/ApplicationCandidateDetails";
 import React, { useState } from "react";
 import type { JobApplicatinon } from "../../../../features/application/interfaces";
 import DashboardSection from "../../../Components/Dashboard/DashboardSection";
@@ -67,7 +67,6 @@ const Applications = () => {
         jobId={jobId!}
         refetchApplications={refetch}
       />
-      ;
     </>
   );
 };
