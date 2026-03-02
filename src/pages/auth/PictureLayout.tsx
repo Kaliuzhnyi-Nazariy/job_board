@@ -11,7 +11,7 @@ const PictureLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="hidden min-[1440px]:block relative h-full  ">
         <div className="absolute w-full h-full bg-linear-[0deg,#041A3C_1%,#041a3c7c_100%,transparent] select-none"></div>
         <img
-          src="/public/checkered_flag.jpg"
+          src="/checkered_flag.jpg"
           alt="checkered flag"
           className="h-full w-full object-none object-center select-none"
         />
