@@ -37,6 +37,11 @@ const SettingsLayout = lazy(
   () => import("./Components/candidateSettings/SettingsLayout"),
 );
 
+// employer settings
+const EmployerPersonalSettingsPage = lazy(
+  () => import("./pages/employer/Settings/Personal"),
+);
+
 const PersonalPage = lazy(
   () => import("./pages/candidate/Setting/Personal/Personal"),
 );
@@ -131,6 +136,10 @@ function App() {
               <Route
                 path="view-application/:jobId"
                 element={<ApplicationPage />}
+              />
+              <Route
+                path="settings"
+                element={<EmployerPersonalSettingsPage />}
               />
             </Route>
             {/* <Route path="view-application/:jobId" element={<ApplicationPage />} /> */}

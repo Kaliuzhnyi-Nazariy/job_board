@@ -78,7 +78,13 @@ const Dashboard = () => {
             `${liStyle} ${isActive ? active : inactive}`
           }
         > */}
-        <NavLink to={baseURL} className={`${liStyle} ${inactive} ${noPage}`}>
+        <NavLink
+          to={`${baseURL}/settings`}
+          end
+          className={({ isActive }) => {
+            return `${liStyle} ${isActive ? active : inactive}`;
+          }}
+        >
           <SettingsOutlinedIcon className="size-6" /> Settings
         </NavLink>
       </nav>
