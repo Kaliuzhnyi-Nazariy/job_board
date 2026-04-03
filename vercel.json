@@ -1,8 +1,9 @@
 {
   "rewrites": [
+    { "source": "/(.*)", "destination": "/" },
     {
       "source": "/api/(.*)",
-      "destination": "https://your-backend.onrender.com/api/$1"
+      "destination": "https://job-board-backend-ny7k.onrender.com"
     }
   ]
 }
