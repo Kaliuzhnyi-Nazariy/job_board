@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { type ChangePasswordState, type IUser } from "./interfaces";
-import api from "../api/api";
+import api, { clearToken } from "../api/api";
 import axios from "axios";
 
 export const getMe = createAsyncThunk<
@@ -44,6 +44,7 @@ export const deleteAccount = createAsyncThunk<
 >("/user/delete", async (_, { rejectWithValue }) => {
   try {
     const res = await api.delete("/user/delete");
+    clearToken();
     return res.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
