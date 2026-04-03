@@ -5,8 +5,8 @@ import {
   userLoading,
   userRole,
 } from "../../features/user/userSelector";
-import { infoToast } from "../Components/Toasts/Toasts";
-import { useEffect } from "react";
+// import { infoToast } from "../Components/Toasts/Toasts";
+// import { useEffect } from "react";
 
 const RestrictedRoute = () => {
   const role = useSelector(userRole) as "candidate" | "employer";
@@ -19,11 +19,11 @@ const RestrictedRoute = () => {
   //     return <div>Loading...</div>;
   //   }
 
-  useEffect(() => {
-    if (!loading && !role) {
-      infoToast({ text: "You are logged in!" });
-    }
-  }, [loading, role]);
+  // useEffect(() => {
+  //   if (!loading && !role) {
+  //     infoToast({ text: "You are logged in!" });
+  //   }
+  // }, [loading, role]);
 
   if (loading) {
     return <div>Loading...</div>;
