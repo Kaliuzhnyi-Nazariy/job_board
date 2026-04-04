@@ -36,9 +36,11 @@ const ApplyModal = ({
     cvId: "",
   };
 
-  const { register, handleSubmit, reset, control } = useForm({
+  const { register, handleSubmit, reset, control, watch } = useForm({
     defaultValues: defaultValue,
   });
+
+  const { cvId } = watch();
 
   const { mutate, isPending } = useMutation({
     mutationKey: ["applyToJob"],
@@ -154,7 +156,10 @@ const ApplyModal = ({
                 </button>
               </li>
               <li>
-                <button className="cursor-pointer px-6 py-3 bg-(--primary5) button text-white hover:bg-(--primary6) rounded-[3px] transition-colors duration-150">
+                <button
+                  className="cursor-pointer px-6 py-3 bg-(--primary5) button text-white hover:bg-(--primary6) rounded-[3px] transition-colors duration-150 disabled:opacity-50"
+                  disabled={!cvId}
+                >
                   Apply Now
                 </button>
               </li>
