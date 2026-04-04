@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { userId } from "../../../../features/user/userSelector";
 import {
@@ -40,6 +40,7 @@ const Profile = () => {
   const {
     register,
     reset,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -48,7 +49,7 @@ const Profile = () => {
 
   const { mutate } = useMutation({
     mutationKey: ["updateProfile"],
-    mutationFn: (data: UpdateProfile) => updateCandidateProfile(data),
+    mutationFn: (newData: UpdateProfile) => updateCandidateProfile(newData),
     onSuccess: () => {
       successToast({ text: "Profile updated!" });
     },
@@ -60,8 +61,8 @@ const Profile = () => {
     },
   });
 
-  const handleSubmitUpdate: SubmitHandler<IUpdProfile> = async (data) => {
-    mutate({ ...data, date_of_birth: new Date(data.dateOfBirth) });
+  const handleSubmitUpdate: SubmitHandler<IUpdProfile> = async (newData) => {
+    mutate({ ...newData, date_of_birth: new Date(newData.dateOfBirth) });
   };
 
   const userIdValue = useSelector(userId);
@@ -69,6 +70,7 @@ const Profile = () => {
   const { data } = useQuery({
     queryKey: ["candidate", userIdValue],
     queryFn: () => getCandidate(userIdValue!),
+    enabled: !!userIdValue,
   });
 
   useEffect(() => {
@@ -113,7 +115,33 @@ const Profile = () => {
       </div>
       <div className="flex flex-col">
         <label className={labelStyles}>Gender</label>
-        <Select
+
+        <Controller
+          name="gender"
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              value={field.value || "Mr"}
+              sx={{
+                "& .css-18jp67o-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
+                  {
+                    padding: "12px 18px",
+                  },
+                "& .css-18p5xg2-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline":
+                  {
+                    borderColor: "#e4e5e8",
+                  },
+              }}
+            >
+              <MenuItem value="Mr">Mr</MenuItem>
+              <MenuItem value="Ms">Ms</MenuItem>
+              <MenuItem value="Mx">Mx</MenuItem>
+            </Select>
+          )}
+        />
+
+        {/* <Select
           {...register("gender")}
           defaultValue={updForm.gender}
           sx={{
@@ -130,7 +158,7 @@ const Profile = () => {
           <MenuItem value="Mr">Mr</MenuItem>
           <MenuItem value="Ms">Ms</MenuItem>
           <MenuItem value="Mx">Mx</MenuItem>
-        </Select>
+        </Select> */}
       </div>
       <div className="flex flex-col">
         <label className={labelStyles}>Experience</label>
@@ -172,6 +200,7 @@ const Profile = () => {
           id="standard-multiline-static"
           multiline
           rows={10}
+          {...register("biography")}
           placeholder="Write down your biography here. Let the employers know who you are..."
           variant="outlined"
           sx={{
