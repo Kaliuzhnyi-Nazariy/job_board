@@ -12,6 +12,7 @@ export interface UserInitialState {
   isLoading: boolean;
   initialized: boolean;
   isError: string | null;
+  token: null | string;
 }
 
 export interface RejectValue {

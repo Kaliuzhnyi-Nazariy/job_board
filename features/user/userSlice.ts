@@ -5,18 +5,24 @@ import type {
   RejectValue,
   UserInitialState,
 } from "./interfaces";
-import { changePassword, deleteAccount, getMe } from "./userRequest";
+import {
+  changePassword,
+  deleteAccount,
+  getMe,
+  refreshUser,
+} from "./userRequest";
 import { logout, signin, signup } from "../auth/authRequest";
+import type { ISignupResponse } from "../auth/interface";
 
 const initialState: UserInitialState = {
   user: null,
   isLoading: false,
   initialized: false,
   isError: null,
+  token: null,
 };
 
 const handlePending = (state: UserInitialState) => {
-  // console.log("start fetching user data");
   state.isError = null;
   state.isLoading = true;
 };
@@ -73,11 +79,11 @@ const userSlice = createSlice({
       .addCase(signup.pending, handlePending)
       .addCase(
         signup.fulfilled,
-        (state: UserInitialState, action: PayloadAction<IUser>) => {
-          console.log(action.payload);
+        (state: UserInitialState, action: PayloadAction<ISignupResponse>) => {
           state.isLoading = false;
           state.initialized = true;
-          state.user = action.payload;
+          state.user = action.payload.data;
+          state.token = action.payload.token;
         },
       )
       .addCase(signup.rejected, handleRejected)
@@ -92,6 +98,7 @@ const userSlice = createSlice({
           state.isLoading = false;
           state.initialized = true;
           state.user = action.payload.data;
+          state.token = action.payload.token;
         },
       )
       .addCase(signin.rejected, handleRejected)
@@ -100,8 +107,19 @@ const userSlice = createSlice({
       .addCase(logout.fulfilled, (state: UserInitialState) => {
         state.user = null;
         state.isLoading = false;
+        state.token = "";
       })
-      .addCase(logout.rejected, handleRejected);
+      .addCase(logout.rejected, handleRejected)
+      .addCase(refreshUser.pending, handlePending)
+      .addCase(
+        refreshUser.fulfilled,
+        (state: UserInitialState, action: PayloadAction<IUser>) => {
+          state.user = action.payload;
+          state.initialized = true;
+          state.isLoading = false;
+        },
+      )
+      .addCase(refreshUser.rejected, handleRejected);
   },
 });
 

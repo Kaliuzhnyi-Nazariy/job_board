@@ -4,13 +4,14 @@ import type {
   // IResponse,
   ISignIn,
   ISignUp,
+  ISignupResponse,
   // ResetPassword
 } from "./interface";
 import axios from "axios";
-import type { IServiceSigninResponse, IUser } from "../user/interfaces";
+import type { IServiceSigninResponse } from "../user/interfaces";
 
 export const signup = createAsyncThunk<
-  IUser,
+  ISignupResponse,
   ISignUp,
   { rejectValue: { message: string } }
 >("/auth/signup", async (data, { rejectWithValue }) => {
@@ -52,9 +53,10 @@ export const logout = createAsyncThunk<
   { rejectValue: { message: string } }
 >("/user/auth/logout", async (_, { rejectWithValue }) => {
   try {
-    const res = await api.post("/user/auth/signout");
+    // const res = await api.post("/user/auth/signout");
     clearToken();
-    return res.data;
+    // return res.data;
+    return;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return rejectWithValue({

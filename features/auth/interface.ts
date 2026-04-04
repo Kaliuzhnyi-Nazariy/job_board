@@ -1,3 +1,5 @@
+import type { IUser } from "../user/interfaces";
+
 export interface ISignUp {
   role: "employer" | "candidate";
   fullName: string;
@@ -23,5 +25,10 @@ export interface ISignInResponse extends IResponse {
 export interface ResetPassword {
   password: string;
   confirmPassword: string;
+  token: string;
+}
+
+export interface ISignupResponse {
+  data: IUser;
   token: string;
 }

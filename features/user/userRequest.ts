@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { type ChangePasswordState, type IUser } from "./interfaces";
-import api, { clearToken } from "../api/api";
+import api, { clearToken, setAuthToken } from "../api/api";
 import axios from "axios";
+import type { StoreState } from "../../src/store";
 
 export const getMe = createAsyncThunk<
   IUser,
@@ -52,5 +53,34 @@ export const deleteAccount = createAsyncThunk<
         message: error.response?.data?.message || "Signup failed",
       });
     }
+  }
+});
+
+export const refreshUser = createAsyncThunk<
+  IUser,
+  void,
+  { rejectValue: { message: string } }
+>("user/refresh", async (_, thunkAPI) => {
+  const state = thunkAPI.getState() as StoreState;
+  const persistedToken = state.user.token;
+
+  if (!persistedToken) {
+    return thunkAPI.rejectWithValue({ message: "Unable to fetch user" });
+  }
+
+  try {
+    setAuthToken(persistedToken);
+    const res = await api.get("/user/get-me");
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return thunkAPI.rejectWithValue({
+        message: error.response?.data?.message || "Refresh failed",
+      });
+    }
+
+    return thunkAPI.rejectWithValue({
+      message: "Unknown error",
+    });
   }
 });

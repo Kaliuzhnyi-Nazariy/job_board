@@ -6,7 +6,9 @@ import { ToastContainer } from "react-toastify";
 import PrtoectedRoute from "./layouts/ProtectedRoute";
 import RestrictedRoute from "./layouts/RestrictedRoute";
 import { useAppDispatch } from "../features/hooks/dispatchHook";
-import { getMe } from "../features/user/userRequest";
+import { refreshUser } from "../features/user/userRequest";
+// import { useSelector } from "react-redux";
+// import { userLoading } from "../features/user/userSelector";
 
 // Auth
 const SigninPage = lazy(() => import("./pages/auth/Signin"));
@@ -83,7 +85,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getMe());
+    dispatch(refreshUser());
   }, [dispatch]);
 
   return (
@@ -98,7 +100,7 @@ function App() {
             <Route path="signup" element={<SignupPage />} />
           </Route>
           <Route path="/forget-password" element={<ForgetPage />} />
-          <Route path="/reset-password/*" element={<ResetPasswordPage />} />
+          <Route path=" " element={<ResetPasswordPage />} />
         </Route>
         <Route path="/" element={<UserLayoutComponent />}>
           <Route path="/" element={<HomePage />} />
