@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import LinkButton from "../Buttons/LinkButton";
 import { useSelector } from "react-redux";
 import { userRole } from "../../../features/user/userSelector";
+import MobMenuDashboardAccordion from "./MobMenuDashboardAccordion";
 
 const MobMenu = ({
   isOpen,
@@ -18,8 +19,8 @@ const MobMenu = ({
   const findText = userrole == "candidate" ? "Find Job" : "Find Candidate";
 
   // dashboard
-  const dashboardRoute =
-    userrole === "candidate" ? "/candidate/dashboard" : "/employer/dashboard";
+  // const dashboardRoute =
+  //   userrole === "candidate" ? "/candidate/dashboard" : "/employer/dashboard";
 
   // style
   const liItem = "w-full border-b border-b-(--gray1)";
@@ -58,14 +59,20 @@ const MobMenu = ({
               {findText}
             </Link>
           </li>
-          <li className={liItem}>
-            <Link
+          <li
+            className={liItem}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            {/* <Link
               to={dashboardRoute}
               onClick={handleClose}
               className="block w-full py-4"
             >
               Dashboard
-            </Link>
+            </Link> */}
+            <MobMenuDashboardAccordion onClick={closeMenu} role={userrole} />
           </li>
         </ul>
 

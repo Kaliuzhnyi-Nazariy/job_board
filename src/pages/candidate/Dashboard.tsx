@@ -1,25 +1,18 @@
-import { NavLink } from "react-router";
-
-import FilterNoneOutlinedIcon from "@mui/icons-material/FilterNoneOutlined";
-import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-
 import DashboardLayout from "../../Components/Dashboard/DashboardLayout";
+import DashboardCandidateLinks from "./DashboardCandidateLinks";
 
 const Dashboard = () => {
-  const baseURL = "/candidate/dashboard";
+  // const baseURL = "/candidate/dashboard";
 
-  const liStyle =
-    "flex gap-4 items-center px-5 py-2.5 transition-colors duration-100 w-full h-11 ";
+  // const liStyle =
+  //   "flex gap-4 items-center px-5 py-2.5 transition-colors duration-100 w-full h-11 ";
 
-  const active = " bg-(--primary50) text-(--primary5)";
-  const inactive = " hover:text-black hover:bg-(--gray50)";
+  // const active = " bg-(--primary50) text-(--primary5)";
+  // const inactive = " hover:text-black hover:bg-(--gray50)";
 
   return (
     <DashboardLayout title="candidate dashboard">
-      <nav className="body_small_500 text-(--gray5) h-full ">
+      {/* <nav className="body_small_500 text-(--gray5) h-full ">
         <NavLink
           to={baseURL}
           end
@@ -56,7 +49,10 @@ const Dashboard = () => {
         >
           <SettingsOutlinedIcon className="size-6" /> Settings
         </NavLink>
-      </nav>
+      </nav> */}
+      <div className="hidden lg:block h-full">
+        <DashboardCandidateLinks />
+      </div>
     </DashboardLayout>
   );
 };

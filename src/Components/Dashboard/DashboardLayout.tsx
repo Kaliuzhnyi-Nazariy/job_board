@@ -1,51 +1,62 @@
 import React from "react";
 import Section from "../Section";
-import { useAppDispatch } from "../../../features/hooks/dispatchHook";
-import { Outlet, useNavigate } from "react-router";
-import { logout } from "../../../features/auth/authRequest";
+// import { useAppDispatch } from "../../../features/hooks/dispatchHook";
+import {
+  Outlet,
+  // useNavigate
+} from "react-router";
+// import { logout } from "../../../features/auth/authRequest";
 
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { errorToast, successToast } from "../Toasts/Toasts";
+// import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+// import { errorToast, successToast } from "../Toasts/Toasts";
 
 const DashboardLayout = ({
   title,
   children,
+  extraStyles = "",
 }: {
   title: string;
+  extraStyles?: string;
   children: React.ReactNode;
 }) => {
-  const liStyle =
-    "flex gap-4 items-center px-5 py-2.5 transition-colors duration-100 w-full h-11 ";
+  // const liStyle =
+  //   "flex gap-4 items-center px-5 py-2.5 transition-colors duration-100 w-full h-11 ";
 
-  const inactive = " hover:text-black hover:bg-(--gray50)";
+  // const inactive = " hover:text-black hover:bg-(--gray50)";
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      await dispatch(logout());
-      navigate("/auth/signin");
-      successToast({ text: "Logged out successfully!" });
-    } catch (error) {
-      errorToast({
-        text: (error as { message: string }).message || "Something went wrong!",
-      });
-    }
-  };
+  // const handleLogout = async () => {
+  //   try {
+  //     await dispatch(logout());
+  //     navigate("/auth/signin");
+  //     successToast({ text: "Logged out successfully!" });
+  //   } catch (error) {
+  //     errorToast({
+  //       text: (error as { message: string }).message || "Something went wrong!",
+  //     });
+  //   }
+  // };
 
   return (
-    <Section extraStyles="flex flex-col-reverse min-[1024px]:w-246 min-[1440px]:w-full min-[1024px]:mx-auto min-[1440px]:mx-0 min-[1440px]:flex-row">
-      <div className="flex flex-col justify-between mt-3 min-[1024px]:mt-6">
+    <Section
+      extraStyles={
+        "flex flex-col-reverse min-[1024px]:w-246 min-[1440px]:w-full min-[1024px]:mx-auto min-[1440px]:mx-0 min-[1440px]:flex-row " +
+        extraStyles
+      }
+    >
+      <div className="flex flex-col mt-3 min-[1024px]:mt-6">
+        {/* <div className="flex flex-col justify-between mt-3 min-[1024px]:mt-6"> */}
         <h4
-          className="uppetcase body_xs_500 text-(--gray4) ml-5 w-full min-[1440px]:w-72 "
+          className="uppetcase body_xs_500 text-(--gray4) ml-5 w-full min-[1440px]:w-72 hidden lg:block "
           style={{ marginBottom: 12 }}
         >
           {title}
         </h4>
         {children}
-
+        {/* 
         <button
           className={
             `${liStyle} ${inactive}` + "mt-auto cursor-pointer pl-5 mb-6"
@@ -53,7 +64,7 @@ const DashboardLayout = ({
           onClick={handleLogout}
         >
           <LogoutOutlinedIcon className="size-6" /> Log-out
-        </button>
+        </button> */}
       </div>
 
       <Outlet />
