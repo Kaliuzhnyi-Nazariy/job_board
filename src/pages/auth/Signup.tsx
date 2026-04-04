@@ -78,9 +78,9 @@ const Signup = () => {
     if (!isCheckTerms) return;
 
     try {
-      const { role } = await dispatch(signup(data)).unwrap();
+      const { data: response } = await dispatch(signup(data)).unwrap();
 
-      if (role === "employer") {
+      if (response.role === "employer") {
         navigate("/employer/dashboard");
       } else {
         navigate("/candidate/dashboard");
@@ -99,7 +99,7 @@ const Signup = () => {
 
   const [isCheckTerms, setCheckTerms] = useState(false);
 
-  const errorMessage = "text-(--danger5) px-3 pt-1";
+  const errorMessage = "text-(--danger5) text-xs lg:text-base lg:px-3 pt-1";
 
   const isButtonEnabled = isValid && isCheckTerms;
 
@@ -108,10 +108,10 @@ const Signup = () => {
       {" "}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="justify-self-center self-center w-60 min-[425px]:w-65 min-[640px]:w-134 min-[1440px]:ml-[10%]"
+        className="justify-self-center self-center w-70 min-[425px]:w-65 min-[640px]:w-134 min-[1440px]:ml-[10%]"
       >
         <div className="flex-col min-[640px]:flex-row flex justify-between items-center">
-          <div className="w-36 min-[640px]:w-full min-[1440px]:w-78 flex flex-col gap-4 min-[640px]:text-start">
+          <div className="w-full min-[1440px]:w-78 flex flex-col gap-4 min-[640px]:text-start">
             <h3>Create account.</h3>
             <p>
               <span className="body_medium text-(--gray6)">
@@ -151,32 +151,35 @@ const Signup = () => {
           </>
         </div>
         {errors.role && <p className={errorMessage}>{errors.role?.message}</p>}
-        <div className="mt-8 flex flex-col gap-5 min-[425px]:w-64.5 min-[640px]:w-full">
-          <div className="flex flex-col min-[640px]:flex-row gap-5 ">
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              {...register("fullName")}
-              placeholder="Full Name"
-              sx={{
-                height: "48px",
-                width: "100%",
-                "@media (min-width:425px)": { width: "258px" },
-                padding: 0,
-              }}
-              InputProps={{
-                sx: {
+        <div className="mt-4 md:mt-8 flex flex-col gap-2 md:gap-5 min-[425px]:w-64.5 min-[640px]:w-full">
+          <div className="flex flex-col min-[640px]:flex-row gap-2 md:gap-5 ">
+            <div className="text-start">
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                {...register("fullName")}
+                placeholder="Full Name"
+                sx={{
                   height: "48px",
-                  "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input": {
-                    padding: "12px 18px",
+                  width: "100%",
+                  "@media (min-width:425px)": { width: "258px" },
+                  padding: 0,
+                }}
+                InputProps={{
+                  sx: {
+                    height: "48px",
+                    "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input":
+                      {
+                        padding: "12px 18px",
+                      },
                   },
-                },
-              }}
-            />
-            {errors.fullName && (
-              <p className={errorMessage}>{errors.fullName?.message}</p>
-            )}
-            <div>
+                }}
+              />
+              {errors.fullName && (
+                <p className={errorMessage}>{errors.fullName?.message}</p>
+              )}
+            </div>
+            <div className="text-start">
               <TextField
                 id="outlined-basic"
                 variant="outlined"
@@ -199,27 +202,34 @@ const Signup = () => {
                   },
                 }}
               />
-              <p className={errorMessage}>{errors.username?.message}</p>
+              {errors.username && (
+                <p className={errorMessage}>{errors.username?.message}</p>
+              )}
             </div>
           </div>
           <div className="">
-            <TextField
-              variant="outlined"
-              {...register("email")}
-              placeholder="Email address"
-              sx={{ width: "100%", height: "48px", padding: 0 }}
-              InputProps={{
-                sx: {
-                  height: "48px",
-                  "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input": {
-                    padding: "12px 18px",
+            <div className="text-start">
+              <TextField
+                variant="outlined"
+                {...register("email")}
+                placeholder="Email address"
+                sx={{ width: "100%", height: "48px", padding: 0 }}
+                InputProps={{
+                  sx: {
+                    height: "48px",
+                    "& .css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input":
+                      {
+                        padding: "12px 18px",
+                      },
                   },
-                },
-              }}
-            />
-            <p className={errorMessage}>{errors.email?.message}</p>
+                }}
+              />
+              {errors.email && (
+                <p className={errorMessage}>{errors.email?.message}</p>
+              )}
+            </div>
           </div>
-          <div className="">
+          <div className="text-start">
             <div className="relative">
               <TextField
                 variant="outlined"
@@ -245,9 +255,11 @@ const Signup = () => {
                 {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </button>
             </div>
-            <p className={errorMessage}>{errors.password?.message}</p>
+            {errors.password && (
+              <p className={errorMessage}>{errors.password?.message}</p>
+            )}
           </div>
-          <div className="">
+          <div className="text-start">
             <div className="relative">
               <TextField
                 variant="outlined"
@@ -277,7 +289,9 @@ const Signup = () => {
                 )}
               </button>
             </div>
-            <p className={errorMessage}>{errors.confirmPassword?.message}</p>
+            {errors.confirmPassword && (
+              <p className={errorMessage}>{errors.confirmPassword?.message}</p>
+            )}
           </div>
           <label className="flex gap-2.5">
             {" "}

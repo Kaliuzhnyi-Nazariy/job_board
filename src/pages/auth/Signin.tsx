@@ -65,13 +65,13 @@ const Signin = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const errorMessage = "text-(--danger5) px-3 pt-1";
+  const errorMessage = "text-(--danger5) text-xs lg:text-base lg:px-3 pt-1";
 
   return (
     <PictureLayout>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="justify-self-center self-center w-50 min-[768px]:w-134 min-[1440px]:ml-[10%] min-[1440px]:text-start"
+        className="justify-self-center self-center w-70 min-[768px]:w-134 min-[1440px]:ml-[10%] min-[1440px]:text-start"
       >
         <div className="">
           <div className="">
@@ -88,7 +88,7 @@ const Signin = () => {
           </div>
         </div>
         <div className="my-8 flex flex-col gap-5">
-          <div className="">
+          <div className="flex flex-col text-start">
             <TextField
               variant="outlined"
               {...register("email")}
@@ -103,9 +103,11 @@ const Signin = () => {
                 },
               }}
             />
-            <p className={errorMessage}>{errors.email?.message}</p>
+            {errors.email && (
+              <p className={errorMessage}>{errors.email?.message}</p>
+            )}
           </div>
-          <div className="">
+          <div className="flex flex-col text-start">
             <div className="relative">
               <TextField
                 variant="outlined"
@@ -132,7 +134,9 @@ const Signin = () => {
                 {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </button>
             </div>
-            <p className={errorMessage}>{errors.password?.message}</p>
+            {errors.password && (
+              <p className={errorMessage}>{errors.password?.message}</p>
+            )}
           </div>
 
           <Link

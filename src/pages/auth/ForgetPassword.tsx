@@ -54,7 +54,7 @@ const ForgetPassword = () => {
 
   return (
     <Auth>
-      <div className="justify-self-center self-center w-50 min-[768px]:w-134">
+      <div className="justify-self-center self-center w-70 min-[768px]:w-134">
         <h4>Forget Password</h4>
         <p className="body_medium text-(--gray6) mt-8 ">
           Go back to{" "}
@@ -76,7 +76,7 @@ const ForgetPassword = () => {
             className="mt-8 w-full flex flex-col gap-8"
           >
             {/* <input type="email" {...register("email")} /> */}
-            <div className="">
+            <div className="text-start">
               <TextField
                 id="outlined-basic"
                 variant="outlined"
@@ -92,7 +92,7 @@ const ForgetPassword = () => {
                 }}
               />
               {errors.email && (
-                <p className="text-(--danger5) px-3 pt-1">
+                <p className="text-(--danger5) text-xs lg:text-base lg:px-3 pt-1">
                   {errors.email?.message}
                 </p>
               )}
