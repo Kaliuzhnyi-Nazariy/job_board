@@ -74,8 +74,6 @@ const UpdateCV = ({
     udpateCV(data as IUpdCV);
   };
 
-  // console.log({ selectedCV });
-
   useEffect(() => {
     reset({
       name: selectedCV?.filename.split(".")[0],

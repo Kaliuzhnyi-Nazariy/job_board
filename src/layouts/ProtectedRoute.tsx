@@ -17,14 +17,6 @@ const PrtoectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
   const loading = useSelector(userLoading);
   const initialized = useSelector(userInitialized);
 
-  // console.log({ role, initialized, loading });
-
-  // useEffect(() => {
-  //   if (initialized && !loading && !role) {
-  //     infoToast({ text: "User unauthorized!" });
-  //   }
-  // }, [initialized, loading, role]);
-
   if (!initialized || loading) {
     return <div>Loading...</div>;
   }

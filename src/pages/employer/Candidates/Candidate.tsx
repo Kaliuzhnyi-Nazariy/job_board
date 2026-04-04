@@ -23,10 +23,6 @@ const Candidate = () => {
     return <p>Error occured!</p>;
   }
 
-  if (!isLoading && data && data.data) {
-    console.log(data);
-  }
-
   return (
     <Section>
       {isLoading && <p>Loading...</p>}

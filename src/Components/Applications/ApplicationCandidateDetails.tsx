@@ -63,8 +63,6 @@ const ApplicationCandidateDetails = ({
     },
   });
 
-  // console.log(data.cv_id);
-
   const navigate = useNavigate();
 
   const { mutate: downloadCV, isPending: downloadLoading } = useMutation({
@@ -76,8 +74,6 @@ const ApplicationCandidateDetails = ({
   });
 
   if (!open) return null;
-
-  // console.log({ data });
 
   return (
     <Modal open={open} onClose={handleClose}>

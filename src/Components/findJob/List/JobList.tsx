@@ -42,7 +42,6 @@ const JobList = () => {
   }
 
   if (error) {
-    console.log(error);
     return <p>failed to get jobs</p>;
   }
 
