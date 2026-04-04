@@ -20,7 +20,9 @@ const AppliedList = ({
       </ul>
       <ul className="w-full mt-2">
         {applications.map((ca) => {
-          return <AppliedListItem data={ca} handleOpen={handleOpen} />;
+          return (
+            <AppliedListItem data={ca} handleOpen={handleOpen} key={ca.id} />
+          );
         })}
       </ul>
     </>
