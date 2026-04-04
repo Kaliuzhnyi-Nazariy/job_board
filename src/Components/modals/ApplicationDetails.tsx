@@ -44,6 +44,9 @@ const ApplicationDetails = ({
           p: 2.5,
           borderRadius: "12px",
           width: "80%",
+          maxHeight: "80%",
+          overflowX: "hidden",
+          overflowY: "auto",
         }}
       >
         {isLoading ? (
@@ -57,21 +60,31 @@ const ApplicationDetails = ({
           </>
         ) : (
           <>
-            <div className="flex gap-4 items-center">
+            <div className="flex flex-col md:flex-row gap-1 md:gap-4 items-center">
               <h2 className="body_xl_500 uppercase">Job: {data.title}</h2>
               <WorkTimeBadge jobTime={data.work_time} />
             </div>
-            <div className="flex gap-4 mt-2 body_medium text-(--gray2)">
+
+            <div className="flex flex-col md:flex-row md:gap-4 mt-2 body_medium text-(--gray2)">
               <p className="">Position: {data.position}</p>
-              {" | "}
+              <span className="hidden lg:block">{" | "}</span>
               <span className=" flex gap-2 items-center">
-                <LocationOnIcon sx={{ height: 20, width: 20 }} />
+                <LocationOnIcon
+                  sx={{
+                    height: 20,
+                    width: 20,
+                    display: "none",
+                    "@media (min-width: 1152px)": {
+                      display: "block",
+                    },
+                  }}
+                />
                 <p>Location: {data.location}</p>
               </span>
-              {" | "}
+              <span className="hidden lg:block">{" | "}</span>
 
               <p>Status: {data.status}</p>
-              {" | "}
+              <span className="hidden lg:block">{" | "}</span>
 
               <p>Applied: {dateFormat(data.applied_at)}</p>
             </div>
