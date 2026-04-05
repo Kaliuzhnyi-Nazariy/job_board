@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import { getCandidate } from "../../../../features/candidate/candidatesRequsts";
 import type { FullDataCandidate } from "../../../../features/candidate/interfaces";
-// import { dateFormat } from "../../../helpers";
 import Section from "../../../Components/Section";
 
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -30,7 +29,15 @@ const Candidate = () => {
         <>
           <div className="flex flex-col min-[1024px]:flex-row justify-between pt-12 pb-10">
             <div className="flex gap-6 items-center">
-              <div className="size-20 rounded-full bg-(--gray5)"></div>
+              {data.photo ? (
+                <img
+                  src={data.photo}
+                  alt={data.username + "'s photo"}
+                  className="object-center object-contain"
+                />
+              ) : (
+                <div className="size-20 rounded-full bg-(--gray5)"></div>
+              )}
               <div className="">
                 <h2>{data.full_name}</h2>
                 <small className="opacity-50">{data.speciality}</small>

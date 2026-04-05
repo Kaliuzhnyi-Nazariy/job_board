@@ -13,6 +13,7 @@ export interface FullDataCandidate {
   location?: string;
   phone?: string;
   [key: string]: unknown;
+  photo: string;
 }
 
 export interface IUpdForm {
@@ -45,4 +46,5 @@ export interface IDefaultContactForm {
 export interface ICandidateData extends ICandidate {
   location: string;
   experience: string;
+  photo: string;
 }

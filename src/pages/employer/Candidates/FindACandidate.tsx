@@ -1,10 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCandidates } from "../../../../features/candidate/candidatesRequsts";
 import { Link, useSearchParams } from "react-router";
-import type {
-  // ICandidate,
-  ICandidateData,
-} from "../../../../features/candidate/interfaces";
+import type { ICandidateData } from "../../../../features/candidate/interfaces";
 import Section from "../../../Components/Section";
 import Filters from "./Filters";
 
@@ -62,7 +59,6 @@ const FindACandidate = () => {
 
   return (
     <Section>
-      {/* <h1>Find A Candidate</h1> */}
       <Filters />
       <div className="grid min-[1440px]:grid-cols-[424px_1fr] gap-6 mt-5 ">
         <div className="hidden min-[1440px]:block w-106 h-302 bg-amber-500"></div>
@@ -81,11 +77,18 @@ const FindACandidate = () => {
                       listView === "grid" && "flex-col items-center"
                     }`}
                   >
-                    {/* <div className="flex flex-col gap-5"> */}
-                    {/* <div className="size-24 rounded-lg bg-(--gray5)"></div> */}
-                    <div
-                      className={`${photoStyles} hidden rounded-lg bg-(--gray5)`}
-                    ></div>
+                    {c.photo ? (
+                      <img
+                        src={c.photo}
+                        alt={c.username + "'s photo"}
+                        className={`${photoStyles} hidden rounded-lg `}
+                      />
+                    ) : (
+                      <div
+                        className={`${photoStyles} hidden rounded-lg bg-(--gray5)`}
+                      ></div>
+                    )}
+
                     <div className={"flex flex-col gap-5 w-full "}>
                       <div
                         className={
@@ -93,12 +96,8 @@ const FindACandidate = () => {
                           (listView == "list" ? "" : "items-center")
                         }
                       >
-                        {/* <span className="flex gap-1 items-center"> */}
                         <h3 className="body_large_500">{c.full_name}</h3>
                         <h4 className="body_small text-(--gray6)">{c.role}</h4>
-                        {/* </span> */}
-
-                        {/* <div className="flex gap-4 mt-5"> */}
                         <div
                           className={
                             `flex  min-[768px]:flex-row min-[768px]:mt-5 gap-2 ${extraData}` +
