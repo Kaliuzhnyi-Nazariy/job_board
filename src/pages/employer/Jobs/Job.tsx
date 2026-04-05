@@ -5,20 +5,12 @@ import {
   updateMyJob,
 } from "../../../../features/job/jobRequests";
 import { useNavigate, useParams } from "react-router";
-import type {
-  IJobForm,
-  // IJobFormUpdate,
-  Job,
-} from "../../../../features/job/interfaces";
+import type { IJobForm, Job } from "../../../../features/job/interfaces";
 import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { JobValidation } from "./jobValidation";
 import { workTimeFormat } from "../../../helpers/jobTimeFormat";
-
-// TO-DO:
-// make form and default values take from data from backend
-// change values in input on form values
 
 const Job = () => {
   const { jobId } = useParams();
@@ -93,11 +85,7 @@ const Job = () => {
 
   const queryClient = useQueryClient();
 
-  const {
-    mutate,
-    isSuccess,
-    isError: jobUpdError,
-  } = useMutation({
+  const { mutate } = useMutation({
     mutationKey: ["updateJob"],
     mutationFn: (data: IJobForm) => updateMyJob({ data, jobId: jobId! }),
     onSuccess: () =>
@@ -123,15 +111,7 @@ const Job = () => {
   const job: Job = data.job;
 
   const onSubmit: SubmitHandler<IJobForm> = async (data) => {
-    // console.log(data);
     mutate(data);
-    if (isSuccess) {
-      // console.log("huraaaaaaa");
-    }
-
-    if (jobUpdError) {
-      // console.log(jobUpdError);
-    }
   };
 
   return (

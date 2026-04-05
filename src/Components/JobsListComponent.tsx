@@ -1,11 +1,8 @@
 import { Link } from "react-router";
 
 import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
-// import { useQuery } from "@tanstack/react-query";
-// import { getFiveRecentJobs } from "../../features/job/jobRequests";
 import type { EmployerRecentJobs } from "../../features/job/interfaces";
 import { dateFormat, workTimeFormat } from "../helpers";
-// import ApplicationStatusBadge from "../ApplicationStatusBadge";
 import CandidatesNumberBadge from "./CandidatesNumberBadge";
 
 const JobsListComponent = ({

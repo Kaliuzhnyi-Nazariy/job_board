@@ -1,4 +1,3 @@
-// import type { IJobList } from "./JobComponent";
 import JobCard from "./JobCard";
 import { useQuery } from "@tanstack/react-query";
 import { getJobs } from "../../../../features/job/jobRequests";

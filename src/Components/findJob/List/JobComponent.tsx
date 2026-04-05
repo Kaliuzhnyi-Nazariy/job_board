@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import JobHeader from "./filter/JobHeader";
 import JobList from "./JobList";
 

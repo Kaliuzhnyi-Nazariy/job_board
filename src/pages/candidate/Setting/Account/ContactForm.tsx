@@ -24,10 +24,7 @@ const ContactForm = () => {
   const {
     register: contactRegister,
     handleSubmit: handleContactSubmit,
-    formState: {
-      errors: contactErrors,
-      //   isValid: contactIsValid
-    },
+    formState: { errors: contactErrors },
     reset,
   } = useForm({
     defaultValues: DefaultContact,
@@ -58,7 +55,6 @@ const ContactForm = () => {
     } catch (error) {
       errorToast({ text: (error as { message: string }).message });
     }
-    //   make popup messages
   };
 
   return (

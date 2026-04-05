@@ -1,11 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMyJobs } from "../../../../features/job/jobRequests";
-// import JobCard from "./JobCard";
-// import type { IJob } from "../../../../features/job/interfaces";
 import DashboardSection from "../../../Components/Dashboard/DashboardSection";
-// import OverviewRecentJobsList from "../../../Components/JobsListComponent";
 import { useSearchParams } from "react-router";
-// import { Pagination } from "@mui/material";
 import { useEffect } from "react";
 import JobsListComponent from "../../../Components/JobsListComponent";
 import PaginationComponent from "../../../Components/Pagination";

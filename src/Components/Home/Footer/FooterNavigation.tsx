@@ -35,15 +35,3 @@ const FooterNavigation = ({
 };
 
 export default FooterNavigation;
-
-// <>
-//   <ArrowRightAltOutlinedIcon
-//     className="opacity-0 -translate-x-4
-//        transition-all duration-150
-//        group-hover:opacity-100
-//        group-hover:translate-x-0"
-//   />{" "}
-//   <span className="-translate-x-8 group-hover:translate-x-0">
-//     {title}
-//   </span>
-// </>;

@@ -1,5 +1,3 @@
-// TO-DO: Date and work_time view functions
-
 import { Box, Modal, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { getCandidateApplicationDetails } from "../../../features/application/applicationRequest";
@@ -27,10 +25,6 @@ const ApplicationDetails = ({
   if (!data) {
     return null;
   }
-
-  // if (!isLoading && !isError) {
-  //   dateFormat(data.applied_at || undefined);
-  // }
 
   return (
     <Modal open={open} onClose={handleClose}>

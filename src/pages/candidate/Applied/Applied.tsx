@@ -9,8 +9,6 @@ import { useEffect, useState } from "react";
 import ApplicationDetails from "../../../Components/modals/ApplicationDetails";
 import DashboardSection from "../../../Components/Dashboard/DashboardSection";
 import { useSearchParams } from "react-router";
-// import AppliedListItem from "./AppliedListItem";
-// import { Pagination } from "@mui/material";
 import PaginationComponent from "../../../Components/Pagination";
 import AppliedList from "../../../Components/AppliedList";
 
@@ -46,11 +44,7 @@ const Applied = () => {
     queryFn: () => getCandidateApplications(applicationsPage),
   });
 
-  const {
-    data: applicationsCount,
-    // isLoading: applicationsLoading,
-    // isError: applicationError,
-  } = useQuery({
+  const { data: applicationsCount } = useQuery({
     queryKey: ["getMyApplicationsCount"],
     queryFn: getCandidateCountApplications,
   });
@@ -64,8 +58,6 @@ const Applied = () => {
   }
 
   const amountOfPages = Math.ceil(applicationsCount.count / 8);
-
-  // make a model which is going to be opened after clicking view details button, the request to get data is already exist
 
   return (
     <DashboardSection>

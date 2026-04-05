@@ -116,8 +116,6 @@ const UpdateCV = ({
             <TextField
               id="outlined-basic cv_name"
               variant="outlined"
-              // {...register("username")}
-              // placeholder="Username"
               sx={{
                 height: "48px",
                 width: "100%",

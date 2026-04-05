@@ -1,8 +1,4 @@
-import type {
-  IGetJob,
-  IJobForm,
-  // IJobFormUpdate
-} from "./interfaces";
+import type { IGetJob, IJobForm } from "./interfaces";
 import api from "../api/api";
 
 export const postJob = async (data: IJobForm) => {
@@ -52,7 +48,6 @@ export const updateMyJob = async ({
   return res.data;
 };
 
-// export const getJobById = async (jobId: string) => {
 export const getJob = async (jobId: string) => {
   const res = await api.get("/job/jobs/" + jobId);
 

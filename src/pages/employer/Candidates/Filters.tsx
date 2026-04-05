@@ -1,6 +1,5 @@
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import FilterListView from "../../../Components/FilterListView";
-// import { useSearchParams } from "react-router";
 
 const Filters = () => {
   return (

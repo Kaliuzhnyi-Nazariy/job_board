@@ -1,5 +1,3 @@
-// import { Outlet } from "react-router";
-
 import WorkIcon from "@mui/icons-material/Work";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 

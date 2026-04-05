@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router";
-// import Greeting from "./pages";
 import { lazy, useEffect } from "react";
 
 import { ToastContainer } from "react-toastify";
@@ -7,8 +6,6 @@ import PrtoectedRoute from "./layouts/ProtectedRoute";
 import RestrictedRoute from "./layouts/RestrictedRoute";
 import { useAppDispatch } from "../features/hooks/dispatchHook";
 import { refreshUser } from "../features/user/userRequest";
-// import { useSelector } from "react-redux";
-// import { userLoading } from "../features/user/userSelector";
 
 // Auth
 const SigninPage = lazy(() => import("./pages/auth/Signin"));
@@ -24,11 +21,8 @@ const TermsPage = lazy(() => import("./pages/Terms/terms"));
 
 // Protecting routes
 const UserLayoutComponent = lazy(() => import("./layouts/UserLayout"));
-// const CandidateRouteComponent = lazy(() => import("./layouts/CandidateRoute"));
-// const EmployerRouteComponent = lazy(() => import("./layouts/EmployerRoute"));
 
 // candidate
-// const HomeCandidate = lazy(() => import("./pages/candidate/home"));
 const FindJob = lazy(() => import("./pages/candidate/FindJob"));
 const CandidateDashboard = lazy(() => import("./pages/candidate/Dashboard"));
 const OverviewCandidate = lazy(() => import("./pages/candidate/Overview"));
@@ -57,7 +51,6 @@ const AppliedPage = lazy(() => import("./pages/candidate/Applied/Applied"));
 
 // employer
 const EmployerDashboard = lazy(() => import("./pages/employer/Dashboard"));
-// const HomeEmployer = lazy(() => import("./pages/employer/home"));
 const EmployerOverviewPage = lazy(() => import("./pages/employer/Overview"));
 const PostJobPage = lazy(() => import("./pages/employer/PostAJob"));
 const FindACandidatePage = lazy(
@@ -91,8 +84,6 @@ function App() {
   return (
     <>
       <Routes>
-        {/* <Route path="/" element={<Greeting />} /> */}
-
         <Route element={<RestrictedRoute />}>
           <Route path="/auth">
             <Route index element={<Navigate to="signin" replace />} />
@@ -109,7 +100,6 @@ function App() {
             element={<PrtoectedRoute allowedRoles={["candidate"]} />}
           >
             <Route index element={<Navigate to="find-job" replace />} />
-            {/* <Route path="home" element={<HomeCandidate />} /> */}
             <Route path="find-job" element={<FindJob />} />
             <Route path="find-job/:jobId" element={<JobPage />} />
             <Route path="dashboard" element={<CandidateDashboard />}>
@@ -128,9 +118,7 @@ function App() {
             path="/employer"
             element={<PrtoectedRoute allowedRoles={["employer"]} />}
           >
-            {/* <Route path="home" element={<HomeEmployer />} /> */}
             <Route path="dashboard" element={<EmployerDashboard />}>
-              {/* <Route index element={<Navigate to="" replace />} /> */}
               <Route path="" element={<EmployerOverviewPage />} />
               <Route path="post-a-job" element={<PostJobPage />} />
               <Route path="my-jobs" element={<MyJobsPage />} />
@@ -144,7 +132,6 @@ function App() {
                 element={<EmployerPersonalSettingsPage />}
               />
             </Route>
-            {/* <Route path="view-application/:jobId" element={<ApplicationPage />} /> */}
             <Route path="candidates" element={<FindACandidatePage />} />
             <Route path="candidates/:candidateId" element={<CandidatePage />} />
           </Route>
@@ -165,7 +152,6 @@ function App() {
         draggable
         pauseOnHover
         theme="colored"
-        // transition={Bounce}
       />
     </>
   );

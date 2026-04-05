@@ -75,7 +75,6 @@ const ForgetPassword = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="mt-8 w-full flex flex-col gap-8"
           >
-            {/* <input type="email" {...register("email")} /> */}
             <div className="text-start">
               <TextField
                 id="outlined-basic"
@@ -87,7 +86,6 @@ const ForgetPassword = () => {
                   sx: {
                     height: "48px",
                     padding: 0,
-                    // padding: "0 18px",
                   },
                 }}
               />

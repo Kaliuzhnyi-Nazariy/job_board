@@ -5,8 +5,6 @@ import {
   userLoading,
   userRole,
 } from "../../features/user/userSelector";
-// import { infoToast } from "../Components/Toasts/Toasts";
-// import { useEffect } from "react";
 
 type ProtectedRouteProps = {
   allowedRoles?: ("candidate" | "employer")[];
@@ -22,12 +20,8 @@ const PrtoectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
   }
 
   if (!role) {
-    // infoToast({ text: "User unauthorized!" });
     return <Navigate to="/auth/signin" replace />;
   }
-
-  // console.log(allowedRoles);
-  // console.log(allowedRoles && allowedRoles.includes(role));
 
   if (allowedRoles && !allowedRoles.includes(role)) {
     return <Navigate to="/forbidden" replace />;

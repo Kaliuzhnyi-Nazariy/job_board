@@ -6,7 +6,6 @@ import {
   getCandidateRecentApplications,
 } from "../../../features/application/applicationRequest";
 import { Link } from "react-router";
-// import { dateFormat, workTimeFormat } from "../../helpers";
 import ApplicationDetails from "../../Components/modals/ApplicationDetails";
 import { useState } from "react";
 import type { CandidateRecentApplications } from "../../../features/application/interfaces";
@@ -26,7 +25,6 @@ const Overview = () => {
   const {
     data: candidateApplications,
     isLoading: applicationsLoading,
-    // isError: applicationsError,
   } = useQuery<CandidateRecentApplications[]>({
     queryKey: ["candidateRecentApplications"],
     queryFn: getCandidateRecentApplications,

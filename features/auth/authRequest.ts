@@ -1,12 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api, { clearToken, setAuthToken } from "../api/api";
-import type {
-  // IResponse,
-  ISignIn,
-  ISignUp,
-  ISignupResponse,
-  // ResetPassword
-} from "./interface";
+import type { ISignIn, ISignUp, ISignupResponse } from "./interface";
 import axios from "axios";
 import type { IServiceSigninResponse } from "../user/interfaces";
 
@@ -29,7 +23,6 @@ export const signup = createAsyncThunk<
 });
 
 export const signin = createAsyncThunk<
-  // IResponse,
   IServiceSigninResponse,
   ISignIn,
   { rejectValue: { message: string } }
@@ -53,9 +46,7 @@ export const logout = createAsyncThunk<
   { rejectValue: { message: string } }
 >("/user/auth/logout", async (_, { rejectWithValue }) => {
   try {
-    // const res = await api.post("/user/auth/signout");
     clearToken();
-    // return res.data;
     return;
   } catch (error) {
     if (axios.isAxiosError(error)) {

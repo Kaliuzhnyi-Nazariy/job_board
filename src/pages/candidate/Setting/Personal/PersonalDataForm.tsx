@@ -86,7 +86,6 @@ const PersonalDataForm = () => {
   });
 
   const onSubmit: SubmitHandler<IUpdForm> = (newData) => {
-    console.log({ newData });
     mutate({ ...newData, id: userIdValue! });
   };
 

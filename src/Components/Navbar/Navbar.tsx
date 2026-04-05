@@ -10,10 +10,6 @@ import { useState } from "react";
 const Navbar = () => {
   const role = useSelector(userRole);
 
-  // const homeLink = () => {
-  //   return role == "employer" ? "/employer/home" : "/candidate/home";
-  // };
-
   const findLink = () => {
     if (role == "employer") {
       return { path: "/employer/candidates", text: "Find Employers" };

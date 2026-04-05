@@ -56,7 +56,6 @@ const FindJobSearchbar = () => {
           alignItems: "center",
           bgcolor: "background.paper",
           borderRadius: 1,
-          // boxShadow: 1,
           padding: "12px",
           border: "1px solid #767E94",
 
@@ -101,7 +100,6 @@ const FindJobSearchbar = () => {
           placeholder="Location"
           variant="standard"
           sx={{
-            // width: "300px",
             width: "30%",
             "@media (min-width: 768px)": {
               width: "25%",
@@ -162,13 +160,6 @@ const FindJobSearchbar = () => {
 
         {/* Advance Filter */}
         <Box
-          // sx={{
-          // color: "text.secondary",
-          // cursor: "pointer",
-          //   fontSize: 14,
-          //   width: "178px",
-          //   height: "56px",
-          // }}
           sx={{
             fontSize: 10,
             display: "none",

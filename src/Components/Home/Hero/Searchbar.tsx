@@ -13,8 +13,6 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 const Searchbar = () => {
   const userrole = useSelector(userRole);
 
-  // const [, setSearchParams] = useSearchParams();
-
   const navigate = useNavigate();
 
   const { register, handleSubmit, reset } = useForm<{
@@ -70,22 +68,12 @@ const Searchbar = () => {
         alignItems: "center",
         bgcolor: "background.paper",
         borderRadius: 1,
-        // boxShadow: 1,
         padding: "12px",
         border: "1px solid var(--gray1)",
         marginX: "auto",
-        // margin: "0 auto",
         "@media (min-width: 1440px)": {
           marginX: 0,
         },
-        // width: {
-        //   // "@media (min-width:1440px)": { width: "560px" },
-        //   // "@media (min-width:1920px)": {
-        //   //   width: "679px",
-        //   // },
-        //   lg: "560px",
-        //   xl: "679px",
-        // },
         width: "720px",
         "@media (min-width:1440px)": {
           width: "560px",

@@ -18,10 +18,6 @@ const MobMenu = ({
     userrole == "candidate" ? "/candidate/find-job" : "/employer/candidates";
   const findText = userrole == "candidate" ? "Find Job" : "Find Candidate";
 
-  // dashboard
-  // const dashboardRoute =
-  //   userrole === "candidate" ? "/candidate/dashboard" : "/employer/dashboard";
-
   // style
   const liItem = "w-full border-b border-b-(--gray1)";
 

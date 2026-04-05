@@ -1,12 +1,4 @@
-import {
-  Box,
-  MenuItem,
-  Modal,
-  Select,
-  // TextareaAutosize,
-  TextField,
-  // Typography,
-} from "@mui/material";
+import { Box, MenuItem, Modal, Select, TextField } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { applyToJob } from "../../../features/application/applicationRequest";
@@ -64,10 +56,7 @@ const ApplyModal = ({
     mutate(data);
   };
 
-  const {
-    data: cvs,
-    // isPending: cvLoading
-  } = useQuery({
+  const { data: cvs } = useQuery({
     queryKey: ["getCVs"],
     queryFn: () => getCVs(),
   });
@@ -132,11 +121,7 @@ const ApplyModal = ({
               placeholder="Write down your biography here. Let the employers know who you are..."
               sx={{
                 width: "100%",
-                // padding: "12px 18px",
                 marginTop: "8px",
-                // "& .css-m1j2os-MuiFormControl-root-MuiTextField-root": {
-                //   padding: "0px",
-                // },
               }}
               {...register("coveringLetter")}
             />
@@ -169,7 +154,6 @@ const ApplyModal = ({
       </Box>
     </Modal>
   );
-  //   return <Modal>Hello</Modal>;
 };
 
 export default ApplyModal;

@@ -13,7 +13,6 @@ const FilterListView = () => {
   return (
     <div className="grid grid-cols-2 max-[424px]:w-full min-[425px]:flex min-[425px]:mx-auto min-[768px]:mx-0 gap-4 items-center">
       <Select
-        // id="demo-simple-select"
         value={searchParams.get("order") || "oldest"}
         onChange={(select) =>
           setSearchParams((prev) => {
@@ -39,7 +38,6 @@ const FilterListView = () => {
         <MenuItem value="newest">Earlier</MenuItem>
       </Select>
       <Select
-        // id="demo-simple-select"
         defaultValue={limit}
         onChange={(val) =>
           setSearchParams((prev) => {

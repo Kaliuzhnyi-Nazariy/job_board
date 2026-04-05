@@ -23,7 +23,6 @@ const Searchbar = () => {
       if (pathname !== "/candidate/find-job") {
         navigate({
           pathname: "/candidate/find-job",
-          // search: `?location=${country}`,
         });
         return;
       }
@@ -55,7 +54,6 @@ const Searchbar = () => {
       if (pathname !== "/candidate/find-job") {
         navigate({
           pathname: "/candidate/find-job",
-          // search: `?title=${job}`,
         });
         return;
       }
@@ -69,7 +67,6 @@ const Searchbar = () => {
       if (pathname !== "/employer/candidates") {
         navigate({
           pathname: "/employer/candidates",
-          // search: `?search=${job}`,
         });
         return;
       }
@@ -85,7 +82,6 @@ const Searchbar = () => {
   return (
     <Box
       sx={{
-        // width: "100%",
         width: 668,
         height: 50,
         padding: 0,

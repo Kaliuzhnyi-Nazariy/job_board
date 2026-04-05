@@ -13,20 +13,12 @@ import JobsListComponent from "../../Components/JobsListComponent";
 const Overview = () => {
   const usernameValue = useSelector(username);
   const isUserLoading = useSelector(userLoading);
-  const {
-    data,
-    isLoading,
-    // isError
-  } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["myjobs"],
     queryFn: () => getMyJobs(1),
   });
 
-  const {
-    data: recentJobs,
-    isLoading: loadingRecentJobs,
-    // isError: isRecentJobsError,
-  } = useQuery({
+  const { data: recentJobs, isLoading: loadingRecentJobs } = useQuery({
     queryKey: ["myRecentJobs"],
     queryFn: getFiveRecentJobs,
   });

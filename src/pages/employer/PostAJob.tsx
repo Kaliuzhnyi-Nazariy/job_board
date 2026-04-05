@@ -1,5 +1,3 @@
-// TO-DO:
-// error handling from tanstack
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import { useForm, type SubmitHandler } from "react-hook-form";

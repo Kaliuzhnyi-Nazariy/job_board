@@ -10,13 +10,7 @@ import { logout } from "../../../features/auth/authRequest";
 import { errorToast, successToast } from "../../Components/Toasts/Toasts";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
-const DashboardCandidateLinks = ({
-  onClick,
-}: // extraStyle,
-{
-  onClick?: () => void;
-  extraStyle?: string;
-}) => {
+const DashboardCandidateLinks = ({ onClick }: { onClick?: () => void }) => {
   const baseURL = "/candidate/dashboard";
 
   const liStyle =

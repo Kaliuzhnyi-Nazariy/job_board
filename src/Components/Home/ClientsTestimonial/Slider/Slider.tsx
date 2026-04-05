@@ -4,8 +4,6 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import SliderItem from "./SliderItem";
 
-// import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
-
 export default function App() {
   const [slidesCount, setSlidesCount] = useState(0);
 

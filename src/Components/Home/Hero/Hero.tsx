@@ -24,7 +24,6 @@ const Hero = () => {
   };
 
   return (
-    // <Section extraStyles="bg-[#F1F2F4] py-25 grid grid-cols-auto grid-rows-[1fr_auto] min-[1920px]:gap-x-[149px] gap-y-10">
     <Section extraStyles="bg-[#F1F2F4] py-5 min-[1440px]:py-25 grid grid-rows-auto grid-cols-auto min-[1024px]:grid-rows-[1fr_auto] min-[1920px]:gap-x-[149px] gap-y-3  min-[768px]:gap-y-10">
       <div className="row-start-2 min-[1440px]:row-start-1">
         <div className=" min-[1024px]:w-140  min-[1024px]:mx-auto min-[1440px]:mx-0 min-[1920px]:w-163">

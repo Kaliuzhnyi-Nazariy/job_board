@@ -32,21 +32,10 @@ const CVSection = () => {
     setUpdateCVOpen(false);
   };
 
-  // const CVS_MOCK: { id: string; title: string; size: number }[] = [
-  //   { id: "1", title: "Professional", size: 3.5 },
-  //   { id: "2", title: "Product design", size: 4.7 },
-  //   { id: "13", title: "Visual design", size: 1.3 },
-  //   // { id: "15", title: "Professional", size: 3.5 },
-  //   // { id: "62", title: "Product design", size: 4.7 },
-  //   // { id: "163", title: "Visual design", size: 1.3 },
-  // ];
-
   const { data: cvs, isPending: cvsLoading } = useQuery({
     queryKey: ["getCVs"],
     queryFn: () => getCVs(),
   });
-
-  // console.log({ cvs });
 
   const turnSizeIntoMB = (size: number) => {
     return (size / 1024).toFixed(1).toString();

@@ -53,10 +53,7 @@ export const getCandidateRecentApplications = async () => {
 export const getCandidateApplicationDetails = async (
   jobApplicationId: string,
 ) => {
-  const res = await api.get(
-    "/application/my/" + jobApplicationId,
-    // "/application/candidate-applications/" + jobApplicationId,
-  );
+  const res = await api.get("/application/my/" + jobApplicationId);
 
   return res.data;
 };

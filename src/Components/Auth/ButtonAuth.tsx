@@ -2,8 +2,6 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useSelector } from "react-redux";
 import { userLoading } from "../../../features/user/userSelector";
 
-// import { authLoading } from "../../../features/auth/authSelector";
-
 const ButtonAuth = ({
   isButtonEnabled,
   text,
