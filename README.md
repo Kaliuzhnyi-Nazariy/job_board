@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+# Job Board
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Demo
+https://job-board-eight-beta.vercel.app/
 
-Currently, two official plugins are available:
+## About
+Job Board is a web application designed to connect candidates with employers. It allows users to search and filter job offers, manage applications, and interact with role-specific features.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The application focuses on solving real-world challenges such as filtered search, role-based UI management, and responsive design. Depending on the user role, the platform provides different functionality, including job creation, application tracking, and candidate management.
 
-## React Compiler
+## Tech Stack
+- React
+- TypeScript
+- Redux Toolkit
+- TanStack Query
+- Material UI (MUI)
+- Tailwind CSS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
+- Real-time form validation
+- Apply for jobs with CV (PDF) and optional cover letter
+- Application status tracking
+- Role-based UI and user experience
+- Download uploaded files
+- Manage applicants (change status)
+- Create, update, and delete job offers
+- Advanced filtering for job search
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## How to Run
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Architecture and Decisions
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Clear separation of responsibilities:
+  - Redux Toolkit for global UI state
+  - TanStack Query for server state and API communication
+- Token stored in application state using redux-persist instead of cookies to avoid cross-origin cookie issues
+- React Hook Form for predictable form handling and real-time validation
+- Component-based architecture for better scalability and maintainability
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Challenges
+
+### Role-based UI
+- Different dashboards and functionality depending on user role
+- Route protection to prevent unauthorized access
+
+### Responsive design
+- Adapting Material UI components for mobile devices
+
+### Navigation on mobile devices
+- Implementing a user-friendly mobile menu
+
+## Future Improvements
+
+- Add FAQ and blog sections
+- Support company profiles instead of only individual employers
+- Improve user onboarding experience
