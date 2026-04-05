@@ -85,8 +85,9 @@ const PersonalDataForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<IUpdForm> = (data) => {
-    mutate({ ...data, id: userIdValue! });
+  const onSubmit: SubmitHandler<IUpdForm> = (newData) => {
+    console.log({ newData });
+    mutate({ ...newData, id: userIdValue! });
   };
 
   const labelStyles = "body_small mb-2";
