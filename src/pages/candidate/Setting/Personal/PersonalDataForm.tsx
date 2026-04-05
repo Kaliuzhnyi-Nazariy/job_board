@@ -50,10 +50,10 @@ const PersonalDataForm = () => {
   useEffect(() => {
     if (data) {
       reset({
-        speciality: data.speciality,
-        experience: data.experience,
-        education: data.education,
-        website: data.website,
+        speciality: data.speciality || "",
+        experience: data.experience || "",
+        education: data.education || "",
+        website: data.website || "",
       });
     }
   }, [data, reset]);
