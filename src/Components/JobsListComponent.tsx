@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
 import type { EmployerRecentJobs } from "../../features/job/interfaces";
@@ -16,6 +16,8 @@ const JobsListComponent = ({
   title: string;
   isLink: boolean;
 }) => {
+  const location = useNavigate();
+
   return (
     <div className=" min-[1024px]:h-150 mt-8 relative mx-auto w-full">
       <div className="w-full flex justify-between items-center">
@@ -48,7 +50,10 @@ const JobsListComponent = ({
               return (
                 <li
                   key={rj.id}
-                  className="p-2 min-[1024px]:p-5 grid grid-cols-3 w-full min-[1024px]:grid-cols-[2fr_1fr_1fr_1fr] "
+                  className="p-2 min-[1024px]:p-5 grid grid-cols-3 w-full min-[1024px]:grid-cols-[2fr_1fr_1fr_1fr] hover:cursor-pointer "
+                  onClick={() =>
+                    location("/employer/dashboard/my-jobs/" + rj.id)
+                  }
                 >
                   <div className="flex flex-col gap-2">
                     <h2 className="body_medium_500">{rj.title}</h2>
@@ -65,6 +70,7 @@ const JobsListComponent = ({
                   <Link
                     to={"/employer/dashboard/view-application/" + rj.id}
                     className="px-6 py-3 rounded-sm bg-(--gray50) text-(--primary5) button hover:bg-(--primary5) hover:text-white transition-colors duration-150 max-[1151px]:text-center min-[1152px]:flex items-center justify-between"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     View{" "}
                     <span className="hidden min-[1152px]:block">
