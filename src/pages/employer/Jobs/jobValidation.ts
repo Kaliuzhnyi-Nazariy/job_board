@@ -12,11 +12,11 @@ export const JobValidation = z
     maxSalary: z.number().gt(-1, "The value cannot be negative!"),
     salaryType: z.enum(
       ["month", "week", "hour", "year", "contract"],
-      'That field can be filled only with that values: "month", "week", "year", "contract"'
+      'That field can be filled only with that values: "month", "week", "year", "contract"',
     ),
     workTime: z.enum(
       ["full_time", "part_time", "internship", "contract"],
-      "That field can be filled only with that values: 'full_time', 'part_time', 'internship', 'contract' "
+      "That field can be filled only with that values: 'full_time', 'part_time', 'internship', 'contract' ",
     ),
     location: z.string(),
     education: z.string().optional(),
