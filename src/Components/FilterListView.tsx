@@ -34,8 +34,8 @@ const FilterListView = () => {
           },
         }}
       >
-        <MenuItem value="oldest">Latest</MenuItem>
-        <MenuItem value="newest">Earlier</MenuItem>
+        <MenuItem value="newest">Latest</MenuItem>
+        <MenuItem value="oldest">Earlier</MenuItem>
       </Select>
       <Select
         defaultValue={limit}
