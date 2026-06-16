@@ -91,7 +91,7 @@ function App() {
             <Route path="signup" element={<SignupPage />} />
           </Route>
           <Route path="/forget-password" element={<ForgetPage />} />
-          <Route path=" " element={<ResetPasswordPage />} />
+          <Route path="*" element={<ResetPasswordPage />} />
         </Route>
         <Route path="/" element={<UserLayoutComponent />}>
           <Route path="/" element={<HomePage />} />

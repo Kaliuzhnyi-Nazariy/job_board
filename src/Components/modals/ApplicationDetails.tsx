@@ -15,12 +15,28 @@ const ApplicationDetails = ({
   handleClose: () => void;
   applicationId: string;
 }) => {
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["getApplicationDetails", applicationId],
     queryFn: () => getCandidateApplicationDetails(applicationId),
     enabled: !!applicationId,
     retry: 1,
   });
+
+  if (isLoading) {
+    return (
+      <Modal open={isLoading}>
+        <Typography>Loading...</Typography>
+      </Modal>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Modal open={isError} onClose={handleClose}>
+        <Typography>{error.message}</Typography>
+      </Modal>
+    );
+  }
 
   if (!data) {
     return null;
