@@ -57,7 +57,9 @@ const Applied = () => {
     return <p>Error ocurred!</p>;
   }
 
-  const amountOfPages = Math.ceil(applicationsCount.count / 8);
+  const amountOfPages = applicationsCount.count
+    ? Math.ceil(applicationsCount.count / 8)
+    : 0;
 
   return (
     <DashboardSection>
