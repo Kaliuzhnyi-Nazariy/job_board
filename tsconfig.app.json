@@ -24,5 +24,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "features/hooks", "features/api", "features/auth/authRequest.ts", "features/auth/interface.ts"]
+  "include": ["src", "features/hooks", "features/api", "features/auth/authRequest.ts", "features/auth/interface.ts", "features/auth/authAPI.ts","features/candidate/candidatesRequsts.ts", "features/candidate/interfaces.ts", "features/application/applicationRequest.ts", "features/application/interfaces.ts", "features/cv/interfaces.ts", "features/cv/requests.ts", "features/job/interfaces.ts", "features/job/jobRequests.ts", "features/user/interfaces.ts", "features/user/userPhotoRequest.ts", "features/user/userRequest.ts", "features/user/userSelector.ts", "features/user/userSlice.ts"]
 }
