@@ -100,7 +100,7 @@ const PostAJob = () => {
   const errorMessage = "text-(--danger5) px-3 pt-1";
 
   return (
-    <DashboardSection>
+    <DashboardSection extraStyles="pb-6 min-[768px]:pb-0 min-[1440px]:pb-6">
       <h5>Post a job</h5>
       <form onSubmit={handleSubmit(submitHandler)} className="mt-8">
         <div className={inputBlock}>

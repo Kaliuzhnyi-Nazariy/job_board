@@ -32,7 +32,7 @@ const MyJobs = () => {
   const pageAmount = Math.ceil(data.meta.allAmountOfJobs / data.meta.limit);
 
   return (
-    <DashboardSection>
+    <DashboardSection extraStyles=" flex flex-col flex-1 pb-6 min-[768px]:pb-0 min-[1440px]:pb-6">
       <div className="flex">
         <h1 className="body_large_500">
           My Jobs{" "}

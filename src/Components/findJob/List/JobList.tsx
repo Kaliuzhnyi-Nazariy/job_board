@@ -57,8 +57,12 @@ const JobList = () => {
   return (
     <>
       {data?.jobs?.length > 0 && (
-        <Section>
-          <ul className={`${listView === "grid" ? gridStyles : listStyles} `}>
+        <Section extraStyles=" pb-6 flex flex-col ">
+          <ul
+            className={`flex flex-1 ${
+              listView === "grid" ? gridStyles : listStyles
+            } `}
+          >
             {data.jobs.map((job: IJobList) => {
               return (
                 <li className=" " key={job.id}>
