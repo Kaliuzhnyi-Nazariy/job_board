@@ -38,7 +38,7 @@ const Overview = () => {
       >
         <div className="flex flex-col gap-1 justify-center  ">
           <p className="font-semibold text-lg min-[768px]:text-2xl">
-            {isLoading ? "Loading..." : data.meta.allAmountOfJobs}
+            {isLoading ? "Loading..." : data?.meta.allAmountOfJobs || 0}
           </p>
           <p className="body_xs min-[768px]:body_small">jobs</p>
         </div>

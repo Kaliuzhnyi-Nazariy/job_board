@@ -23,7 +23,7 @@ const Candidate = () => {
   }
 
   return (
-    <Section>
+    <Section extraStyles="pb-6">
       {isLoading && <p>Loading...</p>}
       {data ? (
         <>
