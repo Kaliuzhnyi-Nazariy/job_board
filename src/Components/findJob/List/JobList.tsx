@@ -37,14 +37,22 @@ const JobList = () => {
   });
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <Section extraStyles="flex-1 items-center justify-center flex">
+        <p>Loading...</p>
+      </Section>
+    );
   }
 
   if (error) {
-    return <p>failed to get jobs</p>;
+    return (
+      <Section extraStyles="flex-1 items-center justify-center flex">
+        <p>failed to get jobs</p>
+      </Section>
+    );
   }
 
-  const pageAmount = Math.ceil(data.meta.total / data.meta.limit);
+  const pageAmount = Math.ceil(data?.meta.total / data?.meta.limit) || 0;
 
   return (
     <>

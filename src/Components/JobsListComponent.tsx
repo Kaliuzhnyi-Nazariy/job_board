@@ -19,7 +19,7 @@ const JobsListComponent = ({
   const location = useNavigate();
 
   return (
-    <div className=" min-[1024px]:h-150 mt-8 relative mx-auto w-full">
+    <div className=" min-[1024px]:h-150 mt-8 relative mx-auto w-full flex flex-col">
       <div className="w-full flex justify-between items-center">
         {/* <h4 className="body_medium_500">Recently Applied</h4> */}
         <h4 className="body_medium_500">{title}</h4>
@@ -84,7 +84,9 @@ const JobsListComponent = ({
           </ul>
         </>
       ) : (
-        <p>No posted jobs yet!</p>
+        <div className="flex-1 flex items-center justify-center">
+          <p>No posted jobs yet!</p>
+        </div>
       )}
     </div>
   );

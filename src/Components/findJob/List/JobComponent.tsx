@@ -13,10 +13,12 @@ export interface IJobList {
 
 const JobComponent = () => {
   return (
-    <div>
+    // <div>
+    <>
       <JobHeader />
       <JobList />
-    </div>
+    </>
+    // </div>
   );
 };
 

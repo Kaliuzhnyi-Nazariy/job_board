@@ -14,7 +14,7 @@ const DashboardLayout = ({
   return (
     <Section
       extraStyles={
-        "flex flex-col-reverse min-[1024px]:w-246 min-[1440px]:w-full min-[1024px]:mx-auto min-[1440px]:mx-0 min-[1440px]:flex-row " +
+        "flex flex-col min-[1024px]:flex-col-reverse flex-1 min-[1024px]:w-246 min-[1440px]:w-full min-[1024px]:mx-auto min-[1440px]:mx-0 min-[1440px]:flex-row  " +
         extraStyles
       }
     >
