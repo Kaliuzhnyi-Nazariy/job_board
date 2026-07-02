@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCandidates } from "../../../../features/candidate/candidatesRequsts";
+import candidatesRequests from "../../../../features/candidate/candidatesRequsts";
 import { Link, useSearchParams } from "react-router";
 import type { ICandidateData } from "../../../../features/candidate/interfaces";
 import Section from "../../../Components/Section";
@@ -25,7 +25,8 @@ const FindACandidate = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["candidates", search, location, order],
-    queryFn: () => getCandidates(limit, search, location, order),
+    queryFn: () =>
+      candidatesRequests.getCandidates(limit, search, location, order),
   });
 
   if (isLoading) {

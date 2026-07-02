@@ -1,7 +1,8 @@
 import api from "../api/api";
+import { errorWrapper } from "../helper";
 import type { CandidateApplication } from "./interfaces";
 
-export const applyToJob = async ({
+const applyToJob = async ({
   jobId,
   coveringLetter,
   cvId,
@@ -15,10 +16,7 @@ export const applyToJob = async ({
   return res.data;
 };
 
-export const getApplicantDetails = async (
-  jobId: string,
-  applicationId: string,
-) => {
+const getApplicantDetails = async (jobId: string, applicationId: string) => {
   const res = await api.get(
     `/application/${jobId}/candidate-details/${applicationId}`,
   );
@@ -26,13 +24,13 @@ export const getApplicantDetails = async (
   return res.data;
 };
 
-export const getCandidateCountApplications = async () => {
+const getCandidateCountApplications = async () => {
   const res = await api.get("/application/my/count");
 
   return res.data;
 };
 
-export const getCandidateApplications = async (
+const getCandidateApplications = async (
   page?: string | null,
 ): Promise<CandidateApplication[]> => {
   const res = await api.get("/application/my", {
@@ -42,7 +40,7 @@ export const getCandidateApplications = async (
   return res.data;
 };
 
-export const getCandidateRecentApplications = async () => {
+const getCandidateRecentApplications = async () => {
   const res = await api.get("/application/my/recent");
 
   return res.data;
@@ -50,21 +48,19 @@ export const getCandidateRecentApplications = async () => {
 
 // employer
 
-export const getCandidateApplicationDetails = async (
-  jobApplicationId: string,
-) => {
+const getCandidateApplicationDetails = async (jobApplicationId: string) => {
   const res = await api.get("/application/my/" + jobApplicationId);
 
   return res.data;
 };
 
-export const getApplications = async (jobId: string) => {
+const getApplications = async (jobId: string) => {
   const res = await api.get("/application/" + jobId);
 
   return res.data;
 };
 
-export const updateApplicationStatus = async (
+const updateApplicationStatus = async (
   jobApplicationId: string,
   status: "rejected" | "accepted",
 ) => {
@@ -73,4 +69,18 @@ export const updateApplicationStatus = async (
   });
 
   return res.data;
+};
+
+export default {
+  applyToJob: errorWrapper(applyToJob, "Failed to submit application!"),
+  getApplicantDetails: errorWrapper(getApplicantDetails),
+  getCandidateCountApplications: errorWrapper(getCandidateCountApplications),
+  getCandidateApplications: errorWrapper(getCandidateApplications),
+  getCandidateRecentApplications: errorWrapper(getCandidateRecentApplications),
+  getCandidateApplicationDetails: errorWrapper(getCandidateApplicationDetails),
+  getApplications: errorWrapper(getApplications),
+  updateApplicationStatus: errorWrapper(
+    updateApplicationStatus,
+    "Failed to update application status!",
+  ),
 };

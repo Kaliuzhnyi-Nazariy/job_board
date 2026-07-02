@@ -6,7 +6,7 @@ import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCV } from "../../../../../features/cv/requests";
+import cvRequests from "../../../../../features/cv/requests";
 import { errorToast, successToast } from "../../../../Components/Toasts/Toasts";
 
 const ITEM_HEIGHT = 40;
@@ -31,7 +31,7 @@ const MoreOptionsMenu = ({
 
   const { mutate: deleteCVMutation } = useMutation({
     mutationKey: ["delteCV"],
-    mutationFn: () => deleteCV(cvId),
+    mutationFn: () => cvRequests.deleteCV(cvId),
     onSuccess: () => {
       successToast({ text: "CV deleted!" });
       queryClient.invalidateQueries({ queryKey: ["getCVs"] });

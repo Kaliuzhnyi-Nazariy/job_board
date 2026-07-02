@@ -1,10 +1,7 @@
 import { useSelector } from "react-redux";
 import { userId } from "../../../../features/user/userSelector";
 import { useQuery } from "@tanstack/react-query";
-import {
-  getCandidateApplications,
-  getCandidateCountApplications,
-} from "../../../../features/application/applicationRequest";
+import applicationRequests from "../../../../features/application/applicationRequest";
 import { useEffect, useState } from "react";
 import ApplicationDetails from "../../../Components/modals/ApplicationDetails";
 import DashboardSection from "../../../Components/Dashboard/DashboardSection";
@@ -41,12 +38,13 @@ const Applied = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["getMyApplications", userIdValue, applicationsPage],
-    queryFn: () => getCandidateApplications(applicationsPage),
+    queryFn: () =>
+      applicationRequests.getCandidateApplications(applicationsPage),
   });
 
   const { data: applicationsCount } = useQuery({
     queryKey: ["getMyApplicationsCount"],
-    queryFn: getCandidateCountApplications,
+    queryFn: applicationRequests.getCandidateCountApplications,
   });
 
   if (isLoading) {

@@ -1,6 +1,6 @@
 import JobCard from "./JobCard";
 import { useQuery } from "@tanstack/react-query";
-import { getJobs } from "../../../../features/job/jobRequests";
+import jobRequest from "../../../../features/job/jobRequests";
 import { Link, useSearchParams } from "react-router";
 import Section from "../../Section";
 import PaginationComponent from "../../Pagination";
@@ -27,7 +27,7 @@ const JobList = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["jobs", page, limit, order, title, location],
     queryFn: () =>
-      getJobs({
+      jobRequest.getJobs({
         page: page,
         limit: limit as 12 | 16,
         order: order as "newest" | "oldest",

@@ -1,10 +1,7 @@
 import { useSelector } from "react-redux";
 import { username } from "../../../features/user/userSelector";
 import { useQuery } from "@tanstack/react-query";
-import {
-  getCandidateCountApplications,
-  getCandidateRecentApplications,
-} from "../../../features/application/applicationRequest";
+import applicationRequests from "../../../features/application/applicationRequest";
 import { Link } from "react-router";
 import ApplicationDetails from "../../Components/modals/ApplicationDetails";
 import { useState } from "react";
@@ -19,16 +16,14 @@ const Overview = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["getMyApplicationsCount"],
-    queryFn: getCandidateCountApplications,
+    queryFn: applicationRequests.getCandidateCountApplications,
   });
 
-  const {
-    data: candidateApplications,
-    isLoading: applicationsLoading,
-  } = useQuery<CandidateRecentApplications[]>({
-    queryKey: ["candidateRecentApplications"],
-    queryFn: getCandidateRecentApplications,
-  });
+  const { data: candidateApplications, isLoading: applicationsLoading } =
+    useQuery<CandidateRecentApplications[]>({
+      queryKey: ["candidateRecentApplications"],
+      queryFn: applicationRequests.getCandidateRecentApplications,
+    });
 
   const [openModal, setOpenModal] = useState(false);
   const [applicationId, setApplicationId] = useState<string | null>(null);

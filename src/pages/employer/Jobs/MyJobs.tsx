@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMyJobs } from "../../../../features/job/jobRequests";
+import jobRequests from "../../../../features/job/jobRequests";
 import DashboardSection from "../../../Components/Dashboard/DashboardSection";
 import { useSearchParams } from "react-router";
 import { useEffect } from "react";
@@ -21,7 +21,7 @@ const MyJobs = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["myjobs", page],
-    queryFn: () => getMyJobs(page!),
+    queryFn: () => jobRequests.getMyJobs(page!),
     retry: false,
   });
 

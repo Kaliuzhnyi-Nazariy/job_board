@@ -1,10 +1,7 @@
 import { useSelector } from "react-redux";
 import { userLoading, username } from "../../../features/user/userSelector";
 import { useQuery } from "@tanstack/react-query";
-import {
-  getFiveRecentJobs,
-  getMyJobs,
-} from "../../../features/job/jobRequests";
+import jobRequests from "../../../features/job/jobRequests";
 import { Link } from "react-router";
 import DashboardSection from "../../Components/Dashboard/DashboardSection";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
@@ -15,12 +12,12 @@ const Overview = () => {
   const isUserLoading = useSelector(userLoading);
   const { data, isLoading } = useQuery({
     queryKey: ["myjobs"],
-    queryFn: () => getMyJobs(1),
+    queryFn: () => jobRequests.getMyJobs(1),
   });
 
   const { data: recentJobs, isLoading: loadingRecentJobs } = useQuery({
     queryKey: ["myRecentJobs"],
-    queryFn: getFiveRecentJobs,
+    queryFn: jobRequests.getFiveRecentJobs,
   });
 
   return (

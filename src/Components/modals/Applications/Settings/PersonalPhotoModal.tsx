@@ -5,10 +5,7 @@ import { useState } from "react";
 import { errorToast, successToast } from "../../../Toasts/Toasts";
 import { useMutation } from "@tanstack/react-query";
 
-import {
-  deleteUserPhoto,
-  uploadUserPhotoRequest,
-} from "../../../../../features/user/userPhotoRequest";
+import userPhotoRequests from "../../../../../features/user/userPhotoRequest";
 import { useAppDispatch } from "../../../../../features/hooks/dispatchHook";
 import { getMe } from "../../../../../features/user/userRequest";
 
@@ -27,7 +24,7 @@ const PersonalPhotoModal = ({
 
   const { mutate: uploadPhoto, isPending: uploadingLoading } = useMutation({
     mutationKey: ["uploadPhoto"],
-    mutationFn: () => uploadUserPhotoRequest(photoFile!),
+    mutationFn: () => userPhotoRequests.uploadUserPhotoRequest(photoFile!),
     onError: (err) => {
       errorToast({ text: err.message });
     },
@@ -40,7 +37,7 @@ const PersonalPhotoModal = ({
 
   const { mutate: deletePhoto, isPending: deletingLoading } = useMutation({
     mutationKey: ["deletePhoto"],
-    mutationFn: () => deleteUserPhoto(),
+    mutationFn: () => userPhotoRequests.deleteUserPhoto(),
     onError: (err) => {
       errorToast({ text: err.message });
     },

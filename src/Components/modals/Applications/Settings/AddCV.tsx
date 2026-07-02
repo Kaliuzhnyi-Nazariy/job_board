@@ -3,7 +3,7 @@ import CustomButton from "../../../Buttons/Button";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { uploadCV } from "../../../../../features/cv/requests";
+import cvRequests from "../../../../../features/cv/requests";
 import { errorToast, successToast } from "../../../Toasts/Toasts";
 
 const AddCV = ({
@@ -33,7 +33,7 @@ const AddCV = ({
   const { mutate: uploadCVMutation, isPending: uploadLoading } = useMutation({
     mutationKey: ["uploadCV"],
     mutationFn: (data: { file: File; name: string }) =>
-      uploadCV(data.file, data.name),
+      cvRequests.uploadCV(data.file, data.name),
     onError: (err) => errorToast({ text: err.message }),
     onSuccess: () => {
       successToast({ text: "CV uploaded successfully!" });

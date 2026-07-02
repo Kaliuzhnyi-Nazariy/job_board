@@ -5,7 +5,7 @@ import { useState } from "react";
 import AddCV from "../../../../Components/modals/Applications/Settings/AddCV";
 import UpdateCV from "../../../../Components/modals/Applications/Settings/UpdateCV";
 import { useQuery } from "@tanstack/react-query";
-import { getCVs } from "../../../../../features/cv/requests";
+import cvRequests from "../../../../../features/cv/requests";
 import type { ICV } from "../../../../../features/cv/interfaces";
 
 const CVSection = () => {
@@ -34,7 +34,7 @@ const CVSection = () => {
 
   const { data: cvs, isPending: cvsLoading } = useQuery({
     queryKey: ["getCVs"],
-    queryFn: () => getCVs(),
+    queryFn: () => cvRequests.getCVs(),
   });
 
   const turnSizeIntoMB = (size: number) => {

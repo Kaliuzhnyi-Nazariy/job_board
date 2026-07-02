@@ -95,8 +95,10 @@ const DashboardEmployerLinks = ({ onClick }: { onClick?: () => void }) => {
           Saved Candidates
         </NavLink>
         <NavLink
-          to={baseURL}
-          className={`${liStyle} ${inactive} ${noPage}`}
+          to={`${baseURL}/subscriptions`}
+          className={({ isActive }) =>
+            `${liStyle} ${isActive ? active : inactive}`
+          }
           onClick={onClick}
         >
           <ReceiptLongOutlinedIcon className="size-6" />
