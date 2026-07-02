@@ -72,6 +72,8 @@ const Forbidden = lazy(() => import("./pages/error/Forbidden"));
 
 const NotFoundPage = lazy(() => import("./pages/error/NotFound"));
 
+const SubscriptionsPage = lazy(() => import("./pages/Subscriptions"));
+
 // routes
 
 function App() {
@@ -131,6 +133,7 @@ function App() {
                 path="settings"
                 element={<EmployerPersonalSettingsPage />}
               />
+              <Route path="subscriptions" element={<SubscriptionsPage />} />
             </Route>
             <Route path="candidates" element={<FindACandidatePage />} />
             <Route path="candidates/:candidateId" element={<CandidatePage />} />
