@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router";
-import { getApplications } from "../../../../features/application/applicationRequest";
+import applicationRequests from "../../../../features/application/applicationRequest";
 import ApplicationCandidateDetails from "../../../Components/Applications/ApplicationCandidateDetails";
 import React, { useState } from "react";
 import type { JobApplicatinon } from "../../../../features/application/interfaces";
@@ -18,7 +18,7 @@ const Applications = () => {
 
   const { data, isLoading, isError, refetch } = useQuery<JobApplicatinon[]>({
     queryKey: ["getApplications", jobId],
-    queryFn: () => getApplications(jobId!),
+    queryFn: () => applicationRequests.getApplications(jobId!),
   });
 
   if (isLoading) {

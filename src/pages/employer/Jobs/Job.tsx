@@ -1,9 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  deleteJob,
-  getMyJob,
-  updateMyJob,
-} from "../../../../features/job/jobRequests";
+import jobRequests from "../../../../features/job/jobRequests";
 import { useNavigate, useParams } from "react-router";
 import type { IJobForm, Job } from "../../../../features/job/interfaces";
 import { useEffect, useState } from "react";
@@ -21,7 +17,7 @@ const Job = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["myJob", jobId],
-    queryFn: () => getMyJob(jobId!),
+    queryFn: () => jobRequests.getMyJob(jobId!),
     enabled: !!jobId,
   });
 
@@ -90,7 +86,8 @@ const Job = () => {
 
   const { mutate } = useMutation({
     mutationKey: ["updateJob"],
-    mutationFn: (data: IJobForm) => updateMyJob({ data, jobId: jobId! }),
+    mutationFn: (data: IJobForm) =>
+      jobRequests.updateMyJob({ data, jobId: jobId! }),
     onSuccess: () => {
       console.log("it is success");
       queryClient.invalidateQueries({
@@ -104,7 +101,7 @@ const Job = () => {
 
   const { mutate: deleteJobMutation } = useMutation({
     mutationKey: ["deleteJob"],
-    mutationFn: () => deleteJob(jobId!),
+    mutationFn: () => jobRequests.deleteJob(jobId!),
     onSuccess: () => {
       navigate("/employer/dashboard/my-jobs");
     },

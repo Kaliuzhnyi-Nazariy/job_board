@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCandidates } from "../../../../features/candidate/candidatesRequsts";
+import candidatesRequests from "../../../../features/candidate/candidatesRequsts";
 import { Link, useSearchParams } from "react-router";
 import type { ICandidateData } from "../../../../features/candidate/interfaces";
 import Section from "../../../Components/Section";
@@ -25,21 +25,37 @@ const FindACandidate = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["candidates", search, location, order],
-    queryFn: () => getCandidates(limit, search, location, order),
+    queryFn: () =>
+      candidatesRequests.getCandidates(limit, search, location, order),
   });
 
-  if (isLoading) return <p>Searching for candidates</p>;
+  if (isLoading) {
+    return (
+      <Section extraStyles="flex items-center justify-center">
+        <p>Searching for candidates</p>
+      </Section>
+    );
+  }
 
-  if (isError) return <p>Candidates not found!</p>;
+  if (isError) {
+    return (
+      <Section extraStyles="flex items-center justify-center">
+        <p>Candidates not found!</p>
+      </Section>
+    );
+  }
 
   const pageAmount = Math.ceil(data.meta.total / data.meta.limit);
+
+  const linesCount = Math.ceil(data.data.length / (limit == 12 ? 3 : 4)) ?? 1;
 
   const listStyleView = "flex flex-col gap-3 min-[1440px]:gap-6";
   const gridListView = `grid grid-cols-1 min-[425px]:grid-cols-2 ${
     limit == 12
       ? "min-[1024px]:grid-cols-3 gap-3 "
       : "min-[1024px]:grid-cols-4 gap-2 "
-  } grid-rows-4 `;
+  } grid-rows-${linesCount} `;
+  // } grid-rows-4 `;
 
   const photoStyles = `${
     listView === "list"
@@ -58,7 +74,7 @@ const FindACandidate = () => {
   }`;
 
   return (
-    <Section>
+    <Section extraStyles="pb-6">
       <Filters />
       <div className="grid min-[1440px]:grid-cols-[424px_1fr] gap-6 mt-5 ">
         <div className="hidden min-[1440px]:block w-106 h-302 bg-amber-500"></div>

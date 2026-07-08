@@ -1,6 +1,7 @@
 import api from "../api/api";
+import { errorWrapper } from "../helper";
 
-export const uploadUserPhotoRequest = async (file: File) => {
+const uploadUserPhotoRequest = async (file: File) => {
   const formData = new FormData();
 
   formData.append("photo", file);
@@ -10,8 +11,13 @@ export const uploadUserPhotoRequest = async (file: File) => {
   return res.data;
 };
 
-export const deleteUserPhoto = async () => {
+const deleteUserPhoto = async () => {
   const res = await api.delete("/user/photo");
 
   return res.data;
+};
+
+export default {
+  uploadUserPhotoRequest: errorWrapper(uploadUserPhotoRequest),
+  deleteUserPhoto: errorWrapper(deleteUserPhoto),
 };

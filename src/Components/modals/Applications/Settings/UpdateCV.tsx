@@ -5,7 +5,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import type { ICV } from "../../../../../features/cv/interfaces";
 import { useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateCV } from "../../../../../features/cv/requests";
+import cvRequests from "../../../../../features/cv/requests";
 import { errorToast, successToast } from "../../../Toasts/Toasts";
 
 import { Controller } from "react-hook-form";
@@ -50,7 +50,7 @@ const UpdateCV = ({
   const { mutate: udpateCV, isPending: updatingLoading } = useMutation({
     mutationKey: ["updateCV"],
     mutationFn: (data: IUpdCV) =>
-      updateCV({
+      cvRequests.updateCV({
         cv: data.file,
         cvId: selectedCV.id,
         filename: selectedCV.filename,

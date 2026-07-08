@@ -1,10 +1,10 @@
 import { Box, MenuItem, Modal, Select, TextField } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-import { applyToJob } from "../../../features/application/applicationRequest";
+import applicationRequests from "../../../features/application/applicationRequest";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { errorToast, successToast } from "../Toasts/Toasts";
-import { getCVs } from "../../../features/cv/requests";
+import cvRequests from "../../../features/cv/requests";
 import type { ICV } from "../../../features/cv/interfaces";
 
 export interface ApplyState {
@@ -37,7 +37,7 @@ const ApplyModal = ({
   const { mutate, isPending } = useMutation({
     mutationKey: ["applyToJob"],
     mutationFn: (data: ApplyState) =>
-      applyToJob({
+      applicationRequests.applyToJob({
         jobId: jobId!,
         coveringLetter: data.coveringLetter,
         cvId: data.cvId,
@@ -58,7 +58,7 @@ const ApplyModal = ({
 
   const { data: cvs } = useQuery({
     queryKey: ["getCVs"],
-    queryFn: () => getCVs(),
+    queryFn: () => cvRequests.getCVs(),
   });
 
   return (

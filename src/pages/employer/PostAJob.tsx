@@ -2,15 +2,40 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type IJobForm } from "../../../features/job/interfaces";
-import { postJob } from "../../../features/job/jobRequests";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import DashboardSection from "../../Components/Dashboard/DashboardSection";
 import { MenuItem, Select, TextField } from "@mui/material";
 import { errorToast, successToast } from "../../Components/Toasts/Toasts";
+import subscriptionsRequest from "../../../features/subscription/requests";
+import { Link } from "react-router";
+
+import jobRequests from "../../../features/job/jobRequests";
 
 const PostAJob = () => {
+  const { data: mySubscription } = useQuery({
+    queryKey: ["getMySubscription"],
+    queryFn: subscriptionsRequest.getMySubscription,
+  });
+
+  const { data: subscriptionData, isFetched: fetchedSubscriptionData } =
+    useQuery({
+      queryKey: ["getSubscriptionData", mySubscription?.plan_id],
+      queryFn: () =>
+        subscriptionsRequest.getSubscriptionData(mySubscription!.plan_id),
+      enabled: !!mySubscription?.plan_id,
+    });
+
+  const subscriptionError = !subscriptionData
+    ? "You should subscribe on any plan!"
+    : null;
+
+  const { data: jobs, isFetched: fetchedApplicationsAmount } = useQuery({
+    queryKey: ["getApplicationsAmount"],
+    queryFn: () => jobRequests.getMyJobs(1),
+  });
+
   const JobForm: IJobForm = {
     title: "",
     position: "",
@@ -67,7 +92,7 @@ const PostAJob = () => {
   });
 
   const mutation = useMutation({
-    mutationFn: (data: IJobForm) => postJob(data),
+    mutationFn: (data: IJobForm) => jobRequests.postJob(data),
     onSuccess: () => {
       reset({
         title: "",
@@ -84,11 +109,11 @@ const PostAJob = () => {
       });
       successToast({ text: "Job has been created!" });
     },
-    onError: (err) =>
+    onError: (err) => {
       errorToast({
-        text:
-          (err as { message: string }).message || "Job hasn't been created!",
-      }),
+        text: (err as Error).message || "Job hasn't been created!",
+      });
+    },
   });
 
   const submitHandler: SubmitHandler<IJobForm> = async (data) => {
@@ -99,8 +124,27 @@ const PostAJob = () => {
 
   const errorMessage = "text-(--danger5) px-3 pt-1";
 
+  if (subscriptionError !== null) {
+    return (
+      <DashboardSection extraStyles="flex flex-col flex-1 items-center justify-center">
+        <p>{subscriptionError}</p>
+        <Link
+          to="/employer/dashboard/subscriptions"
+          className="disabled:opacity-50 px-8 py-4 bg-(--primary5) text-white button cursor-pointer flex gap-3 items-center rounded-sm hover:bg-(--primary6) transition-colors duration-150 mt-8 "
+        >
+          Go to buy <ArrowRightAltIcon />
+        </Link>
+      </DashboardSection>
+    );
+  }
+
+  const isReachLimits =
+    fetchedSubscriptionData &&
+    fetchedApplicationsAmount &&
+    jobs.meta.allAmountOfJobs >= subscriptionData.limits;
+
   return (
-    <DashboardSection>
+    <DashboardSection extraStyles="pb-6 min-[768px]:pb-0 min-[1440px]:pb-6 flex-1 ">
       <h5>Post a job</h5>
       <form onSubmit={handleSubmit(submitHandler)} className="mt-8">
         <div className={inputBlock}>
@@ -390,12 +434,17 @@ const PostAJob = () => {
         </div>
 
         <button
-          disabled={mutation.isPending}
+          disabled={mutation.isPending || isReachLimits}
           className="disabled:opacity-50 px-8 py-4 bg-(--primary5) text-white button cursor-pointer flex gap-3 items-center rounded-sm hover:bg-(--primary6) transition-colors duration-150 mt-8 "
         >
           Post Job <ArrowRightAltIcon />
         </button>
       </form>
+
+      {isReachLimits && (
+        <p className={errorMessage}>You reached subscription limits!</p>
+      )}
+      {subscriptionError && <p className={errorMessage}>{subscriptionError}</p>}
     </DashboardSection>
   );
 };

@@ -1,10 +1,7 @@
 import { useSelector } from "react-redux";
 import { userId } from "../../../../features/user/userSelector";
 import { useQuery } from "@tanstack/react-query";
-import {
-  getCandidateApplications,
-  getCandidateCountApplications,
-} from "../../../../features/application/applicationRequest";
+import applicationRequests from "../../../../features/application/applicationRequest";
 import { useEffect, useState } from "react";
 import ApplicationDetails from "../../../Components/modals/ApplicationDetails";
 import DashboardSection from "../../../Components/Dashboard/DashboardSection";
@@ -41,12 +38,13 @@ const Applied = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["getMyApplications", userIdValue, applicationsPage],
-    queryFn: () => getCandidateApplications(applicationsPage),
+    queryFn: () =>
+      applicationRequests.getCandidateApplications(applicationsPage),
   });
 
   const { data: applicationsCount } = useQuery({
     queryKey: ["getMyApplicationsCount"],
-    queryFn: getCandidateCountApplications,
+    queryFn: applicationRequests.getCandidateCountApplications,
   });
 
   if (isLoading) {
@@ -62,7 +60,7 @@ const Applied = () => {
     : 0;
 
   return (
-    <DashboardSection>
+    <DashboardSection extraStyles="pb-6 min-[1024px]:pb-0 flex flex-col min-[1440px]:pb-6 ">
       <h2 className="body_large">
         Applied Jobs
         <span className="opacity-50">
@@ -72,50 +70,11 @@ const Applied = () => {
       </h2>
       {data && data.length > 0 ? (
         <>
-          {/* <ul className="w-full grid grid-cols-[3fr_1fr_1fr_1fr] px-5 py-2.5 body_xs bg-(--gray50) mt-4">
-            <li>Job</li>
-            <li className="justify-self-center hidden">Date Applied</li>
-            <li className="justify-self-center">Status</li>
-            <li className="justify-self-center">Action</li>
-          </ul>
-          <ul className="w-full">
-            {data.map((aj) => {
-              return <AppliedListItem data={aj} handleOpen={handleOpen} />;
-            })}
-          </ul> */}
           <AppliedList applications={data} handleOpen={handleOpen} />
         </>
       ) : (
         <p>You haven't applied yet!</p>
       )}
-      {/* <Pagination
-        count={amountOfPages}
-        page={Number(applicationsPage)}
-        className="flex justify-center mt-12"
-        onChange={(_, page) => {
-          setSearchParams((prev) => {
-            const params = new URLSearchParams(prev);
-            params.set("page", String(page));
-            return params;
-          });
-        }}
-        sx={{
-          "& .Mui-disabled": {
-            color: "#99C2FF",
-            bgcolor: "transparent",
-          },
-          "& .css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected":
-            {
-              bgcolor: "#0a65cc",
-              backgroundColor: "#0a65cc",
-              color: "white",
-            },
-          "& .MuiPaginationItem-previousNext": {
-            bgcolor: "#e7f0fa",
-            color: "#0a65cc",
-          },
-        }}
-      /> */}
 
       <PaginationComponent
         page={Number(applicationsPage)}

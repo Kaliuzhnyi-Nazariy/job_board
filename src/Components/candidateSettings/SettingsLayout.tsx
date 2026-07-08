@@ -11,7 +11,7 @@ const activeStyles = `text-(--primary5) before:content-[''] before:absolute befo
 
 const SettingsLayout = () => {
   return (
-    <DashboardSection extraStyles="flex flex-col">
+    <DashboardSection extraStyles="flex flex-col pb-6 min-[1024px]:pb-0 min-[1440px]:pb-6">
       {/* <div className="flex flex-col mt-12 ml-12 max-w-246"> */}
       <h5
         style={{

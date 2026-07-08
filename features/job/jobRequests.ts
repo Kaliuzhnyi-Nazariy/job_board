@@ -1,16 +1,29 @@
 import type { IGetJob, IJobForm } from "./interfaces";
 import api from "../api/api";
+import axios from "axios";
+import { errorWrapper } from "../helper";
 
-export const postJob = async (data: IJobForm) => {
-  const res = await api.post("/job/post", {
-    ...data,
-    salary: `$${data.minSalary}-$${data.maxSalary}/${data.salaryType}`,
-  });
+const postJob = async (data: IJobForm) => {
+  try {
+    const res = await api.post("/job/post", {
+      ...data,
+      salary: `$${data.minSalary}-$${data.maxSalary}/${data.salaryType}`,
+    });
 
-  return res.data;
+    return res.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const backendMessage = (error.response?.data as { message?: string })
+        ?.message;
+
+      throw new Error(backendMessage || "Job hasn't been created!");
+    }
+
+    throw error;
+  }
 };
 
-export const getJobs = async (params: IGetJob) => {
+const getJobs = async (params: IGetJob) => {
   const res = await api.get("/job/jobs", {
     params,
   });
@@ -18,7 +31,7 @@ export const getJobs = async (params: IGetJob) => {
   return res.data;
 };
 
-export const getMyJobs = async (page: number) => {
+const getMyJobs = async (page: number) => {
   const res = await api.get("/job/my-jobs", {
     params: { page },
   });
@@ -26,13 +39,13 @@ export const getMyJobs = async (page: number) => {
   return res.data;
 };
 
-export const getMyJob = async (jobId: string) => {
+const getMyJob = async (jobId: string) => {
   const res = await api.get("/job/my-jobs/" + jobId);
 
   return res.data;
 };
 
-export const updateMyJob = async ({
+const updateMyJob = async ({
   data,
   jobId,
 }: {
@@ -48,19 +61,19 @@ export const updateMyJob = async ({
   return res.data;
 };
 
-export const getJob = async (jobId: string) => {
+const getJob = async (jobId: string) => {
   const res = await api.get("/job/jobs/" + jobId);
 
   return res.data;
 };
 
-export const getFiveRecentJobs = async () => {
+const getFiveRecentJobs = async () => {
   const res = await api.get("/job/my-jobs/five-recent");
 
   return res.data;
 };
 
-export const getRecentJobs = async (page: string) => {
+const getRecentJobs = async (page: string) => {
   const res = await api.get("/job/my-jobs/recent", {
     params: {
       page,
@@ -70,8 +83,20 @@ export const getRecentJobs = async (page: string) => {
   return res.data;
 };
 
-export const deleteJob = async (jobId: string) => {
+const deleteJob = async (jobId: string) => {
   const res = await api.delete("/job/delete/" + jobId);
 
   return res.data;
+};
+
+export default {
+  postJob: errorWrapper(postJob),
+  getMyJobs: errorWrapper(getMyJobs),
+  getMyJob: errorWrapper(getMyJob),
+  updateMyJob: errorWrapper(updateMyJob),
+  getJob: errorWrapper(getJob),
+  getJobs: errorWrapper(getJobs),
+  getFiveRecentJobs: errorWrapper(getFiveRecentJobs),
+  getRecentJobs: errorWrapper(getRecentJobs),
+  deleteJob: errorWrapper(deleteJob),
 };

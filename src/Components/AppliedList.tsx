@@ -18,7 +18,7 @@ const AppliedList = ({
         <li className="justify-self-center">Status</li>
         <li className="justify-self-center">Action</li>
       </ul>
-      <ul className="w-full mt-2">
+      <ul className="w-full mt-2 flex-1">
         {applications.map((ca) => {
           return (
             <AppliedListItem data={ca} handleOpen={handleOpen} key={ca.id} />

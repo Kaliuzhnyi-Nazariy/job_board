@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import { getJob } from "../../../features/job/jobRequests";
+import jobRequests from "../../../features/job/jobRequests";
 import ApplyModal from "../../Components/modals/ApplyModal";
 import React from "react";
 import Section from "../../Components/Section";
@@ -18,7 +18,7 @@ const Job = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["job", jobId],
-    queryFn: () => getJob(jobId!),
+    queryFn: () => jobRequests.getJob(jobId!),
   });
 
   const [open, setOpen] = React.useState(false);

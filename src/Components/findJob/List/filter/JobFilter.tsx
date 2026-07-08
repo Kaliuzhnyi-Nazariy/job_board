@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "react-router";
-import { getJobs } from "../../../../../features/job/jobRequests";
+import jobRequests from "../../../../../features/job/jobRequests";
 
 const JobFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,7 +16,7 @@ const JobFilter = () => {
   const { refetch } = useQuery({
     queryKey: ["jobs", page, limit, order, jobTitle, jobLocation],
     queryFn: () =>
-      getJobs({
+      jobRequests.getJobs({
         page,
         limit,
         order,

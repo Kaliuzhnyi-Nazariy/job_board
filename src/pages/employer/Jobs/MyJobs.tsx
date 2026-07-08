@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMyJobs } from "../../../../features/job/jobRequests";
+import jobRequests from "../../../../features/job/jobRequests";
 import DashboardSection from "../../../Components/Dashboard/DashboardSection";
 import { useSearchParams } from "react-router";
 import { useEffect } from "react";
@@ -21,7 +21,7 @@ const MyJobs = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["myjobs", page],
-    queryFn: () => getMyJobs(page!),
+    queryFn: () => jobRequests.getMyJobs(page!),
     retry: false,
   });
 
@@ -32,7 +32,7 @@ const MyJobs = () => {
   const pageAmount = Math.ceil(data.meta.allAmountOfJobs / data.meta.limit);
 
   return (
-    <DashboardSection>
+    <DashboardSection extraStyles=" flex flex-col flex-1 pb-6 min-[768px]:pb-0 min-[1440px]:pb-6">
       <div className="flex">
         <h1 className="body_large_500">
           My Jobs{" "}

@@ -4,10 +4,7 @@ import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { userId } from "../../../../../features/user/userSelector";
-import {
-  getCandidate,
-  updateContact,
-} from "../../../../../features/candidate/candidatesRequsts";
+import candidatesRequest from "../../../../../features/candidate/candidatesRequsts";
 import type { IDefaultContactForm } from "../../../../../features/candidate/interfaces";
 import SettingsButton from "../../../../Components/SettingsButton";
 import { errorToast, successToast } from "../../../../Components/Toasts/Toasts";
@@ -35,7 +32,7 @@ const ContactForm = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["candidate", userIdValue],
-    queryFn: () => getCandidate(userIdValue!),
+    queryFn: () => candidatesRequest.getCandidate(userIdValue!),
   });
 
   useEffect(() => {
@@ -50,7 +47,7 @@ const ContactForm = () => {
 
   const handleSubmit: SubmitHandler<IDefaultContactForm> = async (data) => {
     try {
-      await updateContact(data);
+      await candidatesRequest.updateContact(data);
       successToast({ text: "Contact info updated!" });
     } catch (error) {
       errorToast({ text: (error as { message: string }).message });

@@ -5,13 +5,13 @@ const UserLayout = () => {
   // fetch user
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col w-full">
       <Navbar />
       {/* <Header /> */}
-      <main>
+      <main className="flex flex-col flex-1">
         <Outlet />
       </main>
-    </>
+    </div>
   );
 };
 

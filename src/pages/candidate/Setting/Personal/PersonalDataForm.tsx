@@ -7,10 +7,7 @@ import {
 } from "../../../../../features/user/userSelector";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  getCandidate,
-  updateCandidatePersonal,
-} from "../../../../../features/candidate/candidatesRequsts";
+import candidatesRequest from "../../../../../features/candidate/candidatesRequsts";
 import type { IUpdForm } from "../../../../../features/candidate/interfaces";
 import { useAppDispatch } from "../../../../../features/hooks/dispatchHook";
 import { getMe } from "../../../../../features/user/userRequest";
@@ -27,7 +24,7 @@ const PersonalDataForm = () => {
 
   const { data } = useQuery({
     queryKey: ["candidate", userIdValue],
-    queryFn: () => getCandidate(userIdValue!),
+    queryFn: () => candidatesRequest.getCandidate(userIdValue!),
   });
 
   const defaultValues: IUpdForm = {
@@ -65,7 +62,7 @@ const PersonalDataForm = () => {
   const { mutate } = useMutation({
     mutationKey: ["candidateUpdate"],
     mutationFn: (data: IUpdForm & { id: string }) =>
-      updateCandidatePersonal(data),
+      candidatesRequest.updateCandidatePersonal(data),
     onSuccess: () => {
       dispatch(getMe());
 

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import { getCandidate } from "../../../../features/candidate/candidatesRequsts";
+import candidatesRequest from "../../../../features/candidate/candidatesRequsts";
 import type { FullDataCandidate } from "../../../../features/candidate/interfaces";
 import Section from "../../../Components/Section";
 
@@ -15,7 +15,7 @@ const Candidate = () => {
 
   const { data, isLoading, isError } = useQuery<FullDataCandidate>({
     queryKey: ["candidate", candidateId],
-    queryFn: () => getCandidate(candidateId!),
+    queryFn: () => candidatesRequest.getCandidate(candidateId!),
   });
 
   if (isError) {
@@ -23,7 +23,7 @@ const Candidate = () => {
   }
 
   return (
-    <Section>
+    <Section extraStyles="pb-6">
       {isLoading && <p>Loading...</p>}
       {data ? (
         <>

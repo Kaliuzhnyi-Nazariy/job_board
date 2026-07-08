@@ -1,9 +1,6 @@
 import { Box, Modal } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-  getApplicantDetails,
-  updateApplicationStatus,
-} from "../../../features/application/applicationRequest";
+import applicationRequests from "../../../features/application/applicationRequest";
 import ContactData from "../Candidate/ContactData";
 
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -13,7 +10,7 @@ import { errorToast, successToast } from "../Toasts/Toasts";
 import LinkButton from "../Buttons/LinkButton";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import { getPresignedLink } from "../../../features/cv/requests";
+import cvRequests from "../../../features/cv/requests";
 import { useNavigate } from "react-router";
 
 const ApplicationCandidateDetails = ({
@@ -31,13 +28,15 @@ const ApplicationCandidateDetails = ({
 }) => {
   const { data, isLoading } = useQuery({
     queryKey: ["getCandidateDetails", applicationId],
-    queryFn: () => getApplicantDetails(jobId, applicationId!),
+    queryFn: () =>
+      applicationRequests.getApplicantDetails(jobId, applicationId!),
     enabled: open && !!applicationId && !!jobId,
   });
 
   const { mutate: rejectApplication } = useMutation({
     mutationKey: ["rejectApplicationStatus"],
-    mutationFn: () => updateApplicationStatus(applicationId!, "rejected"),
+    mutationFn: () =>
+      applicationRequests.updateApplicationStatus(applicationId!, "rejected"),
     onSuccess: () => {
       successToast({ text: "Candidate rejected!" });
       refetchApplications();
@@ -51,7 +50,8 @@ const ApplicationCandidateDetails = ({
 
   const { mutate: hireApplication } = useMutation({
     mutationKey: ["acceptApplicationStatus"],
-    mutationFn: () => updateApplicationStatus(applicationId!, "accepted"),
+    mutationFn: () =>
+      applicationRequests.updateApplicationStatus(applicationId!, "accepted"),
     onSuccess: () => {
       successToast({ text: "Candidate accepted!" });
       refetchApplications();
@@ -67,7 +67,7 @@ const ApplicationCandidateDetails = ({
 
   const { mutate: downloadCV, isPending: downloadLoading } = useMutation({
     mutationKey: ["downloadCV"],
-    mutationFn: () => getPresignedLink(data.cv_id),
+    mutationFn: () => cvRequests.getPresignedLink(data.cv_id),
     onSuccess: (data) => {
       navigate(data);
     },

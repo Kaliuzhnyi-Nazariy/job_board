@@ -1,6 +1,6 @@
 import JobCard from "./JobCard";
 import { useQuery } from "@tanstack/react-query";
-import { getJobs } from "../../../../features/job/jobRequests";
+import jobRequest from "../../../../features/job/jobRequests";
 import { Link, useSearchParams } from "react-router";
 import Section from "../../Section";
 import PaginationComponent from "../../Pagination";
@@ -27,7 +27,7 @@ const JobList = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["jobs", page, limit, order, title, location],
     queryFn: () =>
-      getJobs({
+      jobRequest.getJobs({
         page: page,
         limit: limit as 12 | 16,
         order: order as "newest" | "oldest",
@@ -37,20 +37,32 @@ const JobList = () => {
   });
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <Section extraStyles="flex-1 items-center justify-center flex">
+        <p>Loading...</p>
+      </Section>
+    );
   }
 
   if (error) {
-    return <p>failed to get jobs</p>;
+    return (
+      <Section extraStyles="flex-1 items-center justify-center flex">
+        <p>failed to get jobs</p>
+      </Section>
+    );
   }
 
-  const pageAmount = Math.ceil(data.meta.total / data.meta.limit);
+  const pageAmount = Math.ceil(data?.meta.total / data?.meta.limit) || 0;
 
   return (
     <>
       {data?.jobs?.length > 0 && (
-        <Section>
-          <ul className={`${listView === "grid" ? gridStyles : listStyles} `}>
+        <Section extraStyles=" pb-6 flex flex-col ">
+          <ul
+            className={`flex flex-1 ${
+              listView === "grid" ? gridStyles : listStyles
+            } `}
+          >
             {data.jobs.map((job: IJobList) => {
               return (
                 <li className=" " key={job.id}>

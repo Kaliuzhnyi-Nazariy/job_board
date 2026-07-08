@@ -1,6 +1,6 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { getCandidateApplicationDetails } from "../../../features/application/applicationRequest";
+import applicationRequests from "../../../features/application/applicationRequest";
 import { dateFormat } from "../../helpers";
 import WorkTimeBadge from "../WorkTimeBadge";
 
@@ -17,7 +17,8 @@ const ApplicationDetails = ({
 }) => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["getApplicationDetails", applicationId],
-    queryFn: () => getCandidateApplicationDetails(applicationId),
+    queryFn: () =>
+      applicationRequests.getCandidateApplicationDetails(applicationId),
     enabled: !!applicationId,
     retry: 1,
   });

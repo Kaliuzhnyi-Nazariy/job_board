@@ -3,10 +3,7 @@ import { useEffect } from "react";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { userId } from "../../../../features/user/userSelector";
-import {
-  getCandidate,
-  updateCandidateProfile,
-} from "../../../../features/candidate/candidatesRequsts";
+import candidatesRequest from "../../../../features/candidate/candidatesRequsts";
 import type { UpdateProfile } from "../../../../features/candidate/interfaces";
 import { MenuItem, Select, TextField } from "@mui/material";
 import { errorToast, successToast } from "../../../Components/Toasts/Toasts";
@@ -49,7 +46,8 @@ const Profile = () => {
 
   const { mutate } = useMutation({
     mutationKey: ["updateProfile"],
-    mutationFn: (newData: UpdateProfile) => updateCandidateProfile(newData),
+    mutationFn: (newData: UpdateProfile) =>
+      candidatesRequest.updateCandidateProfile(newData),
     onSuccess: () => {
       successToast({ text: "Profile updated!" });
     },
@@ -69,7 +67,7 @@ const Profile = () => {
 
   const { data } = useQuery({
     queryKey: ["candidate", userIdValue],
-    queryFn: () => getCandidate(userIdValue!),
+    queryFn: () => candidatesRequest.getCandidate(userIdValue!),
     enabled: !!userIdValue,
   });
 
