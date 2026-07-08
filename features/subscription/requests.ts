@@ -21,10 +21,15 @@ const getSubscriptionData = async (id: string) => {
   return (await api.get("/subscriptions/data/" + id)).data;
 };
 
+const getInvoices = async () => {
+  return (await api.get("/subscriptions/invoices")).data;
+};
+
 export default {
   getAllSubscriptions: errorWrapper(getAllSubscriptions),
   getMySubscription: errorWrapper(getMySubscription),
   subscribe: errorWrapper(subscribe),
   cancelSubscription: errorWrapper(cancelSubscription),
   getSubscriptionData: errorWrapper(getSubscriptionData),
+  getInvoices: errorWrapper(getInvoices),
 };
