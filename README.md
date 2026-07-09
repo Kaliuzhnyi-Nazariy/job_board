@@ -25,6 +25,7 @@ The application focuses on solving real-world challenges such as filtered search
 - Manage applicants (change status)
 - Create, update, and delete job offers
 - Advanced filtering for job search
+- Subscription system for job applications
 
 ## How to Run
 ```bash
