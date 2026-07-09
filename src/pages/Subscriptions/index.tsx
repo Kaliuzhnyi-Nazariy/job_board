@@ -31,7 +31,7 @@ const Subscriptions = () => {
     <DashboardSection extraStyles="flex flex-col gap-4 min-[1440px]:gap-12 text-center items-center pb-6 ">
       {invoices ? (
         <div className="flex flex-col flex-1 w-full ">
-          <div className="grid max-md:grid-rows-3 grid-cols-1 md:grid-cols-2 md:grid-rows-[2_auto] w-full gap-x-6 gap-y-5 ">
+          <div className="grid max-md:grid-rows-3 grid-cols-1 md:grid-cols-2 md:grid-rows-2 w-full gap-x-6 gap-y-5 ">
             <CurrentPlan
               plan={invoices.invoices[0].plan}
               subscription={invoices.subscription}
