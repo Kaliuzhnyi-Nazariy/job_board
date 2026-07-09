@@ -32,6 +32,17 @@ npm install
 npm run dev
 ```
 
+## Accounts
+```
+Employer:
+ email: employer@email.com
+ password: Password1
+
+Candidate:
+ email: candidate@email.com
+ password: Password1
+```
+
 ## Architecture and Decisions
 
 - Clear separation of responsibilities:
@@ -40,6 +51,7 @@ npm run dev
 - Token stored in application state using redux-persist instead of cookies to avoid cross-origin cookie issues
 - React Hook Form for predictable form handling and real-time validation
 - Component-based architecture for better scalability and maintainability
+- Implementing stripe subscription system for employers that limits jobs application amounts
 
 ## Challenges
 
